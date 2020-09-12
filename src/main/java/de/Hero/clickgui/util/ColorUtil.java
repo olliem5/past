@@ -3,6 +3,7 @@ package de.Hero.clickgui.util;
 import java.awt.Color;
 
 //Deine Imports
+import me.ollieobama.past.Past;
 
 /**
  *  Made by HeroCode
@@ -14,6 +15,6 @@ import java.awt.Color;
 public class ColorUtil {
 	
 	public static Color getClickGUIColor(){
-		return Color.RED;
+		return new Color((int)Past.settingsManager.getSettingByName("GuiRed").getValDouble(), (int) Past.settingsManager.getSettingByName("GuiGreen").getValDouble(), (int)Past.settingsManager.getSettingByName("GuiBlue").getValDouble());
 	}
 }

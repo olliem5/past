@@ -27,24 +27,24 @@ public class ElementCheckBox extends Element {
 	}
 
 	/*
-	 * Rendern des Elements 
+	 * Rendern des Elements
 	 */
 	public void drawScreen(int mouseX, int mouseY, float partialTicks) {
 		Color temp = ColorUtil.getClickGUIColor();
 		int color = new Color(temp.getRed(), temp.getGreen(), temp.getBlue(), 200).getRGB();
-		
+
 		/*
 		 * Die Box und Umrandung rendern
 		 */
-		Gui.drawRect(x, y, x + width, y + height, 0xff1a1a1a);
+		Gui.drawRect((int)x, (int)y, (int)x + (int)width, (int)y + (int)height, 0xff1a1a1a);
 
 		/*
 		 * Titel und Checkbox rendern.
 		 */
-		FontUtil.drawString(setstrg, x + width - FontUtil.getStringWidth(setstrg), y + FontUtil.getFontHeight() / 2 - 0.5, 0xffffffff);
-		Gui.drawRect(x + 1, y + 2, x + 12, y + 13, set.getValBoolean() ? color : 0xff000000);
+		FontUtil.drawString(setstrg, x + width - FontUtil.getStringWidth(setstrg), y + FontUtil.getFontHeight() / 2f - 0.5, 0xffffffff);
+		Gui.drawRect((int)x + 1, (int)y + 2, (int)x + 12, (int)y + 13, set.getValBoolean() ? color : 0xff000000);
 		if (isCheckHovered(mouseX, mouseY))
-			Gui.drawRect(x + 1, y + 2, x + 12, y + 13, 0x55111111);
+			Gui.drawRect((int)x + 1, (int)y + 2, (int)x + 12, (int)y + 13, 0x55111111);
 	}
 
 	/*
@@ -56,12 +56,12 @@ public class ElementCheckBox extends Element {
 			set.setValBoolean(!set.getValBoolean());
 			return true;
 		}
-		
+
 		return super.mouseClicked(mouseX, mouseY, mouseButton);
 	}
 
 	/*
-	 * Einfacher HoverCheck, ben�tigt damit die Value ge�ndert werden kann
+	 * Einfacher HoverCheck, bentigt damit die Value gendert werden kann
 	 */
 	public boolean isCheckHovered(int mouseX, int mouseY) {
 		return mouseX >= x + 1 && mouseX <= x + 12 && mouseY >= y + 2 && mouseY <= y + 13;

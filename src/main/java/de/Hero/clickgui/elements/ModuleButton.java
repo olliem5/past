@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import me.ollieobama.past.Past;
 import me.ollieobama.past.managers.MessageManager;
 import me.ollieobama.past.module.Module;
+import me.ollieobama.past.settings.Setting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Gui;
 
@@ -18,7 +19,6 @@ import de.Hero.clickgui.elements.menu.ElementComboBox;
 import de.Hero.clickgui.elements.menu.ElementSlider;
 import de.Hero.clickgui.util.ColorUtil;
 import de.Hero.clickgui.util.FontUtil;
-import me.ollieobama.past.settings.Setting;
 
 //Deine Imports
 
@@ -145,11 +145,11 @@ public class ModuleButton {
 		 */
 		if (listening) {
 			if (keyCode != Keyboard.KEY_ESCAPE) {
-				MessageManager.sendRawMessage("Bound '" + mod.getName() + "'" + " to '" + Keyboard.getKeyName(keyCode) + "'");
-				//KeyBinds.bindKey(mod, keyCode);
+				MessageManager.sendMessagePrefix("Bound '" + mod.getName() + "'" + " to '" + Keyboard.getKeyName(keyCode) + "'");
+				mod.setKey(keyCode);
 			} else {
-				MessageManager.sendRawMessage("Unbound '" + mod.getName() + "'");
-				//KeyBinds.bindKey(mod, Keyboard.KEY_NONE);
+				MessageManager.sendMessagePrefix("Unbound '" + mod.getName() + "'");
+				mod.setKey(Keyboard.KEY_NONE);
 			}
 			listening = false;
 			return true;

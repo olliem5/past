@@ -10,6 +10,7 @@ import me.ollieobama.past.module.Category;
 import me.ollieobama.past.module.Module;
 import me.ollieobama.past.settings.SettingsManager;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.Gui;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.gui.ScaledResolution;
 
@@ -142,12 +143,16 @@ public class ClickGUI extends GuiScreen {
 			if (panel.extended && panel.visible && panel.Elements != null) {
 				for (ModuleButton b : panel.Elements) {
 					if (b.extended && b.menuelements != null && !b.menuelements.isEmpty()) {
-						int off = 0;
+						double off = 0;
 						Color temp = ColorUtil.getClickGUIColor().darker();
 						int outlineColor = new Color(temp.getRed(), temp.getGreen(), temp.getBlue(), 170).getRGB();
+						
 						for (Element e : b.menuelements) {
 							e.offset = off;
 							e.update();
+							if(Past.settingsManager.getSettingByName("Design").getValString().equalsIgnoreCase("New")){
+								Gui.drawRect((int)e.x, (int)e.y, (int)e.x + (int)e.width + 2, (int)e.y + (int)e.height, outlineColor);
+							}
 							e.drawScreen(mouseX, mouseY, partialTicks);
 							off += e.height;
 						}
@@ -323,9 +328,9 @@ public class ClickGUI extends GuiScreen {
 //			mc.entityRenderer.theShaderGroup.deleteShaderGroup();
 //			mc.entityRenderer.theShaderGroup = null;
 //		}
-//		/*
-//		 * Sliderfix
-//		 */
+		/*
+		 * Sliderfix
+		 */
 		for (Panel panel : ClickGUI.rpanels) {
 			if (panel.extended && panel.visible && panel.Elements != null) {
 				for (ModuleButton b : panel.Elements) {

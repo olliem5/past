@@ -15,11 +15,11 @@ public class Element {
 	public ClickGUI clickgui;
 	public ModuleButton parent;
 	public Setting set;
-	public int offset;
-	public int x;
-	public int y;
-	public int width;
-	public int height;
+	public double offset;
+	public double x;
+	public double y;
+	public double width;
+	public double height;
 	
 	public String setstrg;
 	
@@ -46,7 +46,7 @@ public class Element {
 		String sname = set.getName();
 		if(set.isCheck()){
 			setstrg = sname.substring(0, 1).toUpperCase() + sname.substring(1, sname.length());
-			int textx = x + width - FontUtil.getStringWidth(setstrg);
+			double textx = x + width - FontUtil.getStringWidth(setstrg);
 			if (textx < x + 13) {
 				width += (x + 13) - textx + 1;
 			}
@@ -61,7 +61,7 @@ public class Element {
 					longest = temp;
 				}
 			}
-			int textx = x + width - longest;
+			double textx = x + width - longest;
 			if (textx < x) {
 				width += x - textx + 1;
 			}
@@ -69,7 +69,7 @@ public class Element {
 			setstrg = sname.substring(0, 1).toUpperCase() + sname.substring(1, sname.length());
 			String displayval = "" + Math.round(set.getValDouble() * 100D)/ 100D;
 			String displaymax = "" + Math.round(set.getMax() * 100D)/ 100D;
-			int textx = x + width - FontUtil.getStringWidth(setstrg) - FontUtil.getStringWidth(displaymax) - 4;
+			double textx = x + width - FontUtil.getStringWidth(setstrg) - FontUtil.getStringWidth(displaymax) - 4;
 			if (textx < x) {
 				width += x - textx + 1;
 			}

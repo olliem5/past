@@ -3,6 +3,7 @@ package de.Hero.clickgui;
 import java.awt.Color;
 import java.util.ArrayList;
 
+import me.ollieobama.past.Past;
 import net.minecraft.client.gui.Gui;
 import de.Hero.clickgui.elements.ModuleButton;
 import de.Hero.clickgui.util.ColorUtil;
@@ -61,18 +62,27 @@ public class Panel {
 			x = x2 + mouseX;
 			y = y2 + mouseY;
 		}
-
+		
 		Color temp = ColorUtil.getClickGUIColor().darker();
 		int outlineColor = new Color(temp.getRed(), temp.getGreen(), temp.getBlue(), 170).getRGB();
-
+		
 		Gui.drawRect(x, y, x + width, y + height, 0xff121212);
+		if(Past.settingsManager.getSettingByName("Design").getValString().equalsIgnoreCase("New")){
 			Gui.drawRect(x - 2, y, x, y + height, outlineColor);
 			FontUtil.drawStringWithShadow(title, x + 2, y + height / 2 - FontUtil.getFontHeight()/2, 0xffefefef);
-
+		}else if(Past.settingsManager.getSettingByName("Design").getValString().equalsIgnoreCase("JellyLike")){
+			Gui.drawRect(x + 4,			y + 2, (int) (x + 4.3), 		y + height - 2, 0xffaaaaaa);
+			Gui.drawRect(x - 4 + width, y + 2, (int) (x - 4.3 + width), y + height - 2, 0xffaaaaaa);
+			FontUtil.drawTotalCenteredStringWithShadow(title, x + width / 2, y + height / 2, 0xffefefef);
+		}
+		
 		if (this.extended && !Elements.isEmpty()) {
 			int startY = y + height;
-			int epanelcolor = 0xff232323;
+			int epanelcolor = Past.settingsManager.getSettingByName("Design").getValString().equalsIgnoreCase("New") ? 0xff232323 : Past.settingsManager.getSettingByName("Design").getValString().equalsIgnoreCase("JellyLike") ? 0xbb151515 : 0;;
 			for (ModuleButton et : Elements) {
+				if(Past.settingsManager.getSettingByName("Design").getValString().equalsIgnoreCase("New")){
+					Gui.drawRect(x - 2, startY, x + width, startY + et.height + 1, outlineColor);
+				}
 				Gui.drawRect(x, 	startY, x + width, startY + et.height + 1, epanelcolor);
 				et.x = x + 2;
 				et.y = startY;
@@ -81,7 +91,7 @@ public class Panel {
 				startY += et.height + 1;
 			}
 			Gui.drawRect(x, startY + 1, x + width, startY + 1, epanelcolor);
-
+		
 		}
 	}
 
