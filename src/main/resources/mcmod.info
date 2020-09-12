@@ -1,0 +1,16 @@
+[
+{
+  "modid": "past",
+  "name": "Past Utility Mod",
+  "description": "A utility mod for minecraft 1.12.2",
+  "version": "${version}",
+  "mcversion": "${mcversion}",
+  "url": "",
+  "updateUrl": "",
+  "authorList": ["Ollie", "LittleDraily"],
+  "credits": "LitleDraily for HOPE!",
+  "logoFile": "",
+  "screenshots": [],
+  "dependencies": []
+}
+]
