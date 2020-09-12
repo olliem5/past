@@ -3,7 +3,6 @@ package de.Hero.clickgui;
 import java.awt.Color;
 import java.util.ArrayList;
 
-import me.ollieobama.past.Past;
 import net.minecraft.client.gui.Gui;
 import de.Hero.clickgui.elements.ModuleButton;
 import de.Hero.clickgui.util.ColorUtil;

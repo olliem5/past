@@ -40,9 +40,9 @@ public class Past {
     /* Initializing client */
     @Mod.EventHandler
     public void init(FMLInitializationEvent event) {
+        settingsManager = new SettingsManager();
         moduleManager = new ModuleManager();
         pastHUD = new PastHUD();
-        settingsManager = new SettingsManager();
         clickGUI = new ClickGUI();
         CommandManager.init();
         MinecraftForge.EVENT_BUS.register(new CommandManager());

@@ -11,17 +11,19 @@ public class SettingsTest extends Module {
     }
 
     Setting blue;
+    Setting slider;
 
     @Override
     public void setup() {
         Past.settingsManager.rSetting(blue = new Setting("Blue", this, true));
+        Past.settingsManager.rSetting(slider = new Setting("GuiBlue", this, 1, 1, 255, true));
     }
 
     public void onEnable() {
         if (blue.getValBoolean()) {
-            mc.player.sendChatMessage("BLUEBLUEBLUE");
+            mc.player.sendChatMessage("BLUEBLUEBLUE" + slider.getValString());
         } else {
-            mc.player.sendChatMessage("Nigga");
+            mc.player.sendChatMessage("Nigga" + slider.getValString());
         }
     }
 }

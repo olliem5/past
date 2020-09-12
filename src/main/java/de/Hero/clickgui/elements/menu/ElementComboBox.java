@@ -4,7 +4,6 @@ import java.awt.Color;
 
 import me.ollieobama.past.Past;
 import me.ollieobama.past.settings.Setting;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Gui;
 import de.Hero.clickgui.elements.Element;
 import de.Hero.clickgui.elements.ModuleButton;

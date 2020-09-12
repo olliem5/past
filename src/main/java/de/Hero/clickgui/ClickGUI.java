@@ -8,15 +8,10 @@ import java.util.Collections;
 import me.ollieobama.past.Past;
 import me.ollieobama.past.module.Category;
 import me.ollieobama.past.module.Module;
-import me.ollieobama.past.module.ModuleManager;
 import me.ollieobama.past.settings.SettingsManager;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.Gui;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.gui.ScaledResolution;
-import net.minecraft.client.renderer.OpenGlHelper;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.util.ResourceLocation;
 
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.GL11;
@@ -150,13 +145,9 @@ public class ClickGUI extends GuiScreen {
 						int off = 0;
 						Color temp = ColorUtil.getClickGUIColor().darker();
 						int outlineColor = new Color(temp.getRed(), temp.getGreen(), temp.getBlue(), 170).getRGB();
-						
 						for (Element e : b.menuelements) {
 							e.offset = off;
 							e.update();
-							if(Past.settingsManager.getSettingByName("Design").getValString().equalsIgnoreCase("New")){
-								Gui.drawRect(e.x, e.y, e.x + e.width + 2, e.y + e.height, outlineColor);
-							}
 							e.drawScreen(mouseX, mouseY, partialTicks);
 							off += e.height;
 						}

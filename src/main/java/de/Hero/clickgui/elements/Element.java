@@ -1,7 +1,6 @@
 package de.Hero.clickgui.elements;
 
 import de.Hero.clickgui.ClickGUI;
-import de.Hero.clickgui.elements.menu.ElementComboBox;
 import de.Hero.clickgui.util.FontUtil;
 import me.ollieobama.past.settings.Setting;
 

@@ -53,7 +53,7 @@ public class Setting {
 		this.onlyint = onlyint;
 		this.mode = "Slider";
 	}
-	
+
 	public String getName(){
 		return name;
 	}
