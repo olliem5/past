@@ -53,11 +53,11 @@ public class ClickGUI extends GuiScreen {
 		
 		FontUtil.setupFontUtils();
 		panels = new ArrayList<>();
-		int pwidth = 80;
-		int pheight = 15;
-		int px = 10;
-		int py = 10;
-		int pyplus = pheight + 10;
+		double pwidth = 80;
+		double pheight = 15;
+		double px = 10;
+		double py = 10;
+		double pyplus = pheight + 10;
 		
 		/*
 		 * Zum Sortieren der Panels einfach die Reihenfolge im Enum �ndern ;)

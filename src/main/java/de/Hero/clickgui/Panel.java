@@ -18,12 +18,12 @@ import de.Hero.clickgui.util.FontUtil;
  */
 public class Panel {
 	public String title;
-	public int x;
-	public int y;
-	private int x2;
-	private int y2;
-	public int width;
-	public int height;
+	public double x;
+	public double y;
+	private double x2;
+	private double y2;
+	public double width;
+	public double height;
 	public boolean dragging;
 	public boolean extended;
 	public boolean visible;
@@ -33,7 +33,7 @@ public class Panel {
 	/*
 	 * Konstrukor
 	 */
-	public Panel(String ititle, int ix, int iy, int iwidth, int iheight, boolean iextended, ClickGUI parent) {
+	public Panel(String ititle, double ix, double iy, double iwidth, double iheight, boolean iextended, ClickGUI parent) {
 		this.title = ititle;
 		this.x = ix;
 		this.y = iy;
@@ -65,32 +65,34 @@ public class Panel {
 		
 		Color temp = ColorUtil.getClickGUIColor().darker();
 		int outlineColor = new Color(temp.getRed(), temp.getGreen(), temp.getBlue(), 170).getRGB();
-		
-		Gui.drawRect(x, y, x + width, y + height, 0xff121212);
+
+		Gui.drawRect((int)x, (int)y, (int)x + (int)width, (int)y + (int)height, 0xff121212);
 		if(Past.settingsManager.getSettingByName("Design").getValString().equalsIgnoreCase("New")){
-			Gui.drawRect(x - 2, y, x, y + height, outlineColor);
+			Gui.drawRect((int)x, (int)y, (int)x + (int)width, (int)y + (int)height, 0xff121212);
+			Gui.drawRect((int)x - 2, (int)y, (int)x, (int)y + (int)height, outlineColor);
 			FontUtil.drawStringWithShadow(title, x + 2, y + height / 2 - FontUtil.getFontHeight()/2, 0xffefefef);
 		}else if(Past.settingsManager.getSettingByName("Design").getValString().equalsIgnoreCase("JellyLike")){
-			Gui.drawRect(x + 4,			y + 2, (int) (x + 4.3), 		y + height - 2, 0xffaaaaaa);
-			Gui.drawRect(x - 4 + width, y + 2, (int) (x - 4.3 + width), y + height - 2, 0xffaaaaaa);
+			Gui.drawRect((int)x, (int)y, (int)x + (int)width, (int)y + (int)height, 0xff121212);
+			Gui.drawRect((int)x + 4,			(int)y + 2, (int)x + (int)4.3, 		(int)y + (int)height - 2, 0xffaaaaaa);
+			Gui.drawRect((int)x - 4 + (int)width, (int)y + 2, (int)x - (int)4.3 + (int)width, (int)y + (int)height - 2, 0xffaaaaaa);
 			FontUtil.drawTotalCenteredStringWithShadow(title, x + width / 2, y + height / 2, 0xffefefef);
 		}
 		
 		if (this.extended && !Elements.isEmpty()) {
-			int startY = y + height;
+			double startY = y + height;
 			int epanelcolor = Past.settingsManager.getSettingByName("Design").getValString().equalsIgnoreCase("New") ? 0xff232323 : Past.settingsManager.getSettingByName("Design").getValString().equalsIgnoreCase("JellyLike") ? 0xbb151515 : 0;;
 			for (ModuleButton et : Elements) {
 				if(Past.settingsManager.getSettingByName("Design").getValString().equalsIgnoreCase("New")){
-					Gui.drawRect(x - 2, startY, x + width, startY + et.height + 1, outlineColor);
+					Gui.drawRect((int)x - 2, (int)startY, (int)x + (int)width, (int)startY + (int)et.height + 1, outlineColor);
 				}
-				Gui.drawRect(x, 	startY, x + width, startY + et.height + 1, epanelcolor);
+				Gui.drawRect((int)x, (int)startY, (int)x + (int)width, (int)startY + (int)et.height + 1, epanelcolor);
 				et.x = x + 2;
 				et.y = startY;
 				et.width = width - 4;
 				et.drawScreen(mouseX, mouseY, partialTicks);
 				startY += et.height + 1;
 			}
-			Gui.drawRect(x, startY + 1, x + width, startY + 1, epanelcolor);
+			Gui.drawRect((int)x, (int)startY + 1, (int)x + (int)width, (int)startY + 1, epanelcolor);
 		
 		}
 	}

@@ -15,6 +15,6 @@ import me.ollieobama.past.Past;
 public class ColorUtil {
 	
 	public static Color getClickGUIColor(){
-		return new Color((int)Past.settingsManager.getSettingByName("GuiRed").getValDouble(), (int) Past.settingsManager.getSettingByName("GuiGreen").getValDouble(), (int)Past.settingsManager.getSettingByName("GuiBlue").getValDouble());
+		return new Color((int) Past.settingsManager.getSettingByName("GuiRed").getValDouble(), (int)Past.settingsManager.getSettingByName("GuiGreen").getValDouble(), (int)Past.settingsManager.getSettingByName("GuiBlue").getValDouble());
 	}
 }

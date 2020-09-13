@@ -33,10 +33,10 @@ public class ModuleButton {
 	public Module mod;
 	public ArrayList<Element> menuelements;
 	public Panel parent;
-	public int x;
-	public int y;
-	public int width;
-	public int height;
+	public double x;
+	public double y;
+	public double width;
+	public double height;
 	public boolean extended = false;
 	public boolean listening = false;
 
@@ -83,7 +83,7 @@ public class ModuleButton {
 		 */
 		int textcolor = 0xffafafaf;
 		if (mod.isToggled()) {
-			Gui.drawRect(x - 2, y, x + width + 2, y + height + 1, color);
+			Gui.drawRect((int)x - 2, (int)y, (int)x + (int)width + 2, (int)y + (int)height + 1, color);
 			textcolor = 0xffefefef;
 		}
 		
@@ -91,7 +91,7 @@ public class ModuleButton {
 		 * Ist die Maus �ber dem Element, wenn ja dann soll der Button sich anders f�rben
 		 */
 		if (isHovered(mouseX, mouseY)) {
-			Gui.drawRect(x - 2, y, x + width + 2, y + height + 1, 0x55111111);
+			Gui.drawRect((int)x - 2, (int)y, (int)x + (int)width + 2, (int)y + (int)height + 1, 0x55111111);
 		}
 		
 		/*
