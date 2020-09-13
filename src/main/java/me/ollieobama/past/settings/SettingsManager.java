@@ -2,7 +2,6 @@ package me.ollieobama.past.settings;
 
 import java.util.ArrayList;
 
-//Deine Imports
 import me.ollieobama.past.Past;
 import me.ollieobama.past.module.Module;
 
@@ -16,40 +15,30 @@ import me.ollieobama.past.module.Module;
 public class SettingsManager {
 	
 	private ArrayList<Setting> settings;
+	public SettingsManager() { this.settings = new ArrayList<>(); }
+	public void rSetting(Setting in) { this.settings.add(in); }
+	public ArrayList<Setting> getSettings() { return this.settings; }
 	
-	public SettingsManager(){
-		this.settings = new ArrayList<>();
-	}
-	
-	public void rSetting(Setting in){
-		this.settings.add(in);
-	}
-	
-	public ArrayList<Setting> getSettings(){
-		return this.settings;
-	}
-	
-	public ArrayList<Setting> getSettingsByMod(Module mod){
+	public ArrayList<Setting> getSettingsByMod(Module mod) {
 		ArrayList<Setting> out = new ArrayList<>();
-		for(Setting s : getSettings()){
-			if(s.getParentMod().equals(mod)){
+		for (Setting s : getSettings()) {
+			if (s.getParentMod().equals(mod)) {
 				out.add(s);
 			}
 		}
-		if(out.isEmpty()){
+		if (out.isEmpty()) {
 			return null;
 		}
 		return out;
 	}
 	
-	public Setting getSettingByName(String name){
-		for(Setting set : getSettings()){
-			if(set.getName().equalsIgnoreCase(name)){
+	public Setting getSettingByName(String name) {
+		for (Setting set : getSettings()) {
+			if (set.getName().equalsIgnoreCase(name)) {
 				return set;
 			}
 		}
-		System.err.println("["+ Past.nameversion + "] Error Setting NOT found: '" + name +"'!");
+		System.err.println("["+ Past.nameversion + "] Error, Setting NOT found: '" + name +"'!");
 		return null;
 	}
-
 }
