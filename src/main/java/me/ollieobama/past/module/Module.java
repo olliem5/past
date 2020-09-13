@@ -85,19 +85,13 @@ public class Module {
     public Category getCategory() { return category; }
     public void setCategory(Category category) { this.category = category; }
 
+    public void registerSettings() { selfSettings(); }
+    public void rSetting(Setting setting) { Past.settingsManager.rSetting(setting); }
+
     public void onToggle() {}
     public void onUpdate() {}
     public void onRender() {}
     public void onPlayerTick() {}
     public void setup() {}
-
-    public void registerSettings() {
-        selfSettings();
-    }
-
     public void selfSettings() {}
-
-    public void rSetting(Setting setting) {
-        Past.settingsManager.rSetting(setting);
-    }
 }
