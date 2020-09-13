@@ -4,7 +4,6 @@ import de.Hero.clickgui.ClickGUI;
 import me.ollieobama.past.gui.ingame.PastHUD;
 import me.ollieobama.past.module.Module;
 import me.ollieobama.past.settings.SettingsManager;
-import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
@@ -30,9 +29,9 @@ public class Past {
     public static String nameversion = name + " " + version;
 
     public static ModuleManager moduleManager;
-    public static PastHUD pastHUD;
     public static SettingsManager settingsManager;
     public static ClickGUI clickGUI;
+    public static PastHUD pastHUD;
 
     @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent event) { Display.setTitle(nameversion); }
@@ -42,8 +41,8 @@ public class Past {
     public void init(FMLInitializationEvent event) {
         settingsManager = new SettingsManager();
         moduleManager = new ModuleManager();
-        pastHUD = new PastHUD();
         clickGUI = new ClickGUI();
+        pastHUD = new PastHUD();
         CommandManager.init();
         MinecraftForge.EVENT_BUS.register(new CommandManager());
         MinecraftForge.EVENT_BUS.register(this);
@@ -62,14 +61,6 @@ public class Past {
             if (Keyboard.isKeyDown(m.getKey())) {
                 m.toggle();
             }
-        }
-    }
-
-    /* Drawing PastHUD */
-    @SubscribeEvent
-    public void onGui(RenderGameOverlayEvent event) {
-        if (event.getType() == RenderGameOverlayEvent.ElementType.TEXT) {
-            pastHUD.Draw();
         }
     }
 }
