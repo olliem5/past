@@ -6,5 +6,6 @@ public enum Category {
     PLAYER,
     RENDER,
     MISC,
+    CHAT,
     HUD
 }

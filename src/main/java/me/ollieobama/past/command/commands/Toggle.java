@@ -9,7 +9,7 @@ import me.ollieobama.past.command.Command;
 /* Credit: LittleDraily */
 public class Toggle extends Command {
     public Toggle() {
-        super("Toggle", new String[]{"t", "toggle"});
+        super ("Toggle", new String[]{"toggle"});
     }
 
     @Override

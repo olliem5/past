@@ -27,6 +27,7 @@ public class Past {
     public static final String version = "0.1";
     public static final String appid = "754509326902886411";
     public static String prefix = ".";
+    public static int prefixchatkey = Keyboard.KEY_PERIOD; //TODO: Sync up with config and the prefix string
     public static String nameversion = name + " " + version;
 
     public static ModuleManager moduleManager;

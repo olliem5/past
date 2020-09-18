@@ -28,7 +28,7 @@ public class DiscordManager {
             while (!Thread.currentThread().isInterrupted()) {
                 try {
                     details = "In the menus";
-                    state = "discord.gg/XcMd2Us";
+                    state = "discord.gg/3DBphxC";
 
                     if (mc.isIntegratedServerRunning()) {
                         details = "Singleplayer - " + mc.getIntegratedServer().getWorldName();

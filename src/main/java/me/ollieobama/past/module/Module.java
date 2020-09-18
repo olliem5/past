@@ -47,16 +47,16 @@ public class Module {
         }
     }
 
-    @SubscribeEvent
-    public void onPlayerTick(TickEvent.PlayerTickEvent event) {
-        if (event.type == TickEvent.Type.PLAYER) {
-            for (Module module : moduleManager.getModules()) {
-                if (module.isToggled()) {
-                    onPlayerTick();
-                }
-            }
-        }
-    }
+//    @SubscribeEvent
+//    public void onPlayerTick(TickEvent.PlayerTickEvent event) {
+//        if (event.type == TickEvent.Type.PLAYER) {
+//            for (Module module : moduleManager.getModules()) {
+//                if (module.isToggled()) {
+//                    onPlayerTick();
+//                }
+//            }
+//        }
+//    }
 
     public void toggle() {
         toggled = !toggled;
@@ -91,7 +91,7 @@ public class Module {
     public void onToggle() {}
     public void onUpdate() {}
     public void onRender() {}
-    public void onPlayerTick() {}
+//  public void onPlayerTick() {}
     public void setup() {}
     public void selfSettings() {}
 }

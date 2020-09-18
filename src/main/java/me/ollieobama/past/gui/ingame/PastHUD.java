@@ -10,7 +10,7 @@ public class PastHUD {
     protected Minecraft mc = Minecraft.getMinecraft();
 
     public void drawName() {
-        mc.fontRenderer.drawStringWithShadow(Past.nameversion, 2, 2, -1);
+        mc.fontRenderer.drawStringWithShadow(Past.name + " " + Past.version, 2, 2, -1);
     }
 
     public void drawWelcome() {
@@ -19,7 +19,7 @@ public class PastHUD {
     }
 
     public void drawModules() {
-        float modulespacing = mc.fontRenderer.FONT_HEIGHT + mc.fontRenderer.FONT_HEIGHT + 2;
+        float modulespacing = mc.fontRenderer.FONT_HEIGHT + mc.fontRenderer.FONT_HEIGHT + mc.fontRenderer.FONT_HEIGHT + 2;
         for (Module module : Past.moduleManager.getModules()) {
             if (module.isToggled()) {
                 mc.fontRenderer.drawStringWithShadow(module.getName(), 2, modulespacing, -1);
