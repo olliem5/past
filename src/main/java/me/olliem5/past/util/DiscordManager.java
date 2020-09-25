@@ -1,4 +1,4 @@
-package me.olliem5.past.managers;
+package me.olliem5.past.util;
 
 import club.minnced.discord.rpc.DiscordEventHandlers;
 import club.minnced.discord.rpc.DiscordRPC;

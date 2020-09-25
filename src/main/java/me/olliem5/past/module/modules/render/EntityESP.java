@@ -10,15 +10,20 @@ public class EntityESP extends Module {
     }
 
     public void onRender() {
+        if (mc.world == null) { return; }
         for (Entity entity : mc.world.getLoadedEntityList()) {
-            entity.setGlowing(true);
+            if (entity != mc.player) {
+                entity.setGlowing(true);
+            }
         }
     }
 
     @Override
     public void onDisable() {
         for (Entity entity : mc.world.getLoadedEntityList()) {
-            entity.setGlowing(false);
+            if (entity != mc.player) {
+                entity.setGlowing(false);
+            }
         }
     }
 }

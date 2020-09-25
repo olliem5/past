@@ -1,10 +1,10 @@
 package me.olliem5.past.module.modules.misc;
 
-import com.mojang.realmsclient.gui.ChatFormatting;
 import me.olliem5.past.Past;
 import me.olliem5.past.module.Category;
 import me.olliem5.past.module.Module;
-import me.olliem5.past.managers.MessageManager;
+import me.olliem5.past.util.ColourManager;
+import me.olliem5.past.util.MessageManager;
 import me.olliem5.past.settings.Setting;
 import net.minecraft.client.audio.PositionedSoundRecord;
 import net.minecraft.entity.Entity;
@@ -44,17 +44,17 @@ public class EntityAlert extends Module {
 
             for (Entity entity : mc.world.getLoadedEntityList()) {
                 if (entity instanceof EntityDonkey && donkey.getValBoolean() && this.donkeyDelay >= 100) {
-                    MessageManager.sendMessagePrefix(ChatFormatting.GRAY + "[" + ChatFormatting.BLUE + "EntityAlert" + ChatFormatting.GRAY + "] " + ChatFormatting.WHITE + "Found a " + ChatFormatting.AQUA + "donkey " + ChatFormatting.WHITE + "at " + ChatFormatting.GRAY + "[" + ChatFormatting.WHITE + Math.round(entity.lastTickPosX) + ChatFormatting.GRAY + ", " + ChatFormatting.WHITE + Math.round(entity.lastTickPosY) + ChatFormatting.GRAY + ", " + ChatFormatting.WHITE + Math.round(entity.lastTickPosZ) + ChatFormatting.GRAY + "]");
+                    MessageManager.sendMessagePrefix(ColourManager.gray + "[" + ColourManager.blue + "EntityAlert" + ColourManager.gray + "] " + ColourManager.white + "Found a " + ColourManager.aqua + "donkey " + ColourManager.white + "at " + ColourManager.gray + "[" + ColourManager.white + Math.round(entity.lastTickPosX) + ColourManager.gray + ", " + ColourManager.white + Math.round(entity.lastTickPosY) + ColourManager.gray + ", " + ColourManager.white + Math.round(entity.lastTickPosZ) + ColourManager.gray + "]");
                     if (sound.getValBoolean()) { mc.getSoundHandler().playSound(PositionedSoundRecord.getRecord(SoundEvents.ENTITY_EXPERIENCE_ORB_PICKUP, 1.0F, 1.0F)); }
                     this.donkeyDelay = -750;
                 }
                 if (entity instanceof EntityLlama && llama.getValBoolean() && this.llamaDelay >= 100) {
-                    MessageManager.sendMessagePrefix(ChatFormatting.GRAY + "[" + ChatFormatting.BLUE + "EntityAlert" + ChatFormatting.GRAY + "] " + ChatFormatting.WHITE + "Found a " + ChatFormatting.AQUA + "llama " + ChatFormatting.WHITE + "at " + ChatFormatting.GRAY + "[" + ChatFormatting.WHITE + Math.round(entity.lastTickPosX) + ChatFormatting.GRAY + ", " + ChatFormatting.WHITE + Math.round(entity.lastTickPosY) + ChatFormatting.GRAY + ", " + ChatFormatting.WHITE + Math.round(entity.lastTickPosZ) + ChatFormatting.GRAY + "]");
+                    MessageManager.sendMessagePrefix(ColourManager.gray + "[" + ColourManager.blue + "EntityAlert" + ColourManager.gray + "] " + ColourManager.white + "Found a " + ColourManager.aqua + "llama " + ColourManager.white + "at " + ColourManager.gray + "[" + ColourManager.white + Math.round(entity.lastTickPosX) + ColourManager.gray + ", " + ColourManager.white + Math.round(entity.lastTickPosY) + ColourManager.gray + ", " + ColourManager.white + Math.round(entity.lastTickPosZ) + ColourManager.gray + "]");
                     if (sound.getValBoolean()) { mc.getSoundHandler().playSound(PositionedSoundRecord.getRecord(SoundEvents.ENTITY_EXPERIENCE_ORB_PICKUP, 1.0F, 1.0F)); }
                     this.llamaDelay = -750;
                 }
                 if (entity instanceof EntityMule && mule.getValBoolean() && this.muleDelay >= 100) {
-                    MessageManager.sendMessagePrefix(ChatFormatting.GRAY + "[" + ChatFormatting.BLUE + "EntityAlert" + ChatFormatting.GRAY + "] " + ChatFormatting.WHITE + "Found a " + ChatFormatting.AQUA + "mule " + ChatFormatting.WHITE + "at " + ChatFormatting.GRAY + "[" + ChatFormatting.WHITE + Math.round(entity.lastTickPosX) + ChatFormatting.GRAY + ", " + ChatFormatting.WHITE + Math.round(entity.lastTickPosY) + ChatFormatting.GRAY + ", " + ChatFormatting.WHITE + Math.round(entity.lastTickPosZ) + ChatFormatting.GRAY + "]");
+                    MessageManager.sendMessagePrefix(ColourManager.gray + "[" + ColourManager.blue + "EntityAlert" + ColourManager.gray + "] " + ColourManager.white + "Found a " + ColourManager.aqua + "mule " + ColourManager.white + "at " + ColourManager.gray + "[" + ColourManager.white + Math.round(entity.lastTickPosX) + ColourManager.gray + ", " + ColourManager.white + Math.round(entity.lastTickPosY) + ColourManager.gray + ", " + ColourManager.white + Math.round(entity.lastTickPosZ) + ColourManager.gray + "]");
                     if (sound.getValBoolean()) { mc.getSoundHandler().playSound(PositionedSoundRecord.getRecord(SoundEvents.ENTITY_EXPERIENCE_ORB_PICKUP, 1.0F, 1.0F)); }
                     this.muleDelay = -750;
                 }

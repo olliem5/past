@@ -1,12 +1,11 @@
-package me.olliem5.past.managers;
+package me.olliem5.past.util;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.util.text.TextComponentString;
-import net.minecraft.util.text.TextFormatting;
 
 public class MessageManager {
-    public static String prefix = TextFormatting.GRAY + "[" + TextFormatting.RED + "Past Client"  + TextFormatting.GRAY + "]";
+    public static String prefix = ColourManager.gray + "[" + ColourManager.red + "Past Client"  + ColourManager.gray + "]";
     private static final EntityPlayerSP player = Minecraft.getMinecraft().player;
 
     public static void sendRawMessage(String message) { player.sendMessage(new TextComponentString(message)); }

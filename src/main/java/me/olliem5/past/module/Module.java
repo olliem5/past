@@ -83,9 +83,6 @@ public class Module {
     public Category getCategory() { return category; }
     public void setCategory(Category category) { this.category = category; }
 
-//    public void registerSettings() { selfSettings(); }
-//    public void rSetting(Setting setting) { Past.settingsManager.registerSetting(setting); }
-
     public void onToggle() {}
     public void onUpdate() {}
     public void onRender() {}

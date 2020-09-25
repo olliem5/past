@@ -9,8 +9,10 @@ public class HoleTP extends Module {
     }
 
     public void onUpdate() {
-        if (mc.player.onGround) {
-            --mc.player.motionY;
+        if (mc.player != null && mc.world != null) {
+            if (mc.player.onGround) {
+                --mc.player.motionY;
+            }
         }
     }
 }

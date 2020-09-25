@@ -1,6 +1,6 @@
 package me.olliem5.past.module.modules.misc;
 
-import me.olliem5.past.managers.DiscordManager;
+import me.olliem5.past.util.DiscordManager;
 import me.olliem5.past.module.Category;
 import me.olliem5.past.module.Module;
 

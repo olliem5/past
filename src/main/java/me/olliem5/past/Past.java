@@ -32,6 +32,7 @@ public class Past {
 
     public static ModuleManager moduleManager;
     public static SettingsManager settingsManager;
+    public static CommandManager commandManager;
     public static ClickGUI clickGUI;
     public static PastHUD pastHUD;
 
@@ -45,6 +46,7 @@ public class Past {
 
         settingsManager = new SettingsManager();
         moduleManager = new ModuleManager();
+        commandManager = new CommandManager();
         clickGUI = new ClickGUI();
         pastHUD = new PastHUD();
 
