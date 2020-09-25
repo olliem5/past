@@ -18,9 +18,9 @@ public class PastHUD extends Module {
 
     @Override
     public void setup() {
-        Past.settingsManager.rSetting(clientname = new Setting("Client Name", this, true));
-        Past.settingsManager.rSetting(welcomer  = new Setting("Welcomer", this, true));
-        Past.settingsManager.rSetting(arraylist = new Setting("Arraylist", this, true));
+        Past.settingsManager.registerSetting(clientname = new Setting("Client Name", true, this));
+        Past.settingsManager.registerSetting(welcomer  = new Setting("Welcomer", true, this));
+        Past.settingsManager.registerSetting(arraylist = new Setting("Arraylist", true, this));
     }
 
     @SubscribeEvent

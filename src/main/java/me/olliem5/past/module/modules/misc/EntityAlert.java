@@ -4,8 +4,8 @@ import com.mojang.realmsclient.gui.ChatFormatting;
 import me.olliem5.past.Past;
 import me.olliem5.past.module.Category;
 import me.olliem5.past.module.Module;
-import me.olliem5.past.settings.Setting;
 import me.olliem5.past.managers.MessageManager;
+import me.olliem5.past.settings.Setting;
 import net.minecraft.client.audio.PositionedSoundRecord;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.passive.EntityDonkey;
@@ -29,10 +29,10 @@ public class EntityAlert extends Module {
 
     @Override
     public void setup() {
-        Past.settingsManager.rSetting(donkey = new Setting("Donkey", this, false));
-        Past.settingsManager.rSetting(llama = new Setting("Llama", this, false));
-        Past.settingsManager.rSetting(mule = new Setting("Mule", this, false));
-        Past.settingsManager.rSetting(sound = new Setting("Sound", this, false));
+        Past.settingsManager.registerSetting(donkey = new Setting("Donkey", true, this));
+        Past.settingsManager.registerSetting(llama = new Setting("Llama", true, this));
+        Past.settingsManager.registerSetting(mule = new Setting("Mule", true, this));
+        Past.settingsManager.registerSetting(sound = new Setting("Sound", true, this));
     }
 
     public void onUpdate() {

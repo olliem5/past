@@ -19,7 +19,7 @@ public class WeaknessAlert extends Module {
 
     @Override
     public void setup() {
-        Past.settingsManager.rSetting(sound = new Setting("Sound", this, false));
+        Past.settingsManager.registerSetting(sound = new Setting("Sound", true, this));
     }
 
     private boolean hasAnnounced = false;

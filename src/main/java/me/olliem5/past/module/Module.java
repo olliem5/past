@@ -1,7 +1,5 @@
 package me.olliem5.past.module;
 
-import me.olliem5.past.Past;
-import me.olliem5.past.settings.Setting;
 import net.minecraft.client.Minecraft;
 import net.minecraftforge.client.event.RenderHandEvent;
 import net.minecraftforge.common.MinecraftForge;
@@ -79,14 +77,14 @@ public class Module {
     public String getName() { return name; }
     public void setName(String name) { this.name = name; }
 
-    public String getDescription() { return description; }
+    public String getDescription() { return description; } //TODO: Render description in ClickGUI
     public void setDescription(String description) { this.description = description; }
 
     public Category getCategory() { return category; }
     public void setCategory(Category category) { this.category = category; }
 
-    public void registerSettings() { selfSettings(); }
-    public void rSetting(Setting setting) { Past.settingsManager.rSetting(setting); }
+//    public void registerSettings() { selfSettings(); }
+//    public void rSetting(Setting setting) { Past.settingsManager.registerSetting(setting); }
 
     public void onToggle() {}
     public void onUpdate() {}

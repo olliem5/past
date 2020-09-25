@@ -17,8 +17,8 @@ public class ChatSuffix extends Module {
 
     @Override
     public void setup() {
-        Past.settingsManager.rSetting(blue = new Setting("Blue", this, false));
-        Past.settingsManager.rSetting(green = new Setting("Green", this, false));
+        Past.settingsManager.registerSetting(blue = new Setting("Blue", false, this));
+        Past.settingsManager.registerSetting(green = new Setting("Green", true, this));
     }
 
     @SubscribeEvent
