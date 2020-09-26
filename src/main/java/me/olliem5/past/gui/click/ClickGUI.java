@@ -57,6 +57,20 @@ public class ClickGUI extends GuiScreen {
        }
    }
 
+    @Override
+    protected void keyTyped(char typedChar, int keyCode) {
+        for (Panel panel : panels) {
+            if (panel.isOpen() && keyCode != 1) {
+                if (!panel.getComponents().isEmpty()) {
+                    for (Component component : panel.getComponents()) {
+                        component.keyTyped(typedChar, keyCode);
+                    }
+                }
+            }
+        }
+        if (keyCode == 1) { this.mc.displayGuiScreen(null); } //So you are able to close the GUI.
+    }
+
    @Override
    public void mouseReleased(int mouseX, int mouseY, int state) {
        for (Panel p : panels) {

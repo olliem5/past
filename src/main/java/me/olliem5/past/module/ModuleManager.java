@@ -8,6 +8,7 @@ import me.olliem5.past.module.modules.misc.DiscordRPC;
 import me.olliem5.past.module.modules.hud.ClickGUI;
 import me.olliem5.past.module.modules.misc.EntityAlert;
 import me.olliem5.past.module.modules.chat.PrefixChat;
+import me.olliem5.past.module.modules.misc.FakePlayer;
 import me.olliem5.past.module.modules.movement.HoleTP;
 import me.olliem5.past.module.modules.movement.Sprint;
 import me.olliem5.past.module.modules.player.WeaknessAlert;
@@ -35,6 +36,7 @@ public class ModuleManager {
         /* Misc */
         modules.add(new DiscordRPC());
         modules.add(new EntityAlert());
+        modules.add(new FakePlayer());
 
         /* Movement */
         modules.add(new Sprint());

@@ -1,40 +1,94 @@
 package me.olliem5.past.gui.click.elements;
 
+import me.olliem5.past.Past;
 import me.olliem5.past.gui.click.Component;
 import me.olliem5.past.gui.click.Panel;
 import me.olliem5.past.module.Module;
+import me.olliem5.past.settings.Setting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Gui;
 
 import java.awt.*;
+import java.util.ArrayList;
 
 public class ModuleButton extends Component {
+    private ArrayList<Component> subcomponents;
     public Module mod;
     public Panel parent;
     public int offset;
     private boolean isHovered;
+    private boolean open;
 
     public ModuleButton(Module mod, Panel parent, int offset) {
         this.mod = mod;
         this.parent = parent;
         this.offset = offset;
+        this.subcomponents = new ArrayList<>();
+        this.open = false;
+        int opY = offset + 12;
+
+        if (Past.settingsManager.getSettingsModule(mod) != null) {
+            for (Setting setting : Past.settingsManager.getSettingsModule(mod)) {
+                if (setting.getType() == "boolean") {
+                    this.subcomponents.add(new BooleanSwitch(setting, this, opY));
+                    opY += 12;
+                }
+            }
+        }
+        //Add keybind component to all modules.
+        this.subcomponents.add(new KeybindListener(this, opY));
     }
 
     @Override
     public void renderComponent() {
         Gui.drawRect(parent.getX(), this.parent.getY() + this.offset, parent.getX() + parent.getWidth(), this.parent.getY() + 12 + this.offset, this.isHovered ? (this.mod.isToggled() ? new Color(0xFF222222).darker().getRGB() : 0xFF222222) : (this.mod.isToggled() ? new Color(14,14,14).getRGB() : 0xFF111111));
         Minecraft.getMinecraft().fontRenderer.drawStringWithShadow(this.mod.getName(), parent.getX() + 2, (parent.getY() + offset + 2), this.mod.isToggled() ? 0x999999 : -1);
+
+        if (this.open) {
+            if (!this.subcomponents.isEmpty()) {
+                for (Component comp : this.subcomponents) {
+                    comp.renderComponent();
+                }
+                //Maybe here draw the rectangles on side of settings?
+            }
+        }
     }
 
     @Override
     public void updateComponent(int mouseX, int mouseY) {
         this.isHovered = isMouseOnButton(mouseX, mouseY);
+
+        if (!this.subcomponents.isEmpty()) {
+            for (Component comp : this.subcomponents) {
+                comp.updateComponent(mouseX, mouseY);
+            }
+        }
     }
 
     @Override
     public void mouseClicked(int mouseX, int mouseY, int button) {
-        if (isMouseOnButton(mouseX, mouseY) && button == 0) {
+        if (isMouseOnButton(mouseX, mouseY) && button == 0) { //Left mouse button, when clicked the module the button belongs to is toggled.
             this.mod.toggle();
+        }
+        if (isMouseOnButton(mouseX, mouseY) && button == 1) { //Right mouse button, when clicked the module button will display it's subcomponents specific to the module it belongs to.
+            this.setOpen(!isOpen());
+        }
+        for (Component comp : this.subcomponents) {
+            comp.mouseClicked(mouseX, mouseY, button);
+        }
+    }
+
+    @Override
+    public void keyTyped(char typedChar, int key) {
+        for (Component comp : this.subcomponents) {
+            comp.keyTyped(typedChar, key);
+        }
+    }
+
+    @Override
+    public void mouseReleased(int mouseX, int mouseY, int mouseButton) {
+        for (Component comp : this.subcomponents) {
+            comp.mouseReleased(mouseX, mouseY, mouseButton);
         }
     }
 
@@ -45,4 +99,7 @@ public class ModuleButton extends Component {
             return false;
         }
     }
+
+    public boolean isOpen() { return open; }
+    public void setOpen(boolean open) { this.open = open; }
 }

@@ -2,13 +2,13 @@
 {
   "modid": "past",
   "name": "Past Utility Mod",
-  "description": "A utility mod for minecraft 1.12.2",
-  "version": "0.1",
+  "description": "A utility mod for Minecraft 1.12.2, geared towards Anarchy Servers.",
+  "version": "1.0",
   "mcversion": "1.12.2",
   "url": "",
   "updateUrl": "",
   "authorList": ["Ollie"],
-  "credits": "LittleDraily for HOPE, HeroCode for the ClickGUI and Settings",
+  "credits": "See GitHub - https://github.com/olliem5/past",
   "logoFile": "",
   "screenshots": [],
   "dependencies": []
