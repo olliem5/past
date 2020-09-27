@@ -8,7 +8,6 @@ import me.olliem5.past.settings.Setting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Gui;
 
-import java.awt.*;
 import java.util.ArrayList;
 
 public class ModuleButton extends Component {
@@ -41,8 +40,12 @@ public class ModuleButton extends Component {
 
     @Override
     public void renderComponent() {
-        Gui.drawRect(parent.getX(), this.parent.getY() + this.offset, parent.getX() + parent.getWidth(), this.parent.getY() + 12 + this.offset, this.isHovered ? (this.mod.isToggled() ? new Color(0xFF222222).darker().getRGB() : 0xFF222222) : (this.mod.isToggled() ? new Color(14,14,14).getRGB() : 0xFF111111));
-        Minecraft.getMinecraft().fontRenderer.drawStringWithShadow(this.mod.getName(), parent.getX() + 2, (parent.getY() + offset + 2), this.mod.isToggled() ? 0x999999 : -1);
+        if (this.mod.isToggled()) {
+            Gui.drawRect(parent.getX(), this.parent.getY() + this.offset, parent.getX() + parent.getWidth(), this.parent.getY() + 12 + this.offset, 0xFF222222);
+        } else {
+            Gui.drawRect(parent.getX(), this.parent.getY() + this.offset, parent.getX() + parent.getWidth(), this.parent.getY() + 12 + this.offset, 0xFF111111);
+        }
+        Minecraft.getMinecraft().fontRenderer.drawStringWithShadow(this.mod.getName(), parent.getX() + 2, (parent.getY() + offset + 2),-1);
 
         if (this.open) {
             if (!this.subcomponents.isEmpty()) {

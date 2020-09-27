@@ -23,18 +23,18 @@ public class BooleanSwitch extends Component {
     @Override
     public void renderComponent() {
         if (this.op.getValBoolean()) {
-            Gui.drawRect(parent.parent.getX(), this.parent.parent.getY() + this.offset, parent.parent.getX() + parent.parent.getWidth(), this.parent.parent.getY() + 12 + this.offset, 0xFF111111);
-            Minecraft.getMinecraft().fontRenderer.drawStringWithShadow(this.op.getName(), parent.parent.getX() + 2, (parent.parent.getY() + this.offset + 2), 0x999999);
+            Gui.drawRect(parent.parent.getX() + 80, this.parent.parent.getY() -12 + this.offset, parent.parent.getX() + parent.parent.getWidth() + parent.parent.getWidth(), this.parent.parent.getY() + this.offset, 0xFF222222);
+            Minecraft.getMinecraft().fontRenderer.drawStringWithShadow(this.op.getName(), parent.parent.getX() + 82, (parent.parent.getY() + this.offset -10), -1);
         } else {
-            Gui.drawRect(parent.parent.getX(), this.parent.parent.getY() + this.offset, parent.parent.getX() + parent.parent.getWidth(), this.parent.parent.getY() + 12 + this.offset, 0xff121212);
-            Minecraft.getMinecraft().fontRenderer.drawStringWithShadow(this.op.getName(), parent.parent.getX() + 2, (parent.parent.getY() + this.offset + 2), -1);
+            Gui.drawRect(parent.parent.getX() + 80, this.parent.parent.getY() -12 + this.offset, parent.parent.getX() + parent.parent.getWidth() + parent.parent.getWidth(), this.parent.parent.getY() + this.offset, 0xFF111111);
+            Minecraft.getMinecraft().fontRenderer.drawStringWithShadow(this.op.getName(), parent.parent.getX() + 82, (parent.parent.getY() + this.offset -10), -1);
         }
     }
 
     @Override
     public void updateComponent(int mouseX, int mouseY) {
-        this.y = parent.parent.getY() + this.offset;
-        this.x = parent.parent.getX();
+        this.y = parent.parent.getY() -12 + this.offset;
+        this.x = parent.parent.getX() + 80;
     }
 
     @Override
@@ -45,7 +45,7 @@ public class BooleanSwitch extends Component {
     }
 
     public boolean isMouseOnButton(int x, int y) {
-        if (x > this.x && x < this.x + 88 && y > this.y && y < this.y + 12) {
+        if (x > this.x && x < this.x + 80 && y > this.y && y < this.y + 12) {
             return true;
         } else {
             return false;

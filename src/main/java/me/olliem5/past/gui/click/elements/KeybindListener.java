@@ -21,16 +21,16 @@ public class KeybindListener extends Component {
 
     @Override
     public void renderComponent() {
-        Gui.drawRect(parent.parent.getX() + 2, parent.parent.getY() + offset, parent.parent.getX() + (parent.parent.getWidth() * 1), parent.parent.getY() + offset + 12, 0xFF111111);
+        Gui.drawRect(parent.parent.getX() + 80, this.parent.parent.getY() -12 + this.offset, parent.parent.getX() + parent.parent.getWidth() + parent.parent.getWidth(), this.parent.parent.getY() + this.offset, 0xFF111111);
 //        Gui.drawRect(parent.parent.getX(), parent.parent.getY() + offset, parent.parent.getX() + 2, parent.parent.getY() + offset + 12, 0xFF111111); //Corner rectangle!
-        if (isBinding) { Minecraft.getMinecraft().fontRenderer.drawStringWithShadow("Listening...", parent.parent.getX() + 2, parent.parent.getY() + this.offset + 2, -1); }
-        else { Minecraft.getMinecraft().fontRenderer.drawStringWithShadow("Keybind - " + Keyboard.getKeyName(this.parent.mod.getKey()), parent.parent.getX() + 2, parent.parent.getY() + this.offset + 2, -1);  }
+        if (isBinding) { Minecraft.getMinecraft().fontRenderer.drawStringWithShadow("Listening...", parent.parent.getX() + 82, (parent.parent.getY() + this.offset -10), -1); }
+        else { Minecraft.getMinecraft().fontRenderer.drawStringWithShadow("Bind - " + Keyboard.getKeyName(this.parent.mod.getKey()), parent.parent.getX() + 82, (parent.parent.getY() + this.offset -10), -1);  }
     }
 
     @Override
     public void updateComponent(int mouseX, int mouseY) {
-        this.y = parent.parent.getY() + this.offset;
-        this.x = parent.parent.getX();
+        this.y = parent.parent.getY() -12 + this.offset;
+        this.x = parent.parent.getX() + 80;
     }
 
     @Override
@@ -57,9 +57,10 @@ public class KeybindListener extends Component {
     }
 
     public boolean isMouseOnButton(int x, int y) {
-        if (x > this.x && x < this.x + 88 && y > this.y && y < this.y + 12) {
+        if (x > this.x && x < this.x + 80 && y > this.y && y < this.y + 12) {
             return true;
+        } else {
+            return false;
         }
-        return false;
     }
 }

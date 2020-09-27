@@ -1,7 +1,6 @@
 package me.olliem5.past.gui.click;
 
 import me.olliem5.past.module.Category;
-import me.olliem5.past.util.ColourManager;
 import net.minecraft.client.gui.GuiScreen;
 
 import java.util.ArrayList;
@@ -17,7 +16,7 @@ public class ClickGUI extends GuiScreen {
        int panelHeight = 15;
 
        for (Category c : Category.values()) {
-           String paneltitle = ColourManager.underline + "" + Character.toUpperCase(c.name().toLowerCase().charAt(0)) + c.name().toLowerCase().substring(1);
+           String paneltitle = /*ColourManager.underline + "" + */Character.toUpperCase(c.name().toLowerCase().charAt(0)) + c.name().toLowerCase().substring(1);
            ClickGUI.panels.add(new Panel(paneltitle, panelX, panelY, panelWidth, panelHeight, c));
            panelX += 81;
        }

@@ -17,8 +17,8 @@ public class ChatSuffix extends Module {
 
     @Override
     public void setup() {
-        Past.settingsManager.registerSetting(blue = new Setting("Blue", false, this));
-        Past.settingsManager.registerSetting(green = new Setting("Green", true, this));
+        Past.settingsManager.registerSetting(blue = new Setting("Blue Suffix", false, this));
+        Past.settingsManager.registerSetting(green = new Setting("Green Suffix", false, this));
     }
 
     @SubscribeEvent

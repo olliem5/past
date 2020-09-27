@@ -47,7 +47,7 @@ public class Panel {
     }
 
     public void drawScreen(int mouseX, int mouseY, float partialTicks) { //Initial header of module category.
-        Gui.drawRect(x, y, x + width, y + height, 0xff121212);
+        Gui.drawRect(x, y, x + width, y + height, 0xFF222222); //TODO: Make red!
         mc.fontRenderer.drawStringWithShadow(title, x + 2, y + height / 2 - mc.fontRenderer.FONT_HEIGHT / 2, -1);
 
         if (this.open) { //Rendering components when the GUI is opened.

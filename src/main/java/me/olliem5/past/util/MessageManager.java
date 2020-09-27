@@ -12,6 +12,6 @@ public class MessageManager {
 
     public static void sendRawMessage(String message) { player.sendMessage(new TextComponentString(message)); }
     public static void sendMessagePrefix(String message) { sendRawMessage(prefix + " " + message); }
-    public static void sendEntityAlertMessage(String message) { sendMessagePrefix(" " + entityalertPrefix + message); } //The space at the start might end up being a double space.
-    public static void sendWeaknessAlertMessage(String message) { sendMessagePrefix(" " + weaknessAlertPrefix + message); }
+    public static void sendEntityAlertMessage(String message) { sendMessagePrefix(entityalertPrefix + " " + message); }
+    public static void sendWeaknessAlertMessage(String message) { sendMessagePrefix(weaknessAlertPrefix + " " + message); }
 }
