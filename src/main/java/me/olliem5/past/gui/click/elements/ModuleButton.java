@@ -5,7 +5,6 @@ import me.olliem5.past.gui.click.Component;
 import me.olliem5.past.gui.click.Panel;
 import me.olliem5.past.module.Module;
 import me.olliem5.past.settings.Setting;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Gui;
 
 import java.util.ArrayList;
@@ -15,7 +14,6 @@ public class ModuleButton extends Component {
     public Module mod;
     public Panel parent;
     public int offset;
-    private boolean isHovered;
     private boolean open;
 
     public ModuleButton(Module mod, Panel parent, int offset) {
@@ -32,6 +30,10 @@ public class ModuleButton extends Component {
                     this.subcomponents.add(new BooleanSwitch(setting, this, opY));
                     opY += 12;
                 }
+                if (setting.getType() == "intslider") {
+                    this.subcomponents.add(new IntegerSlider(setting, this, opY));
+                    opY += 12;
+                }
             }
         }
         //Add keybind component to all modules.
@@ -45,40 +47,27 @@ public class ModuleButton extends Component {
         } else {
             Gui.drawRect(parent.getX(), this.parent.getY() + this.offset, parent.getX() + parent.getWidth(), this.parent.getY() + 12 + this.offset, 0xFF111111);
         }
-        Minecraft.getMinecraft().fontRenderer.drawStringWithShadow(this.mod.getName(), parent.getX() + 2, (parent.getY() + offset + 2),-1);
+        mc.fontRenderer.drawStringWithShadow(this.mod.getName(), parent.getX() + 2, (parent.getY() + offset + 2),-1);
 
-        if (this.open) {
-            if (!this.subcomponents.isEmpty()) {
-                for (Component comp : this.subcomponents) {
-                    comp.renderComponent();
-                }
-                //Maybe here draw the rectangles on side of settings?
-            }
+        if (this.open && !this.subcomponents.isEmpty()) {
+            for (Component comp : this.subcomponents) { comp.renderComponent(); }
         }
     }
 
     @Override
     public void updateComponent(int mouseX, int mouseY) {
-        this.isHovered = isMouseOnButton(mouseX, mouseY);
-
         if (!this.subcomponents.isEmpty()) {
-            for (Component comp : this.subcomponents) {
-                comp.updateComponent(mouseX, mouseY);
-            }
+            for (Component comp : this.subcomponents) { comp.updateComponent(mouseX, mouseY); }
         }
     }
 
     @Override
     public void mouseClicked(int mouseX, int mouseY, int button) {
-        if (isMouseOnButton(mouseX, mouseY) && button == 0) { //Left mouse button, when clicked the module the button belongs to is toggled.
-            this.mod.toggle();
-        }
-        if (isMouseOnButton(mouseX, mouseY) && button == 1) { //Right mouse button, when clicked the module button will display it's subcomponents specific to the module it belongs to.
-            this.setOpen(!isOpen());
-        }
-        for (Component comp : this.subcomponents) {
-            comp.mouseClicked(mouseX, mouseY, button);
-        }
+        //Left mouse button, when clicked the module the button belongs to is toggled.
+        if (isMouseOnButton(mouseX, mouseY) && button == 0) { this.mod.toggle(); }
+        //Right mouse button, when clicked the module button will display it's subcomponents specific to the module it belongs to.
+        if (isMouseOnButton(mouseX, mouseY) && button == 1) { this.setOpen(!isOpen()); }
+        for (Component comp : this.subcomponents) { comp.mouseClicked(mouseX, mouseY, button); }
     }
 
     @Override

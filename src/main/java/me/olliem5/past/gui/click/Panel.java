@@ -38,7 +38,7 @@ public class Panel {
         int tY = this.height;
 
         for (Module mod : Past.moduleManager.getModules()) {
-            if (mod.getCategory().equals(cat)) {
+            if (mod.getCategory() == cat) {
                 ModuleButton modButton = new ModuleButton(mod, this, tY);
                 this.components.add(modButton);
                 tY += 12;
@@ -46,16 +46,14 @@ public class Panel {
         }
     }
 
-    public void drawScreen(int mouseX, int mouseY, float partialTicks) { //Initial header of module category.
-        Gui.drawRect(x, y, x + width, y + height, 0xFF222222); //TODO: Make red!
+    //Initial header of module category.
+    public void drawScreen(int mouseX, int mouseY, float partialTicks) {
+        Gui.drawRect(x, y, x + width, y + height, 0xFF222222);
         mc.fontRenderer.drawStringWithShadow(title, x + 2, y + height / 2 - mc.fontRenderer.FONT_HEIGHT / 2, -1);
 
-        if (this.open) { //Rendering components when the GUI is opened.
-            if (!this.components.isEmpty()) {
-                for (Component component : components) {
-                    component.renderComponent();
-                }
-            }
+        //Rendering components when the GUI is opened.
+        if (this.open && !this.components.isEmpty()) {
+            for (Component component : components) { component.renderComponent(); }
         }
     }
 

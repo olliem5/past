@@ -1,7 +1,6 @@
 package me.olliem5.past.gui.click.elements;
 
 import me.olliem5.past.gui.click.Component;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Gui;
 import org.lwjgl.input.Keyboard;
 
@@ -11,6 +10,8 @@ public class KeybindListener extends Component {
     private int offset;
     private int x;
     private int y;
+
+    //TODO: Make it set listening to false when escape is pressed & when a default Minecraft gui like the advancements tab (bound to L) is pressed it will not display it if a module is bound to it....?
 
     public KeybindListener(ModuleButton parent, int offset) {
         this.parent = parent;
@@ -22,9 +23,8 @@ public class KeybindListener extends Component {
     @Override
     public void renderComponent() {
         Gui.drawRect(parent.parent.getX() + 80, this.parent.parent.getY() -12 + this.offset, parent.parent.getX() + parent.parent.getWidth() + parent.parent.getWidth(), this.parent.parent.getY() + this.offset, 0xFF111111);
-//        Gui.drawRect(parent.parent.getX(), parent.parent.getY() + offset, parent.parent.getX() + 2, parent.parent.getY() + offset + 12, 0xFF111111); //Corner rectangle!
-        if (isBinding) { Minecraft.getMinecraft().fontRenderer.drawStringWithShadow("Listening...", parent.parent.getX() + 82, (parent.parent.getY() + this.offset -10), -1); }
-        else { Minecraft.getMinecraft().fontRenderer.drawStringWithShadow("Bind - " + Keyboard.getKeyName(this.parent.mod.getKey()), parent.parent.getX() + 82, (parent.parent.getY() + this.offset -10), -1);  }
+        if (isBinding) { mc.fontRenderer.drawStringWithShadow("Listening...", parent.parent.getX() + 82, (parent.parent.getY() + this.offset -10), -1); }
+        else { mc.fontRenderer.drawStringWithShadow("Bind - " + Keyboard.getKeyName(this.parent.mod.getKey()), parent.parent.getX() + 82, (parent.parent.getY() + this.offset -10), -1);  }
     }
 
     @Override

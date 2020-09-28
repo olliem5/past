@@ -16,7 +16,7 @@ public class ClickGUI extends GuiScreen {
        int panelHeight = 15;
 
        for (Category c : Category.values()) {
-           String paneltitle = /*ColourManager.underline + "" + */Character.toUpperCase(c.name().toLowerCase().charAt(0)) + c.name().toLowerCase().substring(1);
+           String paneltitle = Character.toUpperCase(c.name().toLowerCase().charAt(0)) + c.name().toLowerCase().substring(1);
            ClickGUI.panels.add(new Panel(paneltitle, panelX, panelY, panelWidth, panelHeight, c));
            panelX += 81;
        }
@@ -29,28 +29,25 @@ public class ClickGUI extends GuiScreen {
            p.updatePosition(mouseX, mouseY);
            p.drawScreen(mouseX, mouseY, partialTicks);
 
-           for (Component comp : p.getComponents()) {
-               comp.updateComponent(mouseX, mouseY);
-           }
+           for (Component comp : p.getComponents()) { comp.updateComponent(mouseX, mouseY); }
        }
    }
 
    @Override
    public void mouseClicked(int mouseX, int mouseY, int mouseButton) {
        for (Panel p : panels) {
-           if (p.isWithinHeader(mouseX, mouseY) && mouseButton == 0) { //Left mouse button.
-               p.setDragging(true); //Puts the panel into dragging mode.
+           //Left mouse button, puts the panel into dragging mode.
+           if (p.isWithinHeader(mouseX, mouseY) && mouseButton == 0) {
+               p.setDragging(true);
                p.dragX = mouseX - p.getX();
                p.dragY = mouseY - p.getY();
            }
-           if (p.isWithinHeader(mouseX, mouseY) && mouseButton == 1) { //Right mouse button.
-               p.setOpen(!p.isOpen()); //Set the panel to be opened, displaying modules.
-           }
-           if (p.isOpen()) {
-               if (!p.getComponents().isEmpty()) {
-                   for (Component component : p.getComponents()) {
-                       component.mouseClicked(mouseX, mouseY, mouseButton);
-                   }
+           //Right mouse button, sets the panel to be opened, displaying the module buttons.
+           if (p.isWithinHeader(mouseX, mouseY) && mouseButton == 1) { p.setOpen(!p.isOpen()); }
+
+           if (p.isOpen() && !p.getComponents().isEmpty()) {
+               for (Component component : p.getComponents()) {
+                   component.mouseClicked(mouseX, mouseY, mouseButton);
                }
            }
        }
@@ -59,21 +56,22 @@ public class ClickGUI extends GuiScreen {
     @Override
     protected void keyTyped(char typedChar, int keyCode) {
         for (Panel panel : panels) {
-            if (panel.isOpen() && keyCode != 1) {
-                if (!panel.getComponents().isEmpty()) {
-                    for (Component component : panel.getComponents()) {
-                        component.keyTyped(typedChar, keyCode);
-                    }
-                }
+            if (panel.isOpen() && !panel.getComponents().isEmpty() && keyCode != 1) {
+                for (Component component : panel.getComponents()) { component.keyTyped(typedChar, keyCode); }
             }
         }
-        if (keyCode == 1) { this.mc.displayGuiScreen(null); } //So you are able to close the GUI.
+        //So you are able to close the GUI.
+        if (keyCode == 1) { this.mc.displayGuiScreen(null); }
     }
 
    @Override
    public void mouseReleased(int mouseX, int mouseY, int state) {
        for (Panel p : panels) {
            p.setDragging(false);
+
+           if (p.isOpen() && !p.getComponents().isEmpty()) {
+               for (Component component : p.getComponents()) { component.mouseReleased(mouseX, mouseY, state); }
+           }
        }
    }
 
