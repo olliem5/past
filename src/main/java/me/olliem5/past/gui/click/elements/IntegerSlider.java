@@ -1,5 +1,6 @@
 package me.olliem5.past.gui.click.elements;
 
+import me.olliem5.past.Past;
 import me.olliem5.past.gui.click.Component;
 import me.olliem5.past.settings.Setting;
 import me.olliem5.past.util.ColourManager;
@@ -29,7 +30,11 @@ public class IntegerSlider extends Component {
     @Override
     public void renderComponent() {
         Gui.drawRect(parent.parent.getX() + 80, this.parent.parent.getY() -12 + this.offset, parent.parent.getX() + parent.parent.getWidth() + parent.parent.getWidth(), this.parent.parent.getY() + this.offset, 0xFF111111);
-        Gui.drawRect(parent.parent.getX() + 80, this.parent.parent.getY() -12 + this.offset, parent.parent.getX() + parent.parent.getWidth() + (int)this.sliderWidth, this.parent.parent.getY() + this.offset, 0xFF222222);
+        if (Past.settingsManager.getSettingName("RainbowGUI").getValBoolean()) {
+            Gui.drawRect(parent.parent.getX() + 80, this.parent.parent.getY() -12 + this.offset, parent.parent.getX() + parent.parent.getWidth() + (int)this.sliderWidth, this.parent.parent.getY() + this.offset, ColourManager.getMultiColour().getRGB());
+        } else {
+            Gui.drawRect(parent.parent.getX() + 80, this.parent.parent.getY() -12 + this.offset, parent.parent.getX() + parent.parent.getWidth() + (int)this.sliderWidth, this.parent.parent.getY() + this.offset, 0xFF222222);
+        }
         mc.fontRenderer.drawStringWithShadow(this.set.getName() + " " + ColourManager.gray + this.set.getValueInt(), parent.parent.getX() + 82, (parent.parent.getY() + this.offset -10), -1);
     }
 

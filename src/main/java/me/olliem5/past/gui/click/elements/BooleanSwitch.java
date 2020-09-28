@@ -1,7 +1,9 @@
 package me.olliem5.past.gui.click.elements;
 
+import me.olliem5.past.Past;
 import me.olliem5.past.gui.click.Component;
 import me.olliem5.past.settings.Setting;
+import me.olliem5.past.util.ColourManager;
 import net.minecraft.client.gui.Gui;
 
 public class BooleanSwitch extends Component {
@@ -21,7 +23,9 @@ public class BooleanSwitch extends Component {
 
     @Override
     public void renderComponent() {
-        if (this.op.getValBoolean()) {
+        if (Past.settingsManager.getSettingName("RainbowGUI").getValBoolean() && this.op.getValBoolean()) {
+            Gui.drawRect(parent.parent.getX() + 80, this.parent.parent.getY() -12 + this.offset, parent.parent.getX() + parent.parent.getWidth() + parent.parent.getWidth(), this.parent.parent.getY() + this.offset, ColourManager.getMultiColour().getRGB());
+        } else if (this.op.getValBoolean()) {
             Gui.drawRect(parent.parent.getX() + 80, this.parent.parent.getY() -12 + this.offset, parent.parent.getX() + parent.parent.getWidth() + parent.parent.getWidth(), this.parent.parent.getY() + this.offset, 0xFF222222);
         } else {
             Gui.drawRect(parent.parent.getX() + 80, this.parent.parent.getY() -12 + this.offset, parent.parent.getX() + parent.parent.getWidth() + parent.parent.getWidth(), this.parent.parent.getY() + this.offset, 0xFF111111);

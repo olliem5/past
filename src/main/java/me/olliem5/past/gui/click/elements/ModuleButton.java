@@ -5,6 +5,7 @@ import me.olliem5.past.gui.click.Component;
 import me.olliem5.past.gui.click.Panel;
 import me.olliem5.past.module.Module;
 import me.olliem5.past.settings.Setting;
+import me.olliem5.past.util.ColourManager;
 import net.minecraft.client.gui.Gui;
 
 import java.util.ArrayList;
@@ -42,12 +43,21 @@ public class ModuleButton extends Component {
 
     @Override
     public void renderComponent() {
-        if (this.mod.isToggled()) {
+        if (Past.settingsManager.getSettingName("RainbowGUI").getValBoolean() && this.mod.isToggled()) {
+            Gui.drawRect(parent.getX(), this.parent.getY() + this.offset, parent.getX() + parent.getWidth(), this.parent.getY() + 12 + this.offset, ColourManager.getMultiColour().getRGB());
+        } else if (this.mod.isToggled()) {
             Gui.drawRect(parent.getX(), this.parent.getY() + this.offset, parent.getX() + parent.getWidth(), this.parent.getY() + 12 + this.offset, 0xFF222222);
         } else {
             Gui.drawRect(parent.getX(), this.parent.getY() + this.offset, parent.getX() + parent.getWidth(), this.parent.getY() + 12 + this.offset, 0xFF111111);
         }
         mc.fontRenderer.drawStringWithShadow(this.mod.getName(), parent.getX() + 2, (parent.getY() + offset + 2),-1);
+        if (this.subcomponents.size() > 2) {
+            if (!this.isOpen()) {
+                mc.fontRenderer.drawStringWithShadow("+", parent.getX() + parent.getWidth() -10, (parent.getY() + offset + 2),-1);
+            } else if (this.isOpen()) {
+                mc.fontRenderer.drawStringWithShadow("-", parent.getX() + parent.getWidth() -10, (parent.getY() + offset + 2),-1);
+            }
+        }
 
         if (this.open && !this.subcomponents.isEmpty()) {
             for (Component comp : this.subcomponents) { comp.renderComponent(); }

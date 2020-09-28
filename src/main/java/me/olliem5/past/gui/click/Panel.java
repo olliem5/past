@@ -4,6 +4,7 @@ import me.olliem5.past.Past;
 import me.olliem5.past.gui.click.elements.ModuleButton;
 import me.olliem5.past.module.Category;
 import me.olliem5.past.module.Module;
+import me.olliem5.past.util.ColourManager;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Gui;
 
@@ -48,7 +49,11 @@ public class Panel {
 
     //Initial header of module category.
     public void drawScreen(int mouseX, int mouseY, float partialTicks) {
-        Gui.drawRect(x, y, x + width, y + height, 0xFF222222);
+        if (Past.settingsManager.getSettingName("RainbowGUI").getValBoolean()) {
+            Gui.drawRect(x, y, x + width, y + height, ColourManager.getMultiColour().getRGB());
+        } else {
+            Gui.drawRect(x, y, x + width, y + height, 0xFF222222);
+        }
         mc.fontRenderer.drawStringWithShadow(title, x + 2, y + height / 2 - mc.fontRenderer.FONT_HEIGHT / 2, -1);
 
         //Rendering components when the GUI is opened.
