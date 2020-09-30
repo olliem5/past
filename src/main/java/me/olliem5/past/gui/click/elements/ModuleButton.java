@@ -65,6 +65,11 @@ public class ModuleButton extends Component {
     }
 
     @Override
+    public void closeallsub() {
+        this.open =   false;
+    }
+
+    @Override
     public void updateComponent(int mouseX, int mouseY) {
         if (!this.subcomponents.isEmpty()) {
             for (Component comp : this.subcomponents) { comp.updateComponent(mouseX, mouseY); }
@@ -76,7 +81,14 @@ public class ModuleButton extends Component {
         //Left mouse button, when clicked the module the button belongs to is toggled.
         if (isMouseOnButton(mouseX, mouseY) && button == 0) { this.mod.toggle(); }
         //Right mouse button, when clicked the module button will display it's subcomponents specific to the module it belongs to.
-        if (isMouseOnButton(mouseX, mouseY) && button == 1) { this.setOpen(!isOpen()); }
+        if (isMouseOnButton(mouseX, mouseY) && button == 1) {
+            if(!this.isOpen()){
+                parent.closeAllSetting();
+                this.setOpen(true);
+            }else{
+                this.setOpen(false);
+            }
+        }
         for (Component comp : this.subcomponents) { comp.mouseClicked(mouseX, mouseY, button); }
     }
 

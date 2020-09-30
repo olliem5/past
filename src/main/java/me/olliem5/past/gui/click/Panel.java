@@ -19,6 +19,7 @@ public class Panel {
     public int y;
     public int width;
     public int height;
+    public boolean issettingoepn;
     private boolean isDragging;
     private boolean open;
     public int dragX;
@@ -26,6 +27,7 @@ public class Panel {
     Category cat;
 
     public Panel(String title, int x, int y, int width, int height, Category cat) {
+        issettingoepn = true;
         this.components = new ArrayList<>();
         this.title = title;
         this.x = x;
@@ -74,6 +76,12 @@ public class Panel {
         if (this.isDragging) {
             this.setX(mouseX - dragX);
             this.setY(mouseY - dragY);
+        }
+    }
+
+    public void closeAllSetting(){
+        for(Component component:components){
+            component.closeallsub();
         }
     }
 
