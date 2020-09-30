@@ -1,6 +1,6 @@
 package me.olliem5.past.module.modules.misc;
 
-import me.olliem5.past.util.DiscordManager;
+import me.olliem5.past.util.DiscordUtil;
 import me.olliem5.past.module.Category;
 import me.olliem5.past.module.Module;
 
@@ -10,8 +10,8 @@ public class DiscordRPC extends Module {
     }
 
     @Override
-    public void onEnable() {  DiscordManager.startup(); }
+    public void onEnable() {  DiscordUtil.startup(); }
 
     @Override
-    public void onDisable() { DiscordManager.shutdown(); }
+    public void onDisable() { DiscordUtil.shutdown(); }
 }

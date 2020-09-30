@@ -1,8 +1,8 @@
 package me.olliem5.past.command.commands;
 
 import me.olliem5.past.Past;
-import me.olliem5.past.util.ColourManager;
-import me.olliem5.past.util.MessageManager;
+import me.olliem5.past.util.ColourUtil;
+import me.olliem5.past.util.MessageUtil;
 import me.olliem5.past.module.Module;
 import me.olliem5.past.command.Command;
 import org.lwjgl.input.Keyboard;
@@ -20,9 +20,9 @@ public class BindCommand extends Command {
                     if (m.getName().equalsIgnoreCase(args[1])) {
                         try {
                             m.setKey(Keyboard.getKeyIndex(args[2].toUpperCase()));
-                            MessageManager.sendMessagePrefix(ColourManager.aqua + m.getName() + ColourManager.white + " is now binded to " + ColourManager.red + args[2].toUpperCase() + ColourManager.gray + " (" + ColourManager.white + Keyboard.getKeyIndex(args[2].toUpperCase() + "") + ColourManager.gray + ")");
+                            MessageUtil.sendMessagePrefix(ColourUtil.aqua + m.getName() + ColourUtil.white + " is now binded to " + ColourUtil.red + args[2].toUpperCase() + ColourUtil.gray + " (" + ColourUtil.white + Keyboard.getKeyIndex(args[2].toUpperCase() + "") + ColourUtil.gray + ")");
                         } catch (Exception e) {
-                            MessageManager.sendMessagePrefix(ColourManager.red + m.getName() + ColourManager.white + " Something went wrong :(");
+                            MessageUtil.sendMessagePrefix(ColourUtil.red + m.getName() + ColourUtil.white + " Something went wrong :(");
                             e.printStackTrace();
                         }
                     }

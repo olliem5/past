@@ -5,6 +5,7 @@ import me.olliem5.past.module.Module;
 import me.olliem5.past.module.ModuleManager;
 import me.olliem5.past.gui.click.ClickGUI;
 import me.olliem5.past.settings.SettingsManager;
+import me.olliem5.past.util.ConfigUtil;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
@@ -35,6 +36,7 @@ public class Past {
     public static CommandManager commandManager;
     public static ClickGUI clickGUI;
     public static PastHUD pastHUD;
+    public static ConfigUtil configUtil;
 
     @Mod.EventHandler
     public void PastPreStartup(FMLPreInitializationEvent event) { Display.setTitle(nameversion); }
@@ -49,14 +51,11 @@ public class Past {
         commandManager = new CommandManager();
         clickGUI = new ClickGUI();
         pastHUD = new PastHUD();
+        configUtil = new ConfigUtil();
 
         CommandManager.init();
         MinecraftForge.EVENT_BUS.register(new CommandManager());
         MinecraftForge.EVENT_BUS.register(this);
-
-        try {
-            //Load Config
-        } catch (Exception ignored) {}
 
         System.out.println("[" + nameversion + "]" + " " + "Initialized and ready to go!");
     }

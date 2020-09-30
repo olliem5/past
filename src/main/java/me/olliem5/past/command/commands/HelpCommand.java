@@ -1,8 +1,8 @@
 package me.olliem5.past.command.commands;
 
 import me.olliem5.past.command.Command;
-import me.olliem5.past.util.ColourManager;
-import me.olliem5.past.util.MessageManager;
+import me.olliem5.past.util.ColourUtil;
+import me.olliem5.past.util.MessageUtil;
 
 public class HelpCommand extends Command {
     public HelpCommand() {
@@ -11,12 +11,12 @@ public class HelpCommand extends Command {
 
     @Override
     public void onCommand(String[] args) {
-        MessageManager.sendMessagePrefix(ColourManager.red + "Past Client" + ColourManager.gray + " - " + ColourManager.red + "Help");
-        MessageManager.sendMessagePrefix(ColourManager.white + "Available Commands:");
-        MessageManager.sendMessagePrefix(ColourManager.aqua + ".bind" + " " + ColourManager.gray + "[" + ColourManager.red + "Bind a module to a set key" + ColourManager.gray + "]" + " " + ColourManager.gray + " - " + ColourManager.white + "Usage (.bind <module> <key>)");
-        MessageManager.sendRawMessage(ColourManager.gray + "-");
-        MessageManager.sendMessagePrefix(ColourManager.aqua + ".toggle" + " " + ColourManager.gray + "[" + ColourManager.red + "Toggle a specified module" + ColourManager.gray + "]" + " " + ColourManager.gray + " - " + ColourManager.white + "Usage (.toggle <module>)");
-        MessageManager.sendRawMessage(ColourManager.gray + "-");
-        MessageManager.sendMessagePrefix(ColourManager.aqua + ".modules" + " " + ColourManager.gray + "[" + ColourManager.red + "Gives you a list of all client modules" + ColourManager.gray + "]" + " " + ColourManager.gray + " - " + ColourManager.white + "Usage (.modules)");
+        MessageUtil.sendMessagePrefix(ColourUtil.red + "Past Client" + ColourUtil.gray + " - " + ColourUtil.red + "Help");
+        MessageUtil.sendMessagePrefix(ColourUtil.white + "Available Commands:");
+        MessageUtil.sendMessagePrefix(ColourUtil.aqua + ".bind" + " " + ColourUtil.gray + "[" + ColourUtil.red + "Bind a module to a set key" + ColourUtil.gray + "]" + " " + ColourUtil.gray + " - " + ColourUtil.white + "Usage (.bind <module> <key>)");
+        MessageUtil.sendRawMessage(ColourUtil.gray + "-");
+        MessageUtil.sendMessagePrefix(ColourUtil.aqua + ".toggle" + " " + ColourUtil.gray + "[" + ColourUtil.red + "Toggle a specified module" + ColourUtil.gray + "]" + " " + ColourUtil.gray + " - " + ColourUtil.white + "Usage (.toggle <module>)");
+        MessageUtil.sendRawMessage(ColourUtil.gray + "-");
+        MessageUtil.sendMessagePrefix(ColourUtil.aqua + ".modules" + " " + ColourUtil.gray + "[" + ColourUtil.red + "Gives you a list of all client modules" + ColourUtil.gray + "]" + " " + ColourUtil.gray + " - " + ColourUtil.white + "Usage (.modules)");
     }
 }

@@ -8,7 +8,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiMultiplayer;
 import net.minecraft.client.gui.GuiWorldSelection;
 
-public class DiscordManager {
+public class DiscordUtil {
     private static final Minecraft mc = Minecraft.getMinecraft();
     private static final DiscordRPC rpc = DiscordRPC.INSTANCE;
     public static DiscordRichPresence rp = new DiscordRichPresence();
@@ -27,7 +27,7 @@ public class DiscordManager {
         new Thread(() -> {
             while (!Thread.currentThread().isInterrupted()) {
                 try {
-                    details = "In the menus";
+                    details = "Main Menu";
                     state = "discord.gg/3DBphxC";
 
                     if (mc.isIntegratedServerRunning()) {

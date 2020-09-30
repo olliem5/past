@@ -1,5 +1,6 @@
 package me.olliem5.past.module;
 
+import me.olliem5.past.Past;
 import net.minecraft.client.Minecraft;
 import net.minecraftforge.client.event.RenderHandEvent;
 import net.minecraftforge.common.MinecraftForge;
@@ -68,11 +69,31 @@ public class Module {
 
     public boolean isToggled() { return toggled; }
 
-    public void onEnable() { MinecraftForge.EVENT_BUS.register(this); }
-    public void onDisable() { MinecraftForge.EVENT_BUS.unregister(this); }
+    public void onEnable() {
+        MinecraftForge.EVENT_BUS.register(this);
+
+        if (Past.configUtil != null) {
+            try { Past.configUtil.saveConfig(); } catch (Exception e) {}
+        }
+    }
+
+    public void onDisable() {
+        MinecraftForge.EVENT_BUS.unregister(this);
+
+        if (Past.configUtil != null) {
+            try { Past.configUtil.saveConfig(); } catch (Exception e) {}
+        }
+    }
 
     public Integer getKey() { return key; }
-    public void setKey(Integer key) { this.key = key; }
+
+    public void setKey(Integer key) {
+        this.key = key;
+
+        if (Past.configUtil != null) {
+            try { Past.configUtil.saveConfig(); } catch (Exception e) {}
+        }
+    }
 
     public String getName() { return name; }
     public void setName(String name) { this.name = name; }

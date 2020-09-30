@@ -1,8 +1,8 @@
 package me.olliem5.past.command.commands;
 
 import me.olliem5.past.Past;
-import me.olliem5.past.util.ColourManager;
-import me.olliem5.past.util.MessageManager;
+import me.olliem5.past.util.ColourUtil;
+import me.olliem5.past.util.MessageUtil;
 import me.olliem5.past.module.Module;
 import me.olliem5.past.command.Command;
 
@@ -20,9 +20,9 @@ public class ToggleCommand extends Command {
                 if (m.getName().equalsIgnoreCase(args[1])) {
                     m.toggle();
                     if (m.isToggled()) {
-                        MessageManager.sendMessagePrefix(ColourManager.aqua + m.getName() + ColourManager.white + " is now " + ColourManager.green + "ON");
+                        MessageUtil.sendMessagePrefix(ColourUtil.aqua + m.getName() + ColourUtil.white + " is now " + ColourUtil.green + "ON");
                     } else {
-                        MessageManager.sendMessagePrefix(ColourManager.aqua + m.getName() + ColourManager.white + " is now " + ColourManager.red + "OFF");
+                        MessageUtil.sendMessagePrefix(ColourUtil.aqua + m.getName() + ColourUtil.white + " is now " + ColourUtil.red + "OFF");
                     }
                 }
             }

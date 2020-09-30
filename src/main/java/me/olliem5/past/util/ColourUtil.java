@@ -4,7 +4,7 @@ import com.mojang.realmsclient.gui.ChatFormatting;
 
 import java.awt.*;
 
-public class ColourManager {
+public class ColourUtil {
     //ChatFormatting colours.
     public static ChatFormatting aqua = ChatFormatting.AQUA;
     public static ChatFormatting black = ChatFormatting.BLACK;
@@ -40,15 +40,15 @@ public class ColourManager {
     private int blueRGB;
     private int rgb;
                         //Reee frick u java make me spell the word wrong for class >:(
-    public ColourManager(Color colour) {
+    public ColourUtil(Color colour) {
         this.redRGB = colour.getRed();
         this.greenRGB = colour.getGreen();
         this.blueRGB = colour.getBlue();
         this.rgb = colour.getRGB();
     }
 
-    public static ColourManager getMultiColour() {
-        ColourManager theRGB = new ColourManager(Color.getHSBColor((float) (System.currentTimeMillis() % 7500L) / 7500f, 0.8f, 0.8f));
+    public static ColourUtil getMultiColour() {
+        ColourUtil theRGB = new ColourUtil(Color.getHSBColor((float) (System.currentTimeMillis() % 7500L) / 7500f, 0.8f, 0.8f));
         return theRGB;
     }
 

@@ -1,5 +1,6 @@
 package me.olliem5.past.settings;
 
+import me.olliem5.past.Past;
 import me.olliem5.past.module.Module;
 
 public class Setting {
@@ -28,10 +29,7 @@ public class Setting {
     }
 
     public int getValueInt() { return this.start; }
-    public void setValueInt(final int value) { this.start = value; }
-
     public boolean getValBoolean() { return this.bval; }
-    public void setValBoolean(boolean value) { this.bval = value; }
 
     public String getType() { return type; }
     public String getName() { return name; }
@@ -41,4 +39,20 @@ public class Setting {
     public int getMax() { return max; }
 
     public Module getParent() { return parent; }
+
+    public void setValueInt(final int value) {
+        this.start = value;
+
+        if (Past.configUtil != null) {
+            try { Past.configUtil.saveConfig(); } catch (Exception e) {}
+        }
+    }
+
+    public void setValBoolean(boolean value) {
+        this.bval = value;
+
+        if (Past.configUtil != null) {
+            try { Past.configUtil.saveConfig(); } catch (Exception e) {}
+        }
+    }
 }

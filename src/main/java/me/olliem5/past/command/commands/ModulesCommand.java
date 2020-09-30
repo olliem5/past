@@ -3,8 +3,8 @@ package me.olliem5.past.command.commands;
 import me.olliem5.past.Past;
 import me.olliem5.past.command.Command;
 import me.olliem5.past.module.Module;
-import me.olliem5.past.util.ColourManager;
-import me.olliem5.past.util.MessageManager;
+import me.olliem5.past.util.ColourUtil;
+import me.olliem5.past.util.MessageUtil;
 
 public class ModulesCommand extends Command {
     public ModulesCommand() {
@@ -13,9 +13,9 @@ public class ModulesCommand extends Command {
 
     @Override
     public void onCommand(String[] args) {
-        MessageManager.sendMessagePrefix(ColourManager.red + "Past Client" + ColourManager.gray + " - " + ColourManager.red + "Available Modules");
+        MessageUtil.sendMessagePrefix(ColourUtil.red + "Past Client" + ColourUtil.gray + " - " + ColourUtil.red + "Available Modules");
         for (Module module : Past.moduleManager.getModules()) {
-            MessageManager.sendMessagePrefix(ColourManager.aqua + module.getName() + ColourManager.gray + " - " + ColourManager.white + module.getDescription());
+            MessageUtil.sendMessagePrefix(ColourUtil.aqua + module.getName() + ColourUtil.gray + " - " + ColourUtil.white + module.getDescription());
         }
     }
 }
