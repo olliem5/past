@@ -1,4 +1,4 @@
-package me.olliem5.past.gui.click.elements;
+package me.olliem5.past.gui.click.components;
 
 import me.olliem5.past.Past;
 import me.olliem5.past.gui.click.Component;
@@ -65,9 +65,7 @@ public class ModuleButton extends Component {
     }
 
     @Override
-    public void closeallsub() {
-        this.open =   false;
-    }
+    public void closeAllSub() { this.open = false; }
 
     @Override
     public void updateComponent(int mouseX, int mouseY) {
@@ -82,10 +80,10 @@ public class ModuleButton extends Component {
         if (isMouseOnButton(mouseX, mouseY) && button == 0) { this.mod.toggle(); }
         //Right mouse button, when clicked the module button will display it's subcomponents specific to the module it belongs to.
         if (isMouseOnButton(mouseX, mouseY) && button == 1) {
-            if(!this.isOpen()){
+            if (!this.isOpen()) {
                 parent.closeAllSetting();
                 this.setOpen(true);
-            }else{
+            } else {
                 this.setOpen(false);
             }
         }

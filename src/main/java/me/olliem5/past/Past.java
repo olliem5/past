@@ -1,5 +1,6 @@
 package me.olliem5.past;
 
+import me.olliem5.past.gui.editor.HudEditor;
 import me.olliem5.past.gui.ingame.PastHUD;
 import me.olliem5.past.module.Module;
 import me.olliem5.past.module.ModuleManager;
@@ -35,6 +36,7 @@ public class Past {
     public static SettingsManager settingsManager;
     public static CommandManager commandManager;
     public static ClickGUI clickGUI;
+    public static HudEditor hudEditor;
     public static PastHUD pastHUD;
     public static ConfigUtil configUtil;
 
@@ -50,6 +52,7 @@ public class Past {
         moduleManager = new ModuleManager();
         commandManager = new CommandManager();
         clickGUI = new ClickGUI();
+        hudEditor = new HudEditor();
         pastHUD = new PastHUD();
         configUtil = new ConfigUtil();
 

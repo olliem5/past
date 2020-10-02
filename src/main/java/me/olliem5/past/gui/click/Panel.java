@@ -1,7 +1,7 @@
 package me.olliem5.past.gui.click;
 
 import me.olliem5.past.Past;
-import me.olliem5.past.gui.click.elements.ModuleButton;
+import me.olliem5.past.gui.click.components.ModuleButton;
 import me.olliem5.past.module.Category;
 import me.olliem5.past.module.Module;
 import me.olliem5.past.util.ColourUtil;
@@ -19,7 +19,7 @@ public class Panel {
     public int y;
     public int width;
     public int height;
-    public boolean issettingoepn;
+    public boolean isSettingOpen;
     private boolean isDragging;
     private boolean open;
     public int dragX;
@@ -27,7 +27,6 @@ public class Panel {
     Category cat;
 
     public Panel(String title, int x, int y, int width, int height, Category cat) {
-        issettingoepn = true;
         this.components = new ArrayList<>();
         this.title = title;
         this.x = x;
@@ -35,6 +34,7 @@ public class Panel {
         this.width = width;
         this.height = height;
         this.dragX = 0;
+        this.isSettingOpen = true;
         this.isDragging = false;
         this.open = true;
         this.cat = cat;
@@ -47,6 +47,19 @@ public class Panel {
                 tY += 12;
             }
         }
+    }
+
+    public Panel(String title, int x, int y, int width, int height) {
+        this.components = new ArrayList<>();
+        this.title = title;
+        this.x = x;
+        this.y = y;
+        this.width = width;
+        this.height = height;
+        this.dragX = 0;
+        this.isSettingOpen = true;
+        this.isDragging = false;
+        this.open = true;
     }
 
     //Initial header of module category.
@@ -79,10 +92,8 @@ public class Panel {
         }
     }
 
-    public void closeAllSetting(){
-        for(Component component:components){
-            component.closeallsub();
-        }
+    public void closeAllSetting() {
+        for (Component component : components) { component.closeAllSub(); }
     }
 
     public ArrayList<Component> getComponents() { return components; }

@@ -24,9 +24,11 @@ public class ChatSuffix extends Module {
     @SubscribeEvent
     public void onChat(ClientChatEvent event) {
 
-        if (blue.getValBoolean()) { event.setMessage(event.getMessage() + " ` \uff30\uff41\uff53\uff54"); }
-        else if (green.getValBoolean()) { event.setMessage(event.getMessage() + " > \uff30\uff41\uff53\uff54"); }
-        else { event.setMessage(event.getMessage() + " \uff30\uff41\uff53\uff54"); }
+        String suffix = " \uff30\uff41\uff53\uff54";
+
+        if (blue.getValBoolean()) { event.setMessage(event.getMessage() + " `" + suffix); }
+        else if (green.getValBoolean()) { event.setMessage(event.getMessage() + " >" + suffix); }
+        else { event.setMessage(event.getMessage() + suffix); }
 
         if (event.getMessage().startsWith("/")) { return; }
         if (event.getMessage().startsWith(Past.prefix)) { return; }

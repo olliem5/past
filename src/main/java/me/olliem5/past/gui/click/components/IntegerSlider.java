@@ -1,4 +1,4 @@
-package me.olliem5.past.gui.click.elements;
+package me.olliem5.past.gui.click.components;
 
 import me.olliem5.past.Past;
 import me.olliem5.past.gui.click.Component;

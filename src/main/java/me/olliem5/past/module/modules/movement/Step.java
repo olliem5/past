@@ -17,7 +17,7 @@ public class Step extends Module {
         Past.settingsManager.registerSetting(height = new Setting("Height", 1, 1, 10, this));
     }
 
-    public void onUpdate() {
+    public void onUpdate() { //TODO: Make this vanilla mode.
         if (mc.player != null && mc.world != null) {
             if (mc.player.onGround && !mc.player.isInWater() && !mc.player.isInLava() && !mc.player.isOnLadder()) {
                 if (mc.player.collidedHorizontally) {

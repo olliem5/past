@@ -31,10 +31,10 @@ import java.util.List;
 
 public class BedAura extends Module {
     public BedAura() {
-        super ("BedAura", "Places and destroys beds, best on 1.13+", Category.COMBAT);
+        super ("BedAura", "Places and destroys beds, for 1.13+", Category.COMBAT);
     }
 
-    //TODO: AutoSwitch setting (for bed in hand).
+    //TODO: When mode setting is made, make mode for 1.12.2. (Probably just AutoBreak).
 
     Setting place;
     Setting explode;
@@ -97,7 +97,6 @@ public class BedAura extends Module {
         if (mc.player == null) { return; }
 
         if (mc.player.dimension == 0) {
-            //Todo: make a delay for sending the error message for being in overworld.
             MessageUtil.sendBedAuraMessage(ColourUtil.gray + "[" + ColourUtil.red + "Error" + ColourUtil.gray + "]" + " " + ColourUtil.white + "You are in the" + " " + ColourUtil.green + "Overworld" + ColourUtil.gray + "!" + " " + ColourUtil.white + "Please go into the" + " " + ColourUtil.red + "Nether" + " " + ColourUtil.white + "to use this feature" + ColourUtil.gray + ".");
             this.toggle();
         }
