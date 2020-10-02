@@ -38,7 +38,7 @@ public class HudEditor extends GuiScreen {
                 p.dragX = mouseX - p.getX();
                 p.dragY = mouseY - p.getY();
             }
-            //Right mouse button, sets the panel to be opened, displaying the module buttons.
+            //Right mouse button, sets the panel to be opened, displaying the HUD toggle buttons.
             if (p.isWithinHeader(mouseX, mouseY) && mouseButton == 1) {
                 p.setOpen(!p.isOpen());
             }

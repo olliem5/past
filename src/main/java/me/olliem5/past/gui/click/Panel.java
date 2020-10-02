@@ -26,6 +26,7 @@ public class Panel {
     public int dragY;
     Category cat;
 
+    //For ClickGUI.
     public Panel(String title, int x, int y, int width, int height, Category cat) {
         this.components = new ArrayList<>();
         this.title = title;
@@ -49,6 +50,7 @@ public class Panel {
         }
     }
 
+    //For HudEditor.
     public Panel(String title, int x, int y, int width, int height) {
         this.components = new ArrayList<>();
         this.title = title;
@@ -60,6 +62,8 @@ public class Panel {
         this.isSettingOpen = true;
         this.isDragging = false;
         this.open = true;
+
+        //Add the HUD toggle buttons here.
     }
 
     //Initial header of module category.
