@@ -3,6 +3,8 @@ package me.olliem5.past.settings;
 import me.olliem5.past.Past;
 import me.olliem5.past.module.Module;
 
+import java.util.ArrayList;
+
 public class Setting {
     private Module parent;
     private String name;
@@ -28,8 +30,19 @@ public class Setting {
         this.type = "boolean";
     }
 
+    private String value;
+    private ArrayList<String> modes;
+    public Setting(String name, Module module, ArrayList<String> modes, String value) {
+        this.parent = module;
+        this.name = name;
+        this.value = value;
+        this.modes = modes;
+        this.type = "mode";
+    }
+
     public int getValueInt() { return this.start; }
     public boolean getValBoolean() { return this.bval; }
+    public String getValueString() { return this.value; }
 
     public String getType() { return type; }
     public String getName() { return name; }
@@ -39,6 +52,8 @@ public class Setting {
     public int getMax() { return max; }
 
     public Module getParent() { return parent; }
+
+    public ArrayList<String> getModes() { return this.modes; }
 
     public void setValueInt(final int value) {
         this.start = value;
@@ -55,4 +70,6 @@ public class Setting {
             try { Past.configUtil.saveConfig(); } catch (Exception e) {}
         }
     }
+
+    public void setValueString(String value) { this.value = value; }
 }

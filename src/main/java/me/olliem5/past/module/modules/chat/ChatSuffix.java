@@ -7,16 +7,23 @@ import me.olliem5.past.settings.Setting;
 import net.minecraftforge.client.event.ClientChatEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
+import java.util.ArrayList;
+
 public class ChatSuffix extends Module {
     public ChatSuffix() {
         super ("ChatSuffix", "Adds a custom ending to your messages", Category.CHAT);
     }
 
+    Setting suffixmode;
     Setting blue;
     Setting green;
 
     @Override
     public void setup() {
+        ArrayList<String> modes = new ArrayList<>();
+        modes.add("Classic");
+        modes.add("Version");
+        Past.settingsManager.registerSetting(suffixmode = new Setting("Suffix", this, modes, "Classic"));
         Past.settingsManager.registerSetting(blue = new Setting("Blue Suffix", false, this));
         Past.settingsManager.registerSetting(green = new Setting("Green Suffix", false, this));
     }
@@ -24,7 +31,10 @@ public class ChatSuffix extends Module {
     @SubscribeEvent
     public void onChat(ClientChatEvent event) {
 
-        String suffix = " \uff30\uff41\uff53\uff54";
+        String suffix = "";
+
+        if (suffixmode.getValueString() == "Classic") { suffix = " \uff30\uff41\uff53\uff54"; }
+        if (suffixmode.getValueString() == "Version") { suffix = " \uff30\uff41\uff53\uff54" + " " + Past.version; }
 
         if (blue.getValBoolean()) { event.setMessage(event.getMessage() + " `" + suffix); }
         else if (green.getValBoolean()) { event.setMessage(event.getMessage() + " >" + suffix); }
