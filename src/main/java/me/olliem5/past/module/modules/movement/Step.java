@@ -7,7 +7,7 @@ import me.olliem5.past.settings.Setting;
 
 public class Step extends Module {
     public Step() {
-        super ("Step", "Allows you to step up blocks", Category.MISC);
+        super ("Step", "Allows you to step up blocks", Category.MOVEMENT);
     }
 
     Setting height;
