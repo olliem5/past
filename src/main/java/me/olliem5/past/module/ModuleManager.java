@@ -1,6 +1,7 @@
 package me.olliem5.past.module;
 
 import me.olliem5.past.module.modules.chat.Spammer;
+import me.olliem5.past.module.modules.combat.AutoCrystal;
 import me.olliem5.past.module.modules.combat.AutoTotem;
 import me.olliem5.past.module.modules.combat.BedAura;
 import me.olliem5.past.module.modules.hud.HudEditor;
@@ -33,6 +34,7 @@ public class ModuleManager {
         /* Combat */
         modules.add(new AutoTotem());
         modules.add(new BedAura());
+        modules.add(new AutoCrystal());
 
         /* HUD */
         modules.add(new ClickGUI());
