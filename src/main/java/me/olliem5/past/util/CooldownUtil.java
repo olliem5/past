@@ -1,10 +1,10 @@
 package me.olliem5.past.util;
 
-public class Cooldown {
+public class CooldownUtil {
 
     private long time;
 
-    public Cooldown() {
+    public CooldownUtil() {
         time = -1;
     }
 

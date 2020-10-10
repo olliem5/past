@@ -4,7 +4,7 @@ import me.olliem5.past.Past;
 import me.olliem5.past.module.Category;
 import me.olliem5.past.module.Module;
 import me.olliem5.past.settings.Setting;
-import me.olliem5.past.util.Cooldown;
+import me.olliem5.past.util.CooldownUtil;
 import net.minecraft.client.Minecraft;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
@@ -32,8 +32,8 @@ public class AutoCrystal extends Module {
     public AutoCrystal() {
         super("AutoCrystal", "Breaks and Places crystals", Category.COMBAT);
     }
-    Cooldown breaktimer = new Cooldown();
-    Cooldown placetimer = new Cooldown();
+    CooldownUtil breaktimer = new CooldownUtil();
+    CooldownUtil placetimer = new CooldownUtil();
 
     Setting placedelay;
     Setting breakdelay;
@@ -68,8 +68,8 @@ public class AutoCrystal extends Module {
         Past.settingsManager.registerSetting(autoswitch = new Setting("AutoSwitch", true, this));
         Past.settingsManager.registerSetting(placedelay = new Setting("Place Delay", 0, 2, 20, this));
         Past.settingsManager.registerSetting(breakdelay = new Setting("Break Delay", 0, 2, 20, this));
-        Past.settingsManager.registerSetting(placerange = new Setting("Place range", 0, 5, 10, this));
-        Past.settingsManager.registerSetting(breakrange = new Setting("Break range", 0, 5, 10, this));
+        Past.settingsManager.registerSetting(placerange = new Setting("Place Range", 0, 5, 10, this));
+        Past.settingsManager.registerSetting(breakrange = new Setting("Break Range", 0, 5, 10, this));
         Past.settingsManager.registerSetting(mindamage = new Setting("Min Damage", 0, 8, 35, this));
         Past.settingsManager.registerSetting(faceplace = new Setting("Faceplace", 0, 8, 35, this));
 
