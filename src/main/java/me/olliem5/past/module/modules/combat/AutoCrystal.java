@@ -29,9 +29,11 @@ import java.util.stream.Collectors;
 
 public class AutoCrystal extends Module {
     static Minecraft mc = Minecraft.getMinecraft();
+
     public AutoCrystal() {
-        super("AutoCrystal", "Breaks and Places crystals", Category.COMBAT);
+        super ("AutoCrystal", "Breaks and Places crystals", Category.COMBAT);
     }
+
     CooldownUtil breaktimer = new CooldownUtil();
     CooldownUtil placetimer = new CooldownUtil();
 
@@ -45,6 +47,7 @@ public class AutoCrystal extends Module {
     Setting swinghand;
     Setting mindamage;
     Setting faceplace;
+
     private ArrayList<String> placemodes;
     private ArrayList<String> breakmodes;
     private ArrayList<String> swinghands;
@@ -56,12 +59,15 @@ public class AutoCrystal extends Module {
         placemodes.add("None");
         placemodes.add("Single");
         placemodes.add("Multi");
+
         breakmodes = new ArrayList<>();
         breakmodes.add("None");
         breakmodes.add("Near");
+
         swinghands = new ArrayList<>();
         swinghands.add("Main");
         swinghands.add("Offhand");
+
         Past.settingsManager.registerSetting(placemode = new Setting("Place", this, placemodes, "Single"));
         Past.settingsManager.registerSetting(breakmode = new Setting("Break", this, breakmodes, "Near"));
         Past.settingsManager.registerSetting(swinghand = new Setting("Swing", this, swinghands, "Main"));
@@ -72,17 +78,12 @@ public class AutoCrystal extends Module {
         Past.settingsManager.registerSetting(breakrange = new Setting("Break Range", 0, 5, 10, this));
         Past.settingsManager.registerSetting(mindamage = new Setting("Min Damage", 0, 8, 35, this));
         Past.settingsManager.registerSetting(faceplace = new Setting("Faceplace", 0, 8, 35, this));
-
-
-
     }
-
-
 
     @Override
     public void onUpdate() {
-        if(mc.player == null) return;
-         if(breaktimer.passed(breakdelay.getValueInt() * 50)){
+        if (mc.player == null) { return; }
+         if (breaktimer.passed(breakdelay.getValueInt() * 50)) {
             EntityEnderCrystal crystal = mc.world.loadedEntityList.stream()
                     .filter(entity -> entity instanceof EntityEnderCrystal)
                     .filter(e -> mc.player.getDistance(e) <= breakrange.getValueInt())
@@ -90,35 +91,32 @@ public class AutoCrystal extends Module {
                     .min(Comparator.comparing(c -> mc.player.getDistance(c)))
                     .orElse(null);
             System.out.println(breakmode.getValueString());
-            if(breakmode.getValueString().equalsIgnoreCase("near") && mc.player != null && crystal != null){
+            if (breakmode.getValueString().equalsIgnoreCase("near") && mc.player != null && crystal != null) {
                 mc.playerController.attackEntity(mc.player, crystal);
-                if(swinghand.getValueString().equalsIgnoreCase("main")){
+                if (swinghand.getValueString().equalsIgnoreCase("main")) {
                     mc.player.swingArm(EnumHand.MAIN_HAND);
-                }else if(swinghand.getValueString().equalsIgnoreCase("offhand")){
+                } else if (swinghand.getValueString().equalsIgnoreCase("offhand")) {
                     mc.player.swingArm(EnumHand.OFF_HAND);
                 }
-
             }
             breaktimer.reset();
-
-        }else{
-
+        } else {
+            //Do stuff.
         }
 
-        if(placetimer.passed(placedelay.getValueInt() * 50)){
+        if (placetimer.passed(placedelay.getValueInt() * 50)) {
             Entity ent = null;
             Entity lastTarget = null;
-            if(placemode.getValueString().equalsIgnoreCase("Multi")){
+            if (placemode.getValueString().equalsIgnoreCase("Multi")) {
                 BlockPos finalPos = null;
                 final List<BlockPos> blocks = this.findCrystalBlocks();
                 final List<Entity> entities = new ArrayList<Entity>();
                 entities.addAll((Collection<? extends Entity>) mc.world.playerEntities.stream().collect(Collectors.toList()));
                 double damage = 0.5;
                 for (final Entity entity : entities) {
-                    if(entity != mc.player){
+                    if (entity != mc.player){
                         if (((EntityLivingBase) entity).getHealth() <= 0.0f) {
                             continue;
-
                         }
                         for (final BlockPos blockPos : blocks) {
 
@@ -141,7 +139,7 @@ public class AutoCrystal extends Module {
                         }
                     }
                 }
-                if(damage == 0.5){
+                if (damage == 0.5) {
                     return;
                 }
                 int crystalSlot = (mc.player.getHeldItemMainhand().getItem() == Items.END_CRYSTAL) ? mc.player.inventory.currentItem : -1;
@@ -173,11 +171,10 @@ public class AutoCrystal extends Module {
                     f = result.sideHit;
                 }
                 mc.player.connection.sendPacket((Packet) new CPacketPlayerTryUseItemOnBlock(finalPos, f, offhand ? EnumHand.OFF_HAND : EnumHand.MAIN_HAND, 0.0f, 0.0f, 0.0f));
-
             }
             placetimer.reset();
 
-        }else{
+        } else {
             //in cooldown
         }
     }
@@ -188,9 +185,8 @@ public class AutoCrystal extends Module {
     }
 
     @Override
-    public void onRender() {
+    public void onRender() {}
 
-    }
     public static float calculateDamage(double posX, double posY, double posZ, Entity entity) {
         float doubleExplosionSize = 12.0F;
         double distancedsize = entity.getDistance(posX, posY, posZ) / (double) doubleExplosionSize;
@@ -204,6 +200,7 @@ public class AutoCrystal extends Module {
         }
         return (float) finald;
     }
+
     public static float getBlastReduction(EntityLivingBase entity, float damage, Explosion explosion) {
         if (entity instanceof EntityPlayer) {
             EntityPlayer ep = (EntityPlayer) entity;
@@ -233,11 +230,13 @@ public class AutoCrystal extends Module {
     public static float calculateDamage(EntityEnderCrystal crystal, Entity entity) {
         return calculateDamage(crystal.posX, crystal.posY, crystal.posZ, entity);
     }
+
     private List<BlockPos> findCrystalBlocks() {
         NonNullList positions = NonNullList.create();
         positions.addAll((Collection)this.getSphere(getPlayerPos(), this.placerange.getValueInt(), this.placerange.getValueInt(), false, true, 0).stream().filter(this::canPlaceCrystal).collect(Collectors.toList()));
         return (List<BlockPos>)positions;
     }
+
     public List<BlockPos> getSphere(final BlockPos loc, final float r, final int h, final boolean hollow, final boolean sphere, final int plus_y) {
         final List<BlockPos> circleblocks = new ArrayList<BlockPos>();
         final int cx = loc.getX();
@@ -256,9 +255,11 @@ public class AutoCrystal extends Module {
         }
         return circleblocks;
     }
+
     public static BlockPos getPlayerPos() {
         return new BlockPos(Math.floor(mc.player.posX), Math.floor(mc.player.posY), Math.floor(mc.player.posZ));
     }
+
     private boolean canPlaceCrystal(final BlockPos blockPos) {
         final BlockPos boost = blockPos.add(0, 1, 0);
         final BlockPos boost2 = blockPos.add(0, 2, 0);
