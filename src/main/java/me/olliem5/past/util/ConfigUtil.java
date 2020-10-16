@@ -10,35 +10,47 @@ import java.util.ArrayList;
 
 public class ConfigUtil {
     public File MainDirectory;
-    public File ModuleFile;
-
-    String separator = " - ";
 
     public ConfigUtil() {
         MainDirectory = new File(Minecraft.getMinecraft().mcDataDir, "Past Client");
         if (!MainDirectory.exists()) { MainDirectory.mkdir(); }
-
-        ModuleFile = new File(MainDirectory, "Module Info.txt");
-        if (!ModuleFile.exists()) { try { ModuleFile.createNewFile(); } catch (IOException e) {} }
     }
 
-    public void saveConfig() {
-        ArrayList<String> toSave = new ArrayList<>();
-
-        for (Module module : Past.moduleManager.getModules()) { toSave.add("Module" + separator + module.getName() + separator + module.getKey() + separator + module.isToggled()); }
-
-        for (Setting setting : Past.settingsManager.getSettings()) {
-            if (setting.getType() == "boolean") { toSave.add("Setting" + separator + setting.getName() + separator + setting.getParent().getName() + separator + setting.getValBoolean()); }
-            if (setting.getType() == "intslider") { toSave.add("Setting" + separator + setting.getName() + separator + setting.getParent().getName() + separator + setting.getValueInt()); }
-        }
-
+    public void saveLoadedModules() {
         try {
-            PrintWriter printWriter = new PrintWriter(this.ModuleFile);
-            for (String string : toSave) { printWriter.println(string); }
-            printWriter.close();
-        } catch (FileNotFoundException e) { e.printStackTrace(); }
+            File file = new File(MainDirectory, "ToggledModules.txt");
+            ArrayList<String> modulesToSave = new ArrayList<>();
+
+            for (Module module : Past.moduleManager.getModules()) { if (module.isToggled()) { modulesToSave.add(module.getName()); } }
+
+            try {
+                PrintWriter printWriter = new PrintWriter(file);
+                for (String string : modulesToSave) { printWriter.println(string); }
+                printWriter.close();
+            } catch (FileNotFoundException e) {}
+        } catch (Exception e) {}
     }
 
-    public void loadConfig() {
+    public void saveKeybinds() {
+        try {
+            File file = new File(MainDirectory, "Keybinds.txt");
+            ArrayList<String> bindsToSave = new ArrayList<>();
+
+            for (Module module : Past.moduleManager.getModules()) { bindsToSave.add(module.getName() + ":" + module.getKey()); }
+
+            try {
+                PrintWriter printWriter = new PrintWriter(file);
+                for (String string : bindsToSave) { printWriter.println(string); }
+                printWriter.close();
+            } catch (FileNotFoundException e) {}
+        } catch (Exception e) {}
     }
+
+    public void loadConfig() {}
+
+    //For later
+//        for (Setting setting : Past.settingsManager.getSettings()) {
+//            if (setting.getType() == "boolean") { toSave.add("Setting" + separator + setting.getName() + separator + setting.getParent().getName() + separator + setting.getValBoolean()); }
+//            if (setting.getType() == "intslider") { toSave.add("Setting" + separator + setting.getName() + separator + setting.getParent().getName() + separator + setting.getValueInt()); }
+//        }
 }

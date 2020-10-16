@@ -52,7 +52,6 @@ public class AutoCrystal extends Module {
     private ArrayList<String> breakmodes;
     private ArrayList<String> swinghands;
 
-
     @Override
     public void setup() {
         placemodes = new ArrayList<>();

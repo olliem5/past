@@ -72,17 +72,13 @@ public class Module {
     public void onEnable() {
         MinecraftForge.EVENT_BUS.register(this);
 
-        if (Past.configUtil != null) {
-            try { Past.configUtil.saveConfig(); } catch (Exception e) {}
-        }
+        if (Past.configUtil != null) { try { Past.configUtil.saveLoadedModules(); } catch (Exception e) {} }
     }
 
     public void onDisable() {
         MinecraftForge.EVENT_BUS.unregister(this);
 
-        if (Past.configUtil != null) {
-            try { Past.configUtil.saveConfig(); } catch (Exception e) {}
-        }
+        if (Past.configUtil != null) { try { Past.configUtil.saveLoadedModules(); } catch (Exception e) {} }
     }
 
     public Integer getKey() { return key; }
@@ -90,9 +86,7 @@ public class Module {
     public void setKey(Integer key) {
         this.key = key;
 
-        if (Past.configUtil != null) {
-            try { Past.configUtil.saveConfig(); } catch (Exception e) {}
-        }
+        if (Past.configUtil != null) { try { Past.configUtil.saveKeybinds(); } catch (Exception e) {} }
     }
 
     public String getName() { return name; }
