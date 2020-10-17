@@ -46,6 +46,21 @@ public class ConfigUtil {
         } catch (Exception e) {}
     }
 
+    public void saveBooleans() {
+        try {
+            File file = new File(MainDirectory, "BooleanValues.txt");
+            ArrayList<String> booleansToSave = new ArrayList<>();
+
+            for (Setting setting : Past.settingsManager.getSettings()) { if (setting.getType() == "boolean") { booleansToSave.add(setting.getParent().getName() + ":" + setting.getName() + ":" + setting.getValBoolean()); } }
+
+            try {
+                PrintWriter printWriter = new PrintWriter(file);
+                for (String string : booleansToSave) { printWriter.println(string); }
+                printWriter.close();
+            } catch (FileNotFoundException e) {}
+        } catch (Exception e) {}
+    }
+
     public void loadConfig() {}
 
     //For later

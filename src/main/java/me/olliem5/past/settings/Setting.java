@@ -1,5 +1,6 @@
 package me.olliem5.past.settings;
 
+import me.olliem5.past.Past;
 import me.olliem5.past.module.Module;
 
 import java.util.ArrayList;
@@ -56,7 +57,11 @@ public class Setting {
 
     public void setValueInt(final int value) { this.start = value; }
 
-    public void setValBoolean(boolean value) { this.bval = value; }
+    public void setValBoolean(boolean value) {
+        this.bval = value;
+
+        if (Past.configUtil != null) { try { Past.configUtil.saveBooleans(); } catch (Exception e) {} }
+    }
 
     public void setValueString(String value) { this.value = value; }
 }
