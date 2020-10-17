@@ -1,6 +1,8 @@
 package me.olliem5.past.util;
 
 import me.olliem5.past.Past;
+import me.olliem5.past.gui.click.ClickGUI;
+import me.olliem5.past.gui.click.Panel;
 import me.olliem5.past.module.Module;
 import me.olliem5.past.settings.Setting;
 import net.minecraft.client.Minecraft;
@@ -61,11 +63,53 @@ public class ConfigUtil {
         } catch (Exception e) {}
     }
 
-    public void loadConfig() {}
+    public void saveIntegers() {
+        try {
+            File file = new File(MainDirectory, "IntegerValues.txt");
+            ArrayList<String> integersToSave = new ArrayList<>();
 
-    //For later
-//        for (Setting setting : Past.settingsManager.getSettings()) {
-//            if (setting.getType() == "boolean") { toSave.add("Setting" + separator + setting.getName() + separator + setting.getParent().getName() + separator + setting.getValBoolean()); }
-//            if (setting.getType() == "intslider") { toSave.add("Setting" + separator + setting.getName() + separator + setting.getParent().getName() + separator + setting.getValueInt()); }
-//        }
+            for (Setting setting : Past.settingsManager.getSettings()) { if (setting.getType() == "intslider") { integersToSave.add(setting.getParent().getName() + ":" + setting.getName() + ":" + setting.getValueInt()); } }
+
+            try {
+                PrintWriter printWriter = new PrintWriter(file);
+                for (String string : integersToSave) { printWriter.println(string); }
+                printWriter.close();
+            } catch (FileNotFoundException e) {}
+        } catch (Exception e) {}
+    }
+
+    public void saveModes() {
+        try {
+            File file = new File(MainDirectory, "ModeValues.txt");
+            ArrayList<String> modesToSave = new ArrayList<>();
+
+            for (Setting setting : Past.settingsManager.getSettings()) { if (setting.getType() == "mode") { modesToSave.add(setting.getParent().getName() + ":" + setting.getName() + ":" + setting.getValueString()); } }
+
+            try {
+                PrintWriter printWriter = new PrintWriter(file);
+                for (String string : modesToSave) { printWriter.println(string); }
+                printWriter.close();
+            } catch (FileNotFoundException e) {}
+        } catch (Exception e) {}
+    }
+
+    public void saveGuiPanels() {
+        try {
+            File file = new File(MainDirectory, "GuiPanels.txt");
+            ArrayList<String> panelsToSave = new ArrayList<>();
+
+            for (Panel panel : ClickGUI.panels) {
+                panelsToSave.add(panel.getCat() + ":" + "x" + ":" + panel.getX());
+                panelsToSave.add(panel.getCat() + ":" + "y" + ":" + panel.getY());
+            }
+
+            try {
+                PrintWriter printWriter = new PrintWriter(file);
+                for (String string : panelsToSave) { printWriter.println(string); }
+                printWriter.close();
+            } catch (FileNotFoundException e) {}
+        } catch (Exception e) {}
+    }
+
+    public void loadConfig() {}
 }

@@ -55,7 +55,11 @@ public class Setting {
 
     public ArrayList<String> getModes() { return this.modes; }
 
-    public void setValueInt(final int value) { this.start = value; }
+    public void setValueInt(final int value) {
+        this.start = value;
+
+        if (Past.configUtil != null) { try { Past.configUtil.saveIntegers(); } catch (Exception e) {} }
+    }
 
     public void setValBoolean(boolean value) {
         this.bval = value;
@@ -63,5 +67,9 @@ public class Setting {
         if (Past.configUtil != null) { try { Past.configUtil.saveBooleans(); } catch (Exception e) {} }
     }
 
-    public void setValueString(String value) { this.value = value; }
+    public void setValueString(String value) {
+        this.value = value;
+
+        if (Past.configUtil != null) { try { Past.configUtil.saveModes(); } catch (Exception e) {} }
+    }
 }

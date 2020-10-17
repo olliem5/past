@@ -112,6 +112,17 @@ public class Panel {
     public int getX() { return x; }
     public int getY() { return y; }
 
-    public void setX(int newX) { this.x = newX; }
-    public void setY(int newY) { this.y = newY; }
+    public void setX(int newX) {
+        this.x = newX;
+
+        if (Past.configUtil != null) { try { Past.configUtil.saveGuiPanels(); } catch (Exception e) {} }
+    }
+
+    public void setY(int newY) {
+        this.y = newY;
+
+        if (Past.configUtil != null) { try { Past.configUtil.saveGuiPanels(); } catch (Exception e) {} }
+    }
+
+    public Category getCat() { return cat; }
 }
