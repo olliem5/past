@@ -12,7 +12,7 @@ public class ViewModel extends Module {
         super ("ViewModel", "Changes the way your player looks", Category.RENDER);
     }
 
-    //Arm Yaw is disabled atom, because when you pop a totem the values get fucked and change.
+    //Arm Yaw is disabled atm, because when you pop a totem the values change.
 
     Setting itemfov;
     Setting armpitch;
