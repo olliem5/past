@@ -34,7 +34,7 @@ public class BedAura extends Module {
         super ("BedAura", "Places and destroys beds, for 1.13+", Category.COMBAT);
     }
 
-    //TODO: When mode setting is made, make mode for 1.12.2. (Probably just AutoBreak).
+    //TODO: Mode for 1.12.2. (Probably just AutoBreak).
 
     Setting place;
     Setting explode;

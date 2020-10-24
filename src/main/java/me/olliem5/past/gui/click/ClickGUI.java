@@ -1,5 +1,6 @@
 package me.olliem5.past.gui.click;
 
+import me.olliem5.past.Past;
 import me.olliem5.past.module.Category;
 import net.minecraft.client.gui.GuiScreen;
 
@@ -24,7 +25,9 @@ public class ClickGUI extends GuiScreen {
 
    @Override
    public void drawScreen(int mouseX, int mouseY, float partialTicks) {
-       drawDefaultBackground();
+       if (Past.settingsManager.getSettingName("Background").getValBoolean()) {
+           drawDefaultBackground();
+       }
        for (Panel p : panels) {
            p.updatePosition(mouseX, mouseY);
            p.drawScreen(mouseX, mouseY, partialTicks);

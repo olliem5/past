@@ -5,7 +5,7 @@ import me.olliem5.past.module.modules.combat.AutoCrystal;
 import me.olliem5.past.module.modules.combat.AutoTotem;
 import me.olliem5.past.module.modules.combat.BedAura;
 import me.olliem5.past.module.modules.hud.HudEditor;
-import me.olliem5.past.module.modules.hud.PastHUD;
+import me.olliem5.past.module.modules.hud.HUD;
 import me.olliem5.past.module.modules.chat.ChatSuffix;
 import me.olliem5.past.module.modules.misc.DiscordRPC;
 import me.olliem5.past.module.modules.hud.ClickGUI;
@@ -38,7 +38,7 @@ public class ModuleManager {
 
         /* HUD */
         modules.add(new ClickGUI());
-        modules.add(new PastHUD());
+        modules.add(new HUD());
         modules.add(new HudEditor());
 
         /* Misc */
