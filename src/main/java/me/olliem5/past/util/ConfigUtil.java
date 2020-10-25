@@ -21,6 +21,7 @@ public class ConfigUtil {
         }
 
         loadSavedModules();
+        loadKeybinds();
     }
 
     public void saveLoadedModules() {
@@ -164,5 +165,27 @@ public class ConfigUtil {
             }
             br.close();
         } catch (Exception e) {}
+    }
+
+    public void loadKeybinds() {
+        try {
+            File file = new File(MainDirectory, "Keybinds.txt");
+            FileInputStream fstream = new FileInputStream(file.getAbsolutePath());
+            DataInputStream in = new DataInputStream(fstream);
+            BufferedReader br = new BufferedReader(new InputStreamReader(in));
+
+            String line;
+            while ((line = br.readLine()) != null) {
+                String curLine = line.trim();
+                String name = curLine.split(":")[0];
+                String bind = curLine.split(":")[1];
+                for (Module m : Past.moduleManager.getModules()) {
+                    if (m != null && m.getName().equalsIgnoreCase(name)) {
+                        m.setKey(Integer.parseInt(bind));
+                    }
+                }
+            }
+            br.close();
+        } catch (Exception var11) {}
     }
 }
