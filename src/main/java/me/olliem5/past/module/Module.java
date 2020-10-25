@@ -61,24 +61,28 @@ public class Module {
         toggled = !toggled;
         onToggle();
         if (toggled) {
-            onEnable();
+            onEnableEvent();
         } else {
-            onDisable();
+            onDisableEvent();
         }
     }
 
     public boolean isToggled() { return toggled; }
 
-    public void onEnable() {
+    public void onEnableEvent() {
         MinecraftForge.EVENT_BUS.register(this);
 
         if (Past.configUtil != null) { try { Past.configUtil.saveLoadedModules(); } catch (Exception e) {} }
+
+        onEnable();
     }
 
-    public void onDisable() {
+    public void onDisableEvent() {
         MinecraftForge.EVENT_BUS.unregister(this);
 
         if (Past.configUtil != null) { try { Past.configUtil.saveLoadedModules(); } catch (Exception e) {} }
+
+        onDisable();
     }
 
     public Integer getKey() { return key; }
@@ -104,4 +108,6 @@ public class Module {
 //  public void onPlayerTick() {}
     public void setup() {}
     public void selfSettings() {}
+    public void onEnable() {}
+    public void onDisable() {}
 }
