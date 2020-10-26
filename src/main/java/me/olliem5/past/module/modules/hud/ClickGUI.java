@@ -14,11 +14,13 @@ public class ClickGUI extends Module {
 
     Setting rgb;
     Setting background;
+    Setting descriptions;
 
     @Override
     public void setup() {
         Past.settingsManager.registerSetting(rgb = new Setting("RainbowGUI", true, this));
         Past.settingsManager.registerSetting(background = new Setting("Background", true, this));
+        Past.settingsManager.registerSetting(descriptions = new Setting("Descriptions", true, this));
     }
 
     public void onEnable() {

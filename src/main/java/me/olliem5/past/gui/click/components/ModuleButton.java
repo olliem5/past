@@ -16,6 +16,9 @@ public class ModuleButton extends Component {
     public Panel parent;
     public int offset;
     private boolean open;
+    private boolean hovered;
+    int mousexx;
+    int mouseyy;
 
     public ModuleButton(Module mod, Panel parent, int offset) {
         this.mod = mod;
@@ -66,6 +69,15 @@ public class ModuleButton extends Component {
         if (this.open && !this.subcomponents.isEmpty()) {
             for (Component comp : this.subcomponents) { comp.renderComponent(); }
         }
+
+        if (Past.settingsManager.getSettingName("Descriptions").getValBoolean() && hovered == true) {
+            if (Past.settingsManager.getSettingName("RainbowGUI").getValBoolean()) {
+                Gui.drawRect(mousexx -2, mouseyy -2, mousexx + mc.fontRenderer.getStringWidth(mod.getDescription()) + 2,mouseyy + mc.fontRenderer.FONT_HEIGHT + 2, ColourUtil.getMultiColour().getRGB());
+            } else {
+                Gui.drawRect(mousexx -2, mouseyy -2, mousexx + mc.fontRenderer.getStringWidth(mod.getDescription()) + 2,mouseyy + mc.fontRenderer.FONT_HEIGHT + 2, 0xFF222222);
+            }
+            mc.fontRenderer.drawStringWithShadow(mod.getDescription(), mousexx, mouseyy, -1);
+        }
     }
 
     @Override
@@ -73,6 +85,9 @@ public class ModuleButton extends Component {
 
     @Override
     public void updateComponent(int mouseX, int mouseY) {
+        this.hovered = this.isMouseOnButton(mouseX, mouseY);
+        mousexx = mouseX + 10;
+        mouseyy = mouseY - 5;
         if (!this.subcomponents.isEmpty()) {
             for (Component comp : this.subcomponents) { comp.updateComponent(mouseX, mouseY); }
         }
