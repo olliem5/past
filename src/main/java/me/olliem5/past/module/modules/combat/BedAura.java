@@ -237,7 +237,7 @@ public class BedAura extends Module {
         List<EntityPlayer> playerList = mc.world.playerEntities;
         closestTarget = null;
         for (EntityPlayer target : playerList) {
-            if (target == mc.player) { continue; } //Check for if player is the user.
+            if (target == mc.player) { continue; }
             if (!isLiving(target)) { continue; }
             if ((target).getHealth() <= 0) { continue; }
 
@@ -262,4 +262,12 @@ public class BedAura extends Module {
 
     public static boolean isLiving(Entity e) { return e instanceof EntityLivingBase; }
     private boolean canPlaceBed(BlockPos pos) { return (mc.world.getBlockState(pos).getBlock() == Blocks.AIR || mc.world.getBlockState(pos).getBlock() == Blocks.BED) && mc.world.getEntitiesWithinAABB(Entity.class, new AxisAlignedBB(pos)).isEmpty(); }
+
+    public String getArraylistInfo() {
+        if (closestTarget != null) {
+            return ColourUtil.gray + " " + closestTarget.getName();
+        } else {
+            return "";
+        }
+    }
 }

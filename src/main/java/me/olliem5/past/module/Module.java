@@ -93,6 +93,8 @@ public class Module {
         if (Past.configUtil != null) { try { Past.configUtil.saveKeybinds(); } catch (Exception e) {} }
     }
 
+    public String getArraylistInfo() { return ""; }
+
     public String getName() { return name; }
     public void setName(String name) { this.name = name; }
 

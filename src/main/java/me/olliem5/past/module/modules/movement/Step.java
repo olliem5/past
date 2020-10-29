@@ -4,6 +4,7 @@ import me.olliem5.past.Past;
 import me.olliem5.past.module.Category;
 import me.olliem5.past.module.Module;
 import me.olliem5.past.settings.Setting;
+import me.olliem5.past.util.ColourUtil;
 
 public class Step extends Module {
     public Step() {
@@ -30,4 +31,6 @@ public class Step extends Module {
 
     @Override
     public void onDisable() { mc.player.stepHeight = 0.5f; }
+
+    public String getArraylistInfo() { return ColourUtil.gray + " " + height.getValueInt(); }
 }

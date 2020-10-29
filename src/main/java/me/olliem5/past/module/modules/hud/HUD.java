@@ -91,7 +91,7 @@ public class HUD extends Module {
                 }
             }
             if (arraylist.getValBoolean()) {
-                Past.moduleManager.modules.sort((module1, module2) -> StringUtil.getStringWidth(StringUtil.capitalizeFirstLetter(module2.getName())) - StringUtil.getStringWidth(StringUtil.capitalizeFirstLetter(module1.getName())));
+                Past.moduleManager.modules.sort((module1, module2) -> StringUtil.getStringWidth(StringUtil.capitalizeFirstLetter(module2.getName() + module2.getArraylistInfo())) - StringUtil.getStringWidth(StringUtil.capitalizeFirstLetter(module1.getName() + module1.getArraylistInfo())));
                 ScaledResolution sr = new ScaledResolution(mc);
                 int count = 0;
 
@@ -102,15 +102,15 @@ public class HUD extends Module {
                     double offset = count * (mc.fontRenderer.FONT_HEIGHT + 6);
 
                     if (background.getValBoolean()) {
-                        Gui.drawRect(sr.getScaledWidth() - mc.fontRenderer.getStringWidth(module.getName()) - 10, (int)offset, sr.getScaledWidth(),6 + mc.fontRenderer.FONT_HEIGHT + (int)offset, 0x75101010);
+                        Gui.drawRect(sr.getScaledWidth() - mc.fontRenderer.getStringWidth(module.getName() + module.getArraylistInfo()) - 10, (int)offset, sr.getScaledWidth(),6 + mc.fontRenderer.FONT_HEIGHT + (int)offset, 0x75101010);
                     }
                     if (sidebox.getValBoolean()) {
-                        Gui.drawRect(sr.getScaledWidth() - mc.fontRenderer.getStringWidth(module.getName()) -10, (int)offset, sr.getScaledWidth() - mc.fontRenderer.getStringWidth(module.getName()) -8, 6 + mc.fontRenderer.FONT_HEIGHT + (int)offset, getColour());
+                        Gui.drawRect(sr.getScaledWidth() - mc.fontRenderer.getStringWidth(module.getName() + module.getArraylistInfo()) -10, (int)offset, sr.getScaledWidth() - mc.fontRenderer.getStringWidth(module.getName() + module.getArraylistInfo()) -8, 6 + mc.fontRenderer.FONT_HEIGHT + (int)offset, getColour());
                     }
                     if (shadow.getValBoolean()) {
-                        mc.fontRenderer.drawStringWithShadow(module.getName(), sr.getScaledWidth() - mc.fontRenderer.getStringWidth(module.getName()) -4, (int) (4 + offset), getColour());
+                        mc.fontRenderer.drawStringWithShadow(module.getName() + module.getArraylistInfo(), sr.getScaledWidth() - mc.fontRenderer.getStringWidth(module.getName() + module.getArraylistInfo()) -4, (int) (4 + offset), getColour());
                     } else {
-                        mc.fontRenderer.drawString(module.getName(), sr.getScaledWidth() - mc.fontRenderer.getStringWidth(module.getName()) -4, (int) (4 + offset), getColour());
+                        mc.fontRenderer.drawString(module.getName() + module.getArraylistInfo(), sr.getScaledWidth() - mc.fontRenderer.getStringWidth(module.getName() + module.getArraylistInfo()) -4, (int) (4 + offset), getColour());
                     }
                     count++;
                 }

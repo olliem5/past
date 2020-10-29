@@ -4,6 +4,7 @@ import me.olliem5.past.Past;
 import me.olliem5.past.module.Category;
 import me.olliem5.past.module.Module;
 import me.olliem5.past.settings.Setting;
+import me.olliem5.past.util.ColourUtil;
 import net.minecraftforge.client.event.ClientChatEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
@@ -43,4 +44,6 @@ public class ChatSuffix extends Module {
         if (event.getMessage().startsWith("/")) { return; }
         if (event.getMessage().startsWith(Past.prefix)) { return; }
     }
+
+    public String getArraylistInfo() { return ColourUtil.gray + " " + suffixmode.getValueString().toUpperCase(); }
 }
