@@ -30,7 +30,7 @@ public class IntegerSlider extends Component {
     @Override
     public void renderComponent() {
         Gui.drawRect(parent.parent.getX() + 80, this.parent.parent.getY() -12 + this.offset, parent.parent.getX() + parent.parent.getWidth() + parent.parent.getWidth(), this.parent.parent.getY() + this.offset, 0xFF111111);
-        if (Past.settingsManager.getSettingName("RainbowGUI").getValBoolean()) {
+        if (Past.settingsManager.getSettingID("ClickGUIRainbow").getValBoolean()) {
             Gui.drawRect(parent.parent.getX() + 80, this.parent.parent.getY() -12 + this.offset, parent.parent.getX() + parent.parent.getWidth() + (int)this.sliderWidth, this.parent.parent.getY() + this.offset, ColourUtil.getMultiColour().getRGB());
         } else {
             Gui.drawRect(parent.parent.getX() + 80, this.parent.parent.getY() -12 + this.offset, parent.parent.getX() + parent.parent.getWidth() + (int)this.sliderWidth, this.parent.parent.getY() + this.offset, 0xFF222222);

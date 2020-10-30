@@ -68,7 +68,7 @@ public class Panel {
 
     //Initial header of module category.
     public void drawScreen(int mouseX, int mouseY, float partialTicks) {
-        if (Past.settingsManager.getSettingName("RainbowGUI").getValBoolean()) {
+        if (Past.settingsManager.getSettingID("ClickGUIRainbow").getValBoolean()) {
             Gui.drawRect(x, y, x + width, y + height, ColourUtil.getMultiColour().getRGB());
         } else {
             Gui.drawRect(x, y, x + width, y + height, 0xFF222222);

@@ -23,7 +23,7 @@ public class BooleanSwitch extends Component {
 
     @Override
     public void renderComponent() {
-        if (Past.settingsManager.getSettingName("RainbowGUI").getValBoolean() && this.op.getValBoolean()) {
+        if (Past.settingsManager.getSettingID("ClickGUIRainbow").getValBoolean() && this.op.getValBoolean()) {
             Gui.drawRect(parent.parent.getX() + 80, this.parent.parent.getY() -12 + this.offset, parent.parent.getX() + parent.parent.getWidth() + parent.parent.getWidth(), this.parent.parent.getY() + this.offset, ColourUtil.getMultiColour().getRGB());
         } else if (this.op.getValBoolean()) {
             Gui.drawRect(parent.parent.getX() + 80, this.parent.parent.getY() -12 + this.offset, parent.parent.getX() + parent.parent.getWidth() + parent.parent.getWidth(), this.parent.parent.getY() + this.offset, 0xFF222222);

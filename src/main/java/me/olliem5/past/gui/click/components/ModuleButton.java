@@ -50,7 +50,7 @@ public class ModuleButton extends Component {
 
     @Override
     public void renderComponent() {
-        if (Past.settingsManager.getSettingName("RainbowGUI").getValBoolean() && this.mod.isToggled()) {
+        if (Past.settingsManager.getSettingID("ClickGUIRainbow").getValBoolean() && this.mod.isToggled()) {
             Gui.drawRect(parent.getX(), this.parent.getY() + this.offset, parent.getX() + parent.getWidth(), this.parent.getY() + 12 + this.offset, ColourUtil.getMultiColour().getRGB());
         } else if (this.mod.isToggled()) {
             Gui.drawRect(parent.getX(), this.parent.getY() + this.offset, parent.getX() + parent.getWidth(), this.parent.getY() + 12 + this.offset, 0xFF222222);
@@ -70,8 +70,8 @@ public class ModuleButton extends Component {
             for (Component comp : this.subcomponents) { comp.renderComponent(); }
         }
 
-        if (Past.settingsManager.getSettingName("Descriptions").getValBoolean() && hovered == true) {
-            if (Past.settingsManager.getSettingName("RainbowGUI").getValBoolean()) {
+        if (Past.settingsManager.getSettingID("ClickGUIDescriptions").getValBoolean() && hovered == true) {
+            if (Past.settingsManager.getSettingID("ClickGUIRainbow").getValBoolean()) {
                 Gui.drawRect(mousexx -2, mouseyy -2, mousexx + mc.fontRenderer.getStringWidth(mod.getDescription()) + 2,mouseyy + mc.fontRenderer.FONT_HEIGHT + 2, ColourUtil.getMultiColour().getRGB());
             } else {
                 Gui.drawRect(mousexx -2, mouseyy -2, mousexx + mc.fontRenderer.getStringWidth(mod.getDescription()) + 2,mouseyy + mc.fontRenderer.FONT_HEIGHT + 2, 0xFF222222);

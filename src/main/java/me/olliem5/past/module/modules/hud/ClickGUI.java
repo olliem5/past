@@ -20,7 +20,7 @@ public class ClickGUI extends Module {
     public void setup() {
         Past.settingsManager.registerSetting(rgb = new Setting("RainbowGUI", "ClickGUIRainbow", true, this));
         Past.settingsManager.registerSetting(background = new Setting("Background", "ClickGUIBackground", true, this));
-        Past.settingsManager.registerSetting(descriptions = new Setting("Descriptions", "ClickGuiDescriptions", true, this));
+        Past.settingsManager.registerSetting(descriptions = new Setting("Descriptions", "ClickGUIDescriptions", true, this));
     }
 
     public void onEnable() {

@@ -25,7 +25,7 @@ public class ClickGUI extends GuiScreen {
 
    @Override
    public void drawScreen(int mouseX, int mouseY, float partialTicks) {
-       if (Past.settingsManager.getSettingName("Background").getValBoolean()) {
+       if (Past.settingsManager.getSettingID("ClickGUIBackground").getValBoolean()) {
            drawDefaultBackground();
        }
        for (Panel p : panels) {

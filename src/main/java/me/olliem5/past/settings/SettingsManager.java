@@ -25,9 +25,9 @@ public class SettingsManager {
     }
 
     public Setting getSettingID(String id) {
-        for (Setting set : getSettings()) {
-            if (set.getId() == id) {
-                return set;
+        for (Setting setting : getSettings()) {
+            if (setting.getId() == id) {
+                return setting;
             }
         }
         System.out.println("[" + Past.nameversion + "]" + " " + "Error - Setting" + " " + "'" + id + "'" + "NOT Found!");
