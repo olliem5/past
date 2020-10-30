@@ -20,8 +20,8 @@ public class ViewModel extends Module {
 
     @Override
     public void setup() {
-        Past.settingsManager.registerSetting(itemfov = new Setting("Item FOV", 110, 130, 170, this));
-        Past.settingsManager.registerSetting(armpitch = new Setting("Arm Pitch", -360, 90, 360, this));
+        Past.settingsManager.registerSetting(itemfov = new Setting("Item FOV", "ViewModelItemFOV", 110, 130, 170, this));
+        Past.settingsManager.registerSetting(armpitch = new Setting("Arm Pitch", "ViewModelArmPitch", -360, 90, 360, this));
 //        Past.settingsManager.registerSetting(armyaw = new Setting("Arm Yaw", -360, 220, 1080, this));
     }
 

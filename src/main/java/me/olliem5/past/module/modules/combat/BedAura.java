@@ -45,12 +45,12 @@ public class BedAura extends Module {
 
     @Override
     public void setup() {
-        Past.settingsManager.registerSetting(place = new Setting("Place", true, this));
-        Past.settingsManager.registerSetting(explode = new Setting("Explode", true, this));
-        Past.settingsManager.registerSetting(autoswitch = new Setting("Auto Switch", true, this));
-        Past.settingsManager.registerSetting(range = new Setting("Range", 0, 7, 9, this));
-        Past.settingsManager.registerSetting(placedelay = new Setting("Place Delay", 8, 15, 20, this));
-        Past.settingsManager.registerSetting(debugMessages = new Setting("Info Messages", true, this));
+        Past.settingsManager.registerSetting(place = new Setting("Place", "BedAuraPlace", true, this));
+        Past.settingsManager.registerSetting(explode = new Setting("Explode", "BedAuraExplode", true, this));
+        Past.settingsManager.registerSetting(autoswitch = new Setting("Auto Switch", "BedAuraAutoSwitch", true, this));
+        Past.settingsManager.registerSetting(range = new Setting("Range", "BedAuraRange", 0, 7, 9, this));
+        Past.settingsManager.registerSetting(placedelay = new Setting("Place Delay", "BedAuraPlaceDelay", 8, 15, 20, this));
+        Past.settingsManager.registerSetting(debugMessages = new Setting("Info Messages", "BedAuraInfoMessages", true, this));
     }
 
     private int playerHotbarSlot = -1;

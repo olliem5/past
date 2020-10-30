@@ -67,16 +67,16 @@ public class AutoCrystal extends Module {
         swinghands.add("Main");
         swinghands.add("Offhand");
 
-        Past.settingsManager.registerSetting(placemode = new Setting("Place", this, placemodes, "Single"));
-        Past.settingsManager.registerSetting(breakmode = new Setting("Break", this, breakmodes, "Near"));
-        Past.settingsManager.registerSetting(swinghand = new Setting("Swing", this, swinghands, "Main"));
-        Past.settingsManager.registerSetting(autoswitch = new Setting("AutoSwitch", true, this));
-        Past.settingsManager.registerSetting(placedelay = new Setting("Place Delay", 0, 2, 20, this));
-        Past.settingsManager.registerSetting(breakdelay = new Setting("Break Delay", 0, 2, 20, this));
-        Past.settingsManager.registerSetting(placerange = new Setting("Place Range", 0, 5, 10, this));
-        Past.settingsManager.registerSetting(breakrange = new Setting("Break Range", 0, 5, 10, this));
-        Past.settingsManager.registerSetting(mindamage = new Setting("Min Damage", 0, 8, 35, this));
-        Past.settingsManager.registerSetting(faceplace = new Setting("Faceplace", 0, 8, 35, this));
+        Past.settingsManager.registerSetting(placemode = new Setting("Place", "AutoCrystalPlace", this, placemodes, "Single"));
+        Past.settingsManager.registerSetting(breakmode = new Setting("Break", "AutoCrystalBreak", this, breakmodes, "Near"));
+        Past.settingsManager.registerSetting(swinghand = new Setting("Swing", "AutoCrystalSwing", this, swinghands, "Main"));
+        Past.settingsManager.registerSetting(autoswitch = new Setting("AutoSwitch", "AutoCrystalAutoSwitch", true, this));
+        Past.settingsManager.registerSetting(placedelay = new Setting("Place Delay", "AutoCrystalPlaceDelay", 0, 2, 20, this));
+        Past.settingsManager.registerSetting(breakdelay = new Setting("Break Delay", "AutoCrystalBreakDelay", 0, 2, 20, this));
+        Past.settingsManager.registerSetting(placerange = new Setting("Place Range", "AutoCrystalPlaceRange", 0, 5, 10, this));
+        Past.settingsManager.registerSetting(breakrange = new Setting("Break Range", "AutoCrystalBreakRange", 0, 5, 10, this));
+        Past.settingsManager.registerSetting(mindamage = new Setting("Min Damage", "AutoCrystalMinDamage", 0, 8, 35, this));
+        Past.settingsManager.registerSetting(faceplace = new Setting("Faceplace", "AutoCrystalFaceplace", 0, 8, 35, this));
     }
 
     @Override

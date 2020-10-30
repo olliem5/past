@@ -15,7 +15,7 @@ public class Step extends Module {
 
     @Override
     public void setup() {
-        Past.settingsManager.registerSetting(height = new Setting("Height", 1, 1, 10, this));
+        Past.settingsManager.registerSetting(height = new Setting("Height", "StepHeight", 1, 1, 10, this));
     }
 
     public void onUpdate() { //TODO: Make this vanilla mode.

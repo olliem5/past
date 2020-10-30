@@ -29,10 +29,10 @@ public class EntityAlert extends Module {
 
     @Override
     public void setup() {
-        Past.settingsManager.registerSetting(donkey = new Setting("Donkey", true, this));
-        Past.settingsManager.registerSetting(llama = new Setting("Llama", true, this));
-        Past.settingsManager.registerSetting(mule = new Setting("Mule", true, this));
-        Past.settingsManager.registerSetting(sound = new Setting("Sound", true, this));
+        Past.settingsManager.registerSetting(donkey = new Setting("Donkey", "EntityAlertDonkey", true, this));
+        Past.settingsManager.registerSetting(llama = new Setting("Llama", "EntityAlertLlama", true, this));
+        Past.settingsManager.registerSetting(mule = new Setting("Mule", "EntityAlertMule", true, this));
+        Past.settingsManager.registerSetting(sound = new Setting("Sound", "EntityAlertSound", true, this));
     }
 
     public void onUpdate() {

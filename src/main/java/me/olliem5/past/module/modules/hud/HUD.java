@@ -36,20 +36,20 @@ public class HUD extends Module {
 
     @Override
     public void setup() {
-        Past.settingsManager.registerSetting(rgb = new Setting("RGB", true, this));
-        Past.settingsManager.registerSetting(shadow = new Setting("Shadow", true, this));
-        Past.settingsManager.registerSetting(red = new Setting("Red", 0, 255, 255, this));
-        Past.settingsManager.registerSetting(green = new Setting("Green", 0, 10, 255, this));
-        Past.settingsManager.registerSetting(blue = new Setting("Blue", 0, 10, 255, this));
-        Past.settingsManager.registerSetting(watermark = new Setting("Watermark", true, this));
-        Past.settingsManager.registerSetting(watermarkx = new Setting("X Value", 0, 2, 1000, this));
-        Past.settingsManager.registerSetting(watermarky = new Setting("Y Value", 0, 2, 1000, this));
-        Past.settingsManager.registerSetting(welcomer = new Setting("Welcomer", true, this));
-        Past.settingsManager.registerSetting(welcomerx = new Setting("X Value", 0, 2, 1000, this));
-        Past.settingsManager.registerSetting(welcomery = new Setting("Y Value", 0, 2, 1000, this));
-        Past.settingsManager.registerSetting(arraylist = new Setting("Arraylist", true, this));
-        Past.settingsManager.registerSetting(sidebox = new Setting("Side Box", true, this));
-        Past.settingsManager.registerSetting(background = new Setting("Background", true, this));
+        Past.settingsManager.registerSetting(rgb = new Setting("RGB", "HUDRGB", true, this));
+        Past.settingsManager.registerSetting(shadow = new Setting("Shadow", "HUDShadow", true, this));
+        Past.settingsManager.registerSetting(red = new Setting("Red", "HUDRed", 0, 255, 255, this));
+        Past.settingsManager.registerSetting(green = new Setting("Green", "HUDGreen", 0, 10, 255, this));
+        Past.settingsManager.registerSetting(blue = new Setting("Blue", "HUDBlue", 0, 10, 255, this));
+        Past.settingsManager.registerSetting(watermark = new Setting("Watermark", "HUDWatermark", true, this));
+        Past.settingsManager.registerSetting(watermarkx = new Setting("X Value", "HUDWatermarkX", 0, 2, 1000, this));
+        Past.settingsManager.registerSetting(watermarky = new Setting("Y Value", "HUDWatermarkY", 0, 2, 1000, this));
+        Past.settingsManager.registerSetting(welcomer = new Setting("Welcomer", "HUDWelcomer", true, this));
+        Past.settingsManager.registerSetting(welcomerx = new Setting("X Value", "HUDWelcomerX", 0, 2, 1000, this));
+        Past.settingsManager.registerSetting(welcomery = new Setting("Y Value", "HUDWelcomerY", 0, 2, 1000, this));
+        Past.settingsManager.registerSetting(arraylist = new Setting("Arraylist", "HUDArraylist", true, this));
+        Past.settingsManager.registerSetting(sidebox = new Setting("Side Box", "HUDArraylistSidebox", true, this));
+        Past.settingsManager.registerSetting(background = new Setting("Background", "HUDArraylistBackground", true, this));
     }
 
     private int getColour() {

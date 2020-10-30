@@ -19,7 +19,7 @@ public class WeaknessMsg extends Module {
 
     @Override
     public void setup() {
-        Past.settingsManager.registerSetting(sound = new Setting("Sound", true, this));
+        Past.settingsManager.registerSetting(sound = new Setting("Sound", "WeaknessMsgSound", true, this));
     }
 
     private boolean hasAnnounced = false;

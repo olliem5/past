@@ -24,6 +24,16 @@ public class SettingsManager {
         return null;
     }
 
+    public Setting getSettingID(String id) {
+        for (Setting set : getSettings()) {
+            if (set.getId() == id) {
+                return set;
+            }
+        }
+        System.out.println("[" + Past.nameversion + "]" + " " + "Error - Setting" + " " + "'" + id + "'" + "NOT Found!");
+        return null;
+    }
+
     public ArrayList<Setting> getSettingsModule(Module module) {
         ArrayList<Setting> list = new ArrayList<>();
         for (Setting setting : getSettings()) {

@@ -14,7 +14,7 @@ public class HoleTP extends Module {
 
     @Override
     public void setup() {
-        Past.settingsManager.registerSetting(water = new Setting("Water Disable", true, this));
+        Past.settingsManager.registerSetting(water = new Setting("Water Disable", "HoleTPWaterDisable", true, this));
     }
 
     public void onUpdate() {

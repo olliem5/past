@@ -8,41 +8,45 @@ import java.util.ArrayList;
 public class Setting {
     private Module parent;
     private String name;
+    private String id;
     private String type;
     private int min;
     private int start;
     private int max;
     private boolean bval;
+    private String sval;
+    private ArrayList<String> modes;
 
-    public Setting(String name, int min, int start, int max, Module module) {
+    public Setting(String name, String id, int min, int start, int max, Module module) {
         this.parent = module;
         this.name = name;
+        this.id = id;
         this.min = min;
         this.start = start;
         this.max = max;
         this.type = "intslider";
     }
 
-    public Setting(String name, boolean bval, Module module) {
+    public Setting(String name, String id, boolean bval, Module module) {
         this.parent = module;
         this.name = name;
+        this.id = id;
         this.bval = bval;
         this.type = "boolean";
     }
 
-    private String value;
-    private ArrayList<String> modes;
-    public Setting(String name, Module module, ArrayList<String> modes, String value) {
+    public Setting(String name, String id, Module module, ArrayList<String> modes, String sval) {
         this.parent = module;
         this.name = name;
-        this.value = value;
+        this.id = id;
+        this.sval = sval;
         this.modes = modes;
         this.type = "mode";
     }
 
     public int getValueInt() { return this.start; }
     public boolean getValBoolean() { return this.bval; }
-    public String getValueString() { return this.value; }
+    public String getValueString() { return this.sval; }
 
     public String getType() { return type; }
     public String getName() { return name; }
@@ -50,6 +54,8 @@ public class Setting {
     public int getMin() { return min; }
     public int getStart() { return start; }
     public int getMax() { return max; }
+
+    public String getId() { return id; }
 
     public Module getParent() { return parent; }
 
@@ -68,7 +74,7 @@ public class Setting {
     }
 
     public void setValueString(String value) {
-        this.value = value;
+        this.sval = value;
 
         if (Past.configUtil != null) { try { Past.configUtil.saveModes(); } catch (Exception e) {} }
     }
