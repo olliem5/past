@@ -29,7 +29,7 @@ compileJava {
 minecraft {
     version = '1.12.2-14.23.5.2847'
     runDir = 'run'
-    coreMod = 'com.example.examplemod.ExampleModLoadingPlugin'
+    coreMod = 'me.olliem5.past.mixin.MixinLoader'
     // the mappings can be changed at any time, and must be in the following format.
     // snapshot_YYYYMMDD   snapshot are built nightly.
     // stable_#            stables are built at the discretion of the MCP team.
@@ -39,12 +39,13 @@ minecraft {
     // makeObfSourceJar = false // an Srg named sources jar is made by default. uncomment this to disable.
 }
 
-jar.manifest.attributes(
-        'FMLCorePluginContainsFMLMod': true,
-        'FMLCorePlugin': 'com.example.examplemod.ExampleModLoadingPlugin',
-        'ForceLoadAsMod': true,
-        'TweakClass': 'org.spongepowered.asm.launch.MixinTweaker'
-)
+//This thing broke mixins and client both loading in IDE
+//jar.manifest.attributes(
+//        'FMLCorePluginContainsFMLMod': true,
+//        'FMLCorePlugin': 'me.olliem5.past.mixin.MixinLoader',
+//        'ForceLoadAsMod': true,
+//        'TweakClass': 'org.spongepowered.asm.launch.MixinTweaker'
+//)
 
 repositories {
     mavenCentral()
@@ -77,7 +78,7 @@ dependencies {
 }
 
 mixin {
-    add sourceSets.main, 'mixins.examplemod.refmap.json'
+    add sourceSets.main, 'mixins.past.refmap.json'
 }
 
 shadowJar {
