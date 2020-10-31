@@ -3,7 +3,7 @@ package me.olliem5.past.module;
 import me.olliem5.past.module.modules.chat.Spammer;
 import me.olliem5.past.module.modules.combat.AutoCrystal;
 import me.olliem5.past.module.modules.combat.AutoTotem;
-import me.olliem5.past.module.modules.combat.BedAura;
+import me.olliem5.past.module.modules.combat.BonBedAura;
 import me.olliem5.past.module.modules.hud.HudEditor;
 import me.olliem5.past.module.modules.hud.HUD;
 import me.olliem5.past.module.modules.chat.ChatSuffix;
@@ -16,9 +16,7 @@ import me.olliem5.past.module.modules.movement.HoleTP;
 import me.olliem5.past.module.modules.movement.Sprint;
 import me.olliem5.past.module.modules.movement.Step;
 import me.olliem5.past.module.modules.player.WeaknessMsg;
-import me.olliem5.past.module.modules.render.EntityESP;
-import me.olliem5.past.module.modules.render.NoWeather;
-import me.olliem5.past.module.modules.render.ViewModel;
+import me.olliem5.past.module.modules.render.*;
 
 import java.util.ArrayList;
 
@@ -33,7 +31,7 @@ public class ModuleManager {
 
         /* Combat */
         modules.add(new AutoTotem());
-        modules.add(new BedAura());
+        modules.add(new BonBedAura());
         modules.add(new AutoCrystal());
 
         /* HUD */
@@ -58,6 +56,8 @@ public class ModuleManager {
         modules.add(new NoWeather());
         modules.add(new EntityESP());
         modules.add(new ViewModel());
+        modules.add(new SkyColour());
+        modules.add(new Fullbright());
     }
 
     public ArrayList<Module> getModules() { return modules; }

@@ -29,9 +29,9 @@ import net.minecraftforge.common.MinecraftForge;
 import java.util.Comparator;
 import java.util.List;
 
-public class BedAura extends Module {
-    public BedAura() {
-        super ("BedAura", "Places and destroys beds, for 1.13+", Category.COMBAT);
+public class BonBedAura extends Module {
+    public BonBedAura() {
+        super ("BonBedAura", "Places and destroys beds, for 1.13+. Made by bon55.", Category.COMBAT);
     }
 
     //TODO: Mode for 1.12.2. (Probably just AutoBreak).
