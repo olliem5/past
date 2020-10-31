@@ -15,6 +15,7 @@ import me.olliem5.past.module.modules.misc.FakePlayer;
 import me.olliem5.past.module.modules.movement.HoleTP;
 import me.olliem5.past.module.modules.movement.Sprint;
 import me.olliem5.past.module.modules.movement.Step;
+import me.olliem5.past.module.modules.player.AutoLog;
 import me.olliem5.past.module.modules.player.WeaknessMsg;
 import me.olliem5.past.module.modules.render.*;
 
@@ -51,6 +52,7 @@ public class ModuleManager {
 
         /* Player */
         modules.add(new WeaknessMsg());
+        modules.add(new AutoLog());
 
         /* Render */
         modules.add(new NoWeather());
