@@ -71,7 +71,7 @@ public class ConfigUtil {
 
             for (Setting setting : Past.settingsManager.getSettings()) {
                 if (setting.getType() == "boolean") {
-                    booleansToSave.add(setting.getParent().getName() + ":" + setting.getName() + ":" + setting.getValBoolean());
+                    booleansToSave.add(setting.getParent().getName() + ":" + setting.getId() + ":" + setting.getValBoolean());
                 }
             }
 
@@ -92,7 +92,7 @@ public class ConfigUtil {
 
             for (Setting setting : Past.settingsManager.getSettings()) {
                 if (setting.getType() == "intslider") {
-                    integersToSave.add(setting.getParent().getName() + ":" + setting.getName() + ":" + setting.getValueInt());
+                    integersToSave.add(setting.getParent().getName() + ":" + setting.getId() + ":" + setting.getValueInt());
                 }
             }
 
@@ -113,7 +113,7 @@ public class ConfigUtil {
 
             for (Setting setting : Past.settingsManager.getSettings()) {
                 if (setting.getType() == "mode") {
-                    modesToSave.add(setting.getParent().getName() + ":" + setting.getName() + ":" + setting.getValueString());
+                    modesToSave.add(setting.getParent().getName() + ":" + setting.getId() + ":" + setting.getValueString());
                 }
             }
 

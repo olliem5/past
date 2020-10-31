@@ -29,7 +29,7 @@ public class Module {
     }
 
     @SubscribeEvent
-    public void gameTickEvent(TickEvent event) {
+    public void onTick(TickEvent.ClientTickEvent event) {
         for (Module module : moduleManager.getModules()) {
             if (module.isToggled()) {
                 onUpdate();
@@ -45,17 +45,6 @@ public class Module {
             }
         }
     }
-
-//    @SubscribeEvent
-//    public void onPlayerTick(TickEvent.PlayerTickEvent event) {
-//        if (event.type == TickEvent.Type.PLAYER) {
-//            for (Module module : moduleManager.getModules()) {
-//                if (module.isToggled()) {
-//                    onPlayerTick();
-//                }
-//            }
-//        }
-//    }
 
     public void toggle() {
         toggled = !toggled;
@@ -98,7 +87,7 @@ public class Module {
     public String getName() { return name; }
     public void setName(String name) { this.name = name; }
 
-    public String getDescription() { return description; } //TODO: Render description in ClickGUI
+    public String getDescription() { return description; }
     public void setDescription(String description) { this.description = description; }
 
     public Category getCategory() { return category; }
@@ -107,7 +96,6 @@ public class Module {
     public void onToggle() {}
     public void onUpdate() {}
     public void onRender() {}
-//  public void onPlayerTick() {}
     public void setup() {}
     public void selfSettings() {}
     public void onEnable() {}
