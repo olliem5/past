@@ -4,6 +4,7 @@ import me.olliem5.past.Past;
 import me.olliem5.past.module.Category;
 import me.olliem5.past.module.Module;
 import me.olliem5.past.settings.Setting;
+import me.olliem5.past.util.ColourUtil;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 
@@ -53,4 +54,6 @@ public class Fullbright extends Module {
             mc.player.removeActivePotionEffect(fullbrighteffect.getPotion());
         }
     }
+
+    public String getArraylistInfo() { return ColourUtil.gray + " " + brightnessmode.getValueString().toUpperCase(); }
 }

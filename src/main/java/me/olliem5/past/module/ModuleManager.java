@@ -12,6 +12,7 @@ import me.olliem5.past.module.modules.hud.ClickGUI;
 import me.olliem5.past.module.modules.misc.EntityAlert;
 import me.olliem5.past.module.modules.chat.PrefixChat;
 import me.olliem5.past.module.modules.misc.FakePlayer;
+import me.olliem5.past.module.modules.movement.Flight;
 import me.olliem5.past.module.modules.movement.HoleTP;
 import me.olliem5.past.module.modules.movement.Sprint;
 import me.olliem5.past.module.modules.movement.Step;
@@ -49,6 +50,7 @@ public class ModuleManager {
         modules.add(new Sprint());
         modules.add(new HoleTP());
         modules.add(new Step());
+        modules.add(new Flight());
 
         /* Player */
         modules.add(new WeaknessMsg());
