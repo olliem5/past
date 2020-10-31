@@ -15,7 +15,7 @@ public class ConfigUtil {
     public File MainDirectory;
 
     public ConfigUtil() {
-        MainDirectory = new File(Minecraft.getMinecraft().mcDataDir, "Past Client");
+        MainDirectory = new File(Minecraft.getMinecraft().gameDir, "Past Client");
         if (!MainDirectory.exists()) {
             MainDirectory.mkdir();
         }

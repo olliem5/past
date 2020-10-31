@@ -14,7 +14,7 @@ public class Spammer extends Module {
     public void onUpdate() {
         BufferedReader bufferedReader;
         try {
-            bufferedReader = new BufferedReader(new FileReader(mc.mcDataDir.getAbsolutePath() + "/PastSpammer.txt"));
+            bufferedReader = new BufferedReader(new FileReader(mc.gameDir.getAbsolutePath() + "/PastSpammer.txt"));
             String line = bufferedReader.readLine();
             while (line != null) {
                 mc.player.sendChatMessage(line);

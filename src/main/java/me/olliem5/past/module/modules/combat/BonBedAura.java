@@ -127,53 +127,53 @@ public class BonBedAura extends Module {
 
         try {
             if (closestTarget != null) {
-                placeTarget = new BlockPos(closestTarget.getPositionVector().addVector(1, 1, 0));
+                placeTarget = new BlockPos(closestTarget.getPositionVector().add(1, 1, 0));
                 nowTop = false;
                 rotVar = 90;
 
                 BlockPos block1 = placeTarget;
                 if (!canPlaceBed(block1)) {
-                    placeTarget = new BlockPos(closestTarget.getPositionVector().addVector(-1, 1, 0));
+                    placeTarget = new BlockPos(closestTarget.getPositionVector().add(-1, 1, 0));
                     rotVar = -90;
                     nowTop = false;
                 }
 
                 BlockPos block2 = placeTarget;
                 if (!canPlaceBed(block2)) {
-                    placeTarget = new BlockPos(closestTarget.getPositionVector().addVector(0, 1, 1));
+                    placeTarget = new BlockPos(closestTarget.getPositionVector().add(0, 1, 1));
                     rotVar = 180;
                     nowTop = false;
                 }
 
                 BlockPos block3 = placeTarget;
                 if (!canPlaceBed(block3)) {
-                    placeTarget = new BlockPos(closestTarget.getPositionVector().addVector(0, 1, -1));
+                    placeTarget = new BlockPos(closestTarget.getPositionVector().add(0, 1, -1));
                     rotVar = 0;
                     nowTop = false;
                 }
 
                 BlockPos block4 = placeTarget;
                 if (!canPlaceBed(block4)) {
-                    placeTarget = new BlockPos(closestTarget.getPositionVector().addVector(0, 2, -1));
+                    placeTarget = new BlockPos(closestTarget.getPositionVector().add(0, 2, -1));
                     rotVar = 0;
                     nowTop = true;
                 }
 
                 BlockPos blockt1 = placeTarget;
                 if (nowTop && !canPlaceBed(blockt1)) {
-                    placeTarget = new BlockPos(closestTarget.getPositionVector().addVector(-1, 2, 0));
+                    placeTarget = new BlockPos(closestTarget.getPositionVector().add(-1, 2, 0));
                     rotVar = -90;
                 }
 
                 BlockPos blockt2 = placeTarget;
                 if (nowTop && !canPlaceBed(blockt2)) {
-                    placeTarget = new BlockPos(closestTarget.getPositionVector().addVector(0, 2, 1));
+                    placeTarget = new BlockPos(closestTarget.getPositionVector().add(0, 2, 1));
                     rotVar = 180;
                 }
 
                 BlockPos blockt3 = placeTarget;
                 if (nowTop && !canPlaceBed(blockt3)) {
-                    placeTarget = new BlockPos(closestTarget.getPositionVector().addVector(1, 2, 0));
+                    placeTarget = new BlockPos(closestTarget.getPositionVector().add(1, 2, 0));
                     rotVar = 90;
                 }
             }
@@ -255,7 +255,7 @@ public class BonBedAura extends Module {
         if (place.getValBoolean()) {
             BlockPos neighbour = pos.offset(side);
             EnumFacing opposite = side.getOpposite();
-            Vec3d hitVec = new Vec3d(neighbour).addVector(0.5, 0.5, 0.5).add(new Vec3d(opposite.getDirectionVec()).scale(0.5));
+            Vec3d hitVec = new Vec3d(neighbour).add(0.5, 0.5, 0.5).add(new Vec3d(opposite.getDirectionVec()).scale(0.5));
             mc.playerController.processRightClickBlock(mc.player, mc.world, neighbour, opposite, hitVec, EnumHand.MAIN_HAND);
         }
     }
