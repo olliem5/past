@@ -30,8 +30,8 @@ minecraft {
     runDir = "run"
     mappings = project.mcpVersion
     coreMod = 'me.olliem5.past.mixin.MixinLoader'
+    makeObfSourceJar = false
 }
-
 
 repositories {
     maven {
@@ -67,6 +67,7 @@ dependencies {
     compile(group: 'org.reflections', name: 'reflections', version: '0.9.11') {
         exclude group: 'com.google.guava', module: 'guava'
     }
+    compile group: 'club.minnced', name: 'java-discord-rpc', version: '2.0.1'
 }
 
 processResources {
@@ -95,7 +96,7 @@ shadowJar {
         include(dependency('org.yaml:snakeyaml'))
         include(dependency('org.reflections:reflections'))
         include(dependency('org.javassist:javassist'))
-        include(dependency("club.minnced:java-discord-rpc:2.0.2"))
+        include(dependency('club.minnced:java-discord-rpc:2.0.1'))
         include(dependency('com.github.ZeroMemes:Alpine'))
     }
 
