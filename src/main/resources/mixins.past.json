@@ -1,10 +1,9 @@
 {
-    "required": true,
-    "package": "me.olliem5.past.mixin.mixins",
-    "refmap": "mixins.past.refmap.json",
-    "minVersion": "0.7.3",
-    "compatibilityLevel": "JAVA_8",
-    "mixins": [
-        "MixinGuiMainMenu"
-    ]
+  "required": true,
+  "compatibilityLevel": "JAVA_8",
+  "package": "me.olliem5.past.mixin.mixins",
+  "refmap": "mixins.past.refmap.json",
+  "mixins": [
+    "MixinGuiMainMenu"
+  ]
 }
