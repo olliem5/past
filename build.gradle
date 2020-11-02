@@ -124,7 +124,7 @@ jar {
                 'TweakClass': 'org.spongepowered.asm.launch.MixinTweaker',
                 'TweakOrder': 0,
                 'FMLCorePluginContainsFMLMod': 'true',
-                //'FMLCorePlugin': 'me.olliem5.past.mixin.MixinLoader',
+                'FMLCorePlugin': 'me.olliem5.past.mixin.MixinLoader',
                 'ForceLoadAsMod': 'true'
         )
     }

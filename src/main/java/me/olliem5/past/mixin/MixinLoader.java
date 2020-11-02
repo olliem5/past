@@ -22,7 +22,6 @@ public class MixinLoader implements IFMLLoadingPlugin {
     @Override
     public String[] getASMTransformerClass() { return new String[0]; }
 
-
     @Override
     public String getModContainerClass() { return null; }
 

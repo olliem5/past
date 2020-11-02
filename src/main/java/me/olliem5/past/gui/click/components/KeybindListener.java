@@ -1,6 +1,7 @@
 package me.olliem5.past.gui.click.components;
 
 import me.olliem5.past.gui.click.Component;
+import me.olliem5.past.util.ColourUtil;
 import net.minecraft.client.gui.Gui;
 import org.lwjgl.input.Keyboard;
 
@@ -23,8 +24,8 @@ public class KeybindListener extends Component {
     @Override
     public void renderComponent() {
         Gui.drawRect(parent.parent.getX() + 80, this.parent.parent.getY() -12 + this.offset, parent.parent.getX() + parent.parent.getWidth() + parent.parent.getWidth(), this.parent.parent.getY() + this.offset, 0xFF111111);
-        if (isBinding) { mc.fontRenderer.drawStringWithShadow("Listening...", parent.parent.getX() + 82, (parent.parent.getY() + this.offset -10), -1); }
-        else { mc.fontRenderer.drawStringWithShadow("Bind - " + Keyboard.getKeyName(this.parent.mod.getKey()), parent.parent.getX() + 82, (parent.parent.getY() + this.offset -10), -1);  }
+        if (isBinding) { mc.fontRenderer.drawStringWithShadow("Listening" + ColourUtil.gray + " " + "...", parent.parent.getX() + 82, (parent.parent.getY() + this.offset -10), -1); }
+        else { mc.fontRenderer.drawStringWithShadow("Bind" + ColourUtil.gray + " " + Keyboard.getKeyName(this.parent.mod.getKey()), parent.parent.getX() + 82, (parent.parent.getY() + this.offset -10), -1);  }
     }
 
     @Override

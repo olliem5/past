@@ -46,7 +46,7 @@ public class HUD extends Module {
         Past.settingsManager.registerSetting(watermarky = new Setting("Y Value", "HUDWatermarkY", 0, 2, 1000, this));
         Past.settingsManager.registerSetting(welcomer = new Setting("Welcomer", "HUDWelcomer", true, this));
         Past.settingsManager.registerSetting(welcomerx = new Setting("X Value", "HUDWelcomerX", 0, 2, 1000, this));
-        Past.settingsManager.registerSetting(welcomery = new Setting("Y Value", "HUDWelcomerY", 0, 2, 1000, this));
+        Past.settingsManager.registerSetting(welcomery = new Setting("Y Value", "HUDWelcomerY", 0, 12, 1000, this));
         Past.settingsManager.registerSetting(arraylist = new Setting("Arraylist", "HUDArraylist", true, this));
         Past.settingsManager.registerSetting(sidebox = new Setting("Side Box", "HUDArraylistSidebox", true, this));
         Past.settingsManager.registerSetting(background = new Setting("Background", "HUDArraylistBackground", true, this));
