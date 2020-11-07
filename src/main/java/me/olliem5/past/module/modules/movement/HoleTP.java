@@ -18,12 +18,11 @@ public class HoleTP extends Module {
     }
 
     public void onUpdate() {
-        if (mc.player != null && mc.world != null) {
-            if (water.getValBoolean()) {
-                if (!mc.player.isInWater() && mc.player.onGround) { --mc.player.motionY; }
-            } else {
-                if (mc.player.onGround) { --mc.player.motionY; }
-            }
+        if (nullCheck()) { return; }
+        if (water.getValBoolean()) {
+            if (!mc.player.isInWater() && mc.player.onGround) { --mc.player.motionY; }
+        } else {
+            if (mc.player.onGround) { --mc.player.motionY; }
         }
     }
 }

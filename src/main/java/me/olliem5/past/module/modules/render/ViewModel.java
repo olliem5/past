@@ -26,7 +26,7 @@ public class ViewModel extends Module {
     }
 
     public void onUpdate() {
-        if (mc.player == null || mc.world == null) { return; }
+        if (nullCheck()) { return; }
         mc.player.renderArmPitch = armpitch.getValueInt();
 //        mc.player.renderArmYaw = armyaw.getValueInt();
     }

@@ -93,6 +93,8 @@ public class Module {
     public Category getCategory() { return category; }
     public void setCategory(Category category) { this.category = category; }
 
+    public boolean nullCheck() { return mc.player == null || mc.world == null; }
+
     public void onToggle() {}
     public void onUpdate() {}
     public void onRender() {}

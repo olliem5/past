@@ -20,14 +20,14 @@ public class Flight extends Module {
 //    }
 
     public void onUpdate() {
-        if (mc.player == null || mc.world == null) { return; }
+        if (nullCheck()) { return; }
         mc.player.capabilities.isFlying = true;
         //mc.player.capabilities.setFlySpeed((float) flyspeed.getValueInt());
     }
 
     @Override
     public void onDisable() {
-        if (mc.player == null || mc.world == null) { return; }
+        if (nullCheck()) { return; }
         mc.player.capabilities.isFlying = false;
     }
 }

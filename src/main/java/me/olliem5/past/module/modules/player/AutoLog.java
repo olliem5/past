@@ -19,7 +19,7 @@ public class AutoLog extends Module {
     }
 
     public void onUpdate() {
-        if (mc.player == null || mc.world == null) { return; }
+        if (nullCheck()) { return; }
         if (mc.player.getHealth() < (float) health.getValueInt()) {
             this.logOut("Logged out with" + " " + mc.player.getHealth() + " " + "health" + ".");
         }

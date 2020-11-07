@@ -25,17 +25,17 @@ public class WeaknessMsg extends Module {
     private boolean hasAnnounced = false;
 
     public void onUpdate() {
-        if (mc.world != null && mc.player != null) {
-            if (mc.player.isPotionActive(MobEffects.WEAKNESS) && !hasAnnounced) {
-                hasAnnounced = true;
-                MessageUtil.sendWeaknessAlertMessage(ColourUtil.aqua + mc.getSession().getUsername() + ColourUtil.gray + " - " + ColourUtil.white + "You now have " + ColourUtil.red + "weakness" + ColourUtil.gray + "!");
-                if (sound.getValBoolean()) { mc.getSoundHandler().playSound(PositionedSoundRecord.getRecord(SoundEvents.ENTITY_EXPERIENCE_ORB_PICKUP, 1.0F, 1.0F)); }
-            }
-            if (!mc.player.isPotionActive(MobEffects.WEAKNESS) && hasAnnounced) {
-                hasAnnounced = false;
-                MessageUtil.sendWeaknessAlertMessage(ColourUtil.aqua + mc.getSession().getUsername() + ColourUtil.gray + " - " + ColourUtil.white + "You no longer have " + ColourUtil.red + "weakness" + ColourUtil.gray + "!");
-                if (sound.getValBoolean()) { mc.getSoundHandler().playSound(PositionedSoundRecord.getRecord(SoundEvents.ENTITY_EXPERIENCE_ORB_PICKUP, 1.0F, 1.0F)); }
-            }
+        if (nullCheck()) { return; }
+
+        if (mc.player.isPotionActive(MobEffects.WEAKNESS) && !hasAnnounced) {
+            hasAnnounced = true;
+            MessageUtil.sendWeaknessAlertMessage(ColourUtil.aqua + mc.getSession().getUsername() + ColourUtil.gray + " - " + ColourUtil.white + "You now have " + ColourUtil.red + "weakness" + ColourUtil.gray + "!");
+            if (sound.getValBoolean()) { mc.getSoundHandler().playSound(PositionedSoundRecord.getRecord(SoundEvents.ENTITY_EXPERIENCE_ORB_PICKUP, 1.0F, 1.0F)); }
+        }
+        if (!mc.player.isPotionActive(MobEffects.WEAKNESS) && hasAnnounced) {
+            hasAnnounced = false;
+            MessageUtil.sendWeaknessAlertMessage(ColourUtil.aqua + mc.getSession().getUsername() + ColourUtil.gray + " - " + ColourUtil.white + "You no longer have " + ColourUtil.red + "weakness" + ColourUtil.gray + "!");
+            if (sound.getValBoolean()) { mc.getSoundHandler().playSound(PositionedSoundRecord.getRecord(SoundEvents.ENTITY_EXPERIENCE_ORB_PICKUP, 1.0F, 1.0F)); }
         }
     }
 }

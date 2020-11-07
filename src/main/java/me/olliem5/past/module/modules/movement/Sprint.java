@@ -27,6 +27,8 @@ public class Sprint extends Module {
     }
 
     public void onUpdate() {
+        if (nullCheck()) { return; }
+
         if (sprintmode.getValueString() == "Legit") {
             try {
                 if (mc.gameSettings.keyBindForward.isKeyDown() && !(mc.player.collidedHorizontally) && !(mc.player.isSneaking()) && !(mc.player.isHandActive()) && mc.player.getFoodStats().getFoodLevel() > 6f) {

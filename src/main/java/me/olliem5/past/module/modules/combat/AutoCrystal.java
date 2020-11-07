@@ -81,7 +81,7 @@ public class AutoCrystal extends Module {
 
     @Override
     public void onUpdate() {
-        if (mc.player == null || mc.world == null) { return; }
+        if (nullCheck()) { return; }
          if (breaktimer.passed(breakdelay.getValueInt() * 50)) {
             EntityEnderCrystal crystal = mc.world.loadedEntityList.stream()
                     .filter(entity -> entity instanceof EntityEnderCrystal)

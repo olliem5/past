@@ -14,19 +14,19 @@ public class AutoTotem extends Module {
 
     @Override
     public void onUpdate() {
-        if (mc.player != null && mc.world != null) {
-            if (mc.player.getItemStackFromSlot(EntityEquipmentSlot.OFFHAND).getItem() == Items.TOTEM_OF_UNDYING) {
-                return;
-            }
+        if (nullCheck()) { return; }
 
-            final int slot = this.getItemSlot();
+        if (mc.player.getItemStackFromSlot(EntityEquipmentSlot.OFFHAND).getItem() == Items.TOTEM_OF_UNDYING) {
+            return;
+        }
 
-            if (slot != -1) {
-                mc.playerController.windowClick(mc.player.inventoryContainer.windowId, slot, 0, ClickType.PICKUP, mc.player);
-                mc.playerController.windowClick(mc.player.inventoryContainer.windowId, 45, 0, ClickType.PICKUP, mc.player);
-                mc.playerController.windowClick(mc.player.inventoryContainer.windowId, slot, 0, ClickType.PICKUP, mc.player);
-                mc.playerController.updateController();
-            }
+        final int slot = this.getItemSlot();
+
+        if (slot != -1) {
+            mc.playerController.windowClick(mc.player.inventoryContainer.windowId, slot, 0, ClickType.PICKUP, mc.player);
+            mc.playerController.windowClick(mc.player.inventoryContainer.windowId, 45, 0, ClickType.PICKUP, mc.player);
+            mc.playerController.windowClick(mc.player.inventoryContainer.windowId, slot, 0, ClickType.PICKUP, mc.player);
+            mc.playerController.updateController();
         }
     }
 
