@@ -70,7 +70,7 @@ public class AutoCrystal extends Module {
         Past.settingsManager.registerSetting(placemode = new Setting("Place", "AutoCrystalPlace", this, placemodes, "Single"));
         Past.settingsManager.registerSetting(breakmode = new Setting("Break", "AutoCrystalBreak", this, breakmodes, "Near"));
         Past.settingsManager.registerSetting(swinghand = new Setting("Swing", "AutoCrystalSwing", this, swinghands, "Main"));
-        Past.settingsManager.registerSetting(autoswitch = new Setting("AutoSwitch", "AutoCrystalAutoSwitch", true, this));
+        Past.settingsManager.registerSetting(autoswitch = new Setting("Auto Switch", "AutoCrystalAutoSwitch", true, this));
         Past.settingsManager.registerSetting(placedelay = new Setting("Place Delay", "AutoCrystalPlaceDelay", 0, 2, 20, this));
         Past.settingsManager.registerSetting(breakdelay = new Setting("Break Delay", "AutoCrystalBreakDelay", 0, 2, 20, this));
         Past.settingsManager.registerSetting(placerange = new Setting("Place Range", "AutoCrystalPlaceRange", 0, 5, 10, this));

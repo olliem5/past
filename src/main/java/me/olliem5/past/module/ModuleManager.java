@@ -4,6 +4,7 @@ import me.olliem5.past.module.modules.chat.Spammer;
 import me.olliem5.past.module.modules.combat.AutoCrystal;
 import me.olliem5.past.module.modules.combat.AutoTotem;
 import me.olliem5.past.module.modules.combat.BonBedAura;
+import me.olliem5.past.module.modules.combat.Surround;
 import me.olliem5.past.module.modules.hud.HudEditor;
 import me.olliem5.past.module.modules.hud.HUD;
 import me.olliem5.past.module.modules.chat.ChatSuffix;
@@ -33,6 +34,7 @@ public class ModuleManager {
         modules.add(new AutoTotem());
         modules.add(new BonBedAura());
         modules.add(new AutoCrystal());
+        modules.add(new Surround());
 
         /* HUD */
         modules.add(new ClickGUI());
