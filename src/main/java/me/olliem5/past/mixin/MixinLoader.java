@@ -17,6 +17,7 @@ public class MixinLoader implements IFMLLoadingPlugin {
         MixinBootstrap.init();
         Mixins.addConfiguration("mixins.past.json");
         MixinEnvironment.getDefaultEnvironment().setSide(MixinEnvironment.Side.CLIENT);
+        System.out.println("[" + Past.nameversion + "]" + " " + "Mixins Injected!");
     }
 
     @Override
