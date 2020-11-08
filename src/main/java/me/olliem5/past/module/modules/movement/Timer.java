@@ -6,6 +6,7 @@ import me.olliem5.past.mixin.accessors.TimerAccessor;
 import me.olliem5.past.module.Category;
 import me.olliem5.past.module.Module;
 import me.olliem5.past.settings.Setting;
+import me.olliem5.past.util.ColourUtil;
 
 public class Timer extends Module {
     public Timer() {
@@ -27,4 +28,6 @@ public class Timer extends Module {
     public void onDisable() {
         ((TimerAccessor) ((MinecraftAccessor) mc).getTimer()).setTickLength(50f);
     }
+
+    public String getArraylistInfo() { return ColourUtil.gray + " " + speed.getValueInt(); }
 }

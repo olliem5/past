@@ -194,4 +194,6 @@ public class Surround extends Module {
 
         return new Vec3d(x, y, z);
     }
+
+    public String getArraylistInfo() { return ColourUtil.gray + " " + placemode.getValueString().toUpperCase(); }
 }

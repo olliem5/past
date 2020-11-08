@@ -4,6 +4,7 @@ import me.olliem5.past.Past;
 import me.olliem5.past.module.Category;
 import me.olliem5.past.module.Module;
 import me.olliem5.past.settings.Setting;
+import me.olliem5.past.util.ColourUtil;
 import net.minecraft.client.gui.GuiMainMenu;
 
 public class AutoLog extends Module {
@@ -28,4 +29,6 @@ public class AutoLog extends Module {
             mc.displayGuiScreen(new GuiMainMenu());
         }
     }
+
+    public String getArraylistInfo() { return ColourUtil.gray + " " + health.getValueInt(); }
 }
