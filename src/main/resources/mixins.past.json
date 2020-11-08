@@ -4,6 +4,8 @@
   "package": "me.olliem5.past.mixin.mixins",
   "refmap": "mixins.past.refmap.json",
   "mixins": [
-    "MixinGuiMainMenu"
+    "MixinGuiMainMenu",
+    "MixinMinecraft",
+    "MixinTimer"
   ]
 }

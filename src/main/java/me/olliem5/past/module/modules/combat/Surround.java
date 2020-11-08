@@ -34,7 +34,7 @@ public class Surround extends Module {
     private ArrayList<String> centermodes;
 
     private boolean hasPlaced;
-    private int oldInventorySlot;
+    //private int oldInventorySlot;
     private Vec3d center = Vec3d.ZERO;
 
     @Override
@@ -61,7 +61,6 @@ public class Surround extends Module {
     @Override
     public void onEnable() {
         hasPlaced = false;
-        oldInventorySlot = mc.player.inventory.currentItem;
         center = getCenter(mc.player.posX, mc.player.posY, mc.player.posZ);
 
         if (centermode.getValueString() != "None") {
@@ -80,11 +79,6 @@ public class Surround extends Module {
         if (centermode.getValueString() == "None") {
             return;
         }
-    }
-
-    @Override
-    public void onDisable() {
-        mc.player.inventory.currentItem = oldInventorySlot;
     }
 
     private final List<Vec3d> standardSurround = new ArrayList<>(Arrays.asList(
@@ -145,6 +139,7 @@ public class Surround extends Module {
 
                 if (mc.world.getBlockState(blockPos).getBlock().equals(Blocks.AIR)) {
 
+                    int oldInventorySlot = mc.player.inventory.currentItem;
                     mc.player.inventory.currentItem = PlayerUtil.getBlockInHotbar(Blocks.OBSIDIAN);
 
                     if (infomessages.getValBoolean()) {
@@ -169,6 +164,7 @@ public class Surround extends Module {
 
                 if (mc.world.getBlockState(blockPos).getBlock().equals(Blocks.AIR)) {
 
+                    int oldInventorySlot = mc.player.inventory.currentItem;
                     mc.player.inventory.currentItem = PlayerUtil.getBlockInHotbar(Blocks.OBSIDIAN);
 
                     if (infomessages.getValBoolean()) {

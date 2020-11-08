@@ -51,6 +51,7 @@ public class ModuleManager {
         modules.add(new HoleTP());
         modules.add(new Step());
         modules.add(new Flight());
+        modules.add(new Timer());
 
         /* Player */
         modules.add(new WeaknessMsg());
