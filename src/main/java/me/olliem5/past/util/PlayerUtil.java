@@ -52,7 +52,7 @@ public class PlayerUtil {
         return false;
     }
 
-    public static int getBlockInSlot(Block block) {
+    public static int getBlockInHotbar(Block block) {
         for (int i = 0; i < 9; i++) {
             Item item = Minecraft.getMinecraft().player.inventory.getStackInSlot(i).getItem();
             if (item instanceof ItemBlock && ((ItemBlock) item).getBlock().equals(block)) {

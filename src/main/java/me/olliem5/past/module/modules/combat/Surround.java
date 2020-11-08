@@ -4,8 +4,11 @@ import me.olliem5.past.Past;
 import me.olliem5.past.module.Category;
 import me.olliem5.past.module.Module;
 import me.olliem5.past.settings.Setting;
+import me.olliem5.past.util.ColourUtil;
+import me.olliem5.past.util.MessageUtil;
 import me.olliem5.past.util.PlayerUtil;
 import net.minecraft.init.Blocks;
+import net.minecraft.network.play.client.CPacketPlayer;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 
@@ -18,19 +21,21 @@ public class Surround extends Module {
         super ("Surround", "Automatically surrounds you with obsidian", Category.COMBAT);
     }
 
-    /**
-     * Refrenced code from https://github.com/Katatje/Dream/blob/master/src/main/java/cat/yoink/dream/impl/module/combat/Surround.java
-     * yoink is cool
-     */
+    //TODO: Fix OnJump disable mode with centering
 
     Setting placemode;
     Setting disablemode;
+    Setting centermode;
     Setting blockspertick;
+    Setting infomessages;
 
     private ArrayList<String> placemodes;
     private ArrayList<String> disablemodes;
+    private ArrayList<String> centermodes;
 
     private boolean hasPlaced;
+    private int oldInventorySlot;
+    private Vec3d center = Vec3d.ZERO;
 
     @Override
     public void setup() {
@@ -40,69 +45,114 @@ public class Surround extends Module {
 
         disablemodes = new ArrayList<>();
         disablemodes.add("WhenDone");
-        disablemodes.add("OnJump");
+        //disablemodes.add("OnJump");
+
+        centermodes = new ArrayList<>();
+        centermodes.add("Teleport");
+        centermodes.add("None");
 
         Past.settingsManager.registerSetting(placemode = new Setting("Place", "SurroundPlace", this, placemodes, "Standard"));
         Past.settingsManager.registerSetting(disablemode = new Setting("Disable", "SurroundDisable", this, disablemodes, "WhenDone"));
-        Past.settingsManager.registerSetting(blockspertick = new Setting("BPT", "SurroundBlocksPerTick", 1, 1, 10, this));
+        Past.settingsManager.registerSetting(centermode = new Setting("Center", "SurroundCenter", this, centermodes, "Teleport"));
+        Past.settingsManager.registerSetting(blockspertick = new Setting("BPT", "SurroundBlocksPerTick", 0, 1, 10, this));
+        Past.settingsManager.registerSetting(infomessages = new Setting("Info Messages", "SurroundInfoMessages", true, this));
     }
 
     @Override
     public void onEnable() {
         hasPlaced = false;
+        oldInventorySlot = mc.player.inventory.currentItem;
+        center = getCenter(mc.player.posX, mc.player.posY, mc.player.posZ);
+
+        if (centermode.getValueString() != "None") {
+            mc.player.motionX = 0;
+            mc.player.motionZ = 0;
+        }
+
+        if (centermode.getValueString() == "Teleport") {
+            if (infomessages.getValBoolean()) {
+                MessageUtil.sendSurroundMessage(ColourUtil.white + "Centering!");
+            }
+            mc.player.connection.sendPacket(new CPacketPlayer.Position(center.x, center.y, center.z, true));
+            mc.player.setPosition(center.x, center.y, center.z);
+        }
+
+        if (centermode.getValueString() == "None") {
+            return;
+        }
+    }
+
+    @Override
+    public void onDisable() {
+        mc.player.inventory.currentItem = oldInventorySlot;
     }
 
     private final List<Vec3d> standardSurround = new ArrayList<>(Arrays.asList(
+            //X Block
             new Vec3d(1, 0, 0),
-            new Vec3d(0, 0, 1),
+            //X-Minus Block
             new Vec3d(-1, 0, 0),
-            new Vec3d(0, 0, -1),
-            new Vec3d(1, -1, 0),
-            new Vec3d(0, -1, 1),
-            new Vec3d(-1, -1, 0),
-            new Vec3d(0, -1, -1)
+            //Z Block
+            new Vec3d(0, 0, 1),
+            //Z-Minus Block
+            new Vec3d(0, 0, -1)
     ));
 
     private final List<Vec3d> fullSurround = new ArrayList<>(Arrays.asList(
-            new Vec3d(1, 0, 0),
-            new Vec3d(0, 0, 1),
-            new Vec3d(-1, 0, 0),
-            new Vec3d(0, 0, -1),
+            //X-Down Block
             new Vec3d(1, -1, 0),
+            //Z-Down Block
             new Vec3d(0, -1, 1),
+            //X-Minus-Down Block
             new Vec3d(-1, -1, 0),
+            //Z-Minus-Down Block
             new Vec3d(0, -1, -1),
-            new Vec3d(0, -1, 0)
+            //X Block
+            new Vec3d(1, 0, 0),
+            //Z Block
+            new Vec3d(0, 0, 1),
+            //X-Minus Block
+            new Vec3d(-1, 0, 0),
+            //Z-Minus Block
+            new Vec3d(0, 0, -1)
     ));
 
     public void onUpdate() {
         if (nullCheck()) { return; }
 
         if (hasPlaced == true && disablemode.getValueString() == "WhenDone") {
+            if (infomessages.getValBoolean()) {
+                MessageUtil.sendSurroundMessage(ColourUtil.white + "Module is" + ColourUtil.red + " " + "disabling" + ColourUtil.gray + " " + "(WhenDone)");
+            }
             toggle();
         }
 
-        if (hasPlaced == true && disablemode.getValueString() == "OnJump") {
-            if (!mc.player.onGround) {
-                toggle();
-            }
-        }
+//        if (hasPlaced == true && disablemode.getValueString() == "OnJump") {
+//            if (!mc.player.onGround) {
+//                if (infomessages.getValBoolean()) {
+//                    MessageUtil.sendSurroundMessage(ColourUtil.white + "Module is" + ColourUtil.red + " " + "disabling" + ColourUtil.gray + " " + "(OnJump)");
+//                }
+//                toggle();
+//            }
+//        }
 
         int blocksPlaced = 0;
 
         if (placemode.getValueString() == "Standard") {
-
             for (Vec3d placePositions : standardSurround) {
 
                 BlockPos blockPos = new BlockPos(placePositions.add(mc.player.getPositionVector()));
 
                 if (mc.world.getBlockState(blockPos).getBlock().equals(Blocks.AIR)) {
 
-                    int oldSlot = mc.player.inventory.currentItem;
+                    mc.player.inventory.currentItem = PlayerUtil.getBlockInHotbar(Blocks.OBSIDIAN);
 
-                    mc.player.inventory.currentItem = PlayerUtil.getBlockInSlot(Blocks.OBSIDIAN);
+                    if (infomessages.getValBoolean()) {
+                        MessageUtil.sendSurroundMessage(ColourUtil.white + "Placing block");
+                    }
+
                     PlayerUtil.placeBlock(blockPos);
-                    mc.player.inventory.currentItem = oldSlot;
+                    mc.player.inventory.currentItem = oldInventorySlot;
                     blocksPlaced++;
 
                     if (blocksPlaced == blockspertick.getValueInt()) {
@@ -113,19 +163,20 @@ public class Surround extends Module {
         }
 
         if (placemode.getValueString() == "Full") {
-
             for (Vec3d placePositions : fullSurround) {
 
                 BlockPos blockPos = new BlockPos(placePositions.add(mc.player.getPositionVector()));
 
                 if (mc.world.getBlockState(blockPos).getBlock().equals(Blocks.AIR)) {
 
-                    int oldSlot = mc.player.inventory.currentItem;
+                    mc.player.inventory.currentItem = PlayerUtil.getBlockInHotbar(Blocks.OBSIDIAN);
 
-                    mc.player.inventory.currentItem = PlayerUtil.getBlockInSlot(Blocks.OBSIDIAN);
+                    if (infomessages.getValBoolean()) {
+                        MessageUtil.sendSurroundMessage(ColourUtil.white + "Placing block");
+                    }
 
                     PlayerUtil.placeBlock(blockPos);
-                    mc.player.inventory.currentItem = oldSlot;
+                    mc.player.inventory.currentItem = oldInventorySlot;
                     blocksPlaced++;
 
                     if (blocksPlaced == blockspertick.getValueInt()) {
@@ -137,5 +188,14 @@ public class Surround extends Module {
         if (blocksPlaced == 0) {
             hasPlaced = true;
         }
+    }
+
+    public Vec3d getCenter(double posX, double posY, double posZ) {
+
+        double x = Math.floor(posX) + 0.5D;
+        double y = Math.floor(posY);
+        double z = Math.floor(posZ) + 0.5D ;
+
+        return new Vec3d(x, y, z);
     }
 }
