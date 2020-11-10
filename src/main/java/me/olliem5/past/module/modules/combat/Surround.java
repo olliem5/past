@@ -8,7 +8,6 @@ import me.olliem5.past.util.ColourUtil;
 import me.olliem5.past.util.MessageUtil;
 import me.olliem5.past.util.PlayerUtil;
 import net.minecraft.init.Blocks;
-import net.minecraft.item.ItemBlock;
 import net.minecraft.network.play.client.CPacketPlayer;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
@@ -127,7 +126,7 @@ public class Surround extends Module {
 
         if (hasPlaced == true && disablemode.getValueString() == "WhenDone") {
             if (infomessages.getValBoolean()) {
-                MessageUtil.sendSurroundMessage(ColourUtil.white + "Module is" + ColourUtil.red + " " + "disabling" + ColourUtil.gray + " " + "(WhenDone)");
+                MessageUtil.sendSurroundMessage(ColourUtil.white + "Module is" + ColourUtil.red + " " + "disabling" + ColourUtil.gray + " " + "(When Done)");
             }
             toggle();
         }

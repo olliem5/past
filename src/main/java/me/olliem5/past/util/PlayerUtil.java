@@ -12,6 +12,7 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 
 public class PlayerUtil {
@@ -70,5 +71,30 @@ public class PlayerUtil {
             }
         }
         return -1;
+    }
+
+    public enum FacingDirection {
+        NORTH,
+        SOUTH,
+        EAST,
+        WEST,
+    }
+
+    public static FacingDirection getFacing() {
+        switch (MathHelper.floor((double) (Minecraft.getMinecraft().player.rotationYaw * 8.0F / 360.0F) + 0.5D) & 7) {
+            case 0:
+            case 1:
+                return FacingDirection.SOUTH;
+            case 2:
+            case 3:
+                return FacingDirection.WEST;
+            case 4:
+            case 5:
+                return FacingDirection.NORTH;
+            case 6:
+            case 7:
+                return FacingDirection.EAST;
+        }
+        return FacingDirection.NORTH;
     }
 }

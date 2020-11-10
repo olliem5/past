@@ -8,6 +8,7 @@ import me.olliem5.past.module.modules.combat.Surround;
 import me.olliem5.past.module.modules.core.HudEditor;
 import me.olliem5.past.module.modules.core.HUD;
 import me.olliem5.past.module.modules.chat.ChatSuffix;
+import me.olliem5.past.module.modules.misc.AutoBuilder;
 import me.olliem5.past.module.modules.misc.DiscordRPC;
 import me.olliem5.past.module.modules.core.ClickGUI;
 import me.olliem5.past.module.modules.misc.EntityAlert;
@@ -45,6 +46,7 @@ public class ModuleManager {
         modules.add(new DiscordRPC());
         modules.add(new EntityAlert());
         modules.add(new FakePlayer());
+        modules.add(new AutoBuilder());
 
         /* Movement */
         modules.add(new Sprint());
