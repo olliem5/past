@@ -8,6 +8,7 @@ import me.olliem5.past.util.ColourUtil;
 import me.olliem5.past.util.MessageUtil;
 import me.olliem5.past.util.PlayerUtil;
 import net.minecraft.init.Blocks;
+import net.minecraft.item.ItemBlock;
 import net.minecraft.network.play.client.CPacketPlayer;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
@@ -27,6 +28,8 @@ public class Surround extends Module {
     Setting disablemode;
     Setting centermode;
     Setting blockspertick;
+    Setting timeoutticks;
+    Setting onlyobsidian;
     Setting infomessages;
 
     private ArrayList<String> placemodes;
@@ -34,7 +37,6 @@ public class Surround extends Module {
     private ArrayList<String> centermodes;
 
     private boolean hasPlaced;
-    //private int oldInventorySlot;
     private Vec3d center = Vec3d.ZERO;
 
     @Override
@@ -54,7 +56,9 @@ public class Surround extends Module {
         Past.settingsManager.registerSetting(placemode = new Setting("Place", "SurroundPlace", this, placemodes, "Standard"));
         Past.settingsManager.registerSetting(disablemode = new Setting("Disable", "SurroundDisable", this, disablemodes, "WhenDone"));
         Past.settingsManager.registerSetting(centermode = new Setting("Center", "SurroundCenter", this, centermodes, "Teleport"));
-        Past.settingsManager.registerSetting(blockspertick = new Setting("BPT", "SurroundBlocksPerTick", 0, 1, 10, this));
+        Past.settingsManager.registerSetting(blockspertick = new Setting("BPT", "SurroundBlocksPerTick", 1, 1, 10, this));
+        Past.settingsManager.registerSetting(timeoutticks = new Setting("Timeout Ticks", "SurroundTimeoutTicks", 1, 15, 20, this));
+        Past.settingsManager.registerSetting(onlyobsidian = new Setting("Only Obi", "SurroundOnlyObsidian", true, this));
         Past.settingsManager.registerSetting(infomessages = new Setting("Info Messages", "SurroundInfoMessages", true, this));
     }
 
@@ -114,6 +118,13 @@ public class Surround extends Module {
     public void onUpdate() {
         if (nullCheck()) { return; }
 
+        if (this.isToggled()) {
+            if (mc.player.ticksExisted % timeoutticks.getValueInt() == 0) {
+                MessageUtil.sendSurroundMessage(ColourUtil.white + "Module is" + ColourUtil.red + " " + "disabling" + ColourUtil.gray + " " + "(Timed Out)");
+                toggle();
+            }
+        }
+
         if (hasPlaced == true && disablemode.getValueString() == "WhenDone") {
             if (infomessages.getValBoolean()) {
                 MessageUtil.sendSurroundMessage(ColourUtil.white + "Module is" + ColourUtil.red + " " + "disabling" + ColourUtil.gray + " " + "(WhenDone)");
@@ -140,7 +151,18 @@ public class Surround extends Module {
                 if (mc.world.getBlockState(blockPos).getBlock().equals(Blocks.AIR)) {
 
                     int oldInventorySlot = mc.player.inventory.currentItem;
-                    mc.player.inventory.currentItem = PlayerUtil.getBlockInHotbar(Blocks.OBSIDIAN);
+
+                    if (onlyobsidian.getValBoolean()) {
+                        if (infomessages.getValBoolean()) {
+                            MessageUtil.sendSurroundMessage(ColourUtil.white + "Switching to" + " " + ColourUtil.aqua + "obsidian");
+                        }
+                        mc.player.inventory.currentItem = PlayerUtil.getBlockInHotbar(Blocks.OBSIDIAN);
+                    } else {
+                        if (infomessages.getValBoolean()) {
+                            MessageUtil.sendSurroundMessage(ColourUtil.white + "Switching to" + " " + ColourUtil.aqua + "any block");
+                        }
+                        mc.player.inventory.currentItem = PlayerUtil.getAnyBlockInHotbar();
+                    }
 
                     if (infomessages.getValBoolean()) {
                         MessageUtil.sendSurroundMessage(ColourUtil.white + "Placing block");
@@ -165,7 +187,18 @@ public class Surround extends Module {
                 if (mc.world.getBlockState(blockPos).getBlock().equals(Blocks.AIR)) {
 
                     int oldInventorySlot = mc.player.inventory.currentItem;
-                    mc.player.inventory.currentItem = PlayerUtil.getBlockInHotbar(Blocks.OBSIDIAN);
+
+                    if (onlyobsidian.getValBoolean()) {
+                        if (infomessages.getValBoolean()) {
+                            MessageUtil.sendSurroundMessage(ColourUtil.white + "Switching to" + " " + ColourUtil.aqua + "obsidian");
+                        }
+                        mc.player.inventory.currentItem = PlayerUtil.getBlockInHotbar(Blocks.OBSIDIAN);
+                    } else {
+                        if (infomessages.getValBoolean()) {
+                            MessageUtil.sendSurroundMessage(ColourUtil.white + "Switching to" + " " + ColourUtil.aqua + "any block");
+                        }
+                        mc.player.inventory.currentItem = PlayerUtil.getAnyBlockInHotbar();
+                    }
 
                     if (infomessages.getValBoolean()) {
                         MessageUtil.sendSurroundMessage(ColourUtil.white + "Placing block");
@@ -181,6 +214,7 @@ public class Surround extends Module {
                 }
             }
         }
+
         if (blocksPlaced == 0) {
             hasPlaced = true;
         }

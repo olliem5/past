@@ -1,4 +1,4 @@
-package me.olliem5.past.module.modules.hud;
+package me.olliem5.past.module.modules.core;
 
 import me.olliem5.past.Past;
 import me.olliem5.past.module.Category;
@@ -16,7 +16,7 @@ import java.util.Calendar;
 
 public class HUD extends Module {
     public HUD() {
-        super("HUD", "Draws the HUD", Category.HUD);
+        super("HUD", "Draws the HUD", Category.CORE);
     }
 
     Setting rgb;

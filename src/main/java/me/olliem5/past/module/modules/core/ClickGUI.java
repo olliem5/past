@@ -1,4 +1,4 @@
-package me.olliem5.past.module.modules.hud;
+package me.olliem5.past.module.modules.core;
 
 import me.olliem5.past.Past;
 import me.olliem5.past.module.Category;
@@ -8,8 +8,7 @@ import org.lwjgl.input.Keyboard;
 
 public class ClickGUI extends Module {
     public ClickGUI() {
-        super ("ClickGUI", "Opens the ClickGUI", Category.HUD);
-        setKey(Keyboard.KEY_RSHIFT);
+        super ("ClickGUI", "Opens the ClickGUI", Category.CORE);
     }
 
     Setting rgb;

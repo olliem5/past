@@ -61,4 +61,14 @@ public class PlayerUtil {
         }
         return -1;
     }
+
+    public static int getAnyBlockInHotbar() {
+        for (int i = 0; i < 9; i++) {
+            Item item = Minecraft.getMinecraft().player.inventory.getStackInSlot(i).getItem();
+            if (item instanceof ItemBlock) {
+                return i;
+            }
+        }
+        return -1;
+    }
 }

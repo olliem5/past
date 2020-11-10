@@ -7,5 +7,5 @@ public enum Category {
     RENDER,
     MISC,
     CHAT,
-    HUD
+    CORE
 }
