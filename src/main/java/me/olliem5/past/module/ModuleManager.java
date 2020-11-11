@@ -1,24 +1,12 @@
 package me.olliem5.past.module;
 
-import me.olliem5.past.module.modules.chat.Spammer;
-import me.olliem5.past.module.modules.combat.AutoCrystal;
-import me.olliem5.past.module.modules.combat.AutoTotem;
-import me.olliem5.past.module.modules.combat.BonBedAura;
-import me.olliem5.past.module.modules.combat.Surround;
-import me.olliem5.past.module.modules.core.HudEditor;
-import me.olliem5.past.module.modules.core.HUD;
-import me.olliem5.past.module.modules.chat.ChatSuffix;
-import me.olliem5.past.module.modules.misc.AutoBuilder;
-import me.olliem5.past.module.modules.misc.DiscordRPC;
-import me.olliem5.past.module.modules.core.ClickGUI;
-import me.olliem5.past.module.modules.misc.EntityAlert;
-import me.olliem5.past.module.modules.chat.PrefixChat;
-import me.olliem5.past.module.modules.misc.FakePlayer;
+import me.olliem5.past.module.modules.combat.*;
 import me.olliem5.past.module.modules.movement.*;
-import me.olliem5.past.module.modules.player.AutoLog;
-import me.olliem5.past.module.modules.player.FastUse;
-import me.olliem5.past.module.modules.player.WeaknessMsg;
+import me.olliem5.past.module.modules.player.*;
 import me.olliem5.past.module.modules.render.*;
+import me.olliem5.past.module.modules.misc.*;
+import me.olliem5.past.module.modules.chat.*;
+import me.olliem5.past.module.modules.core.*;
 
 import java.util.ArrayList;
 
