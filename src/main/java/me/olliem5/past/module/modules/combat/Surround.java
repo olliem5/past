@@ -25,15 +25,15 @@ public class Surround extends Module {
 
     Setting placemode;
     Setting disablemode;
-    Setting centermode;
+    Setting centerplayer;
     Setting blockspertick;
+    Setting timeout;
     Setting timeoutticks;
     Setting onlyobsidian;
     Setting infomessages;
 
     private ArrayList<String> placemodes;
     private ArrayList<String> disablemodes;
-    private ArrayList<String> centermodes;
 
     private boolean hasPlaced;
     private Vec3d center = Vec3d.ZERO;
@@ -48,14 +48,11 @@ public class Surround extends Module {
         disablemodes.add("WhenDone");
         //disablemodes.add("OnJump");
 
-        centermodes = new ArrayList<>();
-        centermodes.add("Teleport");
-        centermodes.add("None");
-
         Past.settingsManager.registerSetting(placemode = new Setting("Place", "SurroundPlace", this, placemodes, "Standard"));
         Past.settingsManager.registerSetting(disablemode = new Setting("Disable", "SurroundDisable", this, disablemodes, "WhenDone"));
-        Past.settingsManager.registerSetting(centermode = new Setting("Center", "SurroundCenter", this, centermodes, "Teleport"));
+        Past.settingsManager.registerSetting(centerplayer = new Setting("Center", "SurroundCenter", true, this));
         Past.settingsManager.registerSetting(blockspertick = new Setting("BPT", "SurroundBlocksPerTick", 1, 1, 10, this));
+        Past.settingsManager.registerSetting(timeout = new Setting("Timeout", "SurroundTimeout", true, this));
         Past.settingsManager.registerSetting(timeoutticks = new Setting("Timeout Ticks", "SurroundTimeoutTicks", 1, 15, 20, this));
         Past.settingsManager.registerSetting(onlyobsidian = new Setting("Only Obi", "SurroundOnlyObsidian", true, this));
         Past.settingsManager.registerSetting(infomessages = new Setting("Info Messages", "SurroundInfoMessages", true, this));
@@ -66,61 +63,48 @@ public class Surround extends Module {
         hasPlaced = false;
         center = getCenter(mc.player.posX, mc.player.posY, mc.player.posZ);
 
-        if (centermode.getValueString() != "None") {
+        if (centerplayer.getValBoolean()) {
             mc.player.motionX = 0;
             mc.player.motionZ = 0;
-        }
 
-        if (centermode.getValueString() == "Teleport") {
             if (infomessages.getValBoolean()) {
                 MessageUtil.sendSurroundMessage(ColourUtil.white + "Centering!");
             }
+
             mc.player.connection.sendPacket(new CPacketPlayer.Position(center.x, center.y, center.z, true));
             mc.player.setPosition(center.x, center.y, center.z);
-        }
-
-        if (centermode.getValueString() == "None") {
-            return;
         }
     }
 
     private final List<Vec3d> standardSurround = new ArrayList<>(Arrays.asList(
-            //X Block
-            new Vec3d(1, 0, 0),
-            //X-Minus Block
-            new Vec3d(-1, 0, 0),
-            //Z Block
-            new Vec3d(0, 0, 1),
-            //Z-Minus Block
-            new Vec3d(0, 0, -1)
+            new Vec3d(0, -1, 0), //Bottom Block
+            new Vec3d(1, 0, 0), //X Block
+            new Vec3d(-1, 0, 0), //X-Minus Block
+            new Vec3d(0, 0, 1), //Z Block
+            new Vec3d(0, 0, -1) //Z-Minus Block
     ));
 
     private final List<Vec3d> fullSurround = new ArrayList<>(Arrays.asList(
-            //X-Down Block
-            new Vec3d(1, -1, 0),
-            //Z-Down Block
-            new Vec3d(0, -1, 1),
-            //X-Minus-Down Block
-            new Vec3d(-1, -1, 0),
-            //Z-Minus-Down Block
-            new Vec3d(0, -1, -1),
-            //X Block
-            new Vec3d(1, 0, 0),
-            //Z Block
-            new Vec3d(0, 0, 1),
-            //X-Minus Block
-            new Vec3d(-1, 0, 0),
-            //Z-Minus Block
-            new Vec3d(0, 0, -1)
+            new Vec3d(0, -1, 0), //Bottom Block
+            new Vec3d(1, -1, 0), //X-Down Block
+            new Vec3d(0, -1, 1), //Z-Down Block
+            new Vec3d(-1, -1, 0), //X-Minus-Down Block
+            new Vec3d(0, -1, -1), //Z-Minus-Down Block
+            new Vec3d(1, 0, 0), //X Block
+            new Vec3d(0, 0, 1), //Z Block
+            new Vec3d(-1, 0, 0), //X-Minus Block
+            new Vec3d(0, 0, -1) //Z-Minus Block
     ));
 
     public void onUpdate() {
         if (nullCheck()) { return; }
 
-        if (this.isToggled()) {
-            if (mc.player.ticksExisted % timeoutticks.getValueInt() == 0) {
-                MessageUtil.sendSurroundMessage(ColourUtil.white + "Module is" + ColourUtil.red + " " + "disabling" + ColourUtil.gray + " " + "(Timed Out)");
-                toggle();
+        if (timeout.getValBoolean()) {
+            if (this.isToggled()) {
+                if (mc.player.ticksExisted % timeoutticks.getValueInt() == 0) {
+                    MessageUtil.sendSurroundMessage(ColourUtil.white + "Module is" + ColourUtil.red + " " + "disabling" + ColourUtil.gray + " " + "(Timed Out)");
+                    toggle();
+                }
             }
         }
 
