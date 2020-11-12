@@ -42,6 +42,7 @@ public class ModuleManager {
         modules.add(new Step());
         modules.add(new Flight());
         modules.add(new Timer());
+        modules.add(new Velocity());
 
         /* Player */
         modules.add(new WeaknessMsg());

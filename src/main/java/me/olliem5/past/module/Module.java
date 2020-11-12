@@ -60,6 +60,7 @@ public class Module {
 
     public void onEnableEvent() {
         MinecraftForge.EVENT_BUS.register(this);
+        Past.EVENT_BUS.subscribe(this);
 
         if (Past.configUtil != null) { try { Past.configUtil.saveLoadedModules(); } catch (Exception e) {} }
 
@@ -68,6 +69,7 @@ public class Module {
 
     public void onDisableEvent() {
         MinecraftForge.EVENT_BUS.unregister(this);
+        Past.EVENT_BUS.unsubscribe(this);
 
         if (Past.configUtil != null) { try { Past.configUtil.saveLoadedModules(); } catch (Exception e) {} }
 

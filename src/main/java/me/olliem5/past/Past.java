@@ -6,6 +6,8 @@ import me.olliem5.past.module.ModuleManager;
 import me.olliem5.past.gui.click.ClickGUI;
 import me.olliem5.past.settings.SettingsManager;
 import me.olliem5.past.util.ConfigUtil;
+import me.zero.alpine.EventBus;
+import me.zero.alpine.EventManager;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
@@ -33,6 +35,7 @@ public class Past {
     public static String nameversion = name + " " + version;
     public static int prefixchatkey = Keyboard.KEY_PERIOD; //TODO: Sync up with config and the prefix string
 
+    public static EventBus EVENT_BUS = new EventManager();
     public static SettingsManager settingsManager;
     public static ModuleManager moduleManager;
     public static CommandManager commandManager;
