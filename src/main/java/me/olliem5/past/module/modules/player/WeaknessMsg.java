@@ -1,11 +1,11 @@
 package me.olliem5.past.module.modules.player;
 
 import me.olliem5.past.Past;
-import me.olliem5.past.util.ColourUtil;
-import me.olliem5.past.util.MessageUtil;
 import me.olliem5.past.module.Category;
 import me.olliem5.past.module.Module;
 import me.olliem5.past.settings.Setting;
+import me.olliem5.past.util.ColourUtil;
+import me.olliem5.past.util.MessageUtil;
 import net.minecraft.client.audio.PositionedSoundRecord;
 import net.minecraft.init.MobEffects;
 import net.minecraft.init.SoundEvents;

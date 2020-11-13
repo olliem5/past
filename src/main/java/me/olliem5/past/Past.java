@@ -1,11 +1,12 @@
 package me.olliem5.past;
 
+import me.olliem5.past.command.CommandManager;
 import me.olliem5.past.font.CustomFontRenderer;
 import me.olliem5.past.friends.FriendsManager;
+import me.olliem5.past.gui.click.ClickGUI;
 import me.olliem5.past.gui.editor.HudEditor;
 import me.olliem5.past.module.Module;
 import me.olliem5.past.module.ModuleManager;
-import me.olliem5.past.gui.click.ClickGUI;
 import me.olliem5.past.settings.SettingsManager;
 import me.olliem5.past.util.ConfigUtil;
 import me.zero.alpine.EventBus;
@@ -16,7 +17,6 @@ import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.InputEvent;
-import me.olliem5.past.command.CommandManager;
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.Display;
 

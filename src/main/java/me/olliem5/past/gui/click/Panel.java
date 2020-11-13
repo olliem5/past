@@ -8,7 +8,6 @@ import me.olliem5.past.util.ColourUtil;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Gui;
 
-import java.awt.*;
 import java.util.ArrayList;
 
 public class Panel {

@@ -4,7 +4,6 @@ import me.olliem5.past.Past;
 import me.olliem5.past.module.Category;
 import me.olliem5.past.module.Module;
 import me.olliem5.past.settings.Setting;
-import org.lwjgl.input.Keyboard;
 
 public class ClickGUI extends Module {
     public ClickGUI() {

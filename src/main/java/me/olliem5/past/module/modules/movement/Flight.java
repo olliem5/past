@@ -1,9 +1,7 @@
 package me.olliem5.past.module.modules.movement;
 
-import me.olliem5.past.Past;
 import me.olliem5.past.module.Category;
 import me.olliem5.past.module.Module;
-import me.olliem5.past.settings.Setting;
 
 public class Flight extends Module {
     public Flight() {
