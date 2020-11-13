@@ -8,11 +8,17 @@ import java.util.ArrayList;
 public class SettingsManager {
     private ArrayList<Setting> settings;
 
-    public SettingsManager() { this.settings = new ArrayList<>(); }
+    public SettingsManager() {
+        this.settings = new ArrayList<>();
+    }
 
-    public void registerSetting(Setting args) { this.settings.add(args); }
+    public void registerSetting(Setting args) {
+        this.settings.add(args);
+    }
 
-    public ArrayList<Setting> getSettings() { return this.settings; }
+    public ArrayList<Setting> getSettings() {
+        return this.settings;
+    }
 
     public Setting getSettingName(String name) {
         for (Setting setting : getSettings()) {

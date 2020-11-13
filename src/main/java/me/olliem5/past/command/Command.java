@@ -10,7 +10,14 @@ public class Command {
         this.usage = usage;
     }
 
-    public String getCommand() { return command; }
-    public String getUsage() { return usage; }
-    public void onCommand(String[] args) {}
+    public String getCommand() {
+        return command;
+    }
+
+    public String getUsage() {
+        return usage;
+    }
+
+    public void onCommand(String[] args) {
+    }
 }

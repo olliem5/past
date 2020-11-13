@@ -6,7 +6,7 @@ import me.olliem5.past.util.MessageUtil;
 
 public class HelpCommand extends Command {
     public HelpCommand() {
-        super ("help", "Shows you all the client commands you can do, as well as other useful tips.");
+        super("help", "Shows you all the client commands you can do, as well as other useful tips.");
     }
 
     @Override

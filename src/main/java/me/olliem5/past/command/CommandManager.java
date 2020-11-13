@@ -28,7 +28,7 @@ public class CommandManager {
         String[] args = event.getMessage().split(" ");
         if (event.getMessage().startsWith(Past.prefix)) {
             event.setCanceled(true);
-            for (Command c : commands){
+            for (Command c : commands) {
                 if (args[0].equalsIgnoreCase(Past.prefix + c.getCommand())) {
                     c.onCommand(args);
                 }

@@ -6,9 +6,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class FriendsManager {
-    public static List<Friend> friends = new ArrayList<>();;
+    public static List<Friend> friends = new ArrayList<>();
+    ;
 
-    public static List<Friend> getFriends(){
+    public static List<Friend> getFriends() {
         return friends;
     }
 
@@ -35,12 +36,22 @@ public class FriendsManager {
     public void addFriend(String name) {
         friends.add(new Friend(name));
 
-        if (Past.configUtil != null) { try { Past.configUtil.saveFriends(); } catch (Exception e) {} }
+        if (Past.configUtil != null) {
+            try {
+                Past.configUtil.saveFriends();
+            } catch (Exception e) {
+            }
+        }
     }
 
     public void delFriend(String name) {
         friends.remove(getFriendByName(name));
 
-        if (Past.configUtil != null) { try { Past.configUtil.saveFriends(); } catch (Exception e) {} }
+        if (Past.configUtil != null) {
+            try {
+                Past.configUtil.saveFriends();
+            } catch (Exception e) {
+            }
+        }
     }
 }

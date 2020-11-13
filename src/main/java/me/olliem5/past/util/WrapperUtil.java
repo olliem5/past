@@ -9,13 +9,16 @@ public class WrapperUtil {
     public static Minecraft getMinecraft() {
         return Minecraft.getMinecraft();
     }
+
     public static EntityPlayerSP getPlayer() {
         return getMinecraft().player;
     }
+
     public static World getWorld() {
         return getMinecraft().world;
     }
-    public static int getKey(String keyname){
+
+    public static int getKey(String keyname) {
         return Keyboard.getKeyIndex(keyname.toUpperCase());
     }
 }

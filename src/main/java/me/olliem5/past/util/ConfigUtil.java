@@ -43,8 +43,10 @@ public class ConfigUtil {
                     printWriter.println(string);
                 }
                 printWriter.close();
-            } catch (FileNotFoundException e) {}
-        } catch (Exception e) {}
+            } catch (FileNotFoundException e) {
+            }
+        } catch (Exception e) {
+        }
     }
 
     public void saveKeybinds() {
@@ -62,8 +64,10 @@ public class ConfigUtil {
                     printWriter.println(string);
                 }
                 printWriter.close();
-            } catch (FileNotFoundException e) {}
-        } catch (Exception e) {}
+            } catch (FileNotFoundException e) {
+            }
+        } catch (Exception e) {
+        }
     }
 
     public void saveBooleans() {
@@ -83,8 +87,10 @@ public class ConfigUtil {
                     printWriter.println(string);
                 }
                 printWriter.close();
-            } catch (FileNotFoundException e) {}
-        } catch (Exception e) {}
+            } catch (FileNotFoundException e) {
+            }
+        } catch (Exception e) {
+        }
     }
 
     public void saveIntegers() {
@@ -104,8 +110,10 @@ public class ConfigUtil {
                     printWriter.println(string);
                 }
                 printWriter.close();
-            } catch (FileNotFoundException e) {}
-        } catch (Exception e) {}
+            } catch (FileNotFoundException e) {
+            }
+        } catch (Exception e) {
+        }
     }
 
     public void saveModes() {
@@ -125,8 +133,10 @@ public class ConfigUtil {
                     printWriter.println(string);
                 }
                 printWriter.close();
-            } catch (FileNotFoundException e) {}
-        } catch (Exception e) {}
+            } catch (FileNotFoundException e) {
+            }
+        } catch (Exception e) {
+        }
     }
 
     public void saveGuiPanels() {
@@ -145,8 +155,10 @@ public class ConfigUtil {
                     printWriter.println(string);
                 }
                 printWriter.close();
-            } catch (FileNotFoundException e) {}
-        } catch (Exception e) {}
+            } catch (FileNotFoundException e) {
+            }
+        } catch (Exception e) {
+        }
     }
 
     public void saveFriends() {
@@ -164,8 +176,10 @@ public class ConfigUtil {
                     printWriter.println(string);
                 }
                 printWriter.close();
-            } catch (FileNotFoundException e) {}
-        } catch (Exception e) {}
+            } catch (FileNotFoundException e) {
+            }
+        } catch (Exception e) {
+        }
     }
 
     public void loadSavedModules() {
@@ -181,11 +195,14 @@ public class ConfigUtil {
 
                 while (var6.hasNext()) {
                     Module m = (Module) var6.next();
-                    if (m.getName().equals(line)) { m.toggle(); }
+                    if (m.getName().equals(line)) {
+                        m.toggle();
+                    }
                 }
             }
             br.close();
-        } catch (Exception e) {}
+        } catch (Exception e) {
+        }
     }
 
     public void loadKeybinds() {
@@ -207,6 +224,7 @@ public class ConfigUtil {
                 }
             }
             br.close();
-        } catch (Exception var11) {}
+        } catch (Exception var11) {
+        }
     }
 }

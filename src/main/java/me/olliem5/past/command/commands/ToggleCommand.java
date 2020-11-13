@@ -9,24 +9,25 @@ import me.olliem5.past.util.MessageUtil;
 /* Credit: LittleDraily */
 public class ToggleCommand extends Command {
     public ToggleCommand() {
-        super ("toggle", "Allows you to toggle a module.");
+        super("toggle", "Allows you to toggle a module.");
     }
 
     @Override
     public void onCommand(String[] args) {
         if (args.length > 1) {
             try {
-            for (Module m: Past.moduleManager.getModules()) {
-                if (m.getName().equalsIgnoreCase(args[1])) {
-                    m.toggle();
-                    if (m.isToggled()) {
-                        MessageUtil.sendMessagePrefix(ColourUtil.aqua + m.getName() + ColourUtil.white + " is now " + ColourUtil.green + "ON");
-                    } else {
-                        MessageUtil.sendMessagePrefix(ColourUtil.aqua + m.getName() + ColourUtil.white + " is now " + ColourUtil.red + "OFF");
+                for (Module m : Past.moduleManager.getModules()) {
+                    if (m.getName().equalsIgnoreCase(args[1])) {
+                        m.toggle();
+                        if (m.isToggled()) {
+                            MessageUtil.sendMessagePrefix(ColourUtil.aqua + m.getName() + ColourUtil.white + " is now " + ColourUtil.green + "ON");
+                        } else {
+                            MessageUtil.sendMessagePrefix(ColourUtil.aqua + m.getName() + ColourUtil.white + " is now " + ColourUtil.red + "OFF");
+                        }
                     }
                 }
+            } catch (Exception e) {
             }
-            } catch (Exception e) {}
         }
     }
 }

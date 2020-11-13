@@ -44,38 +44,77 @@ public class Setting {
         this.type = "mode";
     }
 
-    public int getValueInt() { return this.start; }
-    public boolean getValBoolean() { return this.bval; }
-    public String getValueString() { return this.sval; }
+    public int getValueInt() {
+        return this.start;
+    }
 
-    public String getType() { return type; }
-    public String getName() { return name; }
+    public boolean getValBoolean() {
+        return this.bval;
+    }
 
-    public int getMin() { return min; }
-    public int getStart() { return start; }
-    public int getMax() { return max; }
+    public String getValueString() {
+        return this.sval;
+    }
 
-    public String getId() { return id; }
+    public String getType() {
+        return type;
+    }
 
-    public Module getParent() { return parent; }
+    public String getName() {
+        return name;
+    }
 
-    public ArrayList<String> getModes() { return this.modes; }
+    public int getMin() {
+        return min;
+    }
+
+    public int getStart() {
+        return start;
+    }
+
+    public int getMax() {
+        return max;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public Module getParent() {
+        return parent;
+    }
+
+    public ArrayList<String> getModes() {
+        return this.modes;
+    }
 
     public void setValueInt(final int value) {
         this.start = value;
 
-        if (Past.configUtil != null) { try { Past.configUtil.saveIntegers(); } catch (Exception e) {} }
+        if (Past.configUtil != null) {
+            try {
+                Past.configUtil.saveIntegers();
+            } catch (Exception e) {}
+        }
     }
 
     public void setValBoolean(boolean value) {
         this.bval = value;
 
-        if (Past.configUtil != null) { try { Past.configUtil.saveBooleans(); } catch (Exception e) {} }
+        if (Past.configUtil != null) {
+            try {
+                Past.configUtil.saveBooleans();
+            } catch (Exception e) {}
+        }
     }
 
     public void setValueString(String value) {
         this.sval = value;
 
-        if (Past.configUtil != null) { try { Past.configUtil.saveModes(); } catch (Exception e) {} }
+        if (Past.configUtil != null) {
+            try {
+                Past.configUtil.saveModes();
+            } catch (Exception e) {}
+        }
     }
 }

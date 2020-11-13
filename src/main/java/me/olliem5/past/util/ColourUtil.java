@@ -39,7 +39,8 @@ public class ColourUtil {
     private int greenRGB;
     private int blueRGB;
     private int rgb;
-                        //Reee frick u java make me spell the word wrong for class >:(
+
+    //Reee frick u java make me spell the word wrong for class >:(
     public ColourUtil(Color colour) {
         this.redRGB = colour.getRed();
         this.greenRGB = colour.getGreen();
@@ -52,5 +53,7 @@ public class ColourUtil {
         return theRGB;
     }
 
-    public int getRGB() { return rgb; }
+    public int getRGB() {
+        return rgb;
+    }
 }

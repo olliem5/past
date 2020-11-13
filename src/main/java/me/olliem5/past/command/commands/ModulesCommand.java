@@ -8,7 +8,7 @@ import me.olliem5.past.util.MessageUtil;
 
 public class ModulesCommand extends Command {
     public ModulesCommand() {
-        super ("modules", "Lists available modules in the client.");
+        super("modules", "Lists available modules in the client.");
     }
 
     @Override

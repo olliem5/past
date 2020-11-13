@@ -45,7 +45,8 @@ public class DiscordUtil {
                     rpc.Discord_UpdatePresence(rp);
                 } catch (Exception e1) {
                     e1.printStackTrace();
-                } try {
+                }
+                try {
                     Thread.sleep(5000L);
                 } catch (InterruptedException e2) {
                     e2.printStackTrace();

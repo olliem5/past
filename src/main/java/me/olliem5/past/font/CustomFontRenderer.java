@@ -150,8 +150,10 @@ public class CustomFontRenderer extends CustomFont {
                     GL11.glBegin(4);
                     drawChar(currentData, character, (float) x, (float) y);
                     GL11.glEnd();
-                    if (strikethrough) drawLine(x, y + currentData[character].height / 2, x + currentData[character].width - 8.0D, y + currentData[character].height / 2, 1.0F);
-                    if (underline) drawLine(x, y + currentData[character].height - 2.0D, x + currentData[character].width - 8.0D, y + currentData[character].height - 2.0D, 1.0F);
+                    if (strikethrough)
+                        drawLine(x, y + currentData[character].height / 2, x + currentData[character].width - 8.0D, y + currentData[character].height / 2, 1.0F);
+                    if (underline)
+                        drawLine(x, y + currentData[character].height - 2.0D, x + currentData[character].width - 8.0D, y + currentData[character].height - 2.0D, 1.0F);
                     x += currentData[character].width - 8 + this.charOffset;
                 }
             }

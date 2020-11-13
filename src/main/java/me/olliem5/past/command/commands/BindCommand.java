@@ -10,13 +10,14 @@ import org.lwjgl.input.Keyboard;
 /* Credit: LittleDraily */
 public class BindCommand extends Command {
     public BindCommand() {
-        super ("bind", "Binds modules to a set key.");
+        super("bind", "Binds modules to a set key.");
     }
+
     @Override
     public void onCommand(String[] args) {
         if (args.length > 2) {
             try {
-                for (Module m: Past.moduleManager.getModules()) {
+                for (Module m : Past.moduleManager.getModules()) {
                     if (m.getName().equalsIgnoreCase(args[1])) {
                         try {
                             m.setKey(Keyboard.getKeyIndex(args[2].toUpperCase()));
@@ -27,7 +28,8 @@ public class BindCommand extends Command {
                         }
                     }
                 }
-            } catch (Exception e) {}
+            } catch (Exception e) {
+            }
         }
     }
 }

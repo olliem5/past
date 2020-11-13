@@ -19,6 +19,7 @@ public class PlayerUtil {
 
     /**
      * Modified from https://github.com/Katatje/Dream/blob/master/src/main/java/cat/yoink/dream/api/util/PlayerUtil.java
+     *
      * @author yoink
      */
 
