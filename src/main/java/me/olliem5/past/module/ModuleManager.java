@@ -25,16 +25,12 @@ public class ModuleManager {
         modules.add(new AutoCrystal());
         modules.add(new Surround());
 
-        /* HUD */
-        modules.add(new ClickGUI());
-        modules.add(new HUD());
-        modules.add(new HudEditor());
-
         /* Misc */
         modules.add(new DiscordRPC());
         modules.add(new EntityAlert());
         modules.add(new FakePlayer());
         modules.add(new AutoBuilder());
+        modules.add(new MCF());
 
         /* Movement */
         modules.add(new Sprint());
@@ -48,6 +44,7 @@ public class ModuleManager {
         modules.add(new WeaknessMsg());
         modules.add(new AutoLog());
         modules.add(new FastUse());
+        modules.add(new Blink());
 
         /* Render */
         modules.add(new NoWeather());
@@ -55,6 +52,11 @@ public class ModuleManager {
         modules.add(new ViewModel());
         modules.add(new SkyColour());
         modules.add(new Fullbright());
+
+        /* Core */
+        modules.add(new ClickGUI());
+        modules.add(new HUD());
+        modules.add(new HudEditor());
     }
 
     public ArrayList<Module> getModules() { return modules; }

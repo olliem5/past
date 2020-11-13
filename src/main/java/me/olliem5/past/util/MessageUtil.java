@@ -13,6 +13,7 @@ public class MessageUtil {
     public static String bedAuraPrefix = ColourUtil.gray + "[" + ColourUtil.darkRed + "BedAura" + ColourUtil.gray + "]";
     public static String surroundPrefix = ColourUtil.gray + "[" + ColourUtil.darkRed + "Surround" + ColourUtil.gray + "]";
     public static String autoBuilderPrefix = ColourUtil.gray + "[" + ColourUtil.darkRed + "AutoBuilder" + ColourUtil.gray + "]";
+    public static String friendsPrefix = ColourUtil.gray + "[" + ColourUtil.darkRed + "Friends" + ColourUtil.gray + "]";
 
     public static void sendRawMessage(String message) { player.sendMessage(new TextComponentString(message)); }
     public static void sendMessagePrefix(String message) { sendRawMessage(prefix + " " + message); }
@@ -21,4 +22,5 @@ public class MessageUtil {
     public static void sendBedAuraMessage(String message) { sendMessagePrefix(bedAuraPrefix + " " + message); }
     public static void sendSurroundMessage(String message) { sendMessagePrefix(surroundPrefix + " " + message); }
     public static void sendAutoBuilderMessage(String message) { sendMessagePrefix(autoBuilderPrefix + " " + message); }
+    public static void sendFreindsMessage(String message) { sendMessagePrefix(friendsPrefix + " " + message); }
 }

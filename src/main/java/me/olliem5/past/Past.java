@@ -1,5 +1,6 @@
 package me.olliem5.past;
 
+import me.olliem5.past.friends.FriendsManager;
 import me.olliem5.past.gui.editor.HudEditor;
 import me.olliem5.past.module.Module;
 import me.olliem5.past.module.ModuleManager;
@@ -39,6 +40,7 @@ public class Past {
     public static SettingsManager settingsManager;
     public static ModuleManager moduleManager;
     public static CommandManager commandManager;
+    public static FriendsManager friendsManager;
     public static ClickGUI clickGUI;
     public static HudEditor hudEditor;
     public static ConfigUtil configUtil;
@@ -59,6 +61,9 @@ public class Past {
 
         commandManager = new CommandManager();
         System.out.println("[" + nameversion + "]" + " " + "Commands Initialized!");
+
+        friendsManager = new FriendsManager();
+        System.out.println("[" + nameversion + "]" + " " + "Friends Initialized!");
 
         clickGUI = new ClickGUI();
         System.out.println("[" + nameversion + "]" + " " + "ClickGUI Initialized!");
