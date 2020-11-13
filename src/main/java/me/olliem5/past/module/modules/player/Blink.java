@@ -49,5 +49,5 @@ public class Blink extends Module {
         }
     }
 
-    public String getArraylistInfo() { return ColourUtil.gray + " " + String.valueOf(packets.size()); }
+    public String getArraylistInfo() { return ColourUtil.gray + " " + packets.size(); }
 }

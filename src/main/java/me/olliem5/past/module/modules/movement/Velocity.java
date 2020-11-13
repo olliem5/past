@@ -10,7 +10,7 @@ import net.minecraft.network.play.server.SPacketExplosion;
 
 public class Velocity extends Module {
     public Velocity() {
-        super ("Velocity", "Modifies the knockback you take", Category.MOVEMENT);
+        super ("Velocity", "Makes you take 0 knockback", Category.MOVEMENT);
     }
 
     @EventHandler
@@ -19,9 +19,9 @@ public class Velocity extends Module {
             if (((SPacketEntityVelocity) event.getPacket()).getEntityID() == mc.player.getEntityId()) {
                 event.cancel();
             }
-            if (event.getPacket() instanceof SPacketExplosion) {
-                event.cancel();
-            }
+        }
+        else if (event.getPacket() instanceof SPacketExplosion) {
+            event.cancel();
         }
     });
 }

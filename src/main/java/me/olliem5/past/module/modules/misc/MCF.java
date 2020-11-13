@@ -5,10 +5,9 @@ import me.olliem5.past.module.Category;
 import me.olliem5.past.module.Module;
 import me.olliem5.past.util.ColourUtil;
 import me.olliem5.past.util.MessageUtil;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.math.RayTraceResult;
-import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-import net.minecraftforge.fml.common.gameevent.InputEvent;
 import org.lwjgl.input.Mouse;
 
 public class MCF extends Module {
@@ -16,10 +15,25 @@ public class MCF extends Module {
         super ("MCF", "Allows you to middle click to add/del friends", Category.MISC);
     }
 
-    @SubscribeEvent
-    public void onMouse(InputEvent.MouseInputEvent event) {
-        if (mc.objectMouseOver.typeOfHit.equals(RayTraceResult.Type.ENTITY) && mc.objectMouseOver.entityHit instanceof EntityPlayer && Mouse.getEventButton() == 2) {
-            if (Past.friendsManager.isFriend(mc.objectMouseOver.entityHit.getName())) {
+    private boolean hasClicked = false;
+
+    public void onUpdate() {
+
+        if (!Mouse.isButtonDown(2)) {
+            hasClicked = false;
+            return;
+        }
+
+        if (!hasClicked) {
+
+            hasClicked = true;
+
+            final RayTraceResult result = mc.objectMouseOver;
+            Entity player = result.entityHit;
+
+            if (result == null || result.typeOfHit != RayTraceResult.Type.ENTITY || !(result.entityHit instanceof EntityPlayer)) return;
+
+            if (Past.friendsManager.isFriend(player.getName())) {
                 Past.friendsManager.delFriend(mc.objectMouseOver.entityHit.getName());
                 MessageUtil.sendFreindsMessage(ColourUtil.white + "Player" + " " + ColourUtil.aqua + mc.objectMouseOver.entityHit.getName() + " " + ColourUtil.white + "has been" + " " + ColourUtil.red + "removed" + " " + ColourUtil.white + "from the friends list");
             } else {
