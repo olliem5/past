@@ -10,7 +10,7 @@ import org.lwjgl.input.Keyboard;
 
 public class PrefixChat extends Module {
     public PrefixChat() {
-        super ("PrefixChat", "Opens chat when the prefix is pressed", Category.CHAT);
+        super("PrefixChat", "Opens chat when the prefix is pressed", Category.CHAT);
     }
 
     @SubscribeEvent

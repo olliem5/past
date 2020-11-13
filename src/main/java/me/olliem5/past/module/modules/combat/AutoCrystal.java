@@ -31,7 +31,7 @@ public class AutoCrystal extends Module {
     static Minecraft mc = Minecraft.getMinecraft();
 
     public AutoCrystal() {
-        super ("AutoCrystal", "Breaks and Places crystals", Category.COMBAT);
+        super("AutoCrystal", "Breaks and Places crystals", Category.COMBAT);
     }
 
     CooldownUtil breaktimer = new CooldownUtil();
@@ -81,8 +81,10 @@ public class AutoCrystal extends Module {
 
     @Override
     public void onUpdate() {
-        if (nullCheck()) { return; }
-         if (breaktimer.passed(breakdelay.getValueInt() * 50)) {
+        if (nullCheck()) {
+            return;
+        }
+        if (breaktimer.passed(breakdelay.getValueInt() * 50)) {
             EntityEnderCrystal crystal = mc.world.loadedEntityList.stream()
                     .filter(entity -> entity instanceof EntityEnderCrystal)
                     .filter(e -> mc.player.getDistance(e) <= breakrange.getValueInt())
@@ -113,7 +115,7 @@ public class AutoCrystal extends Module {
                 entities.addAll((Collection<? extends Entity>) mc.world.playerEntities.stream().collect(Collectors.toList()));
                 double damage = 0.5;
                 for (final Entity entity : entities) {
-                    if (entity != mc.player){
+                    if (entity != mc.player) {
                         if (((EntityLivingBase) entity).getHealth() <= 0.0f) {
                             continue;
                         }
@@ -123,7 +125,7 @@ public class AutoCrystal extends Module {
                             if (b > 56.2) {
                                 continue;
                             }
-                            final double d = calculateDamage(blockPos.getX() + 0.5, blockPos.getY() + 1, blockPos.getZ()+ 0.5, entity);
+                            final double d = calculateDamage(blockPos.getX() + 0.5, blockPos.getY() + 1, blockPos.getZ() + 0.5, entity);
                             if (d < this.mindamage.getValueInt() && ((EntityLivingBase) entity).getHealth() + ((EntityLivingBase) entity).getAbsorptionAmount() > this.faceplace.getValueInt()) {
                                 continue;
                             }
@@ -162,7 +164,7 @@ public class AutoCrystal extends Module {
                     }
                     return;
                 }
-                final RayTraceResult result = mc.world.rayTraceBlocks(new Vec3d(mc.player.posX, mc.player.posY +mc.player.getEyeHeight(), mc.player.posZ), new Vec3d(finalPos.getX() + 0.5, finalPos.getY() - 0.5, finalPos.getZ() + 0.5));
+                final RayTraceResult result = mc.world.rayTraceBlocks(new Vec3d(mc.player.posX, mc.player.posY + mc.player.getEyeHeight(), mc.player.posZ), new Vec3d(finalPos.getX() + 0.5, finalPos.getY() - 0.5, finalPos.getZ() + 0.5));
                 EnumFacing f;
                 if (result == null || result.sideHit == null) {
                     f = EnumFacing.UP;
@@ -184,7 +186,8 @@ public class AutoCrystal extends Module {
     }
 
     @Override
-    public void onRender() {}
+    public void onRender() {
+    }
 
     public static float calculateDamage(double posX, double posY, double posZ, Entity entity) {
         float doubleExplosionSize = 12.0F;
@@ -232,8 +235,8 @@ public class AutoCrystal extends Module {
 
     private List<BlockPos> findCrystalBlocks() {
         NonNullList positions = NonNullList.create();
-        positions.addAll((Collection)this.getSphere(getPlayerPos(), this.placerange.getValueInt(), this.placerange.getValueInt(), false, true, 0).stream().filter(this::canPlaceCrystal).collect(Collectors.toList()));
-        return (List<BlockPos>)positions;
+        positions.addAll((Collection) this.getSphere(getPlayerPos(), this.placerange.getValueInt(), this.placerange.getValueInt(), false, true, 0).stream().filter(this::canPlaceCrystal).collect(Collectors.toList()));
+        return (List<BlockPos>) positions;
     }
 
     public List<BlockPos> getSphere(final BlockPos loc, final float r, final int h, final boolean hollow, final boolean sphere, final int plus_y) {
@@ -241,9 +244,9 @@ public class AutoCrystal extends Module {
         final int cx = loc.getX();
         final int cy = loc.getY();
         final int cz = loc.getZ();
-        for (int x = cx - (int)r; x <= cx + r; ++x) {
-            for (int z = cz - (int)r; z <= cz + r; ++z) {
-                for (int y = sphere ? (cy - (int)r) : cy; y < (sphere ? (cy + r) : ((float)(cy + h))); ++y) {
+        for (int x = cx - (int) r; x <= cx + r; ++x) {
+            for (int z = cz - (int) r; z <= cz + r; ++z) {
+                for (int y = sphere ? (cy - (int) r) : cy; y < (sphere ? (cy + r) : ((float) (cy + h))); ++y) {
                     final double dist = (cx - x) * (cx - x) + (cz - z) * (cz - z) + (sphere ? ((cy - y) * (cy - y)) : 0);
                     if (dist < r * r && (!hollow || dist >= (r - 1.0f) * (r - 1.0f))) {
                         final BlockPos l = new BlockPos(x, y + plus_y, z);
@@ -262,6 +265,6 @@ public class AutoCrystal extends Module {
     private boolean canPlaceCrystal(final BlockPos blockPos) {
         final BlockPos boost = blockPos.add(0, 1, 0);
         final BlockPos boost2 = blockPos.add(0, 2, 0);
-        return (mc.world.getBlockState(blockPos).getBlock() == Blocks.BEDROCK || mc.world.getBlockState(blockPos).getBlock() == Blocks.OBSIDIAN) && mc.world.getBlockState(boost).getBlock() == Blocks.AIR && mc.world.getBlockState(boost2).getBlock() == Blocks.AIR && mc.world.getEntitiesWithinAABB((Class)Entity.class, new AxisAlignedBB(boost)).isEmpty() && mc.world.getEntitiesWithinAABB((Class)Entity.class, new AxisAlignedBB(boost2)).isEmpty();
+        return (mc.world.getBlockState(blockPos).getBlock() == Blocks.BEDROCK || mc.world.getBlockState(blockPos).getBlock() == Blocks.OBSIDIAN) && mc.world.getBlockState(boost).getBlock() == Blocks.AIR && mc.world.getBlockState(boost2).getBlock() == Blocks.AIR && mc.world.getEntitiesWithinAABB((Class) Entity.class, new AxisAlignedBB(boost)).isEmpty() && mc.world.getEntitiesWithinAABB((Class) Entity.class, new AxisAlignedBB(boost2)).isEmpty();
     }
 }

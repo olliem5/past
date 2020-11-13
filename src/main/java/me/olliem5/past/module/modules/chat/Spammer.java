@@ -8,7 +8,7 @@ import java.io.FileReader;
 
 public class Spammer extends Module {
     public Spammer() {
-        super ("Spammer", "Spams text from a file", Category.CHAT); //TODO: Delay
+        super("Spammer", "Spams text from a file", Category.CHAT); //TODO: Delay
     }
 
     public void onUpdate() {
@@ -21,6 +21,7 @@ public class Spammer extends Module {
                 line = bufferedReader.readLine();
             }
             bufferedReader.close();
-        } catch (Exception e) {}
+        } catch (Exception e) {
+        }
     }
 }

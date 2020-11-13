@@ -11,14 +11,16 @@ import net.minecraft.item.ItemStack;
 
 public class AutoTotem extends Module {
     public AutoTotem() {
-        super ("AutoTotem", "Automatically puts a totem in your offhand", Category.COMBAT);
+        super("AutoTotem", "Automatically puts a totem in your offhand", Category.COMBAT);
     }
 
     public int totems;
 
     @Override
     public void onUpdate() {
-        if (nullCheck()) { return; }
+        if (nullCheck()) {
+            return;
+        }
 
         totems = mc.player.inventory.mainInventory.stream().filter(itemStack -> itemStack.getItem() == Items.TOTEM_OF_UNDYING).mapToInt(ItemStack::getCount).sum();
 
@@ -58,5 +60,7 @@ public class AutoTotem extends Module {
         }
     }
 
-    public String getArraylistInfo() { return ColourUtil.gray + " " + getTotemCount(); }
+    public String getArraylistInfo() {
+        return ColourUtil.gray + " " + getTotemCount();
+    }
 }

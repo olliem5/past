@@ -11,7 +11,7 @@ import java.awt.*;
 
 public class SkyColour extends Module {
     public SkyColour() {
-        super ("SkyColour", "Changes the colours of the sky, best in nether & low render distance", Category.RENDER);
+        super("SkyColour", "Changes the colours of the sky, best in nether & low render distance", Category.RENDER);
     }
 
     Setting red;

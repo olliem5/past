@@ -12,7 +12,7 @@ import java.util.ArrayList;
 
 public class Fullbright extends Module {
     public Fullbright() {
-        super ("Fullbright", "Makes your game brighter, re-enable after changing mode", Category.RENDER);
+        super("Fullbright", "Makes your game brighter, re-enable after changing mode", Category.RENDER);
     }
 
     private PotionEffect fullbrighteffect = new PotionEffect(Potion.getPotionById(16));
@@ -55,5 +55,7 @@ public class Fullbright extends Module {
         }
     }
 
-    public String getArraylistInfo() { return ColourUtil.gray + " " + brightnessmode.getValueString().toUpperCase(); }
+    public String getArraylistInfo() {
+        return ColourUtil.gray + " " + brightnessmode.getValueString().toUpperCase();
+    }
 }

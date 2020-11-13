@@ -9,7 +9,7 @@ import net.minecraft.client.gui.GuiMainMenu;
 
 public class AutoLog extends Module {
     public AutoLog() {
-        super ("AutoLog", "Logs you out at a certain health", Category.PLAYER);
+        super("AutoLog", "Logs you out at a certain health", Category.PLAYER);
     }
 
     Setting health;
@@ -20,7 +20,9 @@ public class AutoLog extends Module {
     }
 
     public void onUpdate() {
-        if (nullCheck()) { return; }
+        if (nullCheck()) {
+            return;
+        }
 
         if (mc.player.getHealth() < health.getValueInt()) {
             toggle();
@@ -30,5 +32,7 @@ public class AutoLog extends Module {
         }
     }
 
-    public String getArraylistInfo() { return ColourUtil.gray + " " + health.getValueInt(); }
+    public String getArraylistInfo() {
+        return ColourUtil.gray + " " + health.getValueInt();
+    }
 }

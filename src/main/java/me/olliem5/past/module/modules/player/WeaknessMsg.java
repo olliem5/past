@@ -12,7 +12,7 @@ import net.minecraft.init.SoundEvents;
 
 public class WeaknessMsg extends Module {
     public WeaknessMsg() {
-        super ("WeaknessMsg", "Notifies you if you get weakness", Category.PLAYER);
+        super("WeaknessMsg", "Notifies you if you get weakness", Category.PLAYER);
     }
 
     Setting sound;
@@ -25,17 +25,23 @@ public class WeaknessMsg extends Module {
     private boolean hasAnnounced = false;
 
     public void onUpdate() {
-        if (nullCheck()) { return; }
+        if (nullCheck()) {
+            return;
+        }
 
         if (mc.player.isPotionActive(MobEffects.WEAKNESS) && !hasAnnounced) {
             hasAnnounced = true;
             MessageUtil.sendWeaknessAlertMessage(ColourUtil.aqua + mc.getSession().getUsername() + ColourUtil.gray + " - " + ColourUtil.white + "You now have " + ColourUtil.red + "weakness" + ColourUtil.gray + "!");
-            if (sound.getValBoolean()) { mc.getSoundHandler().playSound(PositionedSoundRecord.getRecord(SoundEvents.ENTITY_EXPERIENCE_ORB_PICKUP, 1.0F, 1.0F)); }
+            if (sound.getValBoolean()) {
+                mc.getSoundHandler().playSound(PositionedSoundRecord.getRecord(SoundEvents.ENTITY_EXPERIENCE_ORB_PICKUP, 1.0F, 1.0F));
+            }
         }
         if (!mc.player.isPotionActive(MobEffects.WEAKNESS) && hasAnnounced) {
             hasAnnounced = false;
             MessageUtil.sendWeaknessAlertMessage(ColourUtil.aqua + mc.getSession().getUsername() + ColourUtil.gray + " - " + ColourUtil.white + "You no longer have " + ColourUtil.red + "weakness" + ColourUtil.gray + "!");
-            if (sound.getValBoolean()) { mc.getSoundHandler().playSound(PositionedSoundRecord.getRecord(SoundEvents.ENTITY_EXPERIENCE_ORB_PICKUP, 1.0F, 1.0F)); }
+            if (sound.getValBoolean()) {
+                mc.getSoundHandler().playSound(PositionedSoundRecord.getRecord(SoundEvents.ENTITY_EXPERIENCE_ORB_PICKUP, 1.0F, 1.0F));
+            }
         }
     }
 }

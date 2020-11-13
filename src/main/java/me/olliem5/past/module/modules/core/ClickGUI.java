@@ -7,7 +7,7 @@ import me.olliem5.past.settings.Setting;
 
 public class ClickGUI extends Module {
     public ClickGUI() {
-        super ("ClickGUI", "Opens the ClickGUI", Category.CORE);
+        super("ClickGUI", "Opens the ClickGUI", Category.CORE);
     }
 
     Setting rgb;

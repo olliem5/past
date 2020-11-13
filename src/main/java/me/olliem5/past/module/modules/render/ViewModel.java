@@ -9,7 +9,7 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 public class ViewModel extends Module {
     public ViewModel() {
-        super ("ViewModel", "Changes the way your player looks", Category.RENDER);
+        super("ViewModel", "Changes the way your player looks", Category.RENDER);
     }
 
     //Arm Yaw is disabled atm, because when you pop a totem the values change.
@@ -26,11 +26,15 @@ public class ViewModel extends Module {
     }
 
     public void onUpdate() {
-        if (nullCheck()) { return; }
+        if (nullCheck()) {
+            return;
+        }
         mc.player.renderArmPitch = armpitch.getValueInt();
 //        mc.player.renderArmYaw = armyaw.getValueInt();
     }
 
     @SubscribeEvent
-    public void fovEvent(EntityViewRenderEvent.FOVModifier m) { m.setFOV(itemfov.getValueInt()); }
+    public void fovEvent(EntityViewRenderEvent.FOVModifier m) {
+        m.setFOV(itemfov.getValueInt());
+    }
 }

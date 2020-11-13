@@ -6,12 +6,16 @@ import me.olliem5.past.util.DiscordUtil;
 
 public class DiscordRPC extends Module {
     public DiscordRPC() {
-        super ("DiscordRPC", "Shows the client on discord", Category.MISC);
+        super("DiscordRPC", "Shows the client on discord", Category.MISC);
     }
 
     @Override
-    public void onEnable() {  DiscordUtil.startup(); }
+    public void onEnable() {
+        DiscordUtil.startup();
+    }
 
     @Override
-    public void onDisable() { DiscordUtil.shutdown(); }
+    public void onDisable() {
+        DiscordUtil.shutdown();
+    }
 }

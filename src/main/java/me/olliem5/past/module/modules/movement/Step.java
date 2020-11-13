@@ -8,7 +8,7 @@ import me.olliem5.past.util.ColourUtil;
 
 public class Step extends Module {
     public Step() {
-        super ("Step", "Allows you to step up blocks", Category.MOVEMENT);
+        super("Step", "Allows you to step up blocks", Category.MOVEMENT);
     }
 
     Setting height;
@@ -19,7 +19,9 @@ public class Step extends Module {
     }
 
     public void onUpdate() {
-        if (nullCheck()) { return; }
+        if (nullCheck()) {
+            return;
+        }
 
         if (mc.player.onGround && !mc.player.isInWater() && !mc.player.isInLava() && !mc.player.isOnLadder()) {
             if (mc.player.collidedHorizontally) {
@@ -30,7 +32,11 @@ public class Step extends Module {
     }
 
     @Override
-    public void onDisable() { mc.player.stepHeight = 0.5f; }
+    public void onDisable() {
+        mc.player.stepHeight = 0.5f;
+    }
 
-    public String getArraylistInfo() { return ColourUtil.gray + " " + height.getValueInt(); }
+    public String getArraylistInfo() {
+        return ColourUtil.gray + " " + height.getValueInt();
+    }
 }

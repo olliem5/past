@@ -11,7 +11,7 @@ import net.minecraft.util.math.BlockPos;
 
 public class FastUse extends Module {
     public FastUse() {
-        super ("FastUse", "Allows you to use items faster", Category.PLAYER);
+        super("FastUse", "Allows you to use items faster", Category.PLAYER);
     }
 
     Setting bow;
@@ -22,7 +22,9 @@ public class FastUse extends Module {
     }
 
     public void onUpdate() {
-        if (nullCheck()) { return; }
+        if (nullCheck()) {
+            return;
+        }
         if (bow.getValBoolean()) {
             if (mc.player.getHeldItemMainhand().getItem() instanceof ItemBow && mc.player.isHandActive() && mc.player.getItemInUseMaxCount() >= 3) {
                 mc.player.connection.sendPacket(new CPacketPlayerDigging(CPacketPlayerDigging.Action.RELEASE_USE_ITEM, BlockPos.ORIGIN, mc.player.getHorizontalFacing()));

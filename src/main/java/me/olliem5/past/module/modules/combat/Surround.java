@@ -18,7 +18,7 @@ import java.util.List;
 
 public class Surround extends Module {
     public Surround() {
-        super ("Surround", "Automatically surrounds you with obsidian", Category.COMBAT);
+        super("Surround", "Automatically surrounds you with obsidian", Category.COMBAT);
     }
 
     //TODO: Fix OnJump disable mode with centering
@@ -97,7 +97,9 @@ public class Surround extends Module {
     ));
 
     public void onUpdate() {
-        if (nullCheck()) { return; }
+        if (nullCheck()) {
+            return;
+        }
 
         if (timeout.getValBoolean()) {
             if (this.isToggled()) {
@@ -207,10 +209,12 @@ public class Surround extends Module {
 
         double x = Math.floor(posX) + 0.5D;
         double y = Math.floor(posY);
-        double z = Math.floor(posZ) + 0.5D ;
+        double z = Math.floor(posZ) + 0.5D;
 
         return new Vec3d(x, y, z);
     }
 
-    public String getArraylistInfo() { return ColourUtil.gray + " " + placemode.getValueString().toUpperCase(); }
+    public String getArraylistInfo() {
+        return ColourUtil.gray + " " + placemode.getValueString().toUpperCase();
+    }
 }

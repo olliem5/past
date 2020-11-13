@@ -15,7 +15,7 @@ import java.util.Queue;
 
 public class Blink extends Module {
     public Blink() {
-        super ("Blink", "Hides movement for a short time", Category.PLAYER);
+        super("Blink", "Hides movement for a short time", Category.PLAYER);
     }
 
     Queue<CPacketPlayer> packets = new LinkedList<>();
@@ -30,7 +30,9 @@ public class Blink extends Module {
 
     @Override
     public void onEnable() {
-        if (mc.world == null) { return; }
+        if (mc.world == null) {
+            return;
+        }
         EntityOtherPlayerMP fakePlayer = new EntityOtherPlayerMP(mc.world, mc.getSession().getProfile());
         fakePlayer.copyLocationAndAnglesFrom(mc.player);
         fakePlayer.rotationYawHead = mc.player.rotationYawHead;
@@ -49,5 +51,7 @@ public class Blink extends Module {
         }
     }
 
-    public String getArraylistInfo() { return ColourUtil.gray + " " + packets.size(); }
+    public String getArraylistInfo() {
+        return ColourUtil.gray + " " + packets.size();
+    }
 }

@@ -59,7 +59,11 @@ public class ModuleManager {
         modules.add(new HudEditor());
     }
 
-    public ArrayList<Module> getModules() { return modules; }
+    public ArrayList<Module> getModules() {
+        return modules;
+    }
 
-    public Module getModuleByName(String name) { return modules.stream().filter(module -> module.getName().equalsIgnoreCase(name)).findFirst().orElse(null); }
+    public Module getModuleByName(String name) {
+        return modules.stream().filter(module -> module.getName().equalsIgnoreCase(name)).findFirst().orElse(null);
+    }
 }

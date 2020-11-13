@@ -17,7 +17,7 @@ import java.util.List;
 
 public class AutoBuilder extends Module {
     public AutoBuilder() {
-        super ("AutoBuilder", "Automatically builds you stuff", Category.MISC);
+        super("AutoBuilder", "Automatically builds you stuff", Category.MISC);
     }
 
     Setting buildmode;
@@ -118,7 +118,9 @@ public class AutoBuilder extends Module {
     ));
 
     public void onUpdate() {
-        if (nullCheck()) { return; }
+        if (nullCheck()) {
+            return;
+        }
 
         int blocksPlaced = 0;
 
@@ -332,5 +334,7 @@ public class AutoBuilder extends Module {
         }
     }
 
-    public String getArraylistInfo() { return ColourUtil.gray + " " + buildmode.getValueString().toUpperCase(); }
+    public String getArraylistInfo() {
+        return ColourUtil.gray + " " + buildmode.getValueString().toUpperCase();
+    }
 }

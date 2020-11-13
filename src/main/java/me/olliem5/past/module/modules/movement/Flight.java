@@ -5,7 +5,7 @@ import me.olliem5.past.module.Module;
 
 public class Flight extends Module {
     public Flight() {
-        super ("Flight", "Allows you to fly", Category.MOVEMENT);
+        super("Flight", "Allows you to fly", Category.MOVEMENT);
     }
 
 //TODO: Float GUI Slider to do fly speed, 1 is fast.
@@ -18,14 +18,18 @@ public class Flight extends Module {
 //    }
 
     public void onUpdate() {
-        if (nullCheck()) { return; }
+        if (nullCheck()) {
+            return;
+        }
         mc.player.capabilities.isFlying = true;
         //mc.player.capabilities.setFlySpeed((float) flyspeed.getValueInt());
     }
 
     @Override
     public void onDisable() {
-        if (nullCheck()) { return; }
+        if (nullCheck()) {
+            return;
+        }
         mc.player.capabilities.isFlying = false;
     }
 }

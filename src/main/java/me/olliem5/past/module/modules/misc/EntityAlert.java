@@ -15,7 +15,7 @@ import net.minecraft.init.SoundEvents;
 
 public class EntityAlert extends Module {
     public EntityAlert() {
-        super ("EntityAlert", "Alerts you when selected entities enter render distance", Category.MISC);
+        super("EntityAlert", "Alerts you when selected entities enter render distance", Category.MISC);
     }
 
     Setting donkey;
@@ -36,7 +36,9 @@ public class EntityAlert extends Module {
     }
 
     public void onUpdate() {
-        if (nullCheck()) { return; }
+        if (nullCheck()) {
+            return;
+        }
 
         ++donkeyDelay;
         ++llamaDelay;
@@ -45,17 +47,23 @@ public class EntityAlert extends Module {
         for (Entity entity : mc.world.getLoadedEntityList()) {
             if (entity instanceof EntityDonkey && donkey.getValBoolean() && this.donkeyDelay >= 100) {
                 MessageUtil.sendEntityAlertMessage(ColourUtil.white + "Found a " + ColourUtil.aqua + "donkey " + ColourUtil.white + "at " + ColourUtil.gray + "[" + ColourUtil.white + Math.round(entity.lastTickPosX) + ColourUtil.gray + ", " + ColourUtil.white + Math.round(entity.lastTickPosY) + ColourUtil.gray + ", " + ColourUtil.white + Math.round(entity.lastTickPosZ) + ColourUtil.gray + "]");
-                if (sound.getValBoolean()) { mc.getSoundHandler().playSound(PositionedSoundRecord.getRecord(SoundEvents.ENTITY_EXPERIENCE_ORB_PICKUP, 1.0F, 1.0F)); }
+                if (sound.getValBoolean()) {
+                    mc.getSoundHandler().playSound(PositionedSoundRecord.getRecord(SoundEvents.ENTITY_EXPERIENCE_ORB_PICKUP, 1.0F, 1.0F));
+                }
                 this.donkeyDelay = -750;
             }
             if (entity instanceof EntityLlama && llama.getValBoolean() && this.llamaDelay >= 100) {
                 MessageUtil.sendEntityAlertMessage(ColourUtil.white + "Found a " + ColourUtil.aqua + "llama " + ColourUtil.white + "at " + ColourUtil.gray + "[" + ColourUtil.white + Math.round(entity.lastTickPosX) + ColourUtil.gray + ", " + ColourUtil.white + Math.round(entity.lastTickPosY) + ColourUtil.gray + ", " + ColourUtil.white + Math.round(entity.lastTickPosZ) + ColourUtil.gray + "]");
-                if (sound.getValBoolean()) { mc.getSoundHandler().playSound(PositionedSoundRecord.getRecord(SoundEvents.ENTITY_EXPERIENCE_ORB_PICKUP, 1.0F, 1.0F)); }
+                if (sound.getValBoolean()) {
+                    mc.getSoundHandler().playSound(PositionedSoundRecord.getRecord(SoundEvents.ENTITY_EXPERIENCE_ORB_PICKUP, 1.0F, 1.0F));
+                }
                 this.llamaDelay = -750;
             }
             if (entity instanceof EntityMule && mule.getValBoolean() && this.muleDelay >= 100) {
                 MessageUtil.sendEntityAlertMessage(ColourUtil.white + "Found a " + ColourUtil.aqua + "mule " + ColourUtil.white + "at " + ColourUtil.gray + "[" + ColourUtil.white + Math.round(entity.lastTickPosX) + ColourUtil.gray + ", " + ColourUtil.white + Math.round(entity.lastTickPosY) + ColourUtil.gray + ", " + ColourUtil.white + Math.round(entity.lastTickPosZ) + ColourUtil.gray + "]");
-                if (sound.getValBoolean()) { mc.getSoundHandler().playSound(PositionedSoundRecord.getRecord(SoundEvents.ENTITY_EXPERIENCE_ORB_PICKUP, 1.0F, 1.0F)); }
+                if (sound.getValBoolean()) {
+                    mc.getSoundHandler().playSound(PositionedSoundRecord.getRecord(SoundEvents.ENTITY_EXPERIENCE_ORB_PICKUP, 1.0F, 1.0F));
+                }
                 this.muleDelay = -750;
             }
         }

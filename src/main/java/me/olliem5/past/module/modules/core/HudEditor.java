@@ -6,7 +6,7 @@ import me.olliem5.past.module.Module;
 
 public class HudEditor extends Module {
     public HudEditor() {
-        super ("HudEditor", "Edit the HUD", Category.CORE);
+        super("HudEditor", "Edit the HUD", Category.CORE);
     }
 
     public void onEnable() {

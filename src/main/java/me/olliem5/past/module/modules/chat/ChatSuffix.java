@@ -12,7 +12,7 @@ import java.util.ArrayList;
 
 public class ChatSuffix extends Module {
     public ChatSuffix() {
-        super ("ChatSuffix", "Adds a custom ending to your messages", Category.CHAT);
+        super("ChatSuffix", "Adds a custom ending to your messages", Category.CHAT);
     }
 
     Setting suffixmode;
@@ -34,16 +34,30 @@ public class ChatSuffix extends Module {
 
         String suffix = "";
 
-        if (suffixmode.getValueString() == "Classic") { suffix = " \uff30\uff41\uff53\uff54"; }
-        if (suffixmode.getValueString() == "Version") { suffix = " \uff30\uff41\uff53\uff54" + " " + Past.version; }
+        if (suffixmode.getValueString() == "Classic") {
+            suffix = " \uff30\uff41\uff53\uff54";
+        }
+        if (suffixmode.getValueString() == "Version") {
+            suffix = " \uff30\uff41\uff53\uff54" + " " + Past.version;
+        }
 
-        if (blue.getValBoolean()) { event.setMessage(event.getMessage() + " `" + suffix); }
-        else if (green.getValBoolean()) { event.setMessage(event.getMessage() + " >" + suffix); }
-        else { event.setMessage(event.getMessage() + suffix); }
+        if (blue.getValBoolean()) {
+            event.setMessage(event.getMessage() + " `" + suffix);
+        } else if (green.getValBoolean()) {
+            event.setMessage(event.getMessage() + " >" + suffix);
+        } else {
+            event.setMessage(event.getMessage() + suffix);
+        }
 
-        if (event.getMessage().startsWith("/")) { return; }
-        if (event.getMessage().startsWith(Past.prefix)) { return; }
+        if (event.getMessage().startsWith("/")) {
+            return;
+        }
+        if (event.getMessage().startsWith(Past.prefix)) {
+            return;
+        }
     }
 
-    public String getArraylistInfo() { return ColourUtil.gray + " " + suffixmode.getValueString().toUpperCase(); }
+    public String getArraylistInfo() {
+        return ColourUtil.gray + " " + suffixmode.getValueString().toUpperCase();
+    }
 }

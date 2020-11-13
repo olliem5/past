@@ -10,7 +10,7 @@ import me.olliem5.past.util.ColourUtil;
 
 public class Timer extends Module {
     public Timer() {
-        super ("Timer", "Changes your tick speed", Category.MOVEMENT);
+        super("Timer", "Changes your tick speed", Category.MOVEMENT);
     }
 
     Setting speed;
@@ -29,5 +29,7 @@ public class Timer extends Module {
         ((TimerAccessor) ((MinecraftAccessor) mc).getTimer()).setTickLength(50f);
     }
 
-    public String getArraylistInfo() { return ColourUtil.gray + " " + speed.getValueInt(); }
+    public String getArraylistInfo() {
+        return ColourUtil.gray + " " + speed.getValueInt();
+    }
 }

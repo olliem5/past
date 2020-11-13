@@ -31,7 +31,7 @@ import java.util.List;
 
 public class BonBedAura extends Module {
     public BonBedAura() {
-        super ("BonBedAura", "Places and destroys beds, for 1.13+. Made by bon55.", Category.COMBAT);
+        super("BonBedAura", "Places and destroys beds, for 1.13+. Made by bon55.", Category.COMBAT);
     }
 
     //TODO: Mode for 1.12.2. (Probably just AutoBreak).
@@ -81,9 +81,15 @@ public class BonBedAura extends Module {
 
     @Override
     public void onDisable() {
-        if (mc.player == null) { return; }
-        if (lastHotbarSlot != playerHotbarSlot && playerHotbarSlot != -1) { mc.player.inventory.currentItem = playerHotbarSlot; }
-        if (debugMessages.getValBoolean()) { MessageUtil.sendBedAuraMessage(ColourUtil.white + "Module has been" + " " + ColourUtil.red + "disabled" + ColourUtil.gray + "."); }
+        if (mc.player == null) {
+            return;
+        }
+        if (lastHotbarSlot != playerHotbarSlot && playerHotbarSlot != -1) {
+            mc.player.inventory.currentItem = playerHotbarSlot;
+        }
+        if (debugMessages.getValBoolean()) {
+            MessageUtil.sendBedAuraMessage(ColourUtil.white + "Module has been" + " " + ColourUtil.red + "disabled" + ColourUtil.gray + ".");
+        }
 
         MinecraftForge.EVENT_BUS.unregister(this);
 
@@ -94,36 +100,50 @@ public class BonBedAura extends Module {
 
     @Override
     public void onUpdate() {
-        if (mc.player == null) { return; }
+        if (mc.player == null) {
+            return;
+        }
 
         if (mc.player.dimension == 0) {
             MessageUtil.sendBedAuraMessage(ColourUtil.gray + "[" + ColourUtil.red + "Error" + ColourUtil.gray + "]" + " " + ColourUtil.white + "You are in the" + " " + ColourUtil.green + "Overworld" + ColourUtil.gray + "!" + " " + ColourUtil.white + "Please go into the" + " " + ColourUtil.red + "Nether" + " " + ColourUtil.white + "to use this feature" + ColourUtil.gray + ".");
             this.toggle();
         }
 
-        try { findClosestTarget(); } catch(NullPointerException npe) {}
+        try {
+            findClosestTarget();
+        } catch (NullPointerException npe) {
+        }
 
         if (closestTarget == null && mc.player.dimension != 0) {
             if (firstRun) {
                 firstRun = false;
-                if (debugMessages.getValBoolean()) { MessageUtil.sendBedAuraMessage(ColourUtil.white + "Module has been" + " " + ColourUtil.green + "enabled" + ColourUtil.gray + "," + " " + ColourUtil.white + "waiting for a target" + ColourUtil.gray + "..."); }
+                if (debugMessages.getValBoolean()) {
+                    MessageUtil.sendBedAuraMessage(ColourUtil.white + "Module has been" + " " + ColourUtil.green + "enabled" + ColourUtil.gray + "," + " " + ColourUtil.white + "waiting for a target" + ColourUtil.gray + "...");
+                }
             }
         }
 
         if (firstRun && closestTarget != null && mc.player.dimension != 0) {
             firstRun = false;
             lastTickTargetName = closestTarget.getName();
-            if (debugMessages.getValBoolean()) { MessageUtil.sendBedAuraMessage(ColourUtil.white + "Module has been" + " " + ColourUtil.green + "activated" + ColourUtil.gray + "," + " " + ColourUtil.white + "the target is" + " " + ColourUtil.aqua.toString() + lastTickTargetName + ColourUtil.gray + "."); }
+            if (debugMessages.getValBoolean()) {
+                MessageUtil.sendBedAuraMessage(ColourUtil.white + "Module has been" + " " + ColourUtil.green + "activated" + ColourUtil.gray + "," + " " + ColourUtil.white + "the target is" + " " + ColourUtil.aqua.toString() + lastTickTargetName + ColourUtil.gray + ".");
+            }
         }
 
         if (closestTarget != null && lastTickTargetName != null) {
             if (!lastTickTargetName.equals(closestTarget.getName())) {
                 lastTickTargetName = closestTarget.getName();
-                if (debugMessages.getValBoolean()) { MessageUtil.sendBedAuraMessage(ColourUtil.white + "New target" + ColourUtil.gray + " " + "-" + " " + ColourUtil.aqua.toString() + lastTickTargetName + ColourUtil.gray + "."); }
+                if (debugMessages.getValBoolean()) {
+                    MessageUtil.sendBedAuraMessage(ColourUtil.white + "New target" + ColourUtil.gray + " " + "-" + " " + ColourUtil.aqua.toString() + lastTickTargetName + ColourUtil.gray + ".");
+                }
             }
         }
 
-        try { diffXZ = mc.player.getPositionVector().distanceTo(closestTarget.getPositionVector()); } catch(NullPointerException npe) {}
+        try {
+            diffXZ = mc.player.getPositionVector().distanceTo(closestTarget.getPositionVector());
+        } catch (NullPointerException npe) {
+        }
 
         try {
             if (closestTarget != null) {
@@ -184,41 +204,48 @@ public class BonBedAura extends Module {
                     .sorted(Comparator.comparing(e -> mc.player.getDistance(e.getPos().getX(), e.getPos().getY(), e.getPos().getZ())))
                     .forEach(bed -> {
                         //If the explode setting is on.
-                        if (mc.player.dimension != 0 && explode.getValBoolean()) { mc.player.connection.sendPacket(new CPacketPlayerTryUseItemOnBlock(bed.getPos(), EnumFacing.UP, EnumHand.OFF_HAND, 0, 0, 0)); }
+                        if (mc.player.dimension != 0 && explode.getValBoolean()) {
+                            mc.player.connection.sendPacket(new CPacketPlayerTryUseItemOnBlock(bed.getPos(), EnumFacing.UP, EnumHand.OFF_HAND, 0, 0, 0));
+                        }
                     });
 
-            if ((mc.player.ticksExisted % placedelay.getValueInt() == 0)  && closestTarget != null) {
+            if ((mc.player.ticksExisted % placedelay.getValueInt() == 0) && closestTarget != null) {
                 this.findBeds();
                 mc.player.ticksExisted++;
                 this.doDaMagic();
             }
-        } catch(NullPointerException npe) {}
+        } catch (NullPointerException npe) {
+        }
     }
 
-       private void doDaMagic() {
+    private void doDaMagic() {
         if (diffXZ <= range.getValueInt()) {
             for (int i = 0; i < 9; i++) {
-                if (bedSlot != -1) { break; }
+                if (bedSlot != -1) {
+                    break;
+                }
                 ItemStack stack = mc.player.inventory.getStackInSlot(i);
                 if (stack.getItem() instanceof ItemBed && autoswitch.getValBoolean()) {
                     bedSlot = i;
-                    if (i != -1) { mc.player.inventory.currentItem = bedSlot; }
+                    if (i != -1) {
+                        mc.player.inventory.currentItem = bedSlot;
                     }
-                    break;
                 }
+                break;
             }
-
-            bedSlot = -1;
-            if (blocksPlaced == 0 && mc.player.inventory.getStackInSlot(mc.player.inventory.currentItem).getItem() instanceof ItemBed) {
-                mc.player.connection.sendPacket(new CPacketEntityAction(mc.player, CPacketEntityAction.Action.START_SNEAKING));
-                mc.player.connection.sendPacket(new CPacketPlayer.Rotation(rotVar, 0, mc.player.onGround));
-                placeBlock(new BlockPos(this.placeTarget), EnumFacing.DOWN);
-                mc.player.connection.sendPacket(new CPacketEntityAction(mc.player, CPacketEntityAction.Action.STOP_SNEAKING));
-                blocksPlaced = 1;
-                nowTop = false;
-            }
-            blocksPlaced = 0;
         }
+
+        bedSlot = -1;
+        if (blocksPlaced == 0 && mc.player.inventory.getStackInSlot(mc.player.inventory.currentItem).getItem() instanceof ItemBed) {
+            mc.player.connection.sendPacket(new CPacketEntityAction(mc.player, CPacketEntityAction.Action.START_SNEAKING));
+            mc.player.connection.sendPacket(new CPacketPlayer.Rotation(rotVar, 0, mc.player.onGround));
+            placeBlock(new BlockPos(this.placeTarget), EnumFacing.DOWN);
+            mc.player.connection.sendPacket(new CPacketEntityAction(mc.player, CPacketEntityAction.Action.STOP_SNEAKING));
+            blocksPlaced = 1;
+            nowTop = false;
+        }
+        blocksPlaced = 0;
+    }
 
     private void findBeds() {
         if (mc.currentScreen == null || !(mc.currentScreen instanceof GuiContainer)) {
@@ -237,16 +264,24 @@ public class BonBedAura extends Module {
         List<EntityPlayer> playerList = mc.world.playerEntities;
         closestTarget = null;
         for (EntityPlayer target : playerList) {
-            if (target == mc.player) { continue; }
-            if (!isLiving(target)) { continue; }
-            if ((target).getHealth() <= 0) { continue; }
+            if (target == mc.player) {
+                continue;
+            }
+            if (!isLiving(target)) {
+                continue;
+            }
+            if ((target).getHealth() <= 0) {
+                continue;
+            }
 
             if (closestTarget == null) {
                 closestTarget = target;
                 continue;
             }
 
-            if (mc.player.getDistance(target) < mc.player.getDistance(closestTarget)) { closestTarget = target; }
+            if (mc.player.getDistance(target) < mc.player.getDistance(closestTarget)) {
+                closestTarget = target;
+            }
         }
     }
 
@@ -260,8 +295,13 @@ public class BonBedAura extends Module {
         }
     }
 
-    public static boolean isLiving(Entity e) { return e instanceof EntityLivingBase; }
-    private boolean canPlaceBed(BlockPos pos) { return (mc.world.getBlockState(pos).getBlock() == Blocks.AIR || mc.world.getBlockState(pos).getBlock() == Blocks.BED) && mc.world.getEntitiesWithinAABB(Entity.class, new AxisAlignedBB(pos)).isEmpty(); }
+    public static boolean isLiving(Entity e) {
+        return e instanceof EntityLivingBase;
+    }
+
+    private boolean canPlaceBed(BlockPos pos) {
+        return (mc.world.getBlockState(pos).getBlock() == Blocks.AIR || mc.world.getBlockState(pos).getBlock() == Blocks.BED) && mc.world.getEntitiesWithinAABB(Entity.class, new AxisAlignedBB(pos)).isEmpty();
+    }
 
     public String getArraylistInfo() {
         if (closestTarget != null) {

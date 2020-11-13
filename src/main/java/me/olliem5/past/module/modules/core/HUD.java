@@ -121,7 +121,9 @@ public class HUD extends Module {
                 int count = 0;
 
                 for (Module module : Past.moduleManager.getModules()) {
-                    if (!module.isToggled()) { continue; }
+                    if (!module.isToggled()) {
+                        continue;
+                    }
 
                     double offset = count * (mc.fontRenderer.FONT_HEIGHT + 4);
 
