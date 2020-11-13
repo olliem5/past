@@ -1,5 +1,6 @@
 package me.olliem5.past;
 
+import me.olliem5.past.font.CustomFontRenderer;
 import me.olliem5.past.friends.FriendsManager;
 import me.olliem5.past.gui.editor.HudEditor;
 import me.olliem5.past.module.Module;
@@ -18,6 +19,8 @@ import net.minecraftforge.fml.common.gameevent.InputEvent;
 import me.olliem5.past.command.CommandManager;
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.Display;
+
+import java.awt.*;
 
 @Mod(
         name = Past.name,
@@ -41,16 +44,17 @@ public class Past {
     public static ModuleManager moduleManager;
     public static CommandManager commandManager;
     public static FriendsManager friendsManager;
+    public static CustomFontRenderer customFontRenderer;
     public static ClickGUI clickGUI;
     public static HudEditor hudEditor;
     public static ConfigUtil configUtil;
 
     @Mod.EventHandler
-    public void PastPreStartup(FMLPreInitializationEvent event) { Display.setTitle(nameversion); }
+    public void PastPreInitialize(FMLPreInitializationEvent event) { Display.setTitle(nameversion); }
 
     /* Initializing client */
     @Mod.EventHandler
-    public void PastStartup(FMLInitializationEvent event) {
+    public void PastInitialize(FMLInitializationEvent event) {
         System.out.println("[" + nameversion + "]" + " " + "Starting up and initializing!");
 
         settingsManager = new SettingsManager();
@@ -64,6 +68,9 @@ public class Past {
 
         friendsManager = new FriendsManager();
         System.out.println("[" + nameversion + "]" + " " + "Friends Initialized!");
+
+        customFontRenderer = new CustomFontRenderer(new Font("Arial", 0, 18), true, false);
+        System.out.println("[" + nameversion + "]" + " " + "Custom Font Renderer Initialized! (Author 086)");
 
         clickGUI = new ClickGUI();
         System.out.println("[" + nameversion + "]" + " " + "ClickGUI Initialized!");

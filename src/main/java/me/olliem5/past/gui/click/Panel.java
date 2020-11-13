@@ -8,6 +8,7 @@ import me.olliem5.past.util.ColourUtil;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Gui;
 
+import java.awt.*;
 import java.util.ArrayList;
 
 public class Panel {
@@ -73,7 +74,12 @@ public class Panel {
         } else {
             Gui.drawRect(x, y, x + width, y + height, 0xFF222222);
         }
-        mc.fontRenderer.drawStringWithShadow(title, x + 2, y + height / 2 - mc.fontRenderer.FONT_HEIGHT / 2, -1);
+
+        if (Past.settingsManager.getSettingID("ClickGUICustomFont").getValBoolean()) {
+            Past.customFontRenderer.drawStringWithShadow(title, x + 2, y + height / 2 - mc.fontRenderer.FONT_HEIGHT / 2, -1);
+        } else {
+            mc.fontRenderer.drawStringWithShadow(title, x + 2, y + height / 2 - mc.fontRenderer.FONT_HEIGHT / 2, -1);
+        }
 
         //Rendering components when the GUI is opened.
         if (this.open && !this.components.isEmpty()) {

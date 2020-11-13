@@ -57,12 +57,26 @@ public class ModuleButton extends Component {
         } else {
             Gui.drawRect(parent.getX(), this.parent.getY() + this.offset, parent.getX() + parent.getWidth(), this.parent.getY() + 12 + this.offset, 0xFF111111);
         }
-        mc.fontRenderer.drawStringWithShadow(this.mod.getName(), parent.getX() + 2, (parent.getY() + offset + 2),-1);
+
+        if (Past.settingsManager.getSettingID("ClickGUICustomFont").getValBoolean()) {
+            Past.customFontRenderer.drawStringWithShadow(this.mod.getName(), parent.getX() + 2, (parent.getY() + offset + 2),-1);
+        } else {
+            mc.fontRenderer.drawStringWithShadow(this.mod.getName(), parent.getX() + 2, (parent.getY() + offset + 2),-1);
+        }
+
         if (this.subcomponents.size() > 1) {
             if (!this.isOpen()) {
-                mc.fontRenderer.drawStringWithShadow("+", parent.getX() + parent.getWidth() -10, (parent.getY() + offset + 2),-1);
+                if (Past.settingsManager.getSettingID("ClickGUICustomFont").getValBoolean()) {
+                    Past.customFontRenderer.drawStringWithShadow("+", parent.getX() + parent.getWidth() -10, (parent.getY() + offset + 2),-1);
+                } else {
+                    mc.fontRenderer.drawStringWithShadow("+", parent.getX() + parent.getWidth() -10, (parent.getY() + offset + 2),-1);
+                }
             } else if (this.isOpen()) {
-                mc.fontRenderer.drawStringWithShadow("-", parent.getX() + parent.getWidth() -10, (parent.getY() + offset + 2),-1);
+                if (Past.settingsManager.getSettingID("ClickGUICustomFont").getValBoolean()) {
+                    Past.customFontRenderer.drawStringWithShadow("-", parent.getX() + parent.getWidth() -10, (parent.getY() + offset + 2),-1);
+                } else {
+                    mc.fontRenderer.drawStringWithShadow("-", parent.getX() + parent.getWidth() -10, (parent.getY() + offset + 2),-1);
+                }
             }
         }
 
@@ -76,7 +90,12 @@ public class ModuleButton extends Component {
             } else {
                 Gui.drawRect(mousexx -2, mouseyy -2, mousexx + mc.fontRenderer.getStringWidth(mod.getDescription()) + 2,mouseyy + mc.fontRenderer.FONT_HEIGHT + 2, 0xFF222222);
             }
-            mc.fontRenderer.drawStringWithShadow(mod.getDescription(), mousexx, mouseyy, -1);
+
+            if (Past.settingsManager.getSettingID("ClickGUICustomFont").getValBoolean()) {
+                Past.customFontRenderer.drawStringWithShadow(mod.getDescription(), mousexx, mouseyy, -1);
+            } else {
+                mc.fontRenderer.drawStringWithShadow(mod.getDescription(), mousexx, mouseyy, -1);
+            }
         }
     }
 

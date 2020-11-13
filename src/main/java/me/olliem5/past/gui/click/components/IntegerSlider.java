@@ -35,7 +35,12 @@ public class IntegerSlider extends Component {
         } else {
             Gui.drawRect(parent.parent.getX() + 80, this.parent.parent.getY() -12 + this.offset, parent.parent.getX() + parent.parent.getWidth() + (int)this.sliderWidth, this.parent.parent.getY() + this.offset, 0xFF222222);
         }
-        mc.fontRenderer.drawStringWithShadow(this.set.getName() + " " + ColourUtil.gray + this.set.getValueInt(), parent.parent.getX() + 82, (parent.parent.getY() + this.offset -10), -1);
+
+        if (Past.settingsManager.getSettingID("ClickGUICustomFont").getValBoolean()) {
+            Past.customFontRenderer.drawStringWithShadow(this.set.getName() + " " + ColourUtil.gray + this.set.getValueInt(), parent.parent.getX() + 82, (parent.parent.getY() + this.offset -10), -1);
+        } else {
+            mc.fontRenderer.drawStringWithShadow(this.set.getName() + " " + ColourUtil.gray + this.set.getValueInt(), parent.parent.getX() + 82, (parent.parent.getY() + this.offset -10), -1);
+        }
     }
 
     @Override

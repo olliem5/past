@@ -30,7 +30,12 @@ public class BooleanSwitch extends Component {
         } else {
             Gui.drawRect(parent.parent.getX() + 80, this.parent.parent.getY() -12 + this.offset, parent.parent.getX() + parent.parent.getWidth() + parent.parent.getWidth(), this.parent.parent.getY() + this.offset, 0xFF111111);
         }
-        mc.fontRenderer.drawStringWithShadow(this.op.getName(), parent.parent.getX() + 82, (parent.parent.getY() + this.offset -10), -1);
+
+        if (Past.settingsManager.getSettingID("ClickGUICustomFont").getValBoolean()) {
+            Past.customFontRenderer.drawStringWithShadow(this.op.getName(), parent.parent.getX() + 82, (parent.parent.getY() + this.offset - 10), -1);
+        } else {
+            mc.fontRenderer.drawStringWithShadow(this.op.getName(), parent.parent.getX() + 82, (parent.parent.getY() + this.offset - 10), -1);
+        }
     }
 
     @Override

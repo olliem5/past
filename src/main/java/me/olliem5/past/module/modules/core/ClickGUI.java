@@ -14,12 +14,14 @@ public class ClickGUI extends Module {
     Setting rgb;
     Setting background;
     Setting descriptions;
+    Setting customfont;
 
     @Override
     public void setup() {
         Past.settingsManager.registerSetting(rgb = new Setting("RainbowGUI", "ClickGUIRainbow", true, this));
         Past.settingsManager.registerSetting(background = new Setting("Background", "ClickGUIBackground", true, this));
         Past.settingsManager.registerSetting(descriptions = new Setting("Descriptions", "ClickGUIDescriptions", true, this));
+        Past.settingsManager.registerSetting(customfont = new Setting("Custom Font", "ClickGUICustomFont", true, this));
     }
 
     public void onEnable() {
