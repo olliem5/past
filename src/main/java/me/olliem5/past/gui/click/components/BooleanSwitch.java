@@ -24,11 +24,11 @@ public class BooleanSwitch extends Component {
     @Override
     public void renderComponent() {
         if (Past.settingsManager.getSettingID("ClickGUIRainbow").getValBoolean() && this.op.getValBoolean()) {
-            Gui.drawRect(parent.parent.getX() + 80, this.parent.parent.getY() -12 + this.offset, parent.parent.getX() + parent.parent.getWidth() + parent.parent.getWidth(), this.parent.parent.getY() + this.offset, ColourUtil.getMultiColour().getRGB());
+            Gui.drawRect(parent.parent.getX() + 80, this.parent.parent.getY() - 12 + this.offset, parent.parent.getX() + parent.parent.getWidth() + parent.parent.getWidth(), this.parent.parent.getY() + this.offset, ColourUtil.getMultiColour().getRGB());
         } else if (this.op.getValBoolean()) {
-            Gui.drawRect(parent.parent.getX() + 80, this.parent.parent.getY() -12 + this.offset, parent.parent.getX() + parent.parent.getWidth() + parent.parent.getWidth(), this.parent.parent.getY() + this.offset, 0xFF222222);
+            Gui.drawRect(parent.parent.getX() + 80, this.parent.parent.getY() - 12 + this.offset, parent.parent.getX() + parent.parent.getWidth() + parent.parent.getWidth(), this.parent.parent.getY() + this.offset, 0xFF222222);
         } else {
-            Gui.drawRect(parent.parent.getX() + 80, this.parent.parent.getY() -12 + this.offset, parent.parent.getX() + parent.parent.getWidth() + parent.parent.getWidth(), this.parent.parent.getY() + this.offset, 0xFF111111);
+            Gui.drawRect(parent.parent.getX() + 80, this.parent.parent.getY() - 12 + this.offset, parent.parent.getX() + parent.parent.getWidth() + parent.parent.getWidth(), this.parent.parent.getY() + this.offset, 0xFF111111);
         }
 
         if (Past.settingsManager.getSettingID("ClickGUICustomFont").getValBoolean()) {
@@ -40,7 +40,7 @@ public class BooleanSwitch extends Component {
 
     @Override
     public void updateComponent(int mouseX, int mouseY) {
-        this.y = parent.parent.getY() -12 + this.offset;
+        this.y = parent.parent.getY() - 12 + this.offset;
         this.x = parent.parent.getX() + 80;
     }
 

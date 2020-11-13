@@ -25,18 +25,18 @@ public class ModeChanger extends Component {
 
     @Override
     public void renderComponent() {
-        Gui.drawRect(parent.parent.getX() + 80, this.parent.parent.getY() -12 + this.offset, parent.parent.getX() + parent.parent.getWidth() + parent.parent.getWidth(), this.parent.parent.getY() + this.offset, 0xFF111111);
+        Gui.drawRect(parent.parent.getX() + 80, this.parent.parent.getY() - 12 + this.offset, parent.parent.getX() + parent.parent.getWidth() + parent.parent.getWidth(), this.parent.parent.getY() + this.offset, 0xFF111111);
 
         if (Past.settingsManager.getSettingID("ClickGUICustomFont").getValBoolean()) {
-            Past.customFontRenderer.drawStringWithShadow(this.op.getName() + " " + ColourUtil.gray + this.op.getValueString().toUpperCase(), parent.parent.getX() + 82, (parent.parent.getY() + this.offset -10), -1);
+            Past.customFontRenderer.drawStringWithShadow(this.op.getName() + " " + ColourUtil.gray + this.op.getValueString().toUpperCase(), parent.parent.getX() + 82, (parent.parent.getY() + this.offset - 10), -1);
         } else {
-            mc.fontRenderer.drawStringWithShadow(this.op.getName() + " " + ColourUtil.gray + this.op.getValueString().toUpperCase(), parent.parent.getX() + 82, (parent.parent.getY() + this.offset -10), -1);
+            mc.fontRenderer.drawStringWithShadow(this.op.getName() + " " + ColourUtil.gray + this.op.getValueString().toUpperCase(), parent.parent.getX() + 82, (parent.parent.getY() + this.offset - 10), -1);
         }
     }
 
     @Override
     public void updateComponent(int mouseX, int mouseY) {
-        this.y = parent.parent.getY() -12 + this.offset;
+        this.y = parent.parent.getY() - 12 + this.offset;
         this.x = parent.parent.getX() + 80;
     }
 
@@ -45,7 +45,9 @@ public class ModeChanger extends Component {
         if (this.isMouseOnButton(mouseX, mouseY) && button == 0 && this.parent.isOpen()) {
             final int maxIndex = this.op.getModes().size() - 1;
             this.modeIndex++;
-            if (this.modeIndex > maxIndex) { this.modeIndex = 0; }
+            if (this.modeIndex > maxIndex) {
+                this.modeIndex = 0;
+            }
             this.op.setValueString(this.op.getModes().get(this.modeIndex));
         }
     }

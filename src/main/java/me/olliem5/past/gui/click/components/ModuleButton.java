@@ -59,36 +59,38 @@ public class ModuleButton extends Component {
         }
 
         if (Past.settingsManager.getSettingID("ClickGUICustomFont").getValBoolean()) {
-            Past.customFontRenderer.drawStringWithShadow(this.mod.getName(), parent.getX() + 2, (parent.getY() + offset + 2),-1);
+            Past.customFontRenderer.drawStringWithShadow(this.mod.getName(), parent.getX() + 2, (parent.getY() + offset + 2), -1);
         } else {
-            mc.fontRenderer.drawStringWithShadow(this.mod.getName(), parent.getX() + 2, (parent.getY() + offset + 2),-1);
+            mc.fontRenderer.drawStringWithShadow(this.mod.getName(), parent.getX() + 2, (parent.getY() + offset + 2), -1);
         }
 
         if (this.subcomponents.size() > 1) {
             if (!this.isOpen()) {
                 if (Past.settingsManager.getSettingID("ClickGUICustomFont").getValBoolean()) {
-                    Past.customFontRenderer.drawStringWithShadow("+", parent.getX() + parent.getWidth() -10, (parent.getY() + offset + 2),-1);
+                    Past.customFontRenderer.drawStringWithShadow("+", parent.getX() + parent.getWidth() - 10, (parent.getY() + offset + 2), -1);
                 } else {
-                    mc.fontRenderer.drawStringWithShadow("+", parent.getX() + parent.getWidth() -10, (parent.getY() + offset + 2),-1);
+                    mc.fontRenderer.drawStringWithShadow("+", parent.getX() + parent.getWidth() - 10, (parent.getY() + offset + 2), -1);
                 }
             } else if (this.isOpen()) {
                 if (Past.settingsManager.getSettingID("ClickGUICustomFont").getValBoolean()) {
-                    Past.customFontRenderer.drawStringWithShadow("-", parent.getX() + parent.getWidth() -10, (parent.getY() + offset + 2),-1);
+                    Past.customFontRenderer.drawStringWithShadow("-", parent.getX() + parent.getWidth() - 10, (parent.getY() + offset + 2), -1);
                 } else {
-                    mc.fontRenderer.drawStringWithShadow("-", parent.getX() + parent.getWidth() -10, (parent.getY() + offset + 2),-1);
+                    mc.fontRenderer.drawStringWithShadow("-", parent.getX() + parent.getWidth() - 10, (parent.getY() + offset + 2), -1);
                 }
             }
         }
 
         if (this.open && !this.subcomponents.isEmpty()) {
-            for (Component comp : this.subcomponents) { comp.renderComponent(); }
+            for (Component comp : this.subcomponents) {
+                comp.renderComponent();
+            }
         }
 
         if (Past.settingsManager.getSettingID("ClickGUIDescriptions").getValBoolean() && hovered == true) {
             if (Past.settingsManager.getSettingID("ClickGUIRainbow").getValBoolean()) {
-                Gui.drawRect(mousexx -2, mouseyy -2, mousexx + mc.fontRenderer.getStringWidth(mod.getDescription()) + 2,mouseyy + mc.fontRenderer.FONT_HEIGHT + 2, ColourUtil.getMultiColour().getRGB());
+                Gui.drawRect(mousexx - 2, mouseyy - 2, mousexx + mc.fontRenderer.getStringWidth(mod.getDescription()) + 2, mouseyy + mc.fontRenderer.FONT_HEIGHT + 2, ColourUtil.getMultiColour().getRGB());
             } else {
-                Gui.drawRect(mousexx -2, mouseyy -2, mousexx + mc.fontRenderer.getStringWidth(mod.getDescription()) + 2,mouseyy + mc.fontRenderer.FONT_HEIGHT + 2, 0xFF222222);
+                Gui.drawRect(mousexx - 2, mouseyy - 2, mousexx + mc.fontRenderer.getStringWidth(mod.getDescription()) + 2, mouseyy + mc.fontRenderer.FONT_HEIGHT + 2, 0xFF222222);
             }
 
             if (Past.settingsManager.getSettingID("ClickGUICustomFont").getValBoolean()) {
@@ -100,7 +102,9 @@ public class ModuleButton extends Component {
     }
 
     @Override
-    public void closeAllSub() { this.open = false; }
+    public void closeAllSub() {
+        this.open = false;
+    }
 
     @Override
     public void updateComponent(int mouseX, int mouseY) {
@@ -108,14 +112,18 @@ public class ModuleButton extends Component {
         mousexx = mouseX + 10;
         mouseyy = mouseY - 5;
         if (!this.subcomponents.isEmpty()) {
-            for (Component comp : this.subcomponents) { comp.updateComponent(mouseX, mouseY); }
+            for (Component comp : this.subcomponents) {
+                comp.updateComponent(mouseX, mouseY);
+            }
         }
     }
 
     @Override
     public void mouseClicked(int mouseX, int mouseY, int button) {
         //Left mouse button, when clicked the module the button belongs to is toggled.
-        if (isMouseOnButton(mouseX, mouseY) && button == 0) { this.mod.toggle(); }
+        if (isMouseOnButton(mouseX, mouseY) && button == 0) {
+            this.mod.toggle();
+        }
         //Right mouse button, when clicked the module button will display it's subcomponents specific to the module it belongs to.
         if (isMouseOnButton(mouseX, mouseY) && button == 1) {
             if (!this.isOpen()) {
@@ -125,7 +133,9 @@ public class ModuleButton extends Component {
                 this.setOpen(false);
             }
         }
-        for (Component comp : this.subcomponents) { comp.mouseClicked(mouseX, mouseY, button); }
+        for (Component comp : this.subcomponents) {
+            comp.mouseClicked(mouseX, mouseY, button);
+        }
     }
 
     @Override
@@ -150,6 +160,11 @@ public class ModuleButton extends Component {
         }
     }
 
-    public boolean isOpen() { return open; }
-    public void setOpen(boolean open) { this.open = open; }
+    public boolean isOpen() {
+        return open;
+    }
+
+    public void setOpen(boolean open) {
+        this.open = open;
+    }
 }

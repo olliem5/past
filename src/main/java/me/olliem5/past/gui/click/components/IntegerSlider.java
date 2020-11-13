@@ -29,23 +29,23 @@ public class IntegerSlider extends Component {
 
     @Override
     public void renderComponent() {
-        Gui.drawRect(parent.parent.getX() + 80, this.parent.parent.getY() -12 + this.offset, parent.parent.getX() + parent.parent.getWidth() + parent.parent.getWidth(), this.parent.parent.getY() + this.offset, 0xFF111111);
+        Gui.drawRect(parent.parent.getX() + 80, this.parent.parent.getY() - 12 + this.offset, parent.parent.getX() + parent.parent.getWidth() + parent.parent.getWidth(), this.parent.parent.getY() + this.offset, 0xFF111111);
         if (Past.settingsManager.getSettingID("ClickGUIRainbow").getValBoolean()) {
-            Gui.drawRect(parent.parent.getX() + 80, this.parent.parent.getY() -12 + this.offset, parent.parent.getX() + parent.parent.getWidth() + (int)this.sliderWidth, this.parent.parent.getY() + this.offset, ColourUtil.getMultiColour().getRGB());
+            Gui.drawRect(parent.parent.getX() + 80, this.parent.parent.getY() - 12 + this.offset, parent.parent.getX() + parent.parent.getWidth() + (int) this.sliderWidth, this.parent.parent.getY() + this.offset, ColourUtil.getMultiColour().getRGB());
         } else {
-            Gui.drawRect(parent.parent.getX() + 80, this.parent.parent.getY() -12 + this.offset, parent.parent.getX() + parent.parent.getWidth() + (int)this.sliderWidth, this.parent.parent.getY() + this.offset, 0xFF222222);
+            Gui.drawRect(parent.parent.getX() + 80, this.parent.parent.getY() - 12 + this.offset, parent.parent.getX() + parent.parent.getWidth() + (int) this.sliderWidth, this.parent.parent.getY() + this.offset, 0xFF222222);
         }
 
         if (Past.settingsManager.getSettingID("ClickGUICustomFont").getValBoolean()) {
-            Past.customFontRenderer.drawStringWithShadow(this.set.getName() + " " + ColourUtil.gray + this.set.getValueInt(), parent.parent.getX() + 82, (parent.parent.getY() + this.offset -10), -1);
+            Past.customFontRenderer.drawStringWithShadow(this.set.getName() + " " + ColourUtil.gray + this.set.getValueInt(), parent.parent.getX() + 82, (parent.parent.getY() + this.offset - 10), -1);
         } else {
-            mc.fontRenderer.drawStringWithShadow(this.set.getName() + " " + ColourUtil.gray + this.set.getValueInt(), parent.parent.getX() + 82, (parent.parent.getY() + this.offset -10), -1);
+            mc.fontRenderer.drawStringWithShadow(this.set.getName() + " " + ColourUtil.gray + this.set.getValueInt(), parent.parent.getX() + 82, (parent.parent.getY() + this.offset - 10), -1);
         }
     }
 
     @Override
     public void updateComponent(int mouseX, int mouseY) {
-        this.y = parent.parent.getY() -12 + this.offset;
+        this.y = parent.parent.getY() - 12 + this.offset;
         this.x = parent.parent.getX() + 80;
         double diff = Math.min(80, Math.max(0, mouseX - this.x));
         int min = this.set.getMin();
@@ -55,14 +55,16 @@ public class IntegerSlider extends Component {
             if (diff == 0) {
                 this.set.setValueInt(this.set.getMin());
             } else {
-                int newValue = (int)roundToPlace(diff / 80 * (max - min) + min, 2);
+                int newValue = (int) roundToPlace(diff / 80 * (max - min) + min, 2);
                 this.set.setValueInt(newValue);
             }
         }
     }
 
     private static double roundToPlace(double value, int places) {
-        if (places < 0) { throw new IllegalArgumentException(); }
+        if (places < 0) {
+            throw new IllegalArgumentException();
+        }
         BigDecimal bd = new BigDecimal(value);
         bd = bd.setScale(places, RoundingMode.HALF_UP);
         return bd.doubleValue();

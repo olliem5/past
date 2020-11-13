@@ -57,12 +57,16 @@ public class HudEditor extends GuiScreen {
             p.setDragging(false);
 
             if (p.isOpen() && !p.getComponents().isEmpty()) {
-                for (Component component : p.getComponents()) { component.mouseReleased(mouseX, mouseY, state); }
+                for (Component component : p.getComponents()) {
+                    component.mouseReleased(mouseX, mouseY, state);
+                }
             }
         }
     }
 
     @Override
-    public boolean doesGuiPauseGame() { return false; }
+    public boolean doesGuiPauseGame() {
+        return false;
+    }
 }
 

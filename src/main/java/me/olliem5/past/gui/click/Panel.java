@@ -82,7 +82,9 @@ public class Panel {
 
         //Rendering components when the GUI is opened.
         if (this.open && !this.components.isEmpty()) {
-            for (Component component : components) { component.renderComponent(); }
+            for (Component component : components) {
+                component.renderComponent();
+            }
         }
     }
 
@@ -102,32 +104,62 @@ public class Panel {
     }
 
     public void closeAllSetting() {
-        for (Component component : components) { component.closeAllSub(); }
+        for (Component component : components) {
+            component.closeAllSub();
+        }
     }
 
-    public ArrayList<Component> getComponents() { return components; }
+    public ArrayList<Component> getComponents() {
+        return components;
+    }
 
-    public int getWidth() { return width; }
+    public int getWidth() {
+        return width;
+    }
 
-    public void setDragging(boolean drag) { this.isDragging = drag; }
+    public void setDragging(boolean drag) {
+        this.isDragging = drag;
+    }
 
-    public boolean isOpen() { return open; }
-    public void setOpen(boolean open) { this.open = open; }
+    public boolean isOpen() {
+        return open;
+    }
 
-    public int getX() { return x; }
-    public int getY() { return y; }
+    public void setOpen(boolean open) {
+        this.open = open;
+    }
+
+    public int getX() {
+        return x;
+    }
+
+    public int getY() {
+        return y;
+    }
 
     public void setX(int newX) {
         this.x = newX;
 
-        if (Past.configUtil != null) { try { Past.configUtil.saveGuiPanels(); } catch (Exception e) {} }
+        if (Past.configUtil != null) {
+            try {
+                Past.configUtil.saveGuiPanels();
+            } catch (Exception e) {
+            }
+        }
     }
 
     public void setY(int newY) {
         this.y = newY;
 
-        if (Past.configUtil != null) { try { Past.configUtil.saveGuiPanels(); } catch (Exception e) {} }
+        if (Past.configUtil != null) {
+            try {
+                Past.configUtil.saveGuiPanels();
+            } catch (Exception e) {
+            }
+        }
     }
 
-    public Category getCategory() { return cat; }
+    public Category getCategory() {
+        return cat;
+    }
 }
