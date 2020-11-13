@@ -29,7 +29,7 @@ public class Surround extends Module {
     Setting blockspertick;
     Setting timeout;
     Setting timeoutticks;
-    Setting onlyobsidian;
+    Setting preferobi;
     Setting infomessages;
 
     private ArrayList<String> placemodes;
@@ -45,17 +45,17 @@ public class Surround extends Module {
         placemodes.add("Full");
 
         disablemodes = new ArrayList<>();
-        disablemodes.add("WhenDone");
+        disablemodes.add("Finish");
         //disablemodes.add("OnJump");
 
         Past.settingsManager.registerSetting(placemode = new Setting("Place", "SurroundPlace", this, placemodes, "Standard"));
-        Past.settingsManager.registerSetting(disablemode = new Setting("Disable", "SurroundDisable", this, disablemodes, "WhenDone"));
+        Past.settingsManager.registerSetting(disablemode = new Setting("Disable", "SurroundDisable", this, disablemodes, "Finish"));
         Past.settingsManager.registerSetting(centerplayer = new Setting("Center", "SurroundCenter", true, this));
         Past.settingsManager.registerSetting(blockspertick = new Setting("BPT", "SurroundBlocksPerTick", 1, 1, 10, this));
         Past.settingsManager.registerSetting(timeout = new Setting("Timeout", "SurroundTimeout", true, this));
         Past.settingsManager.registerSetting(timeoutticks = new Setting("Timeout Ticks", "SurroundTimeoutTicks", 1, 15, 20, this));
-        Past.settingsManager.registerSetting(onlyobsidian = new Setting("Only Obi", "SurroundOnlyObsidian", true, this));
-        Past.settingsManager.registerSetting(infomessages = new Setting("Info Messages", "SurroundInfoMessages", true, this));
+        Past.settingsManager.registerSetting(preferobi = new Setting("Prefer Obi", "SurroundOnlyObsidian", true, this));
+        Past.settingsManager.registerSetting(infomessages = new Setting("Info Messages", "SurroundInfoMessages", false, this));
     }
 
     @Override
@@ -104,15 +104,17 @@ public class Surround extends Module {
         if (timeout.getValBoolean()) {
             if (this.isToggled()) {
                 if (mc.player.ticksExisted % timeoutticks.getValueInt() == 0) {
-                    MessageUtil.sendSurroundMessage(ColourUtil.white + "Module is" + ColourUtil.red + " " + "disabling" + ColourUtil.gray + " " + "(Timed Out)");
+                    if (infomessages.getValBoolean()) {
+                        MessageUtil.sendSurroundMessage(ColourUtil.white + "Module is" + ColourUtil.red + " " + "disabling" + ColourUtil.gray + " " + "(Timed Out)");
+                    }
                     toggle();
                 }
             }
         }
 
-        if (hasPlaced == true && disablemode.getValueString() == "WhenDone") {
+        if (hasPlaced == true && disablemode.getValueString() == "Finish") {
             if (infomessages.getValBoolean()) {
-                MessageUtil.sendSurroundMessage(ColourUtil.white + "Module is" + ColourUtil.red + " " + "disabling" + ColourUtil.gray + " " + "(When Done)");
+                MessageUtil.sendSurroundMessage(ColourUtil.white + "Module is" + ColourUtil.red + " " + "disabling" + ColourUtil.gray + " " + "(Finished)");
             }
             toggle();
         }
@@ -137,7 +139,7 @@ public class Surround extends Module {
 
                     int oldInventorySlot = mc.player.inventory.currentItem;
 
-                    if (onlyobsidian.getValBoolean()) {
+                    if (preferobi.getValBoolean()) {
                         if (infomessages.getValBoolean()) {
                             MessageUtil.sendSurroundMessage(ColourUtil.white + "Switching to" + " " + ColourUtil.aqua + "obsidian");
                         }
@@ -173,7 +175,7 @@ public class Surround extends Module {
 
                     int oldInventorySlot = mc.player.inventory.currentItem;
 
-                    if (onlyobsidian.getValBoolean()) {
+                    if (preferobi.getValBoolean()) {
                         if (infomessages.getValBoolean()) {
                             MessageUtil.sendSurroundMessage(ColourUtil.white + "Switching to" + " " + ColourUtil.aqua + "obsidian");
                         }
