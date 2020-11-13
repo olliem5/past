@@ -88,8 +88,7 @@ public class CustomFontRenderer extends CustomFont {
                     int colorIndex = 21;
                     try {
                         colorIndex = "0123456789abcdefklmnor".indexOf(text.charAt(i + 1));
-                    } catch (Exception e) {
-                    }
+                    } catch (Exception e) {}
                     if (colorIndex < 16) {
                         bold = false;
                         italic = false;

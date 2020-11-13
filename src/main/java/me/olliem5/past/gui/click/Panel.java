@@ -143,8 +143,7 @@ public class Panel {
         if (Past.configUtil != null) {
             try {
                 Past.configUtil.saveGuiPanels();
-            } catch (Exception e) {
-            }
+            } catch (Exception e) {}
         }
     }
 
@@ -154,8 +153,7 @@ public class Panel {
         if (Past.configUtil != null) {
             try {
                 Past.configUtil.saveGuiPanels();
-            } catch (Exception e) {
-            }
+            } catch (Exception e) {}
         }
     }
 

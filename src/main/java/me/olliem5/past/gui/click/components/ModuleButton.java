@@ -88,9 +88,17 @@ public class ModuleButton extends Component {
 
         if (Past.settingsManager.getSettingID("ClickGUIDescriptions").getValBoolean() && hovered == true) {
             if (Past.settingsManager.getSettingID("ClickGUIRainbow").getValBoolean()) {
-                Gui.drawRect(mousexx - 2, mouseyy - 2, mousexx + mc.fontRenderer.getStringWidth(mod.getDescription()) + 2, mouseyy + mc.fontRenderer.FONT_HEIGHT + 2, ColourUtil.getMultiColour().getRGB());
+                if (Past.settingsManager.getSettingID("ClickGUICustomFont").getValBoolean()) {
+                    Gui.drawRect(mousexx - 2, mouseyy - 2, mousexx + Past.customFontRenderer.getStringWidth(mod.getDescription()) + 2, mouseyy + Past.customFontRenderer.getHeight() + 2, ColourUtil.getMultiColour().getRGB());
+                } else {
+                    Gui.drawRect(mousexx - 2, mouseyy - 2, mousexx + mc.fontRenderer.getStringWidth(mod.getDescription()) + 2, mouseyy + mc.fontRenderer.FONT_HEIGHT + 2, ColourUtil.getMultiColour().getRGB());
+                }
             } else {
-                Gui.drawRect(mousexx - 2, mouseyy - 2, mousexx + mc.fontRenderer.getStringWidth(mod.getDescription()) + 2, mouseyy + mc.fontRenderer.FONT_HEIGHT + 2, 0xFF222222);
+                if (Past.settingsManager.getSettingID("ClickGUICustomFont").getValBoolean()) {
+                    Gui.drawRect(mousexx - 2, mouseyy - 2, mousexx + Past.customFontRenderer.getStringWidth(mod.getDescription()) + 2, mouseyy + Past.customFontRenderer.getHeight() + 2, 0xFF222222);
+                } else {
+                    Gui.drawRect(mousexx - 2, mouseyy - 2, mousexx + mc.fontRenderer.getStringWidth(mod.getDescription()) + 2, mouseyy + mc.fontRenderer.FONT_HEIGHT + 2, 0xFF222222);
+                }
             }
 
             if (Past.settingsManager.getSettingID("ClickGUICustomFont").getValBoolean()) {

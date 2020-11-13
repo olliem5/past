@@ -18,6 +18,5 @@ public class Command {
         return usage;
     }
 
-    public void onCommand(String[] args) {
-    }
+    public void onCommand(String[] args) {}
 }

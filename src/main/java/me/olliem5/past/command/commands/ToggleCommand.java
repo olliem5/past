@@ -26,8 +26,7 @@ public class ToggleCommand extends Command {
                         }
                     }
                 }
-            } catch (Exception e) {
-            }
+            } catch (Exception e) {}
         }
     }
 }

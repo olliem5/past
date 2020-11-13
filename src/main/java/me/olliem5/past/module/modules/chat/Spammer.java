@@ -21,7 +21,6 @@ public class Spammer extends Module {
                 line = bufferedReader.readLine();
             }
             bufferedReader.close();
-        } catch (Exception e) {
-        }
+        } catch (Exception e) {}
     }
 }

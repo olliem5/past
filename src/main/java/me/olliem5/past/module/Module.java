@@ -67,8 +67,7 @@ public class Module {
         if (Past.configUtil != null) {
             try {
                 Past.configUtil.saveLoadedModules();
-            } catch (Exception e) {
-            }
+            } catch (Exception e) {}
         }
 
         onEnable();
@@ -81,8 +80,7 @@ public class Module {
         if (Past.configUtil != null) {
             try {
                 Past.configUtil.saveLoadedModules();
-            } catch (Exception e) {
-            }
+            } catch (Exception e) {}
         }
 
         onDisable();
@@ -98,8 +96,7 @@ public class Module {
         if (Past.configUtil != null) {
             try {
                 Past.configUtil.saveKeybinds();
-            } catch (Exception e) {
-            }
+            } catch (Exception e) {}
         }
     }
 
@@ -135,24 +132,17 @@ public class Module {
         return mc.player == null || mc.world == null;
     }
 
-    public void onToggle() {
-    }
+    public void onToggle() {}
 
-    public void onUpdate() {
-    }
+    public void onUpdate() {}
 
-    public void onRender() {
-    }
+    public void onRender() {}
 
-    public void setup() {
-    }
+    public void setup() {}
 
-    public void selfSettings() {
-    }
+    public void selfSettings() {}
 
-    public void onEnable() {
-    }
+    public void onEnable() {}
 
-    public void onDisable() {
-    }
+    public void onDisable() {}
 }

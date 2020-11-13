@@ -7,7 +7,6 @@ import java.util.List;
 
 public class FriendsManager {
     public static List<Friend> friends = new ArrayList<>();
-    ;
 
     public static List<Friend> getFriends() {
         return friends;
@@ -39,8 +38,7 @@ public class FriendsManager {
         if (Past.configUtil != null) {
             try {
                 Past.configUtil.saveFriends();
-            } catch (Exception e) {
-            }
+            } catch (Exception e) {}
         }
     }
 
@@ -50,8 +48,7 @@ public class FriendsManager {
         if (Past.configUtil != null) {
             try {
                 Past.configUtil.saveFriends();
-            } catch (Exception e) {
-            }
+            } catch (Exception e) {}
         }
     }
 }

@@ -40,7 +40,6 @@ public class ColourUtil {
     private int blueRGB;
     private int rgb;
 
-    //Reee frick u java make me spell the word wrong for class >:(
     public ColourUtil(Color colour) {
         this.redRGB = colour.getRed();
         this.greenRGB = colour.getGreen();

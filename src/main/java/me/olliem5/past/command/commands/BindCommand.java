@@ -28,8 +28,7 @@ public class BindCommand extends Command {
                         }
                     }
                 }
-            } catch (Exception e) {
-            }
+            } catch (Exception e) {}
         }
     }
 }
