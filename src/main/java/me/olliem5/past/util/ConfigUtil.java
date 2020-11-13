@@ -1,6 +1,8 @@
 package me.olliem5.past.util;
 
 import me.olliem5.past.Past;
+import me.olliem5.past.friends.Friend;
+import me.olliem5.past.friends.FriendsManager;
 import me.olliem5.past.gui.click.ClickGUI;
 import me.olliem5.past.gui.click.Panel;
 import me.olliem5.past.module.Module;
@@ -140,6 +142,25 @@ public class ConfigUtil {
             try {
                 PrintWriter printWriter = new PrintWriter(file);
                 for (String string : panelsToSave) {
+                    printWriter.println(string);
+                }
+                printWriter.close();
+            } catch (FileNotFoundException e) {}
+        } catch (Exception e) {}
+    }
+
+    public void saveFriends() {
+        try {
+            File file = new File(MainDirectory, "Friends.txt");
+            ArrayList<String> friendsToSave = new ArrayList<>();
+
+            for (Friend friend : FriendsManager.friends) {
+                friendsToSave.add(friend.getName());
+            }
+
+            try {
+                PrintWriter printWriter = new PrintWriter(file);
+                for (String string : friendsToSave) {
                     printWriter.println(string);
                 }
                 printWriter.close();

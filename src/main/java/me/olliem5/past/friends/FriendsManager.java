@@ -1,5 +1,7 @@
 package me.olliem5.past.friends;
 
+import me.olliem5.past.Past;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -32,9 +34,13 @@ public class FriendsManager {
 
     public void addFriend(String name) {
         friends.add(new Friend(name));
+
+        if (Past.configUtil != null) { try { Past.configUtil.saveFriends(); } catch (Exception e) {} }
     }
 
     public void delFriend(String name) {
         friends.remove(getFriendByName(name));
+
+        if (Past.configUtil != null) { try { Past.configUtil.saveFriends(); } catch (Exception e) {} }
     }
 }
