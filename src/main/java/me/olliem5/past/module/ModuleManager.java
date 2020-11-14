@@ -55,6 +55,7 @@ public class ModuleManager {
         modules.add(new ViewModel());
         modules.add(new SkyColour());
         modules.add(new Fullbright());
+        modules.add(new Time());
 
         /* Core */
         modules.add(new ClickGUI());
