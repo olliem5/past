@@ -187,6 +187,7 @@ public class ConfigUtil {
                     }
                 }
             }
+
             br.close();
         } catch (Exception e) {}
     }
@@ -209,6 +210,7 @@ public class ConfigUtil {
                     }
                 }
             }
+
             br.close();
         } catch (Exception var11) {}
     }

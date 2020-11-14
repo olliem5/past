@@ -45,6 +45,8 @@ public class ModuleManager {
         modules.add(new AutoLog());
         modules.add(new FastUse());
         modules.add(new Blink());
+        modules.add(new XCarry());
+        modules.add(new PortalGodMode());
 
         /* Render */
         modules.add(new NoWeather());

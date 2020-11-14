@@ -14,7 +14,7 @@ public class Velocity extends Module {
     }
 
     @EventHandler
-    private Listener<PacketEvent.Receive> listener = new Listener<>(event -> {
+    public Listener<PacketEvent.Receive> listener = new Listener<>(event -> {
         if (event.getPacket() instanceof SPacketEntityVelocity) {
             if (((SPacketEntityVelocity) event.getPacket()).getEntityID() == mc.player.getEntityId()) {
                 event.cancel();
