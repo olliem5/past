@@ -5,8 +5,6 @@
   "refmap": "mixins.past.refmap.json",
   "mixins": [
     "MixinGuiMainMenu",
-    "MixinMinecraft",
-    "MixinTimer",
     "MixinNetworkManager"
   ]
 }
