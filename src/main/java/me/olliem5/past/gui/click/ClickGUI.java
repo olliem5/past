@@ -88,6 +88,18 @@ public class ClickGUI extends GuiScreen {
         }
     }
 
+    public static ArrayList<Panel> getPanels() {
+        return panels;
+    }
+
+    public static Panel getPanelByName(String name) {
+        Panel panel = null;
+        for (Panel p : getPanels()) {
+            if (p.title.equalsIgnoreCase(name)) panel = p;
+        }
+        return panel;
+    }
+
     @Override
     public boolean doesGuiPauseGame() {
         return false;

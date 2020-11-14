@@ -127,6 +127,12 @@ public class Panel {
 
     public void setOpen(boolean open) {
         this.open = open;
+
+        if (Past.configUtil != null) {
+            try {
+                Past.configUtil.saveGuiPanels();
+            } catch (Exception e) {}
+        }
     }
 
     public int getX() {

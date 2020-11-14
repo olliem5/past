@@ -32,7 +32,7 @@ public class FriendsManager {
         return fr;
     }
 
-    public void addFriend(String name) {
+    public static void addFriend(String name) {
         friends.add(new Friend(name));
 
         if (Past.configUtil != null) {

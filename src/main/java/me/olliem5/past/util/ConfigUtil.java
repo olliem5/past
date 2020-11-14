@@ -24,6 +24,8 @@ public class ConfigUtil {
 
         loadSavedModules();
         loadKeybinds();
+        loadFriends();
+        loadGuiPanels();
     }
 
     public void saveLoadedModules() {
@@ -135,8 +137,7 @@ public class ConfigUtil {
             ArrayList<String> panelsToSave = new ArrayList<>();
 
             for (Panel panel : ClickGUI.panels) {
-                panelsToSave.add(panel.getCategory() + ":" + "x" + ":" + panel.getX());
-                panelsToSave.add(panel.getCategory() + ":" + "y" + ":" + panel.getY());
+                panelsToSave.add(panel.getCategory() + ":" + panel.getX() + ":" + panel.getY() + ":" + panel.isOpen());
             }
 
             try {
@@ -210,5 +211,51 @@ public class ConfigUtil {
             }
             br.close();
         } catch (Exception var11) {}
+    }
+
+    public void loadFriends() {
+        try {
+            File file = new File(MainDirectory, "Friends.txt");
+            FileInputStream fstream = new FileInputStream(file.getAbsolutePath());
+            DataInputStream in = new DataInputStream(fstream);
+            BufferedReader br = new BufferedReader(new InputStreamReader(in));
+
+            FriendsManager.friends.clear();
+            String line;
+            while((line = br.readLine()) != null) {
+                Past.friendsManager.addFriend(line);
+            }
+
+            br.close();
+        } catch (Exception e) {}
+    }
+
+    public void loadGuiPanels() {
+        try {
+            File file = new File(MainDirectory, "GuiPanels.txt");
+            FileInputStream fstream = new FileInputStream(file.getAbsolutePath());
+            DataInputStream in = new DataInputStream(fstream);
+            BufferedReader br = new BufferedReader(new InputStreamReader(in));
+
+            String line;
+            while((line = br.readLine()) != null) {
+                String curLine = line.trim();
+                String name = curLine.split(":")[0];
+                String x = curLine.split(":")[1];
+                String y = curLine.split(":")[2];
+                String open = curLine.split(":")[3];
+                int x1 = Integer.parseInt(x);
+                int y1 = Integer.parseInt(y);
+                boolean opened = Boolean.parseBoolean(open);
+                Panel p = ClickGUI.getPanelByName(name);
+                if (p != null) {
+                    p.x = x1;
+                    p.y = y1;
+                    p.setOpen(opened);
+                }
+            }
+
+            br.close();
+        } catch (Exception e) {}
     }
 }
