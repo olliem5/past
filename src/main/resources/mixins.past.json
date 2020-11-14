@@ -5,6 +5,7 @@
   "refmap": "mixins.past.refmap.json",
   "mixins": [
     "MixinGuiMainMenu",
-    "MixinNetworkManager"
+    "MixinNetworkManager",
+    "MixinBlockSoulSand"
   ]
 }
