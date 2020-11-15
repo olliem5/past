@@ -5,6 +5,7 @@ public enum Category {
     MOVEMENT,
     PLAYER,
     RENDER,
+    EXPLOIT,
     MISC,
     CHAT,
     CORE

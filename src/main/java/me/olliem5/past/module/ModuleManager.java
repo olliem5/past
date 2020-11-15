@@ -1,6 +1,10 @@
 package me.olliem5.past.module;
 
 import me.olliem5.past.module.modules.combat.*;
+import me.olliem5.past.module.modules.exploit.Blink;
+import me.olliem5.past.module.modules.exploit.PortalGodMode;
+import me.olliem5.past.module.modules.exploit.Timer;
+import me.olliem5.past.module.modules.exploit.XCarry;
 import me.olliem5.past.module.modules.movement.*;
 import me.olliem5.past.module.modules.player.*;
 import me.olliem5.past.module.modules.render.*;
@@ -24,6 +28,7 @@ public class ModuleManager {
         modules.add(new BonBedAura());
         modules.add(new AutoCrystal());
         modules.add(new Surround());
+        modules.add(new FootEXP());
 
         /* Misc */
         modules.add(new DiscordRPC());

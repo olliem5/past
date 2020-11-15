@@ -4,6 +4,7 @@ import me.olliem5.past.Past;
 import me.olliem5.past.module.Category;
 import me.olliem5.past.module.Module;
 import me.olliem5.past.settings.Setting;
+import me.olliem5.past.util.ColourUtil;
 
 import java.util.ArrayList;
 
@@ -13,7 +14,6 @@ public class Time extends Module {
     }
 
     Setting timemode;
-    //Setting usecustom;
     Setting customtimemode;
 
     private ArrayList<String> timemodes;
@@ -30,7 +30,6 @@ public class Time extends Module {
         timemodes.add("Custom");
 
         Past.settingsManager.registerSetting(timemode = new Setting("Time", "TimeMode", this, timemodes, "Day"));
-        //Past.settingsManager.registerSetting(usecustom = new Setting("Use Custom", "TimeUseCustom", false, this));
         Past.settingsManager.registerSetting(customtimemode = new Setting("Custom", "TimeCustom", 0, 18000, 24000, this));
     }
 
@@ -41,30 +40,22 @@ public class Time extends Module {
 
         if (timemode.getValueString() == "Day") {
             mc.world.setWorldTime(1000);
-        }
-
-        if (timemode.getValueString() == "Noon") {
+        } else if (timemode.getValueString() == "Noon") {
             mc.world.setWorldTime(6000);
-        }
-
-        if (timemode.getValueString() == "Sunset") {
+        } else if (timemode.getValueString() == "Sunset") {
             mc.world.setWorldTime(12500);
-        }
-
-        if (timemode.getValueString() == "Night") {
+        } else if (timemode.getValueString() == "Night") {
             mc.world.setWorldTime(13000);
-        }
-
-        if (timemode.getValueString() == "Midnight") {
+        } else if (timemode.getValueString() == "Midnight") {
             mc.world.setWorldTime(18000);
-        }
-
-        if (timemode.getValueString() == "Sunrise") {
+        } else if (timemode.getValueString() == "Sunrise") {
             mc.world.setWorldTime(23500);
-        }
-
-        if (timemode.getValueString() == "Custom") {
+        } else {
             mc.world.setWorldTime(customtimemode.getValueInt());
         }
+    }
+
+    public String getArraylistInfo() {
+        return ColourUtil.gray + " " + timemode.getValueString();
     }
 }
