@@ -29,6 +29,18 @@ public class ModuleManager {
         modules.add(new AutoCrystal());
         modules.add(new Surround());
         modules.add(new FootEXP());
+        modules.add(new Criticals());
+
+        /* Core */
+        modules.add(new ClickGUI());
+        modules.add(new HUD());
+        modules.add(new HudEditor());
+
+        /* Exploit */
+        modules.add(new Blink());
+        modules.add(new PortalGodMode());
+        modules.add(new Timer());
+        modules.add(new XCarry());
 
         /* Misc */
         modules.add(new DiscordRPC());
@@ -42,17 +54,14 @@ public class ModuleManager {
         modules.add(new HoleTP());
         modules.add(new Step());
         modules.add(new Flight());
-        modules.add(new Timer());
         modules.add(new Velocity());
         modules.add(new NoSlow());
+        modules.add(new ElytraFly());
 
         /* Player */
         modules.add(new WeaknessMsg());
         modules.add(new AutoLog());
         modules.add(new FastUse());
-        modules.add(new Blink());
-        modules.add(new XCarry());
-        modules.add(new PortalGodMode());
 
         /* Render */
         modules.add(new NoWeather());
@@ -61,11 +70,6 @@ public class ModuleManager {
         modules.add(new SkyColour());
         modules.add(new Fullbright());
         modules.add(new Time());
-
-        /* Core */
-        modules.add(new ClickGUI());
-        modules.add(new HUD());
-        modules.add(new HudEditor());
     }
 
     public ArrayList<Module> getModules() {

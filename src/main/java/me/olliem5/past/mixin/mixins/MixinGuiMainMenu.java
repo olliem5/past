@@ -17,18 +17,18 @@ public class MixinGuiMainMenu extends GuiScreen {
 
     @Inject(method = "drawScreen", at = @At("TAIL"), cancellable = true)
     public void drawText(int mouseX, int mouseY, float partialTicks, CallbackInfo ci) {
-        int authorspace = mc.fontRenderer.FONT_HEIGHT + 4;
-        int githubspace = mc.fontRenderer.FONT_HEIGHT + mc.fontRenderer.FONT_HEIGHT + 4;
+        int authorspace = Past.customFontRenderer.getHeight() + 6;
+        int githubspace = Past.customFontRenderer.getHeight() + Past.customFontRenderer.getHeight() + 8;
 
         //This is wack
-        int boxwidth = StringUtil.getStringWidth(Past.github + "..................");
-        int boxheight = mc.fontRenderer.FONT_HEIGHT + mc.fontRenderer.FONT_HEIGHT + 14;
+        int boxwidth = StringUtil.getStringWidthCustomFont(Past.github + "..................");
+        int boxheight = Past.customFontRenderer.getHeight() + Past.customFontRenderer.getHeight() + 18;
 
         Gui.drawRect(2, 2, 4 + boxwidth + 4, boxheight, 0x75101010);
 
-        mc.fontRenderer.drawStringWithShadow(Past.nameversion, boxheight + 4, 4, ColourUtil.getMultiColour().getRGB());
-        mc.fontRenderer.drawStringWithShadow("Created by" + " " + Past.author, boxheight + 4, authorspace, ColourUtil.getMultiColour().getRGB());
-        mc.fontRenderer.drawStringWithShadow(Past.github, boxheight + 4, githubspace, ColourUtil.getMultiColour().getRGB());
+        Past.customFontRenderer.drawStringWithShadow(Past.nameversion, boxheight + 4, 4, ColourUtil.getMultiColour().getRGB());
+        Past.customFontRenderer.drawStringWithShadow("Created by" + " " + Past.author, boxheight + 4, authorspace, ColourUtil.getMultiColour().getRGB());
+        Past.customFontRenderer.drawStringWithShadow(Past.github, boxheight + 4, githubspace, ColourUtil.getMultiColour().getRGB());
 
         ResourceLocation resourceLocation = new ResourceLocation("pastclient", "pastlogo.jpg");
         mc.getTextureManager().bindTexture(resourceLocation);
