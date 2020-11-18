@@ -70,6 +70,7 @@ public class ModuleManager {
         modules.add(new SkyColour());
         modules.add(new Fullbright());
         modules.add(new Time());
+        modules.add(new HoleESP());
     }
 
     public ArrayList<Module> getModules() {
