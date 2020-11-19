@@ -56,6 +56,6 @@ public class Time extends Module {
     }
 
     public String getArraylistInfo() {
-        return ColourUtil.gray + " " + timemode.getValueString();
+        return ColourUtil.gray + " " + timemode.getValueString().toUpperCase();
     }
 }

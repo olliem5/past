@@ -1,5 +1,6 @@
 package me.olliem5.past.util;
 
+import me.olliem5.past.Past;
 import net.minecraft.client.Minecraft;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.NonNullList;
@@ -46,13 +47,13 @@ public class HoleUtil {
 
     public List<BlockPos> findObsidianHoles() {
         NonNullList positions = NonNullList.create();
-        positions.addAll(this.getSphere(getPlayerPos(), 10, 10, false, true, 0).stream().filter(this::isInObsidianHole).collect(Collectors.toList()));
+        positions.addAll(this.getSphere(getPlayerPos(), Past.settingsManager.getSettingID("HoleESPHoleRange").getValueInt(), Past.settingsManager.getSettingID("HoleESPHoleRange").getValueInt(), false, true, 0).stream().filter(this::isInObsidianHole).collect(Collectors.toList()));
         return positions;
     }
 
     public List<BlockPos> findBedrockHoles() {
         NonNullList positions = NonNullList.create();
-        positions.addAll(this.getSphere(getPlayerPos(), 10, 10, false, true, 0).stream().filter(this::isInBedrockHole).collect(Collectors.toList()));
+        positions.addAll(this.getSphere(getPlayerPos(), Past.settingsManager.getSettingID("HoleESPHoleRange").getValueInt(), Past.settingsManager.getSettingID("HoleESPHoleRange").getValueInt(), false, true, 0).stream().filter(this::isInBedrockHole).collect(Collectors.toList()));
         return positions;
     }
 
