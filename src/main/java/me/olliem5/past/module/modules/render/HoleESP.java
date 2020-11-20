@@ -12,7 +12,6 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 import java.awt.*;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 public class HoleESP extends Module {
@@ -62,41 +61,14 @@ public class HoleESP extends Module {
 
     private static HoleUtil holeUtil = new HoleUtil();
 
-    private BlockPos renderBlock;
-
-    @Override
-    public void onUpdate() {
+    @SubscribeEvent
+    public void onRender(RenderWorldLastEvent event) {
         if (nullCheck()) {
             return;
         }
 
         List<BlockPos> obsidianHoles = holeUtil.findObsidianHoles();
         List<BlockPos> bedrockHoles = holeUtil.findBedrockHoles();
-
-        BlockPos blockPosRender = null;
-
-        if (obsidian.getValBoolean()) {
-            Iterator<BlockPos> obsidianIterator = obsidianHoles.iterator();
-            while (obsidianIterator.hasNext()) {
-                blockPosRender = obsidianIterator.next();
-            }
-        }
-
-        if (bedrock.getValBoolean()) {
-            Iterator<BlockPos> bedrockIterator = bedrockHoles.iterator();
-            while (bedrockIterator.hasNext()) {
-                blockPosRender = bedrockIterator.next();
-            }
-        }
-
-        this.renderBlock = blockPosRender;
-    }
-
-    @SubscribeEvent
-    public void onRender(RenderWorldLastEvent event) {
-        if (nullCheck()) {
-            return;
-        }
 
         float[] hue = new float[] {(float) (System.currentTimeMillis() % 7500L) / 7500f};
         int rgb = Color.HSBtoRGB(hue[0], 0.8f, 0.8f);
@@ -105,60 +77,64 @@ public class HoleESP extends Module {
         int rgbblue = rgb & 255;
 
         if (obsidian.getValBoolean()) {
-            for (BlockPos obsidianHoles : holeUtil.findObsidianHoles()) {
-                if (!obsidianrainbow.getValBoolean()) {
-                    if (rendermode.getValueString() == "Full") {
-                        RenderUtil.drawBox(RenderUtil.generateBB(obsidianHoles.getX(), obsidianHoles.getY(), obsidianHoles.getZ()), obsidianred.getValueInt(), obsidiangreen.getValueInt(), obsidianblue.getValueInt(), obsidianopacity.getValueInt());
-                    }
+            if (obsidianHoles != null) {
+                for (BlockPos obiHoles : holeUtil.findObsidianHoles()) {
+                    if (!obsidianrainbow.getValBoolean()) {
+                        if (rendermode.getValueString() == "Full") {
+                            RenderUtil.drawBox(RenderUtil.generateBB(obiHoles.getX(), obiHoles.getY(), obiHoles.getZ()), obsidianred.getValueInt(), obsidiangreen.getValueInt(), obsidianblue.getValueInt(), obsidianopacity.getValueInt());
+                        }
 
-                    if (rendermode.getValueString() == "FullFrame") {
-                        RenderUtil.drawBoxOutline(RenderUtil.generateBB(obsidianHoles.getX(), obsidianHoles.getY(), obsidianHoles.getZ()), obsidianred.getValueInt(), obsidiangreen.getValueInt(), obsidianblue.getValueInt(), obsidianopacity.getValueInt());
-                    }
+                        if (rendermode.getValueString() == "FullFrame") {
+                            RenderUtil.drawBoxOutline(RenderUtil.generateBB(obiHoles.getX(), obiHoles.getY(), obiHoles.getZ()), obsidianred.getValueInt(), obsidiangreen.getValueInt(), obsidianblue.getValueInt(), obsidianopacity.getValueInt());
+                        }
 
-                    if (rendermode.getValueString() == "Frame") {
-                        RenderUtil.drawOutline(RenderUtil.generateBB(obsidianHoles.getX(), obsidianHoles.getY(), obsidianHoles.getZ()), obsidianred.getValueInt(), obsidiangreen.getValueInt(), obsidianblue.getValueInt(), obsidianopacity.getValueInt());
-                    }
-                } else {
-                    if (rendermode.getValueString() == "Full") {
-                        RenderUtil.drawBox(RenderUtil.generateBB(obsidianHoles.getX(), obsidianHoles.getY(), obsidianHoles.getZ()), rgbred / 255f, rgbgreen / 255f, rgbblue / 255f, obsidianopacity.getValueInt());
-                    }
+                        if (rendermode.getValueString() == "Frame") {
+                            RenderUtil.drawOutline(RenderUtil.generateBB(obiHoles.getX(), obiHoles.getY(), obiHoles.getZ()), obsidianred.getValueInt(), obsidiangreen.getValueInt(), obsidianblue.getValueInt(), obsidianopacity.getValueInt());
+                        }
+                    } else {
+                        if (rendermode.getValueString() == "Full") {
+                            RenderUtil.drawBox(RenderUtil.generateBB(obiHoles.getX(), obiHoles.getY(), obiHoles.getZ()), rgbred / 255f, rgbgreen / 255f, rgbblue / 255f, obsidianopacity.getValueInt());
+                        }
 
-                    if (rendermode.getValueString() == "FullFrame") {
-                        RenderUtil.drawBoxOutline(RenderUtil.generateBB(obsidianHoles.getX(), obsidianHoles.getY(), obsidianHoles.getZ()), rgbred / 255f, rgbgreen / 255f, rgbblue / 255f, obsidianopacity.getValueInt());
-                    }
+                        if (rendermode.getValueString() == "FullFrame") {
+                            RenderUtil.drawBoxOutline(RenderUtil.generateBB(obiHoles.getX(), obiHoles.getY(), obiHoles.getZ()), rgbred / 255f, rgbgreen / 255f, rgbblue / 255f, obsidianopacity.getValueInt());
+                        }
 
-                    if (rendermode.getValueString() == "Frame") {
-                        RenderUtil.drawOutline(RenderUtil.generateBB(obsidianHoles.getX(), obsidianHoles.getY(), obsidianHoles.getZ()), rgbred / 255f, rgbgreen / 255f, rgbblue / 255f, obsidianopacity.getValueInt());
+                        if (rendermode.getValueString() == "Frame") {
+                            RenderUtil.drawOutline(RenderUtil.generateBB(obiHoles.getX(), obiHoles.getY(), obiHoles.getZ()), rgbred / 255f, rgbgreen / 255f, rgbblue / 255f, obsidianopacity.getValueInt());
+                        }
                     }
                 }
             }
         }
 
         if (bedrock.getValBoolean()) {
-            for (BlockPos bedrockHoles : holeUtil.findBedrockHoles()) {
-                if (!bedrockrainbow.getValBoolean()) {
-                    if (rendermode.getValueString() == "Full") {
-                        RenderUtil.drawBox(RenderUtil.generateBB(bedrockHoles.getX(), bedrockHoles.getY(), bedrockHoles.getZ()), bedrockred.getValueInt(), bedrockgreen.getValueInt(), bedrockblue.getValueInt(), bedrockopacity.getValueInt());
-                    }
+            if (bedrockHoles != null) {
+                for (BlockPos bRockHoles : holeUtil.findBedrockHoles()) {
+                    if (!bedrockrainbow.getValBoolean()) {
+                        if (rendermode.getValueString() == "Full") {
+                            RenderUtil.drawBox(RenderUtil.generateBB(bRockHoles.getX(), bRockHoles.getY(), bRockHoles.getZ()), bedrockred.getValueInt(), bedrockgreen.getValueInt(), bedrockblue.getValueInt(), bedrockopacity.getValueInt());
+                        }
 
-                    if (rendermode.getValueString() == "FullFrame") {
-                        RenderUtil.drawBoxOutline(RenderUtil.generateBB(bedrockHoles.getX(), bedrockHoles.getY(), bedrockHoles.getZ()), bedrockred.getValueInt(), bedrockgreen.getValueInt(), bedrockblue.getValueInt(), bedrockopacity.getValueInt());
-                    }
+                        if (rendermode.getValueString() == "FullFrame") {
+                            RenderUtil.drawBoxOutline(RenderUtil.generateBB(bRockHoles.getX(), bRockHoles.getY(), bRockHoles.getZ()), bedrockred.getValueInt(), bedrockgreen.getValueInt(), bedrockblue.getValueInt(), bedrockopacity.getValueInt());
+                        }
 
-                    if (rendermode.getValueString() == "Frame") {
-                        RenderUtil.drawOutline(RenderUtil.generateBB(bedrockHoles.getX(), bedrockHoles.getY(), bedrockHoles.getZ()), bedrockred.getValueInt(), bedrockgreen.getValueInt(), bedrockblue.getValueInt(), bedrockopacity.getValueInt());
-                    }
-                } else {
-                    if (rendermode.getValueString() == "Full") {
-                        RenderUtil.drawBox(RenderUtil.generateBB(bedrockHoles.getX(), bedrockHoles.getY(), bedrockHoles.getZ()), rgbred / 255f, rgbgreen / 255f, rgbblue / 255f, bedrockopacity.getValueInt());
-                    }
+                        if (rendermode.getValueString() == "Frame") {
+                            RenderUtil.drawOutline(RenderUtil.generateBB(bRockHoles.getX(), bRockHoles.getY(), bRockHoles.getZ()), bedrockred.getValueInt(), bedrockgreen.getValueInt(), bedrockblue.getValueInt(), bedrockopacity.getValueInt());
+                        }
+                    } else {
+                        if (rendermode.getValueString() == "Full") {
+                            RenderUtil.drawBox(RenderUtil.generateBB(bRockHoles.getX(), bRockHoles.getY(), bRockHoles.getZ()), rgbred / 255f, rgbgreen / 255f, rgbblue / 255f, bedrockopacity.getValueInt());
+                        }
 
-                    if (rendermode.getValueString() == "FullFrame") {
-                        RenderUtil.drawBoxOutline(RenderUtil.generateBB(bedrockHoles.getX(), bedrockHoles.getY(), bedrockHoles.getZ()), rgbred / 255f, rgbgreen / 255f, rgbblue / 255f, bedrockopacity.getValueInt());
-                    }
+                        if (rendermode.getValueString() == "FullFrame") {
+                            RenderUtil.drawBoxOutline(RenderUtil.generateBB(bRockHoles.getX(), bRockHoles.getY(), bRockHoles.getZ()), rgbred / 255f, rgbgreen / 255f, rgbblue / 255f, bedrockopacity.getValueInt());
+                        }
 
-                    if (rendermode.getValueString() == "Frame") {
-                        RenderUtil.drawOutline(RenderUtil.generateBB(bedrockHoles.getX(), bedrockHoles.getY(), bedrockHoles.getZ()), rgbred / 255f, rgbgreen / 255f, rgbblue / 255f, bedrockopacity.getValueInt());
+                        if (rendermode.getValueString() == "Frame") {
+                            RenderUtil.drawOutline(RenderUtil.generateBB(bRockHoles.getX(), bRockHoles.getY(), bRockHoles.getZ()), rgbred / 255f, rgbgreen / 255f, rgbblue / 255f, bedrockopacity.getValueInt());
+                        }
                     }
                 }
             }
