@@ -5,6 +5,7 @@ import net.minecraft.client.Minecraft;
 public class MathUtil {
 
     /**
+     * Credit Seppuku Client
      * https://github.com/seppukudevelopment/seppuku/blob/master/src/main/java/me/rigamortis/seppuku/api/util/MathUtil.java
      */
 

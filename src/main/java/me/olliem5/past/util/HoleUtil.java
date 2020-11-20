@@ -45,6 +45,8 @@ public class HoleUtil {
         return new BlockPos(Math.floor(mc.player.posX), Math.floor(mc.player.posY), Math.floor(mc.player.posZ));
     }
 
+    //TODO: Not make range specific to HoleESP
+
     public List<BlockPos> findObsidianHoles() {
         NonNullList positions = NonNullList.create();
         positions.addAll(this.getSphere(getPlayerPos(), Past.settingsManager.getSettingID("HoleESPHoleRange").getValueInt(), Past.settingsManager.getSettingID("HoleESPHoleRange").getValueInt(), false, true, 0).stream().filter(this::isInObsidianHole).collect(Collectors.toList()));

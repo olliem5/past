@@ -18,10 +18,14 @@ import net.minecraft.util.math.Vec3d;
 public class PlayerUtil {
 
     /**
-     * Modified from https://github.com/Katatje/Dream/blob/master/src/main/java/cat/yoink/dream/api/util/PlayerUtil.java
+     * Credit Yoink for block placement
+     * https://github.com/Katatje/Dream/blob/master/src/main/java/cat/yoink/dream/api/util/PlayerUtil.java
      *
-     * @author yoink
+     * Credit ionar2 for the facing util
+     * https://github.com/ionar2/spidermod/blob/master/src/main/java/me/ionar/salhack/util/entity/PlayerUtil.java
      */
+
+    //TODO: Blacklist shulkers & like blocks for placements
 
     public static void placeBlock(BlockPos pos) {
 
@@ -68,6 +72,16 @@ public class PlayerUtil {
         for (int i = 0; i < 9; i++) {
             Item item = Minecraft.getMinecraft().player.inventory.getStackInSlot(i).getItem();
             if (item instanceof ItemBlock) {
+                return i;
+            }
+        }
+        return -1;
+    }
+
+    public static int getItemInHotbar(Item designatedItem) {
+        for (int i = 0; i < 9; i++) {
+            Item item = Minecraft.getMinecraft().player.inventory.getStackInSlot(i).getItem();
+            if (item instanceof Item && item.equals(designatedItem)) {
                 return i;
             }
         }

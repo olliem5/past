@@ -1,10 +1,7 @@
 package me.olliem5.past.module;
 
 import me.olliem5.past.module.modules.combat.*;
-import me.olliem5.past.module.modules.exploit.Blink;
-import me.olliem5.past.module.modules.exploit.PortalGodMode;
-import me.olliem5.past.module.modules.exploit.Timer;
-import me.olliem5.past.module.modules.exploit.XCarry;
+import me.olliem5.past.module.modules.exploit.*;
 import me.olliem5.past.module.modules.movement.*;
 import me.olliem5.past.module.modules.player.*;
 import me.olliem5.past.module.modules.render.*;
@@ -35,12 +32,14 @@ public class ModuleManager {
         modules.add(new ClickGUI());
         modules.add(new HUD());
         modules.add(new HudEditor());
+        modules.add(new Render());
 
         /* Exploit */
         modules.add(new Blink());
         modules.add(new PortalGodMode());
         modules.add(new Timer());
         modules.add(new XCarry());
+        modules.add(new BowExploit());
 
         /* Misc */
         modules.add(new DiscordRPC());
