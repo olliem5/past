@@ -19,9 +19,7 @@ public class Step extends Module {
     }
 
     public void onUpdate() {
-        if (nullCheck()) {
-            return;
-        }
+        if (nullCheck()) return;
 
         if (mc.player.onGround && !mc.player.isInWater() && !mc.player.isInLava() && !mc.player.isOnLadder()) {
             if (mc.player.collidedHorizontally) {

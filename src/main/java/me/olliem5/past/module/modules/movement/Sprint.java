@@ -27,9 +27,7 @@ public class Sprint extends Module {
     }
 
     public void onUpdate() {
-        if (nullCheck()) {
-            return;
-        }
+        if (nullCheck()) return;
 
         if (sprintmode.getValueString() == "Legit") {
             try {

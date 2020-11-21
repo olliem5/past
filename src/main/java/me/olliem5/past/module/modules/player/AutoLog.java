@@ -20,9 +20,7 @@ public class AutoLog extends Module {
     }
 
     public void onUpdate() {
-        if (nullCheck()) {
-            return;
-        }
+        if (nullCheck()) return;
 
         if (mc.player.getHealth() < health.getValueInt()) {
             toggle();

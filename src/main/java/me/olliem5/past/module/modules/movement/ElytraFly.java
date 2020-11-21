@@ -35,17 +35,13 @@ public class ElytraFly extends Module {
 
     @Override
     public void onEnable() {
-        if (mc.player == null) {
-            return;
-        }
+        if (mc.player == null) return;
 
         mc.player.connection.sendPacket(new CPacketEntityAction(mc.player, CPacketEntityAction.Action.START_FALL_FLYING));
     }
 
     public void onUpdate() {
-        if (mc.player == null) {
-            return;
-        }
+        if (mc.player == null) return;
 
         if (flymode.getValueString() == "Control") {
 

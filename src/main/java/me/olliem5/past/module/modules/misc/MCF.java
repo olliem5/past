@@ -31,8 +31,7 @@ public class MCF extends Module {
             final RayTraceResult result = mc.objectMouseOver;
             Entity player = result.entityHit;
 
-            if (result == null || result.typeOfHit != RayTraceResult.Type.ENTITY || !(result.entityHit instanceof EntityPlayer))
-                return;
+            if (result == null || result.typeOfHit != RayTraceResult.Type.ENTITY || !(result.entityHit instanceof EntityPlayer)) return;
 
             if (Past.friendsManager.isFriend(player.getName())) {
                 Past.friendsManager.delFriend(mc.objectMouseOver.entityHit.getName());

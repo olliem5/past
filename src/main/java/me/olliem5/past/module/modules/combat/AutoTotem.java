@@ -18,15 +18,11 @@ public class AutoTotem extends Module {
 
     @Override
     public void onUpdate() {
-        if (nullCheck()) {
-            return;
-        }
+        if (nullCheck()) return;
 
         totems = mc.player.inventory.mainInventory.stream().filter(itemStack -> itemStack.getItem() == Items.TOTEM_OF_UNDYING).mapToInt(ItemStack::getCount).sum();
 
-        if (mc.player.getItemStackFromSlot(EntityEquipmentSlot.OFFHAND).getItem() == Items.TOTEM_OF_UNDYING) {
-            return;
-        }
+        if (mc.player.getItemStackFromSlot(EntityEquipmentSlot.OFFHAND).getItem() == Items.TOTEM_OF_UNDYING) return;
 
         final int slot = this.getItemSlot();
 

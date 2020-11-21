@@ -47,9 +47,7 @@ public class FootEXP extends Module {
 
     @Override
     public void onUpdate() {
-        if (nullCheck()) {
-            return;
-        }
+        if (nullCheck()) return;
 
         if (autoswitch.getValBoolean()) {
             mc.player.inventory.currentItem = PlayerUtil.getItemInHotbar(Items.EXPERIENCE_BOTTLE);

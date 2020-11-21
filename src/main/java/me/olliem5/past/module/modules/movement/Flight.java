@@ -27,9 +27,8 @@ public class Flight extends Module {
     }
 
     public void onUpdate() {
-        if (nullCheck()) {
-            return;
-        }
+        if (nullCheck()) return;
+
         if (flymode.getValueString() == "Vanilla") {
             mc.player.capabilities.isFlying = true;
             mc.player.capabilities.setFlySpeed((float) flyspeed.getValueDouble());
@@ -38,9 +37,8 @@ public class Flight extends Module {
 
     @Override
     public void onDisable() {
-        if (nullCheck()) {
-            return;
-        }
+        if (nullCheck()) return;
+
         if (flymode.getValueString() == "Vanilla") {
             mc.player.capabilities.isFlying = false;
         }

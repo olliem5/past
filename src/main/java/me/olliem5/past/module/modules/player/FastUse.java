@@ -34,9 +34,7 @@ public class FastUse extends Module {
     }
 
     public void onUpdate() {
-        if (nullCheck()) {
-            return;
-        }
+        if (nullCheck()) return;
 
         if (mc.player.getHeldItemMainhand().getItem() instanceof ItemBow) {
             if (mc.player.isHandActive() && mc.player.getItemInUseMaxCount() >= 3) {

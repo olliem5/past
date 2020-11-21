@@ -25,9 +25,7 @@ public class WeaknessMsg extends Module {
     private boolean hasAnnounced = false;
 
     public void onUpdate() {
-        if (nullCheck()) {
-            return;
-        }
+        if (nullCheck()) return;
 
         if (mc.player.isPotionActive(MobEffects.WEAKNESS) && !hasAnnounced) {
             hasAnnounced = true;

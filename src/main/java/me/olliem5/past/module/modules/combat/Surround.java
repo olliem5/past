@@ -97,9 +97,7 @@ public class Surround extends Module {
     ));
 
     public void onUpdate() {
-        if (nullCheck()) {
-            return;
-        }
+        if (nullCheck()) return;
 
         if (timeout.getValBoolean()) {
             if (this.isToggled()) {

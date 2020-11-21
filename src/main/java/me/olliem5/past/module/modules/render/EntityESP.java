@@ -18,9 +18,8 @@ public class EntityESP extends Module {
 
     @EventHandler
     public Listener<RenderWorldLastEvent> listener = new Listener<>(event -> {
-        if (mc.world == null) {
-            return;
-        }
+        if (mc.world == null) return;
+
         for (Entity entity : mc.world.getLoadedEntityList()) {
             if (entity != mc.player) {
                 entity.setGlowing(true);

@@ -64,9 +64,7 @@ public class HoleESP extends Module {
 
     @EventHandler
     public Listener<RenderWorldLastEvent> listener = new Listener<>(event -> {
-        if (nullCheck()) {
-            return;
-        }
+        if (nullCheck()) return;
 
         List<BlockPos> obsidianHoles = holeUtil.findObsidianHoles();
         List<BlockPos> bedrockHoles = holeUtil.findBedrockHoles();

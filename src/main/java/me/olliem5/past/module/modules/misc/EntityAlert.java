@@ -36,9 +36,7 @@ public class EntityAlert extends Module {
     }
 
     public void onUpdate() {
-        if (nullCheck()) {
-            return;
-        }
+        if (nullCheck()) return;
 
         ++donkeyDelay;
         ++llamaDelay;

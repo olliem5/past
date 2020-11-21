@@ -9,9 +9,7 @@ public class HoleTP extends Module {
     }
 
     public void onUpdate() {
-        if (nullCheck()) {
-            return;
-        }
+        if (nullCheck()) return;
 
         if (mc.player.onGround && !mc.player.isInLava() && !mc.player.isInWater() && !mc.player.isOnLadder()) {
             --mc.player.motionY;

@@ -34,9 +34,7 @@ public class Time extends Module {
     }
 
     public void onUpdate() {
-        if (mc.world == null) {
-            return;
-        }
+        if (mc.world == null) return;
 
         if (timemode.getValueString() == "Day") {
             mc.world.setWorldTime(1000);

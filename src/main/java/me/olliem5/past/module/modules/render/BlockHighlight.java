@@ -47,18 +47,14 @@ public class BlockHighlight extends Module {
 
     @Override
     public void onUpdate() {
-        if (nullCheck()) {
-            return;
-        }
+        if (nullCheck()) return;
 
         rayTraceResult = mc.objectMouseOver;
     }
 
     @EventHandler
     public Listener<RenderWorldLastEvent> listener = new Listener<>(event -> {
-        if (nullCheck()) {
-            return;
-        }
+        if (nullCheck()) return;
 
         float[] hue = new float[] {(float) (System.currentTimeMillis() % 7500L) / 7500f};
         int rgb = Color.HSBtoRGB(hue[0], 0.8f, 0.8f);

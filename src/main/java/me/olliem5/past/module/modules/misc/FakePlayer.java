@@ -13,9 +13,8 @@ public class FakePlayer extends Module {
     }
 
     public void onEnable() {
-        if (mc.world == null) {
-            return;
-        }
+        if (mc.world == null) return;
+
         EntityOtherPlayerMP fakePlayer = new EntityOtherPlayerMP(mc.world, new GameProfile(UUID.fromString("873e2766-9254-49bc-89d7-5d4d585ad29d"), "Obama"));
         fakePlayer.copyLocationAndAnglesFrom(mc.player);
         fakePlayer.rotationYawHead = mc.player.rotationYawHead;

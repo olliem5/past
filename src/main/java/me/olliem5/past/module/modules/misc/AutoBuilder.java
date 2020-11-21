@@ -118,9 +118,7 @@ public class AutoBuilder extends Module {
     ));
 
     public void onUpdate() {
-        if (nullCheck()) {
-            return;
-        }
+        if (nullCheck()) return;
 
         int blocksPlaced = 0;
 
