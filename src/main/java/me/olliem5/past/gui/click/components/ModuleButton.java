@@ -38,6 +38,10 @@ public class ModuleButton extends Component {
                     this.subcomponents.add(new IntegerSlider(setting, this, opY));
                     opY += 12;
                 }
+                if (setting.getType() == "doubleslider") {
+                    this.subcomponents.add(new DoubleSlider(setting, this, opY));
+                    opY += 12;
+                }
                 if (setting.getType() == "mode") {
                     this.subcomponents.add(new ModeChanger(setting, this, opY));
                     opY += 12;

@@ -16,7 +16,6 @@ import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
-import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.Display;
 
 import java.awt.*;
@@ -34,9 +33,8 @@ public class Past {
     public static final String author = "olliem5";
     public static final String github = "https://github.com/olliem5/past";
     public static final String appid = "754509326902886411";
-    public static String prefix = ".";
+    public static String prefix = "@";
     public static String nameversion = name + " " + version;
-    public static int prefixchatkey = Keyboard.KEY_PERIOD; //TODO: Sync up with config and the prefix string
 
     public static EventBus EVENT_BUS;
     public static ForgeEvents forgeEvents;

@@ -13,6 +13,9 @@ public class Setting {
     private int min;
     private int start;
     private int max;
+    private double dmin;
+    private double dstart;
+    private double dmax;
     private boolean bval;
     private String sval;
     private ArrayList<String> modes;
@@ -25,6 +28,16 @@ public class Setting {
         this.start = start;
         this.max = max;
         this.type = "intslider";
+    }
+
+    public Setting(String name, String id, double dmin, double dstart, double dmax, Module module) {
+        this.parent = module;
+        this.name = name;
+        this.id = id;
+        this.dmin = dmin;
+        this.dstart = dstart;
+        this.dmax = dmax;
+        this.type = "doubleslider";
     }
 
     public Setting(String name, String id, boolean bval, Module module) {
@@ -46,6 +59,10 @@ public class Setting {
 
     public int getValueInt() {
         return this.start;
+    }
+
+    public double getValueDouble() {
+        return this.dstart;
     }
 
     public boolean getValBoolean() {
@@ -76,6 +93,18 @@ public class Setting {
         return max;
     }
 
+    public double getDmin() {
+        return dmin;
+    }
+
+    public double getDstart() {
+        return dstart;
+    }
+
+    public double getDmax() {
+        return dmax;
+    }
+
     public String getId() {
         return id;
     }
@@ -96,6 +125,16 @@ public class Setting {
                 Past.configUtil.saveIntegers();
             } catch (Exception e) {}
         }
+    }
+
+    public void setValueDouble(final double value) {
+        this.dstart = value;
+
+//        if (Past.configUtil != null) {
+//            try {
+//                Past.configUtil.saveIntegers();
+//            } catch (Exception e) {}
+//        }
     }
 
     public void setValBoolean(boolean value) {
