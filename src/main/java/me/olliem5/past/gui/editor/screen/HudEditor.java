@@ -1,6 +1,9 @@
 package me.olliem5.past.gui.editor.screen;
 
 import me.olliem5.past.Past;
+import me.olliem5.past.gui.editor.component.HudComponent;
+import me.olliem5.past.util.ColourUtil;
+import net.minecraft.client.gui.Gui;
 import net.minecraft.client.gui.GuiScreen;
 
 import java.util.ArrayList;
@@ -23,12 +26,24 @@ public class HudEditor extends GuiScreen {
         if (Past.settingsManager.getSettingID("ClickGUIBackground").getValBoolean()) {
             drawDefaultBackground();
         }
+
         for (HudPanel hp : hudpanels) {
             hp.updatePosition(mouseX, mouseY);
             hp.drawScreen(mouseX, mouseY, partialTicks);
 
             for (Element elem : hp.getElements()) {
                 elem.updateElement(mouseX, mouseY);
+            }
+        }
+
+        for (HudComponent hudComponent : Past.hudComponentManager.getHudComponents()) {
+            if (hudComponent.isEnabled()) {
+                hudComponent.updatePosition(mouseX,mouseY);
+                if (hudComponent.isDragging()) {
+                    Gui.drawRect(hudComponent.getX() + -2, hudComponent.getY() + -2, hudComponent.getX() + hudComponent.getWidth() + 2, hudComponent.getY() + hudComponent.getHeight() + 2, ColourUtil.getMultiColour().getRGB());
+                }
+                Gui.drawRect(hudComponent.getX() + -1, hudComponent.getY() + -1, hudComponent.getX() + hudComponent.getWidth() + 1, hudComponent.getY() + hudComponent.getHeight() + 1, 0xFF111111);
+                hudComponent.render(partialTicks);
             }
         }
     }
@@ -52,6 +67,14 @@ public class HudEditor extends GuiScreen {
                 }
             }
         }
+
+        for (HudComponent hudComponent : Past.hudComponentManager.getHudComponents()) {
+            if (hudComponent.isMouseOnComponent(mouseX, mouseY) && mouseButton == 0 && hudComponent.isEnabled()) {
+                hudComponent.setDragging(true);
+                hudComponent.setDragX(mouseX - hudComponent.getX());
+                hudComponent.setDragY(mouseY - hudComponent.getY());
+            }
+        }
     }
 
     @Override
@@ -70,6 +93,12 @@ public class HudEditor extends GuiScreen {
                 for (Element elem : hp.getElements()) {
                     elem.mouseReleased(mouseX, mouseY, state);
                 }
+            }
+        }
+
+        for (HudComponent hudComponent : Past.hudComponentManager.getHudComponents()) {
+            if (hudComponent.isMouseOnComponent(mouseX, mouseY) && hudComponent.isEnabled()) {
+                hudComponent.setDragging(false);
             }
         }
     }

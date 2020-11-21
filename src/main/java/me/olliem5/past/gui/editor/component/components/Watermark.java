@@ -2,13 +2,18 @@ package me.olliem5.past.gui.editor.component.components;
 
 import me.olliem5.past.Past;
 import me.olliem5.past.gui.editor.component.HudComponent;
+import me.olliem5.past.util.StringUtil;
 
 public class Watermark extends HudComponent {
     public Watermark() {
-        super("Watermark", false, 2, 2, 10, 10);
+        super("Watermark", boxWidth);
     }
 
-    public void render() {
-        mc.fontRenderer.drawStringWithShadow(Past.nameversion, getX(), getY(), -1);
+    private static String renderText = Past.nameversion;
+
+    private static int boxWidth = StringUtil.getStringWidth(renderText);
+
+    public void render(float ticks) {
+        mc.fontRenderer.drawStringWithShadow(renderText, getX(), getY(), -1);
     }
 }

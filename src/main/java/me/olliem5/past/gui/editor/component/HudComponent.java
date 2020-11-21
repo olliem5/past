@@ -8,26 +8,16 @@ public class HudComponent {
     private String name;
     private boolean enabled;
     private boolean dragging;
-    private int x;
-    private int y;
+    private int x = 2;
+    private int y = 2;
     private int width;
-    private int height;
+    private int height = 9;
     private int dragX;
     private int dragY;
 
-    /**
-     * TODO: Make all the hud components start the render in the top left corner
-     *
-     * Also, why do we need a width and height?
-     */
-
-    public HudComponent(String name, boolean enabled, int x, int y, int width, int height) {
+    public HudComponent(String name, int width) {
         this.name = name;
-        this.enabled = enabled;
-        this.x = x;
-        this.y = y;
         this.width = width;
-        this.height = height;
     }
 
     public String getName() {
@@ -117,5 +107,5 @@ public class HudComponent {
         }
     }
 
-    public void render() {}
+    public void render(float ticks) {}
 }
