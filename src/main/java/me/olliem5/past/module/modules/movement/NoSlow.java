@@ -2,8 +2,9 @@ package me.olliem5.past.module.modules.movement;
 
 import me.olliem5.past.module.Category;
 import me.olliem5.past.module.Module;
+import me.zero.alpine.listener.EventHandler;
+import me.zero.alpine.listener.Listener;
 import net.minecraftforge.client.event.InputUpdateEvent;
-import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 public class NoSlow extends Module {
     public NoSlow() {
@@ -12,11 +13,11 @@ public class NoSlow extends Module {
 
     //Check MixinBlockSoulSand
 
-    @SubscribeEvent
-    public void onInputUpdate(InputUpdateEvent event) {
-        if (!mc.player.isRiding() && mc.player.isHandActive()) {
+    @EventHandler
+    public Listener<InputUpdateEvent> listener = new Listener<>(event -> {
+        if (mc.player.isHandActive() && !mc.player.isRiding()) {
             event.getMovementInput().moveStrafe *= 5;
             event.getMovementInput().moveForward *= 5;
         }
-    }
+    });
 }

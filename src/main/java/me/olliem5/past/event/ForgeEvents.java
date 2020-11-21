@@ -3,7 +3,10 @@ package me.olliem5.past.event;
 import me.olliem5.past.Past;
 import me.olliem5.past.gui.editor.component.HudComponent;
 import me.olliem5.past.module.Module;
+import net.minecraftforge.client.event.EntityViewRenderEvent;
+import net.minecraftforge.client.event.InputUpdateEvent;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
+import net.minecraftforge.client.event.RenderWorldLastEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.InputEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
@@ -11,7 +14,6 @@ import org.lwjgl.input.Keyboard;
 
 public class ForgeEvents {
 
-    //Toggling modules when their keybind is pressed
     @SubscribeEvent
     public void onKeyInput(InputEvent.KeyInputEvent event) {
         if (Keyboard.getEventKeyState()) {
@@ -20,10 +22,10 @@ public class ForgeEvents {
                     modules.toggle();
                 }
             }
+//            Past.EVENT_BUS.post(event);
         }
     }
 
-    //Update for modules
     @SubscribeEvent
     public void onTick(TickEvent.ClientTickEvent event) {
         for (Module module : Past.moduleManager.getModules()) {
@@ -31,9 +33,9 @@ public class ForgeEvents {
                 module.onUpdate();
             }
         }
+//        Past.EVENT_BUS.post(event);
     }
 
-    //Drawing enabled HUD Components
     @SubscribeEvent
     public void onRenderGameOverlay(RenderGameOverlayEvent.Text event) {
         for (HudComponent hudComponent : Past.hudComponentManager.getHudComponents()) {
@@ -41,5 +43,31 @@ public class ForgeEvents {
                 hudComponent.render(event.getPartialTicks());
             }
         }
+        Past.EVENT_BUS.post(event);
+    }
+
+    @SubscribeEvent
+    public void onInputUpdate(InputUpdateEvent event) {
+        Past.EVENT_BUS.post(event);
+    }
+
+    @SubscribeEvent
+    public void onRender(RenderWorldLastEvent event) {
+        Past.EVENT_BUS.post(event);
+    }
+
+    @SubscribeEvent
+    public void fovEvent(EntityViewRenderEvent.FOVModifier event) {
+        Past.EVENT_BUS.post(event);
+    }
+
+    @SubscribeEvent
+    public void fogColours(EntityViewRenderEvent.FogColors event) {
+        Past.EVENT_BUS.post(event);
+    }
+
+    @SubscribeEvent
+    public void fogDensity(EntityViewRenderEvent.FogDensity event) {
+        Past.EVENT_BUS.post(event);
     }
 }

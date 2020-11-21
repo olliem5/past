@@ -9,7 +9,6 @@ import me.olliem5.past.util.PlayerUtil;
 import me.zero.alpine.listener.EventHandler;
 import me.zero.alpine.listener.Listener;
 import net.minecraft.init.Items;
-import net.minecraft.item.ItemBow;
 import net.minecraft.item.ItemExpBottle;
 import net.minecraft.network.play.client.CPacketPlayer;
 import net.minecraft.network.play.client.CPacketPlayerTryUseItem;

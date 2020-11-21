@@ -4,6 +4,8 @@ import me.olliem5.past.Past;
 import me.olliem5.past.module.Category;
 import me.olliem5.past.module.Module;
 import me.olliem5.past.settings.Setting;
+import me.zero.alpine.listener.EventHandler;
+import me.zero.alpine.listener.Listener;
 import net.minecraftforge.client.event.EntityViewRenderEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
@@ -29,13 +31,15 @@ public class SkyColour extends Module {
         Past.settingsManager.registerSetting(density = new Setting("Density", "SkyColourDensity", 0, 0, 255, this));
     }
 
-    @SubscribeEvent
-    public void fogColours(EntityViewRenderEvent.FogColors event) {
+    @EventHandler
+    public Listener<EntityViewRenderEvent.FogColors> fogColorsListener = new Listener<>(event -> {
+
         float[] hue = new float[]{(float) (System.currentTimeMillis() % 7500L) / 7500f};
         int rgb = Color.HSBtoRGB(hue[0], 0.8f, 0.8f);
         int r = rgb >> 16 & 255;
         int g = rgb >> 8 & 255;
         int b = rgb & 255;
+
         if (rainbow.getValBoolean()) {
             event.setRed(r / 255f);
             event.setGreen(g / 255f);
@@ -45,11 +49,11 @@ public class SkyColour extends Module {
             event.setGreen(green.getValueInt() / 255f);
             event.setBlue(blue.getValueInt() / 255f);
         }
-    }
+    });
 
-    @SubscribeEvent
-    public void fogDensity(EntityViewRenderEvent.FogDensity event) {
+    @EventHandler
+    public Listener<EntityViewRenderEvent.FogDensity> fogDensityListener = new Listener<>(event -> {
         event.setDensity(density.getValueInt() / 255f);
         event.setCanceled(true);
-    }
+    });
 }

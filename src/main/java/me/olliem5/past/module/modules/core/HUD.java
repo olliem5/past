@@ -7,10 +7,11 @@ import me.olliem5.past.settings.Setting;
 import me.olliem5.past.util.ColourListUtil;
 import me.olliem5.past.util.ColourUtil;
 import me.olliem5.past.util.StringUtil;
+import me.zero.alpine.listener.EventHandler;
+import me.zero.alpine.listener.Listener;
 import net.minecraft.client.gui.Gui;
 import net.minecraft.client.gui.ScaledResolution;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
-import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 import java.util.Calendar;
 
@@ -75,90 +76,88 @@ public class HUD extends Module {
         }
     }
 
-    @SubscribeEvent
-    public void onGui(RenderGameOverlayEvent event) {
-        if (event.getType() == RenderGameOverlayEvent.ElementType.TEXT) {
-            if (watermark.getValBoolean()) {
-                if (shadow.getValBoolean()) {
-                    if (Past.settingsManager.getSettingID("HUDCustomFont").getValBoolean()) {
-                        Past.customFontRenderer.drawStringWithShadow(Past.nameversion, watermarkx.getValueInt(), watermarky.getValueInt(), getColour());
-                    } else {
-                        mc.fontRenderer.drawStringWithShadow(Past.nameversion, watermarkx.getValueInt(), watermarky.getValueInt(), getColour());
-                    }
-                } else {
-                    if (Past.settingsManager.getSettingID("HUDCustomFont").getValBoolean()) {
-                        Past.customFontRenderer.drawString(Past.nameversion, watermarkx.getValueInt(), watermarky.getValueInt(), getColour());
-                    } else {
-                        mc.fontRenderer.drawString(Past.nameversion, watermarkx.getValueInt(), watermarky.getValueInt(), getColour());
-                    }
-                }
-            }
-
-            if (welcomer.getValBoolean()) {
-                if (shadow.getValBoolean()) {
-                    if (Past.settingsManager.getSettingID("HUDCustomFont").getValBoolean()) {
-                        Past.customFontRenderer.drawStringWithShadow(getWelcomerMessage() + mc.getSession().getUsername(), welcomerx.getValueInt(), welcomery.getValueInt(), getColour());
-                    } else {
-                        mc.fontRenderer.drawStringWithShadow(getWelcomerMessage() + mc.getSession().getUsername(), welcomerx.getValueInt(), welcomery.getValueInt(), getColour());
-                    }
-                } else {
-                    if (Past.settingsManager.getSettingID("HUDCustomFont").getValBoolean()) {
-                        Past.customFontRenderer.drawString(getWelcomerMessage() + mc.getSession().getUsername(), welcomerx.getValueInt(), welcomery.getValueInt(), getColour());
-                    } else {
-                        mc.fontRenderer.drawString(getWelcomerMessage() + mc.getSession().getUsername(), welcomerx.getValueInt(), welcomery.getValueInt(), getColour());
-                    }
-                }
-            }
-
-            if (arraylist.getValBoolean()) {
+    @EventHandler
+    public Listener<RenderGameOverlayEvent.Text> listener = new Listener<>(event -> {
+        if (watermark.getValBoolean()) {
+            if (shadow.getValBoolean()) {
                 if (Past.settingsManager.getSettingID("HUDCustomFont").getValBoolean()) {
-                    Past.moduleManager.modules.sort((module1, module2) -> StringUtil.getStringWidthCustomFont(StringUtil.capitalizeFirstLetter(module2.getName() + module2.getArraylistInfo())) - StringUtil.getStringWidthCustomFont(StringUtil.capitalizeFirstLetter(module1.getName() + module1.getArraylistInfo())));
+                    Past.customFontRenderer.drawStringWithShadow(Past.nameversion, watermarkx.getValueInt(), watermarky.getValueInt(), getColour());
                 } else {
-                    Past.moduleManager.modules.sort((module1, module2) -> StringUtil.getStringWidth(StringUtil.capitalizeFirstLetter(module2.getName() + module2.getArraylistInfo())) - StringUtil.getStringWidth(StringUtil.capitalizeFirstLetter(module1.getName() + module1.getArraylistInfo())));
+                    mc.fontRenderer.drawStringWithShadow(Past.nameversion, watermarkx.getValueInt(), watermarky.getValueInt(), getColour());
                 }
-
-                ScaledResolution sr = new ScaledResolution(mc);
-                int count = 0;
-
-                for (Module module : Past.moduleManager.getModules()) {
-                    if (!module.isToggled()) {
-                        continue;
-                    }
-
-                    double offset = count * (mc.fontRenderer.FONT_HEIGHT + 4);
-
-                    if (background.getValBoolean()) {
-                        if (Past.settingsManager.getSettingID("HUDCustomFont").getValBoolean()) {
-                            Gui.drawRect(sr.getScaledWidth() - Past.customFontRenderer.getStringWidth(module.getName() + module.getArraylistInfo()) - 10, (int) offset, sr.getScaledWidth(), 6 + Past.customFontRenderer.getHeight() + (int) offset, 0x75101010);
-                        } else {
-                            Gui.drawRect(sr.getScaledWidth() - mc.fontRenderer.getStringWidth(module.getName() + module.getArraylistInfo()) - 10, (int) offset, sr.getScaledWidth(), 4 + mc.fontRenderer.FONT_HEIGHT + (int) offset, 0x75101010);
-                        }
-                    }
-
-                    if (sidebox.getValBoolean()) {
-                        if (Past.settingsManager.getSettingID("HUDCustomFont").getValBoolean()) {
-                            Gui.drawRect(sr.getScaledWidth() - Past.customFontRenderer.getStringWidth(module.getName() + module.getArraylistInfo()) - 10, (int) offset, sr.getScaledWidth() - Past.customFontRenderer.getStringWidth(module.getName() + module.getArraylistInfo()) - 8, 6 + Past.customFontRenderer.getHeight() + (int) offset, getColour());
-                        } else {
-                            Gui.drawRect(sr.getScaledWidth() - mc.fontRenderer.getStringWidth(module.getName() + module.getArraylistInfo()) - 10, (int) offset, sr.getScaledWidth() - mc.fontRenderer.getStringWidth(module.getName() + module.getArraylistInfo()) - 8, 4 + mc.fontRenderer.FONT_HEIGHT + (int) offset, getColour());
-                        }
-                    }
-
-                    if (shadow.getValBoolean()) {
-                        if (Past.settingsManager.getSettingID("HUDCustomFont").getValBoolean()) {
-                            Past.customFontRenderer.drawStringWithShadow(module.getName() + module.getArraylistInfo(), sr.getScaledWidth() - Past.customFontRenderer.getStringWidth(module.getName() + module.getArraylistInfo()) - 4, (int) (4 + offset), getColour());
-                        } else {
-                            mc.fontRenderer.drawStringWithShadow(module.getName() + module.getArraylistInfo(), sr.getScaledWidth() - mc.fontRenderer.getStringWidth(module.getName() + module.getArraylistInfo()) - 4, (int) (4 + offset), getColour());
-                        }
-                    } else {
-                        if (Past.settingsManager.getSettingID("HUDCustomFont").getValBoolean()) {
-                            Past.customFontRenderer.drawString(module.getName() + module.getArraylistInfo(), sr.getScaledWidth() - Past.customFontRenderer.getStringWidth(module.getName() + module.getArraylistInfo()) - 4, (int) (4 + offset), getColour());
-                        } else {
-                            mc.fontRenderer.drawString(module.getName() + module.getArraylistInfo(), sr.getScaledWidth() - mc.fontRenderer.getStringWidth(module.getName() + module.getArraylistInfo()) - 4, (int) (4 + offset), getColour());
-                        }
-                    }
-                    count++;
+            } else {
+                if (Past.settingsManager.getSettingID("HUDCustomFont").getValBoolean()) {
+                    Past.customFontRenderer.drawString(Past.nameversion, watermarkx.getValueInt(), watermarky.getValueInt(), getColour());
+                } else {
+                    mc.fontRenderer.drawString(Past.nameversion, watermarkx.getValueInt(), watermarky.getValueInt(), getColour());
                 }
             }
         }
-    }
+
+        if (welcomer.getValBoolean()) {
+            if (shadow.getValBoolean()) {
+                if (Past.settingsManager.getSettingID("HUDCustomFont").getValBoolean()) {
+                    Past.customFontRenderer.drawStringWithShadow(getWelcomerMessage() + mc.getSession().getUsername(), welcomerx.getValueInt(), welcomery.getValueInt(), getColour());
+                } else {
+                    mc.fontRenderer.drawStringWithShadow(getWelcomerMessage() + mc.getSession().getUsername(), welcomerx.getValueInt(), welcomery.getValueInt(), getColour());
+                }
+            } else {
+                if (Past.settingsManager.getSettingID("HUDCustomFont").getValBoolean()) {
+                    Past.customFontRenderer.drawString(getWelcomerMessage() + mc.getSession().getUsername(), welcomerx.getValueInt(), welcomery.getValueInt(), getColour());
+                } else {
+                    mc.fontRenderer.drawString(getWelcomerMessage() + mc.getSession().getUsername(), welcomerx.getValueInt(), welcomery.getValueInt(), getColour());
+                }
+            }
+        }
+
+        if (arraylist.getValBoolean()) {
+            if (Past.settingsManager.getSettingID("HUDCustomFont").getValBoolean()) {
+                Past.moduleManager.modules.sort((module1, module2) -> StringUtil.getStringWidthCustomFont(StringUtil.capitalizeFirstLetter(module2.getName() + module2.getArraylistInfo())) - StringUtil.getStringWidthCustomFont(StringUtil.capitalizeFirstLetter(module1.getName() + module1.getArraylistInfo())));
+            } else {
+                Past.moduleManager.modules.sort((module1, module2) -> StringUtil.getStringWidth(StringUtil.capitalizeFirstLetter(module2.getName() + module2.getArraylistInfo())) - StringUtil.getStringWidth(StringUtil.capitalizeFirstLetter(module1.getName() + module1.getArraylistInfo())));
+            }
+
+            ScaledResolution sr = new ScaledResolution(mc);
+            int count = 0;
+
+            for (Module module : Past.moduleManager.getModules()) {
+                if (!module.isToggled()) {
+                    continue;
+                }
+
+                double offset = count * (mc.fontRenderer.FONT_HEIGHT + 4);
+
+                if (background.getValBoolean()) {
+                    if (Past.settingsManager.getSettingID("HUDCustomFont").getValBoolean()) {
+                        Gui.drawRect(sr.getScaledWidth() - Past.customFontRenderer.getStringWidth(module.getName() + module.getArraylistInfo()) - 10, (int) offset, sr.getScaledWidth(), 6 + Past.customFontRenderer.getHeight() + (int) offset, 0x75101010);
+                    } else {
+                        Gui.drawRect(sr.getScaledWidth() - mc.fontRenderer.getStringWidth(module.getName() + module.getArraylistInfo()) - 10, (int) offset, sr.getScaledWidth(), 4 + mc.fontRenderer.FONT_HEIGHT + (int) offset, 0x75101010);
+                    }
+                }
+
+                if (sidebox.getValBoolean()) {
+                    if (Past.settingsManager.getSettingID("HUDCustomFont").getValBoolean()) {
+                        Gui.drawRect(sr.getScaledWidth() - Past.customFontRenderer.getStringWidth(module.getName() + module.getArraylistInfo()) - 10, (int) offset, sr.getScaledWidth() - Past.customFontRenderer.getStringWidth(module.getName() + module.getArraylistInfo()) - 8, 6 + Past.customFontRenderer.getHeight() + (int) offset, getColour());
+                    } else {
+                        Gui.drawRect(sr.getScaledWidth() - mc.fontRenderer.getStringWidth(module.getName() + module.getArraylistInfo()) - 10, (int) offset, sr.getScaledWidth() - mc.fontRenderer.getStringWidth(module.getName() + module.getArraylistInfo()) - 8, 4 + mc.fontRenderer.FONT_HEIGHT + (int) offset, getColour());
+                    }
+                }
+
+                if (shadow.getValBoolean()) {
+                    if (Past.settingsManager.getSettingID("HUDCustomFont").getValBoolean()) {
+                        Past.customFontRenderer.drawStringWithShadow(module.getName() + module.getArraylistInfo(), sr.getScaledWidth() - Past.customFontRenderer.getStringWidth(module.getName() + module.getArraylistInfo()) - 4, (int) (4 + offset), getColour());
+                    } else {
+                        mc.fontRenderer.drawStringWithShadow(module.getName() + module.getArraylistInfo(), sr.getScaledWidth() - mc.fontRenderer.getStringWidth(module.getName() + module.getArraylistInfo()) - 4, (int) (4 + offset), getColour());
+                    }
+                } else {
+                    if (Past.settingsManager.getSettingID("HUDCustomFont").getValBoolean()) {
+                        Past.customFontRenderer.drawString(module.getName() + module.getArraylistInfo(), sr.getScaledWidth() - Past.customFontRenderer.getStringWidth(module.getName() + module.getArraylistInfo()) - 4, (int) (4 + offset), getColour());
+                    } else {
+                        mc.fontRenderer.drawString(module.getName() + module.getArraylistInfo(), sr.getScaledWidth() - mc.fontRenderer.getStringWidth(module.getName() + module.getArraylistInfo()) - 4, (int) (4 + offset), getColour());
+                    }
+                }
+                count++;
+            }
+        }
+    });
 }

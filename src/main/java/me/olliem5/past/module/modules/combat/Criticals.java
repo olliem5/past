@@ -9,7 +9,6 @@ import me.olliem5.past.util.ColourUtil;
 import me.olliem5.past.util.CooldownUtil;
 import me.zero.alpine.listener.EventHandler;
 import me.zero.alpine.listener.Listener;
-import net.minecraft.network.Packet;
 import net.minecraft.network.play.client.CPacketPlayer;
 import net.minecraft.network.play.client.CPacketUseEntity;
 

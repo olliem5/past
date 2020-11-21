@@ -4,6 +4,8 @@ import me.olliem5.past.Past;
 import me.olliem5.past.module.Category;
 import me.olliem5.past.module.Module;
 import me.olliem5.past.settings.Setting;
+import me.zero.alpine.listener.EventHandler;
+import me.zero.alpine.listener.Listener;
 import net.minecraftforge.client.event.EntityViewRenderEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
@@ -33,8 +35,8 @@ public class ViewModel extends Module {
 //        mc.player.renderArmYaw = armyaw.getValueInt();
     }
 
-    @SubscribeEvent
-    public void fovEvent(EntityViewRenderEvent.FOVModifier m) {
-        m.setFOV(itemfov.getValueInt());
-    }
+    @EventHandler
+    public Listener<EntityViewRenderEvent.FOVModifier> listener = new Listener<>(event -> {
+        event.setFOV(itemfov.getValueInt());
+    });
 }

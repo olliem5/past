@@ -3,11 +3,7 @@ package me.olliem5.past.module;
 import me.olliem5.past.Past;
 import net.minecraft.client.Minecraft;
 import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-import net.minecraftforge.fml.common.gameevent.TickEvent;
 import org.lwjgl.input.Keyboard;
-
-import static me.olliem5.past.Past.moduleManager;
 
 public class Module {
     protected Minecraft mc = Minecraft.getMinecraft();

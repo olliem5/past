@@ -6,9 +6,10 @@ import me.olliem5.past.module.Module;
 import me.olliem5.past.settings.Setting;
 import me.olliem5.past.util.HoleUtil;
 import me.olliem5.past.util.RenderUtil;
+import me.zero.alpine.listener.EventHandler;
+import me.zero.alpine.listener.Listener;
 import net.minecraft.util.math.BlockPos;
 import net.minecraftforge.client.event.RenderWorldLastEvent;
-import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -61,8 +62,8 @@ public class HoleESP extends Module {
 
     private static HoleUtil holeUtil = new HoleUtil();
 
-    @SubscribeEvent
-    public void onRender(RenderWorldLastEvent event) {
+    @EventHandler
+    public Listener<RenderWorldLastEvent> listener = new Listener<>(event -> {
         if (nullCheck()) {
             return;
         }
@@ -139,5 +140,5 @@ public class HoleESP extends Module {
                 }
             }
         }
-    }
+    });
 }

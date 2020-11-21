@@ -5,10 +5,11 @@ import me.olliem5.past.module.Category;
 import me.olliem5.past.module.Module;
 import me.olliem5.past.settings.Setting;
 import me.olliem5.past.util.RenderUtil;
+import me.zero.alpine.listener.EventHandler;
+import me.zero.alpine.listener.Listener;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraftforge.client.event.RenderWorldLastEvent;
-import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -53,8 +54,8 @@ public class BlockHighlight extends Module {
         rayTraceResult = mc.objectMouseOver;
     }
 
-    @SubscribeEvent
-    public void onRender(RenderWorldLastEvent event) {
+    @EventHandler
+    public Listener<RenderWorldLastEvent> listener = new Listener<>(event -> {
         if (nullCheck()) {
             return;
         }
@@ -97,5 +98,5 @@ public class BlockHighlight extends Module {
                 }
             }
         }
-    }
+    });
 }
