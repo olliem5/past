@@ -2,7 +2,7 @@ package me.olliem5.past.module.modules.misc;
 
 import me.olliem5.past.module.Category;
 import me.olliem5.past.module.Module;
-import me.olliem5.past.util.DiscordUtil;
+import me.olliem5.past.util.client.DiscordUtil;
 
 public class DiscordRPC extends Module {
     public DiscordRPC() {

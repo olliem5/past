@@ -1,8 +1,8 @@
 package me.olliem5.past.mixin.mixins;
 
 import me.olliem5.past.Past;
-import me.olliem5.past.util.ColourUtil;
-import me.olliem5.past.util.StringUtil;
+import me.olliem5.past.util.colour.ColourUtil;
+import me.olliem5.past.util.text.StringUtil;
 import net.minecraft.client.gui.Gui;
 import net.minecraft.client.gui.GuiMainMenu;
 import net.minecraft.client.gui.GuiScreen;

@@ -5,7 +5,7 @@ import me.olliem5.past.gui.click.Component;
 import me.olliem5.past.gui.click.Panel;
 import me.olliem5.past.module.Module;
 import me.olliem5.past.settings.Setting;
-import me.olliem5.past.util.ColourUtil;
+import me.olliem5.past.util.colour.ColourUtil;
 import net.minecraft.client.gui.Gui;
 
 import java.util.ArrayList;

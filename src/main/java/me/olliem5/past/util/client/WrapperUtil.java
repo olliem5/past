@@ -1,4 +1,4 @@
-package me.olliem5.past.util;
+package me.olliem5.past.util.client;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.EntityPlayerSP;

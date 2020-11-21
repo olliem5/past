@@ -1,4 +1,4 @@
-package me.olliem5.past.util;
+package me.olliem5.past.util.colour;
 
 import java.awt.*;
 import java.util.ArrayList;

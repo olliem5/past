@@ -1,5 +1,6 @@
-package me.olliem5.past.util;
+package me.olliem5.past.util.client;
 
+import me.olliem5.past.util.colour.ColourUtil;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.util.text.TextComponentString;

@@ -1,6 +1,6 @@
 package me.olliem5.past.event;
 
-import me.olliem5.past.util.WrapperUtil;
+import me.olliem5.past.util.client.WrapperUtil;
 import me.zero.alpine.type.Cancellable;
 
 public class Event extends Cancellable {

@@ -4,7 +4,7 @@ import me.olliem5.past.Past;
 import me.olliem5.past.gui.click.components.ModuleButton;
 import me.olliem5.past.module.Category;
 import me.olliem5.past.module.Module;
-import me.olliem5.past.util.ColourUtil;
+import me.olliem5.past.util.colour.ColourUtil;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Gui;
 

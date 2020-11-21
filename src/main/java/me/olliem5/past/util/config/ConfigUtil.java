@@ -1,4 +1,4 @@
-package me.olliem5.past.util;
+package me.olliem5.past.util.config;
 
 import me.olliem5.past.Past;
 import me.olliem5.past.friends.Friend;

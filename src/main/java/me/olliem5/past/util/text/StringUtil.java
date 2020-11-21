@@ -1,4 +1,4 @@
-package me.olliem5.past.util;
+package me.olliem5.past.util.text;
 
 import me.olliem5.past.Past;
 import net.minecraft.client.Minecraft;

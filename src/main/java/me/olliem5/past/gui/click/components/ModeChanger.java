@@ -3,7 +3,7 @@ package me.olliem5.past.gui.click.components;
 import me.olliem5.past.Past;
 import me.olliem5.past.gui.click.Component;
 import me.olliem5.past.settings.Setting;
-import me.olliem5.past.util.ColourUtil;
+import me.olliem5.past.util.colour.ColourUtil;
 import net.minecraft.client.gui.Gui;
 
 public class ModeChanger extends Component {

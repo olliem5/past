@@ -9,7 +9,7 @@ import me.olliem5.past.gui.editor.component.HudComponentManager;
 import me.olliem5.past.gui.editor.screen.HudEditor;
 import me.olliem5.past.module.ModuleManager;
 import me.olliem5.past.settings.SettingsManager;
-import me.olliem5.past.util.ConfigUtil;
+import me.olliem5.past.util.config.ConfigUtil;
 import me.zero.alpine.EventBus;
 import me.zero.alpine.EventManager;
 import net.minecraftforge.common.MinecraftForge;

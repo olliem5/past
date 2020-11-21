@@ -4,8 +4,8 @@ import me.olliem5.past.Past;
 import me.olliem5.past.module.Category;
 import me.olliem5.past.module.Module;
 import me.olliem5.past.settings.Setting;
-import me.olliem5.past.util.ColourUtil;
-import me.olliem5.past.util.MathUtil;
+import me.olliem5.past.util.colour.ColourUtil;
+import me.olliem5.past.util.module.MathUtil;
 import net.minecraft.network.play.client.CPacketEntityAction;
 
 import java.util.ArrayList;
