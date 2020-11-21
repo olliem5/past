@@ -57,14 +57,14 @@ public class Past {
     public static ConfigUtil configUtil;
 
     @Mod.EventHandler
-    public void PastPreInitialize(FMLPreInitializationEvent event) {
+    public void pastPreInitialize(FMLPreInitializationEvent event) {
         Display.setTitle(nameversion);
     }
 
-    /* Initializing client */
+    //Initializing the client
     @Mod.EventHandler
-    public void PastInitialize(FMLInitializationEvent event) {
-        System.out.println("[" + nameversion + "]" + " " + "Starting up and initializing!");
+    public void pastInitialize(FMLInitializationEvent event) {
+        System.out.println("[" + nameversion + "]" + " " + "Starting client initialization!");
 
         EVENT_BUS = new EventManager();
         System.out.println("[" + nameversion + "]" + " " + "Alpine Events Initialized!");
@@ -103,6 +103,6 @@ public class Past {
         MinecraftForge.EVENT_BUS.register(new CommandManager());
         MinecraftForge.EVENT_BUS.register(new ForgeEvents());
 
-        System.out.println("[" + nameversion + "]" + " " + "Client is ready to go!");
+        System.out.println("[" + nameversion + "]" + " " + "Client has finished initializing!");
     }
 }

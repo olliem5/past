@@ -1,12 +1,14 @@
 package me.olliem5.past.module.modules.chat;
 
 import me.olliem5.past.Past;
+import me.olliem5.past.event.events.PacketEvent;
 import me.olliem5.past.module.Category;
 import me.olliem5.past.module.Module;
 import me.olliem5.past.settings.Setting;
 import me.olliem5.past.util.ColourUtil;
-import net.minecraftforge.client.event.ClientChatEvent;
-import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import me.zero.alpine.listener.EventHandler;
+import me.zero.alpine.listener.Listener;
+import net.minecraft.network.play.client.CPacketChatMessage;
 
 import java.util.ArrayList;
 
@@ -30,35 +32,46 @@ public class ChatSuffix extends Module {
         Past.settingsManager.registerSetting(green = new Setting("Green Suffix", "ChatSuffixGreen", false, this));
     }
 
-    @SubscribeEvent
-    public void onChat(ClientChatEvent event) {
+    private String classicsuffix = " \uff30\uff41\uff53\uff54";
+    private String versionsuffix = " \uff30\uff41\uff53\uff54" + " " + Past.version;
 
-        String suffix = "";
+    @EventHandler
+    public Listener<PacketEvent.Send> listener = new Listener<>(event -> {
+        if (event.getPacket() instanceof CPacketChatMessage) {
 
-        if (suffixmode.getValueString() == "Classic") {
-            suffix = " \uff30\uff41\uff53\uff54";
+            String s = ((CPacketChatMessage) event.getPacket()).getMessage();
+
+            if (s.startsWith("/") || s.startsWith(Past.prefix)) {
+                return;
+            }
+
+            if (suffixmode.getValueString() == "Classic") {
+                if (blue.getValBoolean()) {
+                    s += " `" + classicsuffix;
+                } else if (green.getValBoolean()) {
+                    s += " >" + classicsuffix;
+                } else {
+                    s += classicsuffix;
+                }
+            }
+
+            if (suffixmode.getValueString() == "Version") {
+                if (blue.getValBoolean()) {
+                    s += " `" + versionsuffix;
+                } else if (green.getValBoolean()) {
+                    s += " >" + versionsuffix;
+                } else {
+                    s += versionsuffix;
+                }
+            }
+
+            if (s.length() >= 256) {
+                s = s.substring(0, 256);
+            }
+
+            ((CPacketChatMessage) event.getPacket()).message = s;
         }
-
-        if (suffixmode.getValueString() == "Version") {
-            suffix = " \uff30\uff41\uff53\uff54" + " " + Past.version;
-        }
-
-        if (blue.getValBoolean()) {
-            event.setMessage(event.getMessage() + " `" + suffix);
-        } else if (green.getValBoolean()) {
-            event.setMessage(event.getMessage() + " >" + suffix);
-        } else {
-            event.setMessage(event.getMessage() + suffix);
-        }
-
-        if (event.getMessage().startsWith("/")) {
-            return;
-        }
-
-        if (event.getMessage().startsWith(Past.prefix)) {
-            return;
-        }
-    }
+    });
 
     public String getArraylistInfo() {
         return ColourUtil.gray + " " + suffixmode.getValueString().toUpperCase();
