@@ -4,7 +4,8 @@ import me.olliem5.past.command.CommandManager;
 import me.olliem5.past.font.CustomFontRenderer;
 import me.olliem5.past.friends.FriendsManager;
 import me.olliem5.past.gui.click.ClickGUI;
-import me.olliem5.past.gui.editor.HudEditor;
+import me.olliem5.past.gui.editor.component.HudComponentManager;
+import me.olliem5.past.gui.editor.screen.HudEditor;
 import me.olliem5.past.module.Module;
 import me.olliem5.past.module.ModuleManager;
 import me.olliem5.past.settings.SettingsManager;
@@ -45,6 +46,7 @@ public class Past {
     public static CommandManager commandManager;
     public static FriendsManager friendsManager;
     public static CustomFontRenderer customFontRenderer;
+    public static HudComponentManager hudComponentManager;
     public static ClickGUI clickGUI;
     public static HudEditor hudEditor;
     public static ConfigUtil configUtil;
@@ -71,6 +73,9 @@ public class Past {
 
         customFontRenderer = new CustomFontRenderer(new Font("Arial", 0, 18), true, false);
         System.out.println("[" + nameversion + "]" + " " + "Custom Font Renderer Initialized! (Author 086)");
+
+        hudComponentManager = new HudComponentManager();
+        System.out.println("[" + nameversion + "]" + " " + "HUD Components Initialized!");
 
         clickGUI = new ClickGUI();
         System.out.println("[" + nameversion + "]" + " " + "ClickGUI Initialized!");
