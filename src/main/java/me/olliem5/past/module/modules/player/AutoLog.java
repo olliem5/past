@@ -16,7 +16,7 @@ public class AutoLog extends Module {
 
     @Override
     public void setup() {
-        Past.settingsManager.registerSetting(health = new Setting("Health", "AutoLogHealth", 0, 10, 36, this));
+        Past.settingsManager.registerSetting(health = new Setting("Health", "AutoLogHealth", 1, 10, 36, this));
     }
 
     public void onUpdate() {

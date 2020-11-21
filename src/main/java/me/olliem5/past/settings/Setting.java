@@ -130,11 +130,11 @@ public class Setting {
     public void setValueDouble(final double value) {
         this.dstart = value;
 
-//        if (Past.configUtil != null) {
-//            try {
-//                Past.configUtil.saveIntegers();
-//            } catch (Exception e) {}
-//        }
+        if (Past.configUtil != null) {
+            try {
+                Past.configUtil.saveDoubles();
+            } catch (Exception e) {}
+        }
     }
 
     public void setValBoolean(boolean value) {

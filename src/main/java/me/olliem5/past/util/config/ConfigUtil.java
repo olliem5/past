@@ -110,6 +110,27 @@ public class ConfigUtil {
         } catch (Exception e) {}
     }
 
+    public void saveDoubles() {
+        try {
+            File file = new File(MainDirectory, "DoubleValues.txt");
+            ArrayList<String> doublesToSave = new ArrayList<>();
+
+            for (Setting setting : Past.settingsManager.getSettings()) {
+                if (setting.getType() == "doubleslider") {
+                    doublesToSave.add(setting.getParent().getName() + ":" + setting.getId() + ":" + setting.getValueDouble());
+                }
+            }
+
+            try {
+                PrintWriter printWriter = new PrintWriter(file);
+                for (String string : doublesToSave) {
+                    printWriter.println(string);
+                }
+                printWriter.close();
+            } catch (FileNotFoundException e) {}
+        } catch (Exception e) {}
+    }
+
     public void saveModes() {
         try {
             File file = new File(MainDirectory, "ModeValues.txt");
