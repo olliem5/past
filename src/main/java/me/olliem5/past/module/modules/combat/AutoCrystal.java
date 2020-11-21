@@ -185,10 +185,6 @@ public class AutoCrystal extends Module {
         super.onToggle();
     }
 
-    @Override
-    public void onRender() {
-    }
-
     public static float calculateDamage(double posX, double posY, double posZ, Entity entity) {
         float doubleExplosionSize = 12.0F;
         double distancedsize = entity.getDistance(posX, posY, posZ) / (double) doubleExplosionSize;

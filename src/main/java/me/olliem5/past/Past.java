@@ -1,6 +1,7 @@
 package me.olliem5.past;
 
 import me.olliem5.past.command.CommandManager;
+import me.olliem5.past.event.ForgeEvents;
 import me.olliem5.past.font.CustomFontRenderer;
 import me.olliem5.past.friends.FriendsManager;
 import me.olliem5.past.gui.click.ClickGUI;
@@ -43,7 +44,8 @@ public class Past {
     public static String nameversion = name + " " + version;
     public static int prefixchatkey = Keyboard.KEY_PERIOD; //TODO: Sync up with config and the prefix string
 
-    public static EventBus EVENT_BUS = new EventManager();
+    public static EventBus EVENT_BUS;
+    public static ForgeEvents forgeEvents;
     public static SettingsManager settingsManager;
     public static ModuleManager moduleManager;
     public static CommandManager commandManager;
@@ -55,12 +57,20 @@ public class Past {
     public static ConfigUtil configUtil;
 
     @Mod.EventHandler
-    public void PastPreInitialize(FMLPreInitializationEvent event) { Display.setTitle(nameversion); }
+    public void PastPreInitialize(FMLPreInitializationEvent event) {
+        Display.setTitle(nameversion);
+    }
 
     /* Initializing client */
     @Mod.EventHandler
     public void PastInitialize(FMLInitializationEvent event) {
         System.out.println("[" + nameversion + "]" + " " + "Starting up and initializing!");
+
+        EVENT_BUS = new EventManager();
+        System.out.println("[" + nameversion + "]" + " " + "Alpine Events Initialized!");
+
+        forgeEvents = new ForgeEvents();
+        System.out.println("[" + nameversion + "]" + " " + "Forge Events Initialized!");
 
         settingsManager = new SettingsManager();
         System.out.println("[" + nameversion + "]" + " " + "Settings Initialized!");
@@ -91,34 +101,8 @@ public class Past {
 
         CommandManager.init();
         MinecraftForge.EVENT_BUS.register(new CommandManager());
-        MinecraftForge.EVENT_BUS.register(this);
+        MinecraftForge.EVENT_BUS.register(new ForgeEvents());
 
         System.out.println("[" + nameversion + "]" + " " + "Client is ready to go!");
-    }
-
-    /* Toggling modules on key press */
-    @SubscribeEvent
-    public void onKeyPress(InputEvent.KeyInputEvent event) {
-        for (Module m : moduleManager.getModules()) {
-            if (Keyboard.isKeyDown(m.getKey())) {
-                m.toggle();
-            }
-        }
-    }
-
-    /* Drawing HUD Componenets */
-    @SubscribeEvent
-    public void onRenderGameOverlay(RenderGameOverlayEvent event) {
-        if (Minecraft.getMinecraft().player == null || Minecraft.getMinecraft().world == null) {
-            return;
-        }
-
-        if (event.getType() == RenderGameOverlayEvent.ElementType.ALL) {
-            for (HudComponent hudComponent : Past.hudComponentManager.getHudComponents()) {
-                if (hudComponent.isEnabled()) {
-                    hudComponent.render(event.getPartialTicks());
-                }
-            }
-        }
     }
 }

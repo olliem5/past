@@ -2,7 +2,6 @@ package me.olliem5.past.module;
 
 import me.olliem5.past.Past;
 import net.minecraft.client.Minecraft;
-import net.minecraftforge.client.event.RenderHandEvent;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
@@ -26,24 +25,6 @@ public class Module {
         toggled = false;
         key = Keyboard.KEY_NONE;
         setup();
-    }
-
-    @SubscribeEvent
-    public void onTick(TickEvent.ClientTickEvent event) {
-        for (Module module : moduleManager.getModules()) {
-            if (module.isToggled()) {
-                onUpdate();
-            }
-        }
-    }
-
-    @SubscribeEvent
-    public void onRender(RenderHandEvent event) {
-        for (Module module : moduleManager.getModules()) {
-            if (module.isToggled()) {
-                onRender();
-            }
-        }
     }
 
     public void toggle() {
@@ -135,8 +116,6 @@ public class Module {
     public void onToggle() {}
 
     public void onUpdate() {}
-
-    public void onRender() {}
 
     public void setup() {}
 
