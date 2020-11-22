@@ -6,6 +6,8 @@ import me.olliem5.past.module.Category;
 import me.olliem5.past.module.Module;
 import me.olliem5.past.settings.Setting;
 import me.olliem5.past.util.module.CooldownUtil;
+import me.olliem5.past.util.player.PlayerUtil;
+import me.olliem5.past.util.render.RenderUtil;
 import me.zero.alpine.listener.EventHandler;
 import me.zero.alpine.listener.Listener;
 import net.minecraft.client.Minecraft;
@@ -24,9 +26,10 @@ import net.minecraft.potion.Potion;
 import net.minecraft.util.*;
 import net.minecraft.util.math.*;
 import net.minecraft.world.Explosion;
+import net.minecraftforge.client.event.RenderWorldLastEvent;
 
+import java.awt.*;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -38,6 +41,10 @@ public class AutoCrystal extends Module {
         super("AutoCrystal", "Places and breaks crystals to kill enemies", Category.COMBAT);
     }
 
+    /**
+     * TODO: Enemy Range
+     */
+
     CooldownUtil breaktimer = new CooldownUtil();
     CooldownUtil placetimer = new CooldownUtil();
 
@@ -45,23 +52,31 @@ public class AutoCrystal extends Module {
     Setting breakmode;
     Setting swinghand;
     Setting rotate;
-//    Setting autoswitch;
-//    Setting placedelay;
+    Setting raytrace;
+    //Setting autoswitch;
+    Setting placedelay;
     Setting breakdelay;
-//    Setting placerange;
+    //    Setting placerange;
     Setting breakrange;
 //    Setting mindamage;
 //    Setting faceplace;
+    Setting rendermode;
+    Setting red;
+    Setting green;
+    Setting blue;
+    Setting opacity;
+    Setting rainbow;
 
     private ArrayList<String> placemodes;
     private ArrayList<String> breakmodes;
     private ArrayList<String> swinghands;
+    private ArrayList<String> rendermodes;
 
     @Override
     public void setup() {
         placemodes = new ArrayList<>();
         placemodes.add("Single");
-        placemodes.add("Multi");
+        //placemodes.add("Multi");
         placemodes.add("None");
 
         breakmodes = new ArrayList<>();
@@ -72,17 +87,40 @@ public class AutoCrystal extends Module {
         swinghands.add("Mainhand");
         swinghands.add("Offhand");
 
+        rendermodes = new ArrayList<>();
+        rendermodes.add("Full");
+        rendermodes.add("FullFrame");
+        rendermodes.add("Frame");
+
         Past.settingsManager.registerSetting(placemode = new Setting("Place", "AutoCrystalPlace", this, placemodes, "Single"));
         Past.settingsManager.registerSetting(breakmode = new Setting("Break", "AutoCrystalBreak", this, breakmodes, "Nearest"));
         Past.settingsManager.registerSetting(swinghand = new Setting("Swing", "AutoCrystalSwing", this, swinghands, "Mainhand"));
         Past.settingsManager.registerSetting(rotate = new Setting("Rotate", "AutoCrystalRotate", true, this));
-//        Past.settingsManager.registerSetting(autoswitch = new Setting("Auto Switch", "AutoCrystalAutoSwitch", true, this));
-//        Past.settingsManager.registerSetting(placedelay = new Setting("Place Delay", "AutoCrystalPlaceDelay", 0, 2, 20, this));
+        Past.settingsManager.registerSetting(raytrace = new Setting("Raytrace", "AutoCrystalRaytrace", false, this));
+        //Past.settingsManager.registerSetting(autoswitch = new Setting("Auto Switch", "AutoCrystalAutoSwitch", false, this));
+        Past.settingsManager.registerSetting(placedelay = new Setting("Place Delay", "AutoCrystalPlaceDelay", 0, 2, 20, this));
         Past.settingsManager.registerSetting(breakdelay = new Setting("Break Delay", "AutoCrystalBreakDelay", 0, 2, 20, this));
 //        Past.settingsManager.registerSetting(placerange = new Setting("Place Range", "AutoCrystalPlaceRange", 0.0, 4.4, 10.0, this));
         Past.settingsManager.registerSetting(breakrange = new Setting("Break Range", "AutoCrystalBreakRange", 0.0, 4.4, 10.0, this));
 //        Past.settingsManager.registerSetting(mindamage = new Setting("Min Damage", "AutoCrystalMinDamage", 0, 8, 35, this));
 //        Past.settingsManager.registerSetting(faceplace = new Setting("Faceplace", "AutoCrystalFaceplace", 0, 8, 35, this));
+        Past.settingsManager.registerSetting(rendermode = new Setting("Mode", "AutoCrystalRenderMode", this, rendermodes, "FullFrame"));
+        Past.settingsManager.registerSetting(red = new Setting("Red", "AutoCrystalRed", 0, 100, 255, this));
+        Past.settingsManager.registerSetting(green = new Setting("Green", "AutoCrystalGreen", 0, 100, 255, this));
+        Past.settingsManager.registerSetting(blue = new Setting("Blue", "AutoCrystalBlue", 0, 100, 255, this));
+        Past.settingsManager.registerSetting(opacity = new Setting("Opacity", "AutoCrystalOpacity", 0, 100, 255, this));
+        Past.settingsManager.registerSetting(rainbow = new Setting("Rainbow", "AutoCrystalRainbow", false, this));
+    }
+
+    private int oldInventorySlot;
+    private BlockPos render;
+    private static boolean togglePitch = false;
+    private EnumFacing enumFacing;
+    boolean offhand = false;
+
+    @Override
+    public void onDisable() {
+        resetRotation();
     }
 
     @Override
@@ -102,33 +140,162 @@ public class AutoCrystal extends Module {
                     .min(Comparator.comparing(c -> mc.player.getDistance(c)))
                     .orElse(null);
 
-            if (breakmode.getValueString() == "Nearest" && mc.player != null && crystal != null) {
+            if (mc.player != null && crystal != null) {
+                if (breakmode.getValueString() == "Nearest") {
 
-                if (rotate.getValBoolean()) {
-                    lookAtPacket(crystal.posX, crystal.posY, crystal.posZ, mc.player);
+                    if (rotate.getValBoolean()) {
+                        lookAtPacket(crystal.posX, crystal.posY, crystal.posZ, mc.player);
+                    }
+
+                    mc.playerController.attackEntity(mc.player, crystal);
+
+                    if (swinghand.getValueString() == "Offhand") {
+                        mc.player.swingArm(EnumHand.OFF_HAND);
+                    } else {
+                        mc.player.swingArm(EnumHand.MAIN_HAND);
+                    }
+
                 }
-
-                mc.playerController.attackEntity(mc.player, crystal);
-
-                if (swinghand.getValueString() == "Offhand") {
-                    mc.player.swingArm(EnumHand.OFF_HAND);
-                } else {
-                    mc.player.swingArm(EnumHand.MAIN_HAND);
-                }
-
                 if (breakmode.getValueString() == "None") return;
+                //Other break modes in the future, OnlyOwn, Smart/MostDamage
+                breaktimer.reset();
             }
-            //Other break modes in the future, OnlyOwn, Smart/MostDamage
-            breaktimer.reset();
         }
 
         /**
          * Placing Crystals
          */
+
+        if (mc.player.getHeldItemOffhand().getItem() == Items.END_CRYSTAL) {
+            offhand = true;
+        } else if (mc.player.getHeldItemMainhand().getItem() == Items.END_CRYSTAL) {
+            offhand = false;
+        }
+
+        List<BlockPos> blocks = findCrystalBlocks();
+        List<Entity> entities = new ArrayList<>();
+
+        entities.addAll(mc.world.playerEntities.stream().filter(entityPlayer -> !Past.friendsManager.isFriend(entityPlayer.getName())).collect(Collectors.toList()));
+
+        BlockPos q = null;
+        double damage = 0.5D;
+
+        for (Entity entity : entities) {
+            if (entity == mc.player || ((EntityLivingBase) entity).getHealth() <= 0) continue;
+
+            for (BlockPos blockPos : blocks) {
+                double b = entity.getDistanceSq(blockPos);
+
+                if (b >= 169) continue;
+
+                double d = calculateDamage(blockPos.getX() + 0.5D, blockPos.getY() + 1, blockPos.getZ() + 0.5D, entity);
+
+                if (d > damage) {
+                    double self = calculateDamage(blockPos.getX() + 0.5D, blockPos.getY() + 1, blockPos.getZ() + 0.5D, mc.player);
+
+                    if ((self > d && !(d < ((EntityLivingBase) entity).getHealth())) || self - 0.5D > mc.player.getHealth()) continue;
+
+                    damage = d;
+                    q = blockPos;
+                }
+            }
+        }
+
+        if (damage == 0.5D) {
+            render = null;
+            resetRotation();
+            return;
+        }
+
+        render = q;
+
+        if (placetimer.passed(placedelay.getValueInt() * 50)) {
+            if (placemode.getValueString() == "Single") {
+
+                if (rotate.getValBoolean()) {
+                    lookAtPacket(q.getX() + 0.5D, q.getY() - 0.5D, q.getZ() + 0.5D, mc.player);
+                }
+
+                RayTraceResult result = mc.world.rayTraceBlocks(new Vec3d(mc.player.posX, mc.player.posY + mc.player.getEyeHeight(), mc.player.posZ), new Vec3d(q.getX() + 0.5D, q.getY() - 0.5D, q.getZ() + 0.5D));
+
+                if (raytrace.getValBoolean()) {
+                    if (result == null || result.sideHit == null) {
+                        q = null;
+                        enumFacing = null;
+                        render = null;
+                        resetRotation();
+                        return;
+                    } else {
+                        enumFacing = result.sideHit;
+                    }
+                }
+
+                if (q != null && mc.player != null) {
+                    if (raytrace.getValBoolean() && enumFacing != null) {
+                        mc.player.connection.sendPacket(new CPacketPlayerTryUseItemOnBlock(q, enumFacing, offhand ? EnumHand.OFF_HAND : EnumHand.MAIN_HAND, 0, 0, 0));
+                    } else if (q.getY() == 255) {
+                        mc.player.connection.sendPacket(new CPacketPlayerTryUseItemOnBlock(q, EnumFacing.DOWN, offhand ? EnumHand.OFF_HAND : EnumHand.MAIN_HAND, 0, 0, 0));
+                    } else {
+                        mc.player.connection.sendPacket(new CPacketPlayerTryUseItemOnBlock(q, EnumFacing.UP, offhand ? EnumHand.OFF_HAND : EnumHand.MAIN_HAND, 0, 0, 0));
+                    }
+                }
+
+                if (isSpoofingAngles) {
+                    if (togglePitch) {
+                        mc.player.rotationPitch += 0.0004;
+                        togglePitch = false;
+                    } else {
+                        mc.player.rotationPitch -= 0.0004;
+                        togglePitch = true;
+                    }
+                }
+            }
+            if (placemode.getValueString() == "None") return;
+            placetimer.reset();
+        }
     }
 
+    @EventHandler
+    public Listener<RenderWorldLastEvent> renderWorldLastEventListener = new Listener<>(event -> {
+        if (nullCheck()) return;
+
+        float[] hue = new float[] {(float) (System.currentTimeMillis() % 7500L) / 7500f};
+        int rgb = Color.HSBtoRGB(hue[0], 0.8f, 0.8f);
+        int rgbred = rgb >> 16 & 255;
+        int rgbgreen = rgb >> 8 & 255;
+        int rgbblue = rgb & 255;
+
+        if (render != null) {
+            if (!rainbow.getValBoolean()) {
+                if (rendermode.getValueString() == "Full") {
+                    RenderUtil.drawBox(RenderUtil.generateBB(render.getX(), render.getY(), render.getZ()), red.getValueInt(), green.getValueInt(), blue.getValueInt(), opacity.getValueInt());
+                }
+
+                if (rendermode.getValueString() == "FullFrame") {
+                    RenderUtil.drawBoxOutline(RenderUtil.generateBB(render.getX(), render.getY(), render.getZ()), red.getValueInt(), green.getValueInt(), blue.getValueInt(), opacity.getValueInt());
+                }
+
+                if (rendermode.getValueString() == "Frame") {
+                    RenderUtil.drawOutline(RenderUtil.generateBB(render.getX(), render.getY(), render.getZ()), red.getValueInt(), green.getValueInt(), blue.getValueInt(), opacity.getValueInt());
+                }
+            } else {
+                if (rendermode.getValueString() == "Full") {
+                    RenderUtil.drawBox(RenderUtil.generateBB(render.getX(), render.getY(), render.getZ()), rgbred / 255f, rgbgreen / 255f, rgbblue / 255f, opacity.getValueInt());
+                }
+
+                if (rendermode.getValueString() == "FullFrame") {
+                    RenderUtil.drawBoxOutline(RenderUtil.generateBB(render.getX(), render.getY(), render.getZ()), rgbred / 255f, rgbgreen / 255f, rgbblue / 255f, opacity.getValueInt());
+                }
+
+                if (rendermode.getValueString() == "Frame") {
+                    RenderUtil.drawOutline(RenderUtil.generateBB(render.getX(), render.getY(), render.getZ()), rgbred / 255f, rgbgreen / 255f, rgbblue / 255f, opacity.getValueInt());
+                }
+            }
+        }
+    });
+
     /**
-     * CrystalAura utils made by 086
+     * AutoCrystal utils made by 086
      *
      * https://github.com/zeroeightysix/KAMI/blob/master/src/main/java/me/zeroeightsix/kami/module/modules/combat/CrystalAura.java
      *
@@ -278,9 +445,4 @@ public class AutoCrystal extends Module {
             }
         }
     });
-
-    @Override
-    public void onDisable() {
-        resetRotation();
-    }
 }
