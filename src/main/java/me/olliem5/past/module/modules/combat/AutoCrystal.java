@@ -5,6 +5,7 @@ import me.olliem5.past.event.events.PacketEvent;
 import me.olliem5.past.module.Category;
 import me.olliem5.past.module.Module;
 import me.olliem5.past.settings.Setting;
+import me.olliem5.past.util.client.MessageUtil;
 import me.olliem5.past.util.colour.ColourUtil;
 import me.olliem5.past.util.module.CooldownUtil;
 import me.olliem5.past.util.player.PlayerUtil;
@@ -21,9 +22,11 @@ import net.minecraft.entity.item.EntityEnderCrystal;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
+import net.minecraft.init.SoundEvents;
 import net.minecraft.network.Packet;
 import net.minecraft.network.play.client.CPacketPlayer;
 import net.minecraft.network.play.client.CPacketPlayerTryUseItemOnBlock;
+import net.minecraft.network.play.server.SPacketSoundEffect;
 import net.minecraft.potion.Potion;
 import net.minecraft.util.*;
 import net.minecraft.util.math.*;
@@ -45,12 +48,12 @@ public class AutoCrystal extends Module {
 
     /**
      * TODO: Enemy Range
-     * TODO: Faceplace
-     * TODO: RenderDamage
      * TODO: Logic
-     * TODO: AntiSuicide
      * TODO: AutoSwitch
      * TODO: MultiPlace
+     * TODO: Timeout when a certain ammount of hits are performed on one crystal
+     * TODO: Info Messages on certain events, e.g. "FACEPLACING" with x health & tidy up formatting of existing messages
+     * TODO: check when breaking for max health to self
      */
 
     CooldownUtil breaktimer = new CooldownUtil();
@@ -61,11 +64,16 @@ public class AutoCrystal extends Module {
     Setting swinghand;
     Setting rotate;
     Setting raytrace;
+    Setting nodesync;
     Setting placedelay;
     Setting breakdelay;
+    Setting wallsrange;
     Setting placerange;
     Setting breakrange;
     Setting mindamage;
+    Setting maxselfdamage;
+    Setting faceplace;
+    Setting infomessages;
     Setting renderdamage;
     Setting renderplace;
     Setting rendermode;
@@ -104,11 +112,16 @@ public class AutoCrystal extends Module {
         Past.settingsManager.registerSetting(swinghand = new Setting("Swing", "AutoCrystalSwing", this, swinghands, "Mainhand"));
         Past.settingsManager.registerSetting(rotate = new Setting("Rotate", "AutoCrystalRotate", true, this));
         Past.settingsManager.registerSetting(raytrace = new Setting("Raytrace", "AutoCrystalRaytrace", false, this));
+        Past.settingsManager.registerSetting(nodesync = new Setting("No Desync", "AutoCrystalNoDesync", true, this));
         Past.settingsManager.registerSetting(placedelay = new Setting("Place Delay", "AutoCrystalPlaceDelay", 0, 2, 20, this));
         Past.settingsManager.registerSetting(breakdelay = new Setting("Break Delay", "AutoCrystalBreakDelay", 0, 2, 20, this));
+        Past.settingsManager.registerSetting(wallsrange = new Setting("Walls Range", "AutoCrystalWallsRange", 0.0, 3.5, 10.0, this));
         Past.settingsManager.registerSetting(placerange = new Setting("Place Range", "AutoCrystalPlaceRange", 0.0, 4.4, 10.0, this));
         Past.settingsManager.registerSetting(breakrange = new Setting("Break Range", "AutoCrystalBreakRange", 0.0, 4.4, 10.0, this));
         Past.settingsManager.registerSetting(mindamage = new Setting("Min Damage", "AutoCrystalMinDamage", 0.0, 6.0, 36.0, this));
+        Past.settingsManager.registerSetting(maxselfdamage = new Setting("Max Self Damage", "AutoCrystalMaxSelfDamage", 0.0, 8.0, 36.0, this));
+        Past.settingsManager.registerSetting(faceplace = new Setting("Faceplace Health", "AutoCrystalFaceplace", 0.0, 8.0, 36.0, this));
+        Past.settingsManager.registerSetting(infomessages = new Setting("Info Messages", "AutoCrystalInfoMessages", false, this));
         Past.settingsManager.registerSetting(renderdamage = new Setting("Render Damage", "AutoCrystalRenderDamage", true, this));
         Past.settingsManager.registerSetting(renderplace = new Setting("Render Place", "AutoCrystalRenderPlace", true, this));
         Past.settingsManager.registerSetting(rendermode = new Setting("Mode", "AutoCrystalRenderMode", this, rendermodes, "FullFrame"));
@@ -153,15 +166,26 @@ public class AutoCrystal extends Module {
             if (crystal != null) {
                 if (breakmode.getValueString() == "Nearest") {
 
+                    if (!mc.player.canEntityBeSeen(crystal) && mc.player.getDistance(crystal) > wallsrange.getValueDouble()) return;
+
                     if (rotate.getValBoolean()) {
+                        if (infomessages.getValBoolean()) {
+                            MessageUtil.sendAutoCrystalMessage(ColourUtil.white + "Rotating to" + ColourUtil.aqua + " " + "crystal" + " " + ColourUtil.white + crystal.posX + ", " + crystal.posY + ", " + crystal.posZ);
+                        }
                         lookAtPacket(crystal.posX, crystal.posY, crystal.posZ, mc.player);
                     }
 
                     mc.playerController.attackEntity(mc.player, crystal);
 
                     if (swinghand.getValueString() == "Offhand") {
+                        if (infomessages.getValBoolean()) {
+                            MessageUtil.sendAutoCrystalMessage(ColourUtil.white + "Swinging the" + " " + ColourUtil.aqua + "off hand" + ColourUtil.white + " " + "at a crystal");
+                        }
                         mc.player.swingArm(EnumHand.OFF_HAND);
                     } else {
+                        if (infomessages.getValBoolean()) {
+                            MessageUtil.sendAutoCrystalMessage(ColourUtil.white + "Swinging the" + " " + ColourUtil.aqua + "main hand" + ColourUtil.white + " " + "at a crystal");
+                        }
                         mc.player.swingArm(EnumHand.MAIN_HAND);
                     }
 
@@ -202,12 +226,14 @@ public class AutoCrystal extends Module {
 
                 double d = calculateDamage(blockPos.getX() + 0.5D, blockPos.getY() + 1, blockPos.getZ() + 0.5D, entity);
 
-                if (d < mindamage.getValueDouble()) continue;
+                if (d < mindamage.getValueDouble() && ((EntityLivingBase) entity).getHealth() + ((EntityLivingBase) entity).getAbsorptionAmount() > faceplace.getValueDouble()) continue;
 
                 if (d > damage) {
                     double self = calculateDamage(blockPos.getX() + 0.5D, blockPos.getY() + 1, blockPos.getZ() + 0.5D, mc.player);
 
                     if ((self > d && !(d < ((EntityLivingBase) entity).getHealth())) || self - 0.5D > mc.player.getHealth()) continue;
+
+                    if (self > maxselfdamage.getValueDouble()) continue;
 
                     damage = d;
                     bPos = blockPos;
@@ -229,6 +255,9 @@ public class AutoCrystal extends Module {
             if (placemode.getValueString() == "Single") {
 
                 if (rotate.getValBoolean()) {
+                    if (infomessages.getValBoolean()) {
+                        MessageUtil.sendAutoCrystalMessage(ColourUtil.white + "Rotating to" + " " + ColourUtil.aqua + "block" + ColourUtil.white + bPos.getX() + 0.5D + ", " + (bPos.getY() - 0.5D) + ", " + bPos.getZ() + 0.5D);
+                    }
                     lookAtPacket(bPos.getX() + 0.5D, bPos.getY() - 0.5D, bPos.getZ() + 0.5D, mc.player);
                 }
 
@@ -249,10 +278,19 @@ public class AutoCrystal extends Module {
                 if (bPos != null) {
                     if (raytrace.getValBoolean() && enumFacing != null) {
                         mc.player.connection.sendPacket(new CPacketPlayerTryUseItemOnBlock(bPos, enumFacing, offhand ? EnumHand.OFF_HAND : EnumHand.MAIN_HAND, 0, 0, 0));
+                        if (infomessages.getValBoolean()) {
+                            MessageUtil.sendAutoCrystalMessage(ColourUtil.white + "Place packet sent" + ColourUtil.aqua + " " + "raytrace");
+                        }
                     } else if (bPos.getY() == 255) {
                         mc.player.connection.sendPacket(new CPacketPlayerTryUseItemOnBlock(bPos, EnumFacing.DOWN, offhand ? EnumHand.OFF_HAND : EnumHand.MAIN_HAND, 0, 0, 0));
+                        if (infomessages.getValBoolean()) {
+                            MessageUtil.sendAutoCrystalMessage(ColourUtil.white + "Place packet sent" + ColourUtil.aqua + " " + "above y255 place");
+                        }
                     } else {
                         mc.player.connection.sendPacket(new CPacketPlayerTryUseItemOnBlock(bPos, EnumFacing.UP, offhand ? EnumHand.OFF_HAND : EnumHand.MAIN_HAND, 0, 0, 0));
+                        if (infomessages.getValBoolean()) {
+                            MessageUtil.sendAutoCrystalMessage(ColourUtil.white + "Place packet sent" + ColourUtil.aqua + " " + "normal");
+                        }
                     }
                 }
 
@@ -314,9 +352,45 @@ public class AutoCrystal extends Module {
         if (renderdamage.getValBoolean()) {
             if (renderBlock != null && renderEnt != null) {
                 double d = calculateDamage(renderBlock.getX() + 0.5D, renderBlock.getY() + 0.5D, renderBlock.getZ() + 0.5D, renderEnt);
-                String[] damageText=new String[1];
+                String[] damageText = new String[1];
                 damageText[0] = (Math.floor(d) == d ? (int) d : String.format("%.3f", d)) + "";
                 RenderText.drawText(renderBlock, damageText[0]);
+            }
+        }
+    });
+
+    @EventHandler
+    private Listener<PacketEvent.Receive> packetReceiveListener = new Listener<>(event -> {
+        if (event.getPacket() instanceof SPacketSoundEffect && nodesync.getValBoolean()) {
+            final SPacketSoundEffect packet = (SPacketSoundEffect) event.getPacket();
+            if (packet.getCategory() == SoundCategory.BLOCKS && packet.getSound() == SoundEvents.ENTITY_GENERIC_EXPLODE) {
+                for (Entity e : Minecraft.getMinecraft().world.loadedEntityList) {
+                    if (e instanceof EntityEnderCrystal) {
+                        if (e.getDistance(packet.getX(), packet.getY(), packet.getZ()) <= 6.0f) {
+                            if (infomessages.getValBoolean()) {
+                                MessageUtil.sendAutoCrystalMessage(ColourUtil.white + "Desync crystal" + " " + ColourUtil.red + "removed");
+                            }
+                            e.setDead();
+                        }
+                    }
+                }
+            }
+        }
+    });
+
+    @EventHandler
+    private Listener<PacketEvent.Send> packetSendListener = new Listener<>(event -> {
+        Packet packet = event.getPacket();
+        if (packet instanceof CPacketPlayer) {
+            if (isSpoofingAngles) {
+                ((CPacketPlayer) packet).yaw = (float) yaw;
+                if (infomessages.getValBoolean()) {
+                    MessageUtil.sendAutoCrystalMessage(ColourUtil.white + "Setting" + " " + ColourUtil.aqua + "yaw" + " " + ColourUtil.white + "to" + " " + yaw);
+                }
+                ((CPacketPlayer) packet).pitch = (float) pitch;
+                if (infomessages.getValBoolean()) {
+                    MessageUtil.sendAutoCrystalMessage(ColourUtil.white + "Setting" + " " + ColourUtil.aqua + "pitch" + " " + ColourUtil.white + "to" + " " + pitch);
+                }
             }
         }
     });
@@ -469,15 +543,4 @@ public class AutoCrystal extends Module {
 
         return new double[]{yaw,pitch};
     }
-
-    @EventHandler
-    private Listener<PacketEvent.Send> listener = new Listener<>(event -> {
-        Packet packet = event.getPacket();
-        if (packet instanceof CPacketPlayer) {
-            if (isSpoofingAngles) {
-                ((CPacketPlayer) packet).yaw = (float) yaw;
-                ((CPacketPlayer) packet).pitch = (float) pitch;
-            }
-        }
-    });
 }

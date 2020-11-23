@@ -15,6 +15,7 @@ public class MessageUtil {
     public static String surroundPrefix = ColourUtil.gray + "[" + ColourUtil.darkRed + "Surround" + ColourUtil.gray + "]";
     public static String autoBuilderPrefix = ColourUtil.gray + "[" + ColourUtil.darkRed + "AutoBuilder" + ColourUtil.gray + "]";
     public static String friendsPrefix = ColourUtil.gray + "[" + ColourUtil.darkRed + "Friends" + ColourUtil.gray + "]";
+    public static String autoCrystalPrefix = ColourUtil.gray + "[" + ColourUtil.darkRed + "AutoCrystal" + ColourUtil.gray + "]";
 
     public static void sendRawMessage(String message) {
         player.sendMessage(new TextComponentString(message));
@@ -46,5 +47,9 @@ public class MessageUtil {
 
     public static void sendFreindsMessage(String message) {
         sendMessagePrefix(friendsPrefix + " " + message);
+    }
+
+    public static void sendAutoCrystalMessage(String message) {
+        sendMessagePrefix(autoCrystalPrefix + " " + message);
     }
 }
