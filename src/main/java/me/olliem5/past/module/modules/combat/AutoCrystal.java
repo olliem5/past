@@ -9,6 +9,7 @@ import me.olliem5.past.util.colour.ColourUtil;
 import me.olliem5.past.util.module.CooldownUtil;
 import me.olliem5.past.util.player.PlayerUtil;
 import me.olliem5.past.util.render.RenderUtil;
+import me.olliem5.past.util.text.RenderText;
 import me.zero.alpine.listener.EventHandler;
 import me.zero.alpine.listener.Listener;
 import net.minecraft.client.Minecraft;
@@ -60,13 +61,12 @@ public class AutoCrystal extends Module {
     Setting swinghand;
     Setting rotate;
     Setting raytrace;
-    //Setting autoswitch;
     Setting placedelay;
     Setting breakdelay;
     Setting placerange;
     Setting breakrange;
     Setting mindamage;
-//    Setting faceplace;
+    Setting renderdamage;
     Setting renderplace;
     Setting rendermode;
     Setting red;
@@ -84,7 +84,6 @@ public class AutoCrystal extends Module {
     public void setup() {
         placemodes = new ArrayList<>();
         placemodes.add("Single");
-        //placemodes.add("Multi");
         placemodes.add("None");
 
         breakmodes = new ArrayList<>();
@@ -105,13 +104,12 @@ public class AutoCrystal extends Module {
         Past.settingsManager.registerSetting(swinghand = new Setting("Swing", "AutoCrystalSwing", this, swinghands, "Mainhand"));
         Past.settingsManager.registerSetting(rotate = new Setting("Rotate", "AutoCrystalRotate", true, this));
         Past.settingsManager.registerSetting(raytrace = new Setting("Raytrace", "AutoCrystalRaytrace", false, this));
-        //Past.settingsManager.registerSetting(autoswitch = new Setting("Auto Switch", "AutoCrystalAutoSwitch", false, this));
         Past.settingsManager.registerSetting(placedelay = new Setting("Place Delay", "AutoCrystalPlaceDelay", 0, 2, 20, this));
         Past.settingsManager.registerSetting(breakdelay = new Setting("Break Delay", "AutoCrystalBreakDelay", 0, 2, 20, this));
         Past.settingsManager.registerSetting(placerange = new Setting("Place Range", "AutoCrystalPlaceRange", 0.0, 4.4, 10.0, this));
         Past.settingsManager.registerSetting(breakrange = new Setting("Break Range", "AutoCrystalBreakRange", 0.0, 4.4, 10.0, this));
         Past.settingsManager.registerSetting(mindamage = new Setting("Min Damage", "AutoCrystalMinDamage", 0.0, 6.0, 36.0, this));
-//        Past.settingsManager.registerSetting(faceplace = new Setting("Faceplace", "AutoCrystalFaceplace", 0, 8, 35, this));
+        Past.settingsManager.registerSetting(renderdamage = new Setting("Render Damage", "AutoCrystalRenderDamage", true, this));
         Past.settingsManager.registerSetting(renderplace = new Setting("Render Place", "AutoCrystalRenderPlace", true, this));
         Past.settingsManager.registerSetting(rendermode = new Setting("Mode", "AutoCrystalRenderMode", this, rendermodes, "FullFrame"));
         Past.settingsManager.registerSetting(red = new Setting("Red", "AutoCrystalRed", 0, 100, 255, this));
@@ -123,12 +121,15 @@ public class AutoCrystal extends Module {
 
     private BlockPos renderBlock;
     private EnumFacing enumFacing;
+    private Entity renderEnt;
+
     private static boolean togglePitch = false;
     private boolean offhand;
-    private Entity renderEnt;
 
     @Override
     public void onDisable() {
+        renderBlock = null;
+        renderEnt = null;
         resetRotation();
     }
 
@@ -307,6 +308,15 @@ public class AutoCrystal extends Module {
                         RenderUtil.drawOutline(RenderUtil.generateBB(renderBlock.getX(), renderBlock.getY(), renderBlock.getZ()), rgbred / 255f, rgbgreen / 255f, rgbblue / 255f, opacity.getValueInt());
                     }
                 }
+            }
+        }
+
+        if (renderdamage.getValBoolean()) {
+            if (renderBlock != null && renderEnt != null) {
+                double d = calculateDamage(renderBlock.getX() + 0.5D, renderBlock.getY() + 0.5D, renderBlock.getZ() + 0.5D, renderEnt);
+                String[] damageText=new String[1];
+                damageText[0] = (Math.floor(d) == d ? (int) d : String.format("%.3f", d)) + "";
+                RenderText.drawText(renderBlock, damageText[0]);
             }
         }
     });
