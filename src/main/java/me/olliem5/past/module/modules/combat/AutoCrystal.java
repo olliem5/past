@@ -5,6 +5,7 @@ import me.olliem5.past.event.events.PacketEvent;
 import me.olliem5.past.module.Category;
 import me.olliem5.past.module.Module;
 import me.olliem5.past.settings.Setting;
+import me.olliem5.past.util.colour.ColourUtil;
 import me.olliem5.past.util.module.CooldownUtil;
 import me.olliem5.past.util.player.PlayerUtil;
 import me.olliem5.past.util.render.RenderUtil;
@@ -43,6 +44,12 @@ public class AutoCrystal extends Module {
 
     /**
      * TODO: Enemy Range
+     * TODO: Faceplace
+     * TODO: RenderDamage
+     * TODO: Logic
+     * TODO: AntiSuicide
+     * TODO: AutoSwitch
+     * TODO: MultiPlace
      */
 
     CooldownUtil breaktimer = new CooldownUtil();
@@ -56,10 +63,11 @@ public class AutoCrystal extends Module {
     //Setting autoswitch;
     Setting placedelay;
     Setting breakdelay;
-    //    Setting placerange;
+    Setting placerange;
     Setting breakrange;
-//    Setting mindamage;
+    Setting mindamage;
 //    Setting faceplace;
+    Setting renderplace;
     Setting rendermode;
     Setting red;
     Setting green;
@@ -100,23 +108,24 @@ public class AutoCrystal extends Module {
         //Past.settingsManager.registerSetting(autoswitch = new Setting("Auto Switch", "AutoCrystalAutoSwitch", false, this));
         Past.settingsManager.registerSetting(placedelay = new Setting("Place Delay", "AutoCrystalPlaceDelay", 0, 2, 20, this));
         Past.settingsManager.registerSetting(breakdelay = new Setting("Break Delay", "AutoCrystalBreakDelay", 0, 2, 20, this));
-//        Past.settingsManager.registerSetting(placerange = new Setting("Place Range", "AutoCrystalPlaceRange", 0.0, 4.4, 10.0, this));
+        Past.settingsManager.registerSetting(placerange = new Setting("Place Range", "AutoCrystalPlaceRange", 0.0, 4.4, 10.0, this));
         Past.settingsManager.registerSetting(breakrange = new Setting("Break Range", "AutoCrystalBreakRange", 0.0, 4.4, 10.0, this));
-//        Past.settingsManager.registerSetting(mindamage = new Setting("Min Damage", "AutoCrystalMinDamage", 0, 8, 35, this));
+        Past.settingsManager.registerSetting(mindamage = new Setting("Min Damage", "AutoCrystalMinDamage", 0.0, 6.0, 36.0, this));
 //        Past.settingsManager.registerSetting(faceplace = new Setting("Faceplace", "AutoCrystalFaceplace", 0, 8, 35, this));
+        Past.settingsManager.registerSetting(renderplace = new Setting("Render Place", "AutoCrystalRenderPlace", true, this));
         Past.settingsManager.registerSetting(rendermode = new Setting("Mode", "AutoCrystalRenderMode", this, rendermodes, "FullFrame"));
         Past.settingsManager.registerSetting(red = new Setting("Red", "AutoCrystalRed", 0, 100, 255, this));
         Past.settingsManager.registerSetting(green = new Setting("Green", "AutoCrystalGreen", 0, 100, 255, this));
         Past.settingsManager.registerSetting(blue = new Setting("Blue", "AutoCrystalBlue", 0, 100, 255, this));
         Past.settingsManager.registerSetting(opacity = new Setting("Opacity", "AutoCrystalOpacity", 0, 100, 255, this));
-        Past.settingsManager.registerSetting(rainbow = new Setting("Rainbow", "AutoCrystalRainbow", false, this));
+        Past.settingsManager.registerSetting(rainbow = new Setting("Rainbow", "AutoCrystalRainbow", true, this));
     }
 
-    private int oldInventorySlot;
-    private BlockPos render;
-    private static boolean togglePitch = false;
+    private BlockPos renderBlock;
     private EnumFacing enumFacing;
-    boolean offhand = false;
+    private static boolean togglePitch = false;
+    private boolean offhand;
+    private Entity renderEnt;
 
     @Override
     public void onDisable() {
@@ -140,7 +149,7 @@ public class AutoCrystal extends Module {
                     .min(Comparator.comparing(c -> mc.player.getDistance(c)))
                     .orElse(null);
 
-            if (mc.player != null && crystal != null) {
+            if (crystal != null) {
                 if (breakmode.getValueString() == "Nearest") {
 
                     if (rotate.getValBoolean()) {
@@ -159,6 +168,8 @@ public class AutoCrystal extends Module {
                 if (breakmode.getValueString() == "None") return;
                 //Other break modes in the future, OnlyOwn, Smart/MostDamage
                 breaktimer.reset();
+            } else {
+                resetRotation();
             }
         }
 
@@ -168,7 +179,7 @@ public class AutoCrystal extends Module {
 
         if (mc.player.getHeldItemOffhand().getItem() == Items.END_CRYSTAL) {
             offhand = true;
-        } else if (mc.player.getHeldItemMainhand().getItem() == Items.END_CRYSTAL) {
+        } else {
             offhand = false;
         }
 
@@ -177,7 +188,7 @@ public class AutoCrystal extends Module {
 
         entities.addAll(mc.world.playerEntities.stream().filter(entityPlayer -> !Past.friendsManager.isFriend(entityPlayer.getName())).collect(Collectors.toList()));
 
-        BlockPos q = null;
+        BlockPos bPos = null;
         double damage = 0.5D;
 
         for (Entity entity : entities) {
@@ -190,39 +201,43 @@ public class AutoCrystal extends Module {
 
                 double d = calculateDamage(blockPos.getX() + 0.5D, blockPos.getY() + 1, blockPos.getZ() + 0.5D, entity);
 
+                if (d < mindamage.getValueDouble()) continue;
+
                 if (d > damage) {
                     double self = calculateDamage(blockPos.getX() + 0.5D, blockPos.getY() + 1, blockPos.getZ() + 0.5D, mc.player);
 
                     if ((self > d && !(d < ((EntityLivingBase) entity).getHealth())) || self - 0.5D > mc.player.getHealth()) continue;
 
                     damage = d;
-                    q = blockPos;
+                    bPos = blockPos;
+                    renderEnt = entity;
                 }
             }
         }
 
         if (damage == 0.5D) {
-            render = null;
+            renderBlock = null;
+            renderEnt = null;
             resetRotation();
             return;
         }
 
-        render = q;
+        renderBlock = bPos;
 
         if (placetimer.passed(placedelay.getValueInt() * 50)) {
             if (placemode.getValueString() == "Single") {
 
                 if (rotate.getValBoolean()) {
-                    lookAtPacket(q.getX() + 0.5D, q.getY() - 0.5D, q.getZ() + 0.5D, mc.player);
+                    lookAtPacket(bPos.getX() + 0.5D, bPos.getY() - 0.5D, bPos.getZ() + 0.5D, mc.player);
                 }
 
-                RayTraceResult result = mc.world.rayTraceBlocks(new Vec3d(mc.player.posX, mc.player.posY + mc.player.getEyeHeight(), mc.player.posZ), new Vec3d(q.getX() + 0.5D, q.getY() - 0.5D, q.getZ() + 0.5D));
+                RayTraceResult result = mc.world.rayTraceBlocks(new Vec3d(mc.player.posX, mc.player.posY + mc.player.getEyeHeight(), mc.player.posZ), new Vec3d(bPos.getX() + 0.5D, bPos.getY() - 0.5D, bPos.getZ() + 0.5D));
 
                 if (raytrace.getValBoolean()) {
                     if (result == null || result.sideHit == null) {
-                        q = null;
+                        bPos = null;
                         enumFacing = null;
-                        render = null;
+                        renderBlock = null;
                         resetRotation();
                         return;
                     } else {
@@ -230,13 +245,13 @@ public class AutoCrystal extends Module {
                     }
                 }
 
-                if (q != null && mc.player != null) {
+                if (bPos != null) {
                     if (raytrace.getValBoolean() && enumFacing != null) {
-                        mc.player.connection.sendPacket(new CPacketPlayerTryUseItemOnBlock(q, enumFacing, offhand ? EnumHand.OFF_HAND : EnumHand.MAIN_HAND, 0, 0, 0));
-                    } else if (q.getY() == 255) {
-                        mc.player.connection.sendPacket(new CPacketPlayerTryUseItemOnBlock(q, EnumFacing.DOWN, offhand ? EnumHand.OFF_HAND : EnumHand.MAIN_HAND, 0, 0, 0));
+                        mc.player.connection.sendPacket(new CPacketPlayerTryUseItemOnBlock(bPos, enumFacing, offhand ? EnumHand.OFF_HAND : EnumHand.MAIN_HAND, 0, 0, 0));
+                    } else if (bPos.getY() == 255) {
+                        mc.player.connection.sendPacket(new CPacketPlayerTryUseItemOnBlock(bPos, EnumFacing.DOWN, offhand ? EnumHand.OFF_HAND : EnumHand.MAIN_HAND, 0, 0, 0));
                     } else {
-                        mc.player.connection.sendPacket(new CPacketPlayerTryUseItemOnBlock(q, EnumFacing.UP, offhand ? EnumHand.OFF_HAND : EnumHand.MAIN_HAND, 0, 0, 0));
+                        mc.player.connection.sendPacket(new CPacketPlayerTryUseItemOnBlock(bPos, EnumFacing.UP, offhand ? EnumHand.OFF_HAND : EnumHand.MAIN_HAND, 0, 0, 0));
                     }
                 }
 
@@ -265,34 +280,44 @@ public class AutoCrystal extends Module {
         int rgbgreen = rgb >> 8 & 255;
         int rgbblue = rgb & 255;
 
-        if (render != null) {
-            if (!rainbow.getValBoolean()) {
-                if (rendermode.getValueString() == "Full") {
-                    RenderUtil.drawBox(RenderUtil.generateBB(render.getX(), render.getY(), render.getZ()), red.getValueInt(), green.getValueInt(), blue.getValueInt(), opacity.getValueInt());
-                }
+        if (renderplace.getValBoolean()) {
+            if (renderBlock != null) {
+                if (!rainbow.getValBoolean()) {
+                    if (rendermode.getValueString() == "Full") {
+                        RenderUtil.drawBox(RenderUtil.generateBB(renderBlock.getX(), renderBlock.getY(), renderBlock.getZ()), red.getValueInt(), green.getValueInt(), blue.getValueInt(), opacity.getValueInt());
+                    }
 
-                if (rendermode.getValueString() == "FullFrame") {
-                    RenderUtil.drawBoxOutline(RenderUtil.generateBB(render.getX(), render.getY(), render.getZ()), red.getValueInt(), green.getValueInt(), blue.getValueInt(), opacity.getValueInt());
-                }
+                    if (rendermode.getValueString() == "FullFrame") {
+                        RenderUtil.drawBoxOutline(RenderUtil.generateBB(renderBlock.getX(), renderBlock.getY(), renderBlock.getZ()), red.getValueInt(), green.getValueInt(), blue.getValueInt(), opacity.getValueInt());
+                    }
 
-                if (rendermode.getValueString() == "Frame") {
-                    RenderUtil.drawOutline(RenderUtil.generateBB(render.getX(), render.getY(), render.getZ()), red.getValueInt(), green.getValueInt(), blue.getValueInt(), opacity.getValueInt());
-                }
-            } else {
-                if (rendermode.getValueString() == "Full") {
-                    RenderUtil.drawBox(RenderUtil.generateBB(render.getX(), render.getY(), render.getZ()), rgbred / 255f, rgbgreen / 255f, rgbblue / 255f, opacity.getValueInt());
-                }
+                    if (rendermode.getValueString() == "Frame") {
+                        RenderUtil.drawOutline(RenderUtil.generateBB(renderBlock.getX(), renderBlock.getY(), renderBlock.getZ()), red.getValueInt(), green.getValueInt(), blue.getValueInt(), opacity.getValueInt());
+                    }
+                } else {
+                    if (rendermode.getValueString() == "Full") {
+                        RenderUtil.drawBox(RenderUtil.generateBB(renderBlock.getX(), renderBlock.getY(), renderBlock.getZ()), rgbred / 255f, rgbgreen / 255f, rgbblue / 255f, opacity.getValueInt());
+                    }
 
-                if (rendermode.getValueString() == "FullFrame") {
-                    RenderUtil.drawBoxOutline(RenderUtil.generateBB(render.getX(), render.getY(), render.getZ()), rgbred / 255f, rgbgreen / 255f, rgbblue / 255f, opacity.getValueInt());
-                }
+                    if (rendermode.getValueString() == "FullFrame") {
+                        RenderUtil.drawBoxOutline(RenderUtil.generateBB(renderBlock.getX(), renderBlock.getY(), renderBlock.getZ()), rgbred / 255f, rgbgreen / 255f, rgbblue / 255f, opacity.getValueInt());
+                    }
 
-                if (rendermode.getValueString() == "Frame") {
-                    RenderUtil.drawOutline(RenderUtil.generateBB(render.getX(), render.getY(), render.getZ()), rgbred / 255f, rgbgreen / 255f, rgbblue / 255f, opacity.getValueInt());
+                    if (rendermode.getValueString() == "Frame") {
+                        RenderUtil.drawOutline(RenderUtil.generateBB(renderBlock.getX(), renderBlock.getY(), renderBlock.getZ()), rgbred / 255f, rgbgreen / 255f, rgbblue / 255f, opacity.getValueInt());
+                    }
                 }
             }
         }
     });
+
+    public String getArraylistInfo() {
+        if (renderEnt != null) {
+            return ColourUtil.gray + " " + renderEnt.getName();
+        } else {
+            return "";
+        }
+    }
 
     /**
      * AutoCrystal utils made by 086
@@ -326,7 +351,7 @@ public class AutoCrystal extends Module {
 
     private List<BlockPos> findCrystalBlocks() {
         NonNullList<BlockPos> positions = NonNullList.create();
-        positions.addAll(getSphere(getPlayerPos(), (float) breakrange.getValueDouble(), (int) breakrange.getValueDouble(), false, true, 0).stream().filter(this::canPlaceCrystal).collect(Collectors.toList()));
+        positions.addAll(getSphere(getPlayerPos(), (float) placerange.getValueDouble(), (int) placerange.getValueDouble(), false, true, 0).stream().filter(this::canPlaceCrystal).collect(Collectors.toList()));
         return positions;
     }
 
