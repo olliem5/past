@@ -8,7 +8,6 @@ import me.olliem5.past.settings.Setting;
 import me.olliem5.past.util.client.MessageUtil;
 import me.olliem5.past.util.colour.ColourUtil;
 import me.olliem5.past.util.module.CooldownUtil;
-import me.olliem5.past.util.player.PlayerUtil;
 import me.olliem5.past.util.render.RenderUtil;
 import me.olliem5.past.util.text.RenderText;
 import me.zero.alpine.listener.EventHandler;
@@ -47,12 +46,12 @@ public class AutoCrystal extends Module {
     }
 
     /**
-     * TODO: Enemy Range
-     * TODO: Logic
      * TODO: AutoSwitch
+     * TODO: AntiWeakness
      * TODO: MultiPlace
      * TODO: Timeout when a certain ammount of hits are performed on one crystal
      * TODO: Info Messages on certain events, e.g. "FACEPLACING" with x health & tidy up formatting of existing messages
+     * TODO: Make the CA check if the name is the same as yours, so it does not crystal the fake player from blink
      */
 
     CooldownUtil breaktimer = new CooldownUtil();
@@ -65,6 +64,7 @@ public class AutoCrystal extends Module {
     Setting rotate;
     Setting raytrace;
     Setting nodesync;
+    Setting enemyrange;
     Setting antisuicide;
     Setting antisuicidevalue;
     Setting placedelay;
@@ -94,8 +94,8 @@ public class AutoCrystal extends Module {
     @Override
     public void setup() {
         logicmodes = new ArrayList<>();
-        logicmodes.add("PlaceBreak");
-        logicmodes.add("BreakPlace");
+        logicmodes.add("PlBreak");
+        logicmodes.add("BrPlace");
 
         placemodes = new ArrayList<>();
         placemodes.add("Single");
@@ -114,23 +114,24 @@ public class AutoCrystal extends Module {
         rendermodes.add("FullFrame");
         rendermodes.add("Frame");
 
-        Past.settingsManager.registerSetting(logicmode = new Setting("Logic", "AutoCrystalLogic", this, logicmodes, "PlaceBreak"));
+        Past.settingsManager.registerSetting(logicmode = new Setting("Logic", "AutoCrystalLogic", this, logicmodes, "PlBreak"));
         Past.settingsManager.registerSetting(placemode = new Setting("Place", "AutoCrystalPlace", this, placemodes, "Single"));
         Past.settingsManager.registerSetting(breakmode = new Setting("Break", "AutoCrystalBreak", this, breakmodes, "Nearest"));
         Past.settingsManager.registerSetting(swinghand = new Setting("Swing", "AutoCrystalSwing", this, swinghands, "Mainhand"));
         Past.settingsManager.registerSetting(rotate = new Setting("Rotate", "AutoCrystalRotate", true, this));
-        Past.settingsManager.registerSetting(raytrace = new Setting("Raytrace", "AutoCrystalRaytrace", false, this));
+        Past.settingsManager.registerSetting(raytrace = new Setting("Raytrace", "AutoCrystalRaytrace", true, this));
         Past.settingsManager.registerSetting(nodesync = new Setting("No Desync", "AutoCrystalNoDesync", true, this));
+        Past.settingsManager.registerSetting(enemyrange = new Setting("Enemy Rng", "AutoCrystalEnemyRange", 1.0, 15.0, 50.0, this));
         Past.settingsManager.registerSetting(antisuicide = new Setting("Anti Suicide", "AutoCrystalAntiSuicide", true, this));
-        Past.settingsManager.registerSetting(antisuicidevalue = new Setting("Anti Suicide Health", "AutoCrystalAntiSuicideHealth", 1.0, 15.0, 36.0, this));
+        Past.settingsManager.registerSetting(antisuicidevalue = new Setting("Min HP", "AutoCrystalAntiSuicideHealth", 1.0, 15.0, 36.0, this));
         Past.settingsManager.registerSetting(placedelay = new Setting("Place Delay", "AutoCrystalPlaceDelay", 0, 2, 20, this));
         Past.settingsManager.registerSetting(breakdelay = new Setting("Break Delay", "AutoCrystalBreakDelay", 0, 2, 20, this));
         Past.settingsManager.registerSetting(wallsrange = new Setting("Walls Range", "AutoCrystalWallsRange", 0.0, 3.5, 10.0, this));
         Past.settingsManager.registerSetting(placerange = new Setting("Place Range", "AutoCrystalPlaceRange", 0.0, 4.4, 10.0, this));
         Past.settingsManager.registerSetting(breakrange = new Setting("Break Range", "AutoCrystalBreakRange", 0.0, 4.4, 10.0, this));
         Past.settingsManager.registerSetting(mindamage = new Setting("Min Damage", "AutoCrystalMinDamage", 0.0, 6.0, 36.0, this));
-        Past.settingsManager.registerSetting(maxselfdamage = new Setting("Max Self Damage", "AutoCrystalMaxSelfDamage", 0.0, 8.0, 36.0, this));
-        Past.settingsManager.registerSetting(faceplace = new Setting("Faceplace Health", "AutoCrystalFaceplace", 0.0, 8.0, 36.0, this));
+        Past.settingsManager.registerSetting(maxselfdamage = new Setting("Max Self Dmg", "AutoCrystalMaxSelfDamage", 0.0, 8.0, 36.0, this));
+        Past.settingsManager.registerSetting(faceplace = new Setting("Faceplace HP", "AutoCrystalFaceplace", 0.0, 8.0, 36.0, this));
         Past.settingsManager.registerSetting(infomessages = new Setting("Info Messages", "AutoCrystalInfoMessages", false, this));
         Past.settingsManager.registerSetting(renderdamage = new Setting("Render Damage", "AutoCrystalRenderDamage", true, this));
         Past.settingsManager.registerSetting(renderplace = new Setting("Render Place", "AutoCrystalRenderPlace", true, this));
@@ -146,25 +147,31 @@ public class AutoCrystal extends Module {
     private EnumFacing enumFacing;
     private Entity renderEnt;
 
+    private boolean offhand = false;
+    private boolean acPlacing = false;
     private static boolean togglePitch = false;
-    private boolean offhand;
-    private boolean acPlacing;
+    private static boolean isSpoofingAngles;
 
     private double renderDamageText;
+    private static double yaw;
+    private static double pitch;
 
     @Override
     public void onDisable() {
         renderBlock = null;
         renderEnt = null;
         resetRotation();
+        acPlacing = false;
     }
 
     public void onUpdate() {
+        if (nullCheck()) return;
+
         implementLogic();
     }
 
     private void implementLogic() {
-        if (logicmode.getValueString() == "PlaceBreak") {
+        if (logicmode.getValueString() == "PlBreak") {
             placeCrystal();
             breakCrystal();
         } else {
@@ -244,7 +251,7 @@ public class AutoCrystal extends Module {
             for (BlockPos blockPos : blocks) {
                 double b = entity.getDistanceSq(blockPos);
 
-                if (b >= 169) continue;
+                if (b >= Math.pow(enemyrange.getValueDouble(), 2)) continue;
 
                 double d = calculateDamage(blockPos.getX() + 0.5D, blockPos.getY() + 1, blockPos.getZ() + 0.5D, entity);
 
@@ -374,7 +381,7 @@ public class AutoCrystal extends Module {
             }
         }
 
-        if (renderdamage.getValBoolean()) {
+        if (renderdamage.getValBoolean() && acPlacing == true) {
             if (renderBlock != null && renderEnt != null) {
                 String renderDamageText3dp = String.format ("%.3f", renderDamageText);
                 RenderText.drawText(renderBlock, renderDamageText3dp + "");
@@ -526,10 +533,6 @@ public class AutoCrystal extends Module {
     public static float calculateDamage(EntityEnderCrystal crystal, Entity entity) {
         return calculateDamage(crystal.posX, crystal.posY, crystal.posZ, entity);
     }
-
-    private static boolean isSpoofingAngles;
-    private static double yaw;
-    private static double pitch;
 
     private static void setYawAndPitch(float yaw1, float pitch1) {
         yaw = yaw1;
