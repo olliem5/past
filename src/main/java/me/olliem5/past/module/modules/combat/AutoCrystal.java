@@ -53,12 +53,12 @@ public class AutoCrystal extends Module {
      * TODO: MultiPlace
      * TODO: Timeout when a certain ammount of hits are performed on one crystal
      * TODO: Info Messages on certain events, e.g. "FACEPLACING" with x health & tidy up formatting of existing messages
-     * TODO: check when breaking for max health to self
      */
 
     CooldownUtil breaktimer = new CooldownUtil();
     CooldownUtil placetimer = new CooldownUtil();
 
+    Setting logicmode;
     Setting placemode;
     Setting breakmode;
     Setting swinghand;
@@ -85,6 +85,7 @@ public class AutoCrystal extends Module {
     Setting opacity;
     Setting rainbow;
 
+    private ArrayList<String> logicmodes;
     private ArrayList<String> placemodes;
     private ArrayList<String> breakmodes;
     private ArrayList<String> swinghands;
@@ -92,6 +93,10 @@ public class AutoCrystal extends Module {
 
     @Override
     public void setup() {
+        logicmodes = new ArrayList<>();
+        logicmodes.add("PlaceBreak");
+        logicmodes.add("BreakPlace");
+
         placemodes = new ArrayList<>();
         placemodes.add("Single");
         placemodes.add("None");
@@ -109,6 +114,7 @@ public class AutoCrystal extends Module {
         rendermodes.add("FullFrame");
         rendermodes.add("Frame");
 
+        Past.settingsManager.registerSetting(logicmode = new Setting("Logic", "AutoCrystalLogic", this, logicmodes, "PlaceBreak"));
         Past.settingsManager.registerSetting(placemode = new Setting("Place", "AutoCrystalPlace", this, placemodes, "Single"));
         Past.settingsManager.registerSetting(breakmode = new Setting("Break", "AutoCrystalBreak", this, breakmodes, "Nearest"));
         Past.settingsManager.registerSetting(swinghand = new Setting("Swing", "AutoCrystalSwing", this, swinghands, "Mainhand"));
@@ -153,14 +159,21 @@ public class AutoCrystal extends Module {
         resetRotation();
     }
 
-    @Override
     public void onUpdate() {
-        if (nullCheck()) return;
+        implementLogic();
+    }
 
-        /**
-         * Breaking Crystals
-         */
+    private void implementLogic() {
+        if (logicmode.getValueString() == "PlaceBreak") {
+            placeCrystal();
+            breakCrystal();
+        } else {
+            breakCrystal();
+            placeCrystal();
+        }
+    }
 
+    private void breakCrystal() {
         if (breaktimer.passed(breakdelay.getValueInt() * 50)) {
 
             if (antisuicide.getValBoolean() && (mc.player.getHealth() + mc.player.getAbsorptionAmount()) <= antisuicidevalue.getValueDouble()) return;
@@ -208,11 +221,9 @@ public class AutoCrystal extends Module {
                 resetRotation();
             }
         }
+    }
 
-        /**
-         * Placing Crystals
-         */
-
+    private void placeCrystal() {
         if (mc.player.getHeldItemOffhand().getItem() == Items.END_CRYSTAL) {
             offhand = true;
         } else {
