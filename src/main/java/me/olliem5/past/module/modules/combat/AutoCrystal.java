@@ -65,6 +65,8 @@ public class AutoCrystal extends Module {
     Setting rotate;
     Setting raytrace;
     Setting nodesync;
+    Setting antisuicide;
+    Setting antisuicidevalue;
     Setting placedelay;
     Setting breakdelay;
     Setting wallsrange;
@@ -113,6 +115,8 @@ public class AutoCrystal extends Module {
         Past.settingsManager.registerSetting(rotate = new Setting("Rotate", "AutoCrystalRotate", true, this));
         Past.settingsManager.registerSetting(raytrace = new Setting("Raytrace", "AutoCrystalRaytrace", false, this));
         Past.settingsManager.registerSetting(nodesync = new Setting("No Desync", "AutoCrystalNoDesync", true, this));
+        Past.settingsManager.registerSetting(antisuicide = new Setting("Anti Suicide", "AutoCrystalAntiSuicide", true, this));
+        Past.settingsManager.registerSetting(antisuicidevalue = new Setting("Anti Suicide Health", "AutoCrystalAntiSuicideHealth", 1.0, 15.0, 36.0, this));
         Past.settingsManager.registerSetting(placedelay = new Setting("Place Delay", "AutoCrystalPlaceDelay", 0, 2, 20, this));
         Past.settingsManager.registerSetting(breakdelay = new Setting("Break Delay", "AutoCrystalBreakDelay", 0, 2, 20, this));
         Past.settingsManager.registerSetting(wallsrange = new Setting("Walls Range", "AutoCrystalWallsRange", 0.0, 3.5, 10.0, this));
@@ -158,6 +162,8 @@ public class AutoCrystal extends Module {
          */
 
         if (breaktimer.passed(breakdelay.getValueInt() * 50)) {
+
+            if (antisuicide.getValBoolean() && (mc.player.getHealth() + mc.player.getAbsorptionAmount()) <= antisuicidevalue.getValueDouble()) return;
 
             acPlacing = false;
 
