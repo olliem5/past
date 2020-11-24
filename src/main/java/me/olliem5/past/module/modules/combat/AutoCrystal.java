@@ -138,6 +138,9 @@ public class AutoCrystal extends Module {
 
     private static boolean togglePitch = false;
     private boolean offhand;
+    private boolean acPlacing;
+
+    private double renderDamageText;
 
     @Override
     public void onDisable() {
@@ -155,6 +158,8 @@ public class AutoCrystal extends Module {
          */
 
         if (breaktimer.passed(breakdelay.getValueInt() * 50)) {
+
+            acPlacing = false;
 
             EntityEnderCrystal crystal = mc.world.loadedEntityList.stream()
                     .filter(entity -> entity instanceof EntityEnderCrystal)
@@ -238,6 +243,7 @@ public class AutoCrystal extends Module {
                     damage = d;
                     bPos = blockPos;
                     renderEnt = entity;
+                    renderDamageText = damage;
                 }
             }
         }
@@ -256,7 +262,7 @@ public class AutoCrystal extends Module {
 
                 if (rotate.getValBoolean()) {
                     if (infomessages.getValBoolean()) {
-                        MessageUtil.sendAutoCrystalMessage(ColourUtil.white + "Rotating to" + " " + ColourUtil.aqua + "block" + ColourUtil.white + bPos.getX() + 0.5D + ", " + (bPos.getY() - 0.5D) + ", " + bPos.getZ() + 0.5D);
+                        MessageUtil.sendAutoCrystalMessage(ColourUtil.white + "Rotating to" + " " + ColourUtil.aqua + " " + "block" + ColourUtil.white + bPos.getX() + 0.5D + ", " + (bPos.getY() - 0.5D) + ", " + bPos.getZ() + 0.5D);
                     }
                     lookAtPacket(bPos.getX() + 0.5D, bPos.getY() - 0.5D, bPos.getZ() + 0.5D, mc.player);
                 }
@@ -265,9 +271,9 @@ public class AutoCrystal extends Module {
 
                 if (raytrace.getValBoolean()) {
                     if (result == null || result.sideHit == null) {
-                        bPos = null;
                         enumFacing = null;
                         renderBlock = null;
+                        acPlacing = false;
                         resetRotation();
                         return;
                     } else {
@@ -276,6 +282,8 @@ public class AutoCrystal extends Module {
                 }
 
                 if (bPos != null) {
+                    acPlacing = true;
+
                     if (raytrace.getValBoolean() && enumFacing != null) {
                         mc.player.connection.sendPacket(new CPacketPlayerTryUseItemOnBlock(bPos, enumFacing, offhand ? EnumHand.OFF_HAND : EnumHand.MAIN_HAND, 0, 0, 0));
                         if (infomessages.getValBoolean()) {
@@ -319,7 +327,7 @@ public class AutoCrystal extends Module {
         int rgbgreen = rgb >> 8 & 255;
         int rgbblue = rgb & 255;
 
-        if (renderplace.getValBoolean()) {
+        if (renderplace.getValBoolean() && acPlacing == true) {
             if (renderBlock != null) {
                 if (!rainbow.getValBoolean()) {
                     if (rendermode.getValueString() == "Full") {
@@ -351,10 +359,8 @@ public class AutoCrystal extends Module {
 
         if (renderdamage.getValBoolean()) {
             if (renderBlock != null && renderEnt != null) {
-                double d = calculateDamage(renderBlock.getX() + 0.5D, renderBlock.getY() + 0.5D, renderBlock.getZ() + 0.5D, renderEnt);
-                String[] damageText = new String[1];
-                damageText[0] = (Math.floor(d) == d ? (int) d : String.format("%.3f", d)) + "";
-                RenderText.drawText(renderBlock, damageText[0]);
+                String renderDamageText3dp = String.format ("%.3f", renderDamageText);
+                RenderText.drawText(renderBlock, renderDamageText3dp + "");
             }
         }
     });
