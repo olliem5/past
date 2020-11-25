@@ -39,6 +39,7 @@ public class ModuleManager {
         modules.add(new Timer());
         modules.add(new XCarry());
         modules.add(new BowExploit());
+        modules.add(new PacketMine());
 
         /* Misc */
         modules.add(new DiscordRPC());
