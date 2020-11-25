@@ -18,40 +18,40 @@ public class FootEXP extends Module {
         super("FootEXP", "Makes you look down server side while using EXP bottles", Category.COMBAT);
     }
 
-    Setting autoswitch;
+//    Setting autoswitch;
     Setting usecustompitch;
     Setting custompitch;
 
     @Override
     public void setup() {
-        Past.settingsManager.registerSetting(autoswitch = new Setting("Auto Switch", "FootEXPAutoSwitch", false, this));
+//        Past.settingsManager.registerSetting(autoswitch = new Setting("Auto Switch", "FootEXPAutoSwitch", false, this));
         Past.settingsManager.registerSetting(usecustompitch = new Setting("Use Custom Pitch", "FootEXPUseCustomPitch", false, this));
         Past.settingsManager.registerSetting(custompitch = new Setting("Custom Pitch", "FootEXPCustomPitch", -90, 90, 90, this));
     }
 
-    private int oldInventorySlot;
+//    private int oldInventorySlot;
 
     @Override
     public void onEnable() {
-        if (autoswitch.getValBoolean()) {
-            oldInventorySlot = mc.player.inventory.currentItem;
-        }
+//        if (autoswitch.getValBoolean()) {
+//            oldInventorySlot = mc.player.inventory.currentItem;
+//        }
     }
 
     @Override
     public void onDisable() {
-        if (autoswitch.getValBoolean()) {
-            mc.player.inventory.currentItem = oldInventorySlot;
-        }
+//        if (autoswitch.getValBoolean()) {
+//            mc.player.inventory.currentItem = oldInventorySlot;
+//        }
     }
 
     @Override
     public void onUpdate() {
-        if (nullCheck()) return;
-
-        if (autoswitch.getValBoolean()) {
-            mc.player.inventory.currentItem = PlayerUtil.getItemInHotbar(Items.EXPERIENCE_BOTTLE);
-        }
+//        if (nullCheck()) return;
+//
+//        if (autoswitch.getValBoolean()) {
+//            mc.player.inventory.currentItem = PlayerUtil.getItemInHotbar(Items.EXPERIENCE_BOTTLE);
+//        }
     }
 
     @EventHandler
