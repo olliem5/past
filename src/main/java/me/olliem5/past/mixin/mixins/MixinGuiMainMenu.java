@@ -16,7 +16,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public class MixinGuiMainMenu extends GuiScreen {
 
     @Inject(method = "drawScreen", at = @At("TAIL"), cancellable = true)
-    public void drawText(int mouseX, int mouseY, float partialTicks, CallbackInfo ci) {
+    public void drawText(int mouseX, int mouseY, float partialTicks, CallbackInfo callbackInfo) {
         int authorspace = Past.customFontRenderer.getHeight() + 6;
         int githubspace = Past.customFontRenderer.getHeight() + Past.customFontRenderer.getHeight() + 8;
 

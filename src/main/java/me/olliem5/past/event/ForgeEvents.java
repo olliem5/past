@@ -3,10 +3,7 @@ package me.olliem5.past.event;
 import me.olliem5.past.Past;
 import me.olliem5.past.gui.editor.component.HudComponent;
 import me.olliem5.past.module.Module;
-import net.minecraftforge.client.event.EntityViewRenderEvent;
-import net.minecraftforge.client.event.InputUpdateEvent;
-import net.minecraftforge.client.event.RenderGameOverlayEvent;
-import net.minecraftforge.client.event.RenderWorldLastEvent;
+import net.minecraftforge.client.event.*;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.InputEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
@@ -68,6 +65,11 @@ public class ForgeEvents {
 
     @SubscribeEvent
     public void fogDensity(EntityViewRenderEvent.FogDensity event) {
+        Past.EVENT_BUS.post(event);
+    }
+
+    @SubscribeEvent
+    public void renderBlockOverlay(RenderBlockOverlayEvent event) {
         Past.EVENT_BUS.post(event);
     }
 }

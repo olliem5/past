@@ -6,6 +6,9 @@
   "mixins": [
     "MixinGuiMainMenu",
     "MixinNetworkManager",
-    "MixinBlockSoulSand"
+    "MixinBlockSoulSand",
+    "MixinGuiBossOverlay",
+    "MixinEntityRenderer",
+    "MixinLayerBipedArmor"
   ]
 }

@@ -70,6 +70,7 @@ public class ModuleManager {
         modules.add(new Time());
         modules.add(new HoleESP());
         modules.add(new BlockHighlight());
+        modules.add(new NoRender());
     }
 
     public ArrayList<Module> getModules() {
