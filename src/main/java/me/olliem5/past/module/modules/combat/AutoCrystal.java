@@ -37,7 +37,7 @@ public class AutoCrystal extends Module {
     static Minecraft mc = Minecraft.getMinecraft();
 
     public AutoCrystal() {
-        super("AutoCrystal", "Places and breaks crystals to kill enemies", Category.COMBAT);
+        super("AutoCrystal", "Places and breaks end crystals to kill enemies", Category.COMBAT);
     }
 
     /**
@@ -214,12 +214,12 @@ public class AutoCrystal extends Module {
 
                     if (swinghand.getValueString() == "Offhand") {
                         if (infomessages.getValBoolean()) {
-                            MessageUtil.sendAutoCrystalMessage(ColourUtil.white + "Swinging the" + " " + ColourUtil.aqua + "off hand" + ColourUtil.white + " " + "at a crystal");
+                            MessageUtil.sendAutoCrystalMessage(ColourUtil.white + "Swinging the" + ColourUtil.aqua + " " + "offhand" + ColourUtil.white + " " + "at a crystal");
                         }
                         mc.player.swingArm(EnumHand.OFF_HAND);
                     } else {
                         if (infomessages.getValBoolean()) {
-                            MessageUtil.sendAutoCrystalMessage(ColourUtil.white + "Swinging the" + " " + ColourUtil.aqua + "main hand" + ColourUtil.white + " " + "at a crystal");
+                            MessageUtil.sendAutoCrystalMessage(ColourUtil.white + "Swinging the" + ColourUtil.aqua + " " + "mainhand" + ColourUtil.white + " " + "at a crystal");
                         }
                         mc.player.swingArm(EnumHand.MAIN_HAND);
                     }
@@ -290,7 +290,7 @@ public class AutoCrystal extends Module {
 
                 if (rotate.getValBoolean()) {
                     if (infomessages.getValBoolean()) {
-                        MessageUtil.sendAutoCrystalMessage(ColourUtil.white + "Rotating to" + " " + ColourUtil.aqua + " " + "block" + ColourUtil.white + bPos.getX() + 0.5D + ", " + (bPos.getY() - 0.5D) + ", " + bPos.getZ() + 0.5D);
+                        MessageUtil.sendAutoCrystalMessage(ColourUtil.white + "Rotating to" + ColourUtil.aqua + " " + "block" + " " + ColourUtil.white + bPos.getX() + 0.5D + ", " + (bPos.getY() - 0.5D) + ", " + bPos.getZ() + 0.5D);
                     }
                     crystalUtil.lookAtPacket(bPos.getX() + 0.5D, bPos.getY() - 0.5D, bPos.getZ() + 0.5D, mc.player);
                 }
@@ -412,7 +412,7 @@ public class AutoCrystal extends Module {
                     if (e instanceof EntityEnderCrystal) {
                         if (e.getDistance(packet.getX(), packet.getY(), packet.getZ()) <= 6.0f) {
                             if (infomessages.getValBoolean()) {
-                                MessageUtil.sendAutoCrystalMessage(ColourUtil.white + "Desync crystal" + " " + ColourUtil.red + "removed");
+                                MessageUtil.sendAutoCrystalMessage(ColourUtil.white + "Desync crystal" + ColourUtil.red + " " + "removed");
                             }
                             e.setDead();
                         }
