@@ -78,6 +78,7 @@ public class AutoCrystal extends Module {
     Setting maxselfdamage;
     Setting faceplace;
     Setting infomessages;
+    Setting customfont;
     Setting renderdamage;
     Setting renderplace;
     Setting rendermode;
@@ -135,6 +136,7 @@ public class AutoCrystal extends Module {
         Past.settingsManager.registerSetting(maxselfdamage = new Setting("Max Self Dmg", "AutoCrystalMaxSelfDamage", 0.0, 8.0, 36.0, this));
         Past.settingsManager.registerSetting(faceplace = new Setting("Faceplace HP", "AutoCrystalFaceplace", 0.0, 8.0, 36.0, this));
         Past.settingsManager.registerSetting(infomessages = new Setting("Info Messages", "AutoCrystalInfoMessages", false, this));
+        Past.settingsManager.registerSetting(customfont = new Setting("Custom Font", "AutoCrystalCustomFont", true, this));
         Past.settingsManager.registerSetting(renderdamage = new Setting("Render Damage", "AutoCrystalRenderDamage", true, this));
         Past.settingsManager.registerSetting(renderplace = new Setting("Render Place", "AutoCrystalRenderPlace", true, this));
         Past.settingsManager.registerSetting(rendermode = new Setting("Mode", "AutoCrystalRenderMode", this, rendermodes, "FullFrame"));
@@ -150,7 +152,8 @@ public class AutoCrystal extends Module {
     private Entity renderEnt;
 
     private boolean offhand = false;
-    private boolean acPlacing = false;
+//    public static boolean acBreaking = false;
+//    public static boolean acPlacing = false;
     private static boolean togglePitch = false;
     private static boolean isSpoofingAngles;
 
@@ -159,11 +162,18 @@ public class AutoCrystal extends Module {
     private static double pitch;
 
     @Override
+    public void onEnable() {
+//        acBreaking = false;
+//        acPlacing = false;
+    }
+
+    @Override
     public void onDisable() {
         renderBlock = null;
         renderEnt = null;
         resetRotation();
-        acPlacing = false;
+//        acBreaking = false;
+//        acPlacing = false;
     }
 
     public void onUpdate() {
@@ -186,8 +196,6 @@ public class AutoCrystal extends Module {
         if (breaktimer.passed(breakdelay.getValueInt() * 50)) {
 
             if (antisuicide.getValBoolean() && (mc.player.getHealth() + mc.player.getAbsorptionAmount()) <= antisuicidevalue.getValueDouble()) return;
-
-            acPlacing = false;
 
             EntityEnderCrystal crystal = mc.world.loadedEntityList.stream()
                     .filter(entity -> entity instanceof EntityEnderCrystal)
@@ -299,7 +307,6 @@ public class AutoCrystal extends Module {
                     if (result == null || result.sideHit == null) {
                         enumFacing = null;
                         renderBlock = null;
-                        acPlacing = false;
                         resetRotation();
                         return;
                     } else {
@@ -308,8 +315,6 @@ public class AutoCrystal extends Module {
                 }
 
                 if (bPos != null) {
-                    acPlacing = true;
-
                     if (raytrace.getValBoolean() && enumFacing != null) {
                         mc.player.connection.sendPacket(new CPacketPlayerTryUseItemOnBlock(bPos, enumFacing, offhand ? EnumHand.OFF_HAND : EnumHand.MAIN_HAND, 0, 0, 0));
                         if (infomessages.getValBoolean()) {
@@ -343,51 +348,64 @@ public class AutoCrystal extends Module {
         }
     }
 
+    private void renderACPlacement() {
+        if (renderBlock != null) {
+
+            float[] hue = new float[] {(float) (System.currentTimeMillis() % 7500L) / 7500f};
+            int rgb = Color.HSBtoRGB(hue[0], 0.8f, 0.8f);
+            int rgbred = rgb >> 16 & 255;
+            int rgbgreen = rgb >> 8 & 255;
+            int rgbblue = rgb & 255;
+
+            if (!rainbow.getValBoolean()) {
+                if (rendermode.getValueString() == "Full") {
+                    RenderUtil.drawBox(RenderUtil.generateBB(renderBlock.getX(), renderBlock.getY(), renderBlock.getZ()), red.getValueInt(), green.getValueInt(), blue.getValueInt(), opacity.getValueInt());
+                }
+
+                if (rendermode.getValueString() == "FullFrame") {
+                    RenderUtil.drawBoxOutline(RenderUtil.generateBB(renderBlock.getX(), renderBlock.getY(), renderBlock.getZ()), red.getValueInt(), green.getValueInt(), blue.getValueInt(), opacity.getValueInt());
+                }
+
+                if (rendermode.getValueString() == "Frame") {
+                    RenderUtil.drawOutline(RenderUtil.generateBB(renderBlock.getX(), renderBlock.getY(), renderBlock.getZ()), red.getValueInt(), green.getValueInt(), blue.getValueInt(), opacity.getValueInt());
+                }
+            } else {
+                if (rendermode.getValueString() == "Full") {
+                    RenderUtil.drawBox(RenderUtil.generateBB(renderBlock.getX(), renderBlock.getY(), renderBlock.getZ()), rgbred / 255f, rgbgreen / 255f, rgbblue / 255f, opacity.getValueInt());
+                }
+
+                if (rendermode.getValueString() == "FullFrame") {
+                    RenderUtil.drawBoxOutline(RenderUtil.generateBB(renderBlock.getX(), renderBlock.getY(), renderBlock.getZ()), rgbred / 255f, rgbgreen / 255f, rgbblue / 255f, opacity.getValueInt());
+                }
+
+                if (rendermode.getValueString() == "Frame") {
+                    RenderUtil.drawOutline(RenderUtil.generateBB(renderBlock.getX(), renderBlock.getY(), renderBlock.getZ()), rgbred / 255f, rgbgreen / 255f, rgbblue / 255f, opacity.getValueInt());
+                }
+            }
+        }
+    }
+
+    private void renderACDamage() {
+        if (renderBlock != null && renderEnt != null) {
+            String renderDamageText3dp = String.format ("%.3f", renderDamageText);
+            if (customfont.getValBoolean()) {
+                RenderText.drawTextCustomFont(renderBlock, renderDamageText3dp + "");
+            } else {
+                RenderText.drawTextMCFont(renderBlock, renderDamageText3dp + "");
+            }
+        }
+    }
+
     @EventHandler
     public Listener<RenderWorldLastEvent> renderWorldLastEventListener = new Listener<>(event -> {
         if (nullCheck()) return;
 
-        float[] hue = new float[] {(float) (System.currentTimeMillis() % 7500L) / 7500f};
-        int rgb = Color.HSBtoRGB(hue[0], 0.8f, 0.8f);
-        int rgbred = rgb >> 16 & 255;
-        int rgbgreen = rgb >> 8 & 255;
-        int rgbblue = rgb & 255;
-
-        if (renderplace.getValBoolean() && acPlacing == true) {
-            if (renderBlock != null) {
-                if (!rainbow.getValBoolean()) {
-                    if (rendermode.getValueString() == "Full") {
-                        RenderUtil.drawBox(RenderUtil.generateBB(renderBlock.getX(), renderBlock.getY(), renderBlock.getZ()), red.getValueInt(), green.getValueInt(), blue.getValueInt(), opacity.getValueInt());
-                    }
-
-                    if (rendermode.getValueString() == "FullFrame") {
-                        RenderUtil.drawBoxOutline(RenderUtil.generateBB(renderBlock.getX(), renderBlock.getY(), renderBlock.getZ()), red.getValueInt(), green.getValueInt(), blue.getValueInt(), opacity.getValueInt());
-                    }
-
-                    if (rendermode.getValueString() == "Frame") {
-                        RenderUtil.drawOutline(RenderUtil.generateBB(renderBlock.getX(), renderBlock.getY(), renderBlock.getZ()), red.getValueInt(), green.getValueInt(), blue.getValueInt(), opacity.getValueInt());
-                    }
-                } else {
-                    if (rendermode.getValueString() == "Full") {
-                        RenderUtil.drawBox(RenderUtil.generateBB(renderBlock.getX(), renderBlock.getY(), renderBlock.getZ()), rgbred / 255f, rgbgreen / 255f, rgbblue / 255f, opacity.getValueInt());
-                    }
-
-                    if (rendermode.getValueString() == "FullFrame") {
-                        RenderUtil.drawBoxOutline(RenderUtil.generateBB(renderBlock.getX(), renderBlock.getY(), renderBlock.getZ()), rgbred / 255f, rgbgreen / 255f, rgbblue / 255f, opacity.getValueInt());
-                    }
-
-                    if (rendermode.getValueString() == "Frame") {
-                        RenderUtil.drawOutline(RenderUtil.generateBB(renderBlock.getX(), renderBlock.getY(), renderBlock.getZ()), rgbred / 255f, rgbgreen / 255f, rgbblue / 255f, opacity.getValueInt());
-                    }
-                }
-            }
+        if (renderplace.getValBoolean()) {
+            renderACPlacement();
         }
 
-        if (renderdamage.getValBoolean() && acPlacing == true) {
-            if (renderBlock != null && renderEnt != null) {
-                String renderDamageText3dp = String.format ("%.3f", renderDamageText);
-                RenderText.drawText(renderBlock, renderDamageText3dp + "");
-            }
+        if (renderdamage.getValBoolean()) {
+            renderACDamage();
         }
     });
 

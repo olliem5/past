@@ -45,13 +45,13 @@ public class HudPanel {
     }
 
     public void drawScreen(int mouseX, int mouseY, float partialTicks) {
-        if (Past.settingsManager.getSettingID("ClickGUIRainbow").getValBoolean()) {
+        if (Past.settingsManager.getSettingID("HudEditorRainbow").getValBoolean()) {
             Gui.drawRect(x, y, x + width, y + height, ColourUtil.getMultiColour().getRGB());
         } else {
             Gui.drawRect(x, y, x + width, y + height, 0xFF222222);
         }
 
-        if (Past.settingsManager.getSettingID("ClickGUICustomFont").getValBoolean()) {
+        if (Past.settingsManager.getSettingID("HudEditorCustomFont").getValBoolean()) {
             Past.customFontRenderer.drawStringWithShadow(title, x + 2, y + height / 2 - mc.fontRenderer.FONT_HEIGHT / 2, -1);
         } else {
             mc.fontRenderer.drawStringWithShadow(title, x + 2, y + height / 2 - mc.fontRenderer.FONT_HEIGHT / 2, -1);

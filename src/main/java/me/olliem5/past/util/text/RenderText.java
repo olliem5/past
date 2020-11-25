@@ -1,5 +1,6 @@
 package me.olliem5.past.util.text;
 
+import me.olliem5.past.Past;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.entity.player.EntityPlayer;
@@ -33,12 +34,21 @@ public class RenderText {
         GlStateManager.scale(scaleDistance, scaleDistance, scaleDistance);
     }
 
-    public static void drawText(final BlockPos pos, final String text) {
+    public static void drawTextMCFont(final BlockPos pos, final String text) {
         GlStateManager.pushMatrix();
         glBillboardDistanceScaled(pos.getX() + 0.5f, pos.getY() + 0.5f, pos.getZ() + 0.5f, mc.player, 1.0f);
         GlStateManager.disableDepth();
         GlStateManager.translate(-(mc.fontRenderer.getStringWidth(text) / 2.0), 0.0, 0.0);
         mc.fontRenderer.drawStringWithShadow(text, 0.0f, 0.0f, -1);
+        GlStateManager.popMatrix();
+    }
+
+    public static void drawTextCustomFont(final BlockPos pos, final String text) {
+        GlStateManager.pushMatrix();
+        glBillboardDistanceScaled(pos.getX() + 0.5f, pos.getY() + 0.5f, pos.getZ() + 0.5f, mc.player, 1.0f);
+        GlStateManager.disableDepth();
+        GlStateManager.translate(-(Past.customFontRenderer.getStringWidth(text) / 2.0), 0.0, 0.0);
+        Past.customFontRenderer.drawStringWithShadow(text, 0.0f, 0.0f, -1);
         GlStateManager.popMatrix();
     }
 }

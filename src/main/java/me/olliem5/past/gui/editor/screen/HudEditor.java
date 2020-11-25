@@ -23,7 +23,7 @@ public class HudEditor extends GuiScreen {
 
     @Override
     public void drawScreen(int mouseX, int mouseY, float partialTicks) {
-        if (Past.settingsManager.getSettingID("ClickGUIBackground").getValBoolean()) {
+        if (Past.settingsManager.getSettingID("HudEditorBackground").getValBoolean()) {
             drawDefaultBackground();
         }
 

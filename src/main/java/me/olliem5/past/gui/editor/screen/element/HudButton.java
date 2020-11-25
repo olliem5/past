@@ -39,13 +39,9 @@ public class HudButton extends Element {
         }
     }
 
-    /**
-     * TODO: Make these settings in the HudEditor module
-     */
-
     @Override
     public void renderElement() {
-        if (Past.settingsManager.getSettingID("ClickGUIRainbow").getValBoolean() && this.comp.isEnabled()) {
+        if (Past.settingsManager.getSettingID("HudEditorRainbow").getValBoolean() && this.comp.isEnabled()) {
             Gui.drawRect(parent.getX(), this.parent.getY() + this.offset, parent.getX() + parent.getWidth(), this.parent.getY() + 12 + this.offset, ColourUtil.getMultiColour().getRGB());
         } else if (this.comp.isEnabled()) {
             Gui.drawRect(parent.getX(), this.parent.getY() + this.offset, parent.getX() + parent.getWidth(), this.parent.getY() + 12 + this.offset, 0xFF222222);
@@ -53,7 +49,7 @@ public class HudButton extends Element {
             Gui.drawRect(parent.getX(), this.parent.getY() + this.offset, parent.getX() + parent.getWidth(), this.parent.getY() + 12 + this.offset, 0xFF111111);
         }
 
-        if (Past.settingsManager.getSettingID("ClickGUICustomFont").getValBoolean()) {
+        if (Past.settingsManager.getSettingID("HudEditorCustomFont").getValBoolean()) {
             Past.customFontRenderer.drawStringWithShadow(this.comp.getName(), parent.getX() + 2, (parent.getY() + offset + 2), -1);
         } else {
             mc.fontRenderer.drawStringWithShadow(this.comp.getName(), parent.getX() + 2, (parent.getY() + offset + 2), -1);
@@ -61,13 +57,13 @@ public class HudButton extends Element {
 
         if (this.subelements.size() > 0) {
             if (!this.isOpen()) {
-                if (Past.settingsManager.getSettingID("ClickGUICustomFont").getValBoolean()) {
+                if (Past.settingsManager.getSettingID("HudEditorCustomFont").getValBoolean()) {
                     Past.customFontRenderer.drawStringWithShadow("+", parent.getX() + parent.getWidth() - 10, (parent.getY() + offset + 2), -1);
                 } else {
                     mc.fontRenderer.drawStringWithShadow("+", parent.getX() + parent.getWidth() - 10, (parent.getY() + offset + 2), -1);
                 }
             } else if (this.isOpen()) {
-                if (Past.settingsManager.getSettingID("ClickGUICustomFont").getValBoolean()) {
+                if (Past.settingsManager.getSettingID("HudEditorCustomFont").getValBoolean()) {
                     Past.customFontRenderer.drawStringWithShadow("-", parent.getX() + parent.getWidth() - 10, (parent.getY() + offset + 2), -1);
                 } else {
                     mc.fontRenderer.drawStringWithShadow("-", parent.getX() + parent.getWidth() - 10, (parent.getY() + offset + 2), -1);

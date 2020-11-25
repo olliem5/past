@@ -26,7 +26,6 @@ public class Panel {
     public int dragY;
     Category cat;
 
-    //For ClickGUI.
     public Panel(String title, int x, int y, int width, int height, Category cat) {
         this.components = new ArrayList<>();
         this.title = title;
