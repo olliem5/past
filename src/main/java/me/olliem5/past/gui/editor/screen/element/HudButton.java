@@ -1,9 +1,14 @@
 package me.olliem5.past.gui.editor.screen.element;
 
 import me.olliem5.past.Past;
+import me.olliem5.past.gui.click.components.BooleanSwitch;
+import me.olliem5.past.gui.click.components.DoubleSlider;
+import me.olliem5.past.gui.click.components.IntegerSlider;
+import me.olliem5.past.gui.click.components.ModeChanger;
 import me.olliem5.past.gui.editor.component.HudComponent;
 import me.olliem5.past.gui.editor.screen.Element;
 import me.olliem5.past.gui.editor.screen.HudPanel;
+import me.olliem5.past.settings.Setting;
 import me.olliem5.past.util.colour.ColourUtil;
 import net.minecraft.client.gui.Gui;
 
@@ -23,6 +28,15 @@ public class HudButton extends Element {
         this.subelements = new ArrayList<>();
         this.open = false;
         int opY = offset + 12;
+
+        if (Past.settingsManager.getSettingsHudComponent(comp) != null) {
+            for (Setting setting : Past.settingsManager.getSettingsHudComponent(comp)) {
+                if (setting.getType() == "hudboolean") {
+                    this.subelements.add(new HudBooleanSwitch(setting, this, opY));
+                    opY += 12;
+                }
+            }
+        }
     }
 
     /**
@@ -45,7 +59,7 @@ public class HudButton extends Element {
             mc.fontRenderer.drawStringWithShadow(this.comp.getName(), parent.getX() + 2, (parent.getY() + offset + 2), -1);
         }
 
-        if (this.subelements.size() > 1) {
+        if (this.subelements.size() > 0) {
             if (!this.isOpen()) {
                 if (Past.settingsManager.getSettingID("ClickGUICustomFont").getValBoolean()) {
                     Past.customFontRenderer.drawStringWithShadow("+", parent.getX() + parent.getWidth() - 10, (parent.getY() + offset + 2), -1);

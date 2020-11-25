@@ -1,12 +1,14 @@
 package me.olliem5.past.settings;
 
 import me.olliem5.past.Past;
+import me.olliem5.past.gui.editor.component.HudComponent;
 import me.olliem5.past.module.Module;
 
 import java.util.ArrayList;
 
 public class Setting {
     private Module parent;
+    private HudComponent hudParent;
     private String name;
     private String id;
     private String type;
@@ -55,6 +57,14 @@ public class Setting {
         this.sval = sval;
         this.modes = modes;
         this.type = "mode";
+    }
+
+    public Setting(String name, String id, boolean bval, HudComponent hudComponent) {
+        this.hudParent = hudComponent;
+        this.name = name;
+        this.id = id;
+        this.bval = bval;
+        this.type = "hudboolean";
     }
 
     public int getValueInt() {
@@ -111,6 +121,10 @@ public class Setting {
 
     public Module getParent() {
         return parent;
+    }
+
+    public HudComponent getHudParent() {
+        return hudParent;
     }
 
     public ArrayList<String> getModes() {

@@ -1,6 +1,7 @@
 package me.olliem5.past.settings;
 
 import me.olliem5.past.Past;
+import me.olliem5.past.gui.editor.component.HudComponent;
 import me.olliem5.past.module.Module;
 
 import java.util.ArrayList;
@@ -44,6 +45,16 @@ public class SettingsManager {
         ArrayList<Setting> list = new ArrayList<>();
         for (Setting setting : getSettings()) {
             if (setting.getParent() == module) {
+                list.add(setting);
+            }
+        }
+        return list;
+    }
+
+    public ArrayList<Setting> getSettingsHudComponent(HudComponent hudComponent) {
+        ArrayList<Setting> list = new ArrayList<>();
+        for (Setting setting : getSettings()) {
+            if (setting.getHudParent() == hudComponent) {
                 list.add(setting);
             }
         }

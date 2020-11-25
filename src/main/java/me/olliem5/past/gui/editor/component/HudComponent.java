@@ -11,13 +11,14 @@ public class HudComponent {
     private int x = 2;
     private int y = 2;
     private int width;
-    private int height = 9;
+    private int height = 9; //TODO: make this change if the custom font is enabled
     private int dragX;
     private int dragY;
 
     public HudComponent(String name, int width) {
         this.name = name;
         this.width = width;
+        setup();
     }
 
     public String getName() {
@@ -108,4 +109,6 @@ public class HudComponent {
     }
 
     public void render(float ticks) {}
+
+    public void setup() {}
 }

@@ -52,6 +52,8 @@ public class AutoCrystal extends Module {
      * TODO: Timeout when a certain ammount of hits are performed on one crystal
      * TODO: Info Messages on certain events, e.g. "FACEPLACING" with x health & tidy up formatting of existing messages
      * TODO: Make the CA check if the name is the same as yours, so it does not crystal the fake player from blink
+     * TODO: better calc for place to stop sometimes multiplacing
+     * TODO: better delay system
      */
 
     CooldownUtil breaktimer = new CooldownUtil();

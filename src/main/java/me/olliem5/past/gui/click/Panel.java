@@ -50,22 +50,6 @@ public class Panel {
         }
     }
 
-    //For HudEditor.
-    public Panel(String title, int x, int y, int width, int height) {
-        this.components = new ArrayList<>();
-        this.title = title;
-        this.x = x;
-        this.y = y;
-        this.width = width;
-        this.height = height;
-        this.dragX = 0;
-        this.isSettingOpen = true;
-        this.isDragging = false;
-        this.open = true;
-
-        //Add the HUD toggle buttons here.
-    }
-
     //Initial header of module category.
     public void drawScreen(int mouseX, int mouseY, float partialTicks) {
         if (Past.settingsManager.getSettingID("ClickGUIRainbow").getValBoolean()) {
