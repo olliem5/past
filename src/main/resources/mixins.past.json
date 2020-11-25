@@ -10,6 +10,7 @@
     "MixinGuiBossOverlay",
     "MixinEntityRenderer",
     "MixinLayerBipedArmor",
-    "MixinPlayerControllerMP"
+    "MixinPlayerControllerMP",
+    "MixinAbstractClientPlayer"
   ]
 }

@@ -1,5 +1,6 @@
 package me.olliem5.past;
 
+import me.olliem5.past.cape.CapesManager;
 import me.olliem5.past.command.CommandManager;
 import me.olliem5.past.event.ForgeEvents;
 import me.olliem5.past.font.CustomFontRenderer;
@@ -29,7 +30,7 @@ import java.awt.*;
 public class Past {
     public static final String name = "Past Utility Mod";
     public static final String modid = "past";
-    public static final String version = "1.3";
+    public static final String version = "1.4";
     public static final String author = "olliem5";
     public static final String github = "https://github.com/olliem5/past";
     public static final String appid = "754509326902886411";
@@ -43,6 +44,7 @@ public class Past {
     public static CommandManager commandManager;
     public static FriendsManager friendsManager;
     public static CustomFontRenderer customFontRenderer;
+    public static CapesManager capesManager;
     public static HudComponentManager hudComponentManager;
     public static ClickGUI clickGUI;
     public static HudEditor hudEditor;
@@ -78,6 +80,9 @@ public class Past {
 
         customFontRenderer = new CustomFontRenderer(new Font("Arial", 0, 18), true, false);
         System.out.println("[" + nameversion + "]" + " " + "Custom Font Renderer Initialized! (Author 086)");
+
+        capesManager = new CapesManager();
+        System.out.println("[" + nameversion + "]" + " " + "Capes Initialized!");
 
         hudComponentManager = new HudComponentManager();
         System.out.println("[" + nameversion + "]" + " " + "HUD Components Initialized!");

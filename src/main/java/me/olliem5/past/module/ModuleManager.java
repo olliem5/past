@@ -32,6 +32,7 @@ public class ModuleManager {
         modules.add(new HUD());
         modules.add(new HudEditor());
         modules.add(new Render());
+        modules.add(new Capes());
 
         /* Exploit */
         modules.add(new Blink());
