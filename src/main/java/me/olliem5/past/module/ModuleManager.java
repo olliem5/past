@@ -26,6 +26,7 @@ public class ModuleManager {
         modules.add(new Surround());
         modules.add(new FootEXP());
         modules.add(new Criticals());
+        modules.add(new AutoCrystalRewrite());
 
         /* Core */
         modules.add(new ClickGUI());
