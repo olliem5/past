@@ -53,6 +53,7 @@ public class AutoCrystalRewrite extends Module {
     Setting breakhand;
     Setting rotate;
     Setting raytrace;
+    Setting nodesync;
     Setting placedelay;
     Setting breakdelay;
     Setting placerange;
@@ -61,8 +62,18 @@ public class AutoCrystalRewrite extends Module {
     Setting mindamage;
     Setting faceplace;
     Setting maxselfdamage;
+    Setting customfont;
+    Setting renderdamage;
+    Setting renderplace;
+    Setting rendermode;
+    Setting red;
+    Setting green;
+    Setting blue;
+    Setting opacity;
+    Setting rainbow;
 
     private ArrayList<String> breakhands;
+    private ArrayList<String> rendermodes;
 
     @Override
     public void setup() {
@@ -71,11 +82,17 @@ public class AutoCrystalRewrite extends Module {
         breakhands.add("Offhand");
         breakhands.add("Both");
 
+        rendermodes = new ArrayList<>();
+        rendermodes.add("Full");
+        rendermodes.add("FullFrame");
+        rendermodes.add("Frame");
+
         Past.settingsManager.registerSetting(place = new Setting("Place", "AutoCrystalRewritePlace", true, this));
         Past.settingsManager.registerSetting(explode = new Setting("Break", "AutoCrystalRewriteExplode", true, this));
         Past.settingsManager.registerSetting(breakhand = new Setting("Swing", "AutoCrystalRewriteBreakHand", this, breakhands, "Mainhand"));
         Past.settingsManager.registerSetting(rotate = new Setting("Rotate", "AutoCrystalRewriteRotate", true, this));
         Past.settingsManager.registerSetting(raytrace = new Setting("Raytrace", "AutoCrystalRewriteRaytrace", true, this));
+        Past.settingsManager.registerSetting(nodesync = new Setting("No Desync", "AutoCrystalRewriteNoDesync", true, this));
         Past.settingsManager.registerSetting(placedelay = new Setting("Place Delay (ms)", "AutoCrystalRewritePlaceDelay", 0.0, 200.0, 1000.0, this));
         Past.settingsManager.registerSetting(breakdelay = new Setting("Break Delay (ms)", "AutoCrystalRewriteBreakDelay", 0.0, 200.0, 1000.0, this));
         Past.settingsManager.registerSetting(placerange = new Setting("Place Range", "AutoCrystalRewritePlaceRange", 0.0, 4.4, 10.0, this));
@@ -84,42 +101,56 @@ public class AutoCrystalRewrite extends Module {
         Past.settingsManager.registerSetting(mindamage = new Setting("Min Damage", "AutoCrystalRewriteMinDamage", 0.0, 6.0, 36.0, this));
         Past.settingsManager.registerSetting(faceplace = new Setting("Faceplace HP", "AutoCrystalRewriteFaceplace", 0.0, 8.0, 36.0, this));
         Past.settingsManager.registerSetting(maxselfdamage = new Setting("Max Self Dmg", "AutoCrystalRewriteMaxSelfDamage", 0.0, 8.0, 36.0, this));
+        Past.settingsManager.registerSetting(customfont = new Setting("Custom Font", "AutoCrystalRewriteCustomFont", true, this));
+        Past.settingsManager.registerSetting(renderdamage = new Setting("Render Damage", "AutoCrystalRewriteRenderDamage", true, this));
+        Past.settingsManager.registerSetting(renderplace = new Setting("Render Place", "AutoCrystalRewriteRenderPlace", true, this));
+        Past.settingsManager.registerSetting(rendermode = new Setting("Mode", "AutoCrystalRewriteRenderMode", this, rendermodes, "FullFrame"));
+        Past.settingsManager.registerSetting(red = new Setting("Red", "AutoCrystalRewriteRed", 0, 100, 255, this));
+        Past.settingsManager.registerSetting(green = new Setting("Green", "AutoCrystalRewriteGreen", 0, 100, 255, this));
+        Past.settingsManager.registerSetting(blue = new Setting("Blue", "AutoCrystalRewriteBlue", 0, 100, 255, this));
+        Past.settingsManager.registerSetting(opacity = new Setting("Opacity", "AutoCrystalRewriteOpacity", 0, 100, 255, this));
+        Past.settingsManager.registerSetting(rainbow = new Setting("Rainbow", "AutoCrystalRewriteRainbow", true, this));
     }
 
-    private BlockPos renderBlock;
     BlockPos bPos = null;
+    private BlockPos renderBlock;
     private EnumFacing enumFacing;
+    private Entity renderEnt;
 
     private boolean offhand = false;
     private static boolean togglePitch = false;
 
+    private double renderDamageText;
+
     @Override
     public void onDisable() {
         renderBlock = null;
+        renderEnt = null;
         crystalUtil.resetRotation();
     }
 
     public void onUpdate() {
         if (nullCheck()) return;
 
-        if (place.getValBoolean() && mc.player.getHeldItemOffhand().getItem() == Items.END_CRYSTAL) {
-            offhand = true;
-        } else {
-            offhand = false;
-        }
-
         placeCrystal();
         breakCrystal();
     }
 
     private void placeCrystal() {
+        if (mc.player.getHeldItemOffhand().getItem() == Items.END_CRYSTAL) {
+            offhand = true;
+        } else {
+            offhand = false;
+        }
+
         double damage = 0.5D;
 
         List<BlockPos> blocks = crystalUtil.findCrystalBlocksRewrite();
-        final List<EntityPlayer> entities = mc.world.playerEntities.stream().filter(entityPlayer -> entityPlayer != mc.player && !Past.friendsManager.isFriend(entityPlayer.getName())).collect(Collectors.toList());
+        List<Entity> entities = new ArrayList<>();
+        entities.addAll(mc.world.playerEntities.stream().filter(entityPlayer -> !Past.friendsManager.isFriend(entityPlayer.getName())).collect(Collectors.toList()));
 
-        for (EntityPlayer entity : entities) {
-            if (entity == mc.player|| entity.getHealth() <= 0 || mc.player.getDistance(entity) > enemyrange.getValueDouble()) continue;
+        for (Entity entity : entities) {
+            if (entity == mc.player || ((EntityLivingBase) entity).getHealth() <= 0 || mc.player.getDistance(entity) > enemyrange.getValueDouble()) continue;
 
             for (BlockPos blockPos : blocks) {
 //                double d = crystalUtil.calculateDamage(blockPos.getX() + 0.5D, blockPos.getY() + 1, blockPos.getZ() + 0.5D, entity);
@@ -143,12 +174,15 @@ public class AutoCrystalRewrite extends Module {
 
                     damage = d;
                     bPos = blockPos;
+                    renderEnt = entity;
+                    renderDamageText = damage;
                 }
             }
         }
 
         if (damage == 0.5D) {
             renderBlock = null;
+            renderEnt = null;
             crystalUtil.resetRotation();
             return;
         }
@@ -223,7 +257,7 @@ public class AutoCrystalRewrite extends Module {
 
     @EventHandler
     private Listener<PacketEvent.Receive> packetReceiveListener = new Listener<>(event -> {
-        if (event.getPacket() instanceof SPacketSoundEffect) {
+        if (event.getPacket() instanceof SPacketSoundEffect && nodesync.getValBoolean()) {
             final SPacketSoundEffect packet = (SPacketSoundEffect) event.getPacket();
             if (packet.getCategory() == SoundCategory.BLOCKS && packet.getSound() == SoundEvents.ENTITY_GENERIC_EXPLODE) {
                 for (Entity e : Minecraft.getMinecraft().world.loadedEntityList) {
@@ -257,31 +291,63 @@ public class AutoCrystalRewrite extends Module {
             int rgbgreen = rgb >> 8 & 255;
             int rgbblue = rgb & 255;
 
-            RenderUtil.drawBox(RenderUtil.generateBB(renderBlock.getX(), renderBlock.getY(), renderBlock.getZ()), rgbred, rgbgreen, rgbblue, 3);
+            if (!rainbow.getValBoolean()) {
+                if (rendermode.getValueString() == "Full") {
+                    RenderUtil.drawBox(RenderUtil.generateBB(renderBlock.getX(), renderBlock.getY(), renderBlock.getZ()), red.getValueInt(), green.getValueInt(), blue.getValueInt(), opacity.getValueInt());
+                }
+
+                if (rendermode.getValueString() == "FullFrame") {
+                    RenderUtil.drawBoxOutline(RenderUtil.generateBB(renderBlock.getX(), renderBlock.getY(), renderBlock.getZ()), red.getValueInt(), green.getValueInt(), blue.getValueInt(), opacity.getValueInt());
+                }
+
+                if (rendermode.getValueString() == "Frame") {
+                    RenderUtil.drawOutline(RenderUtil.generateBB(renderBlock.getX(), renderBlock.getY(), renderBlock.getZ()), red.getValueInt(), green.getValueInt(), blue.getValueInt(), opacity.getValueInt());
+                }
+            } else {
+                if (rendermode.getValueString() == "Full") {
+                    RenderUtil.drawBox(RenderUtil.generateBB(renderBlock.getX(), renderBlock.getY(), renderBlock.getZ()), rgbred / 255f, rgbgreen / 255f, rgbblue / 255f, opacity.getValueInt());
+                }
+
+                if (rendermode.getValueString() == "FullFrame") {
+                    RenderUtil.drawBoxOutline(RenderUtil.generateBB(renderBlock.getX(), renderBlock.getY(), renderBlock.getZ()), rgbred / 255f, rgbgreen / 255f, rgbblue / 255f, opacity.getValueInt());
+                }
+
+                if (rendermode.getValueString() == "Frame") {
+                    RenderUtil.drawOutline(RenderUtil.generateBB(renderBlock.getX(), renderBlock.getY(), renderBlock.getZ()), rgbred / 255f, rgbgreen / 255f, rgbblue / 255f, opacity.getValueInt());
+                }
+            }
         }
     }
 
-//    private void renderACDamage() {
-//        if (renderBlock != null && renderEnt != null) {
-//            String renderDamageText3dp = String.format ("%.3f", renderDamageText);
-//            if (customfont.getValBoolean()) {
-//                RenderText.drawTextCustomFont(renderBlock, renderDamageText3dp + "");
-//            } else {
-//                RenderText.drawTextMCFont(renderBlock, renderDamageText3dp + "");
-//            }
-//        }
-//    }
+    private void renderACDamage() {
+        if (renderBlock != null && renderEnt != null) {
+            String renderDamageText3dp = String.format ("%.3f", renderDamageText);
+            if (customfont.getValBoolean()) {
+                RenderText.drawTextCustomFont(renderBlock, renderDamageText3dp + "");
+            } else {
+                RenderText.drawTextMCFont(renderBlock, renderDamageText3dp + "");
+            }
+        }
+    }
 
     @EventHandler
     public Listener<RenderWorldLastEvent> renderWorldLastEventListener = new Listener<>(event -> {
         if (nullCheck()) return;
 
-        //if (renderplace.getValBoolean()) {
+        if (renderplace.getValBoolean()) {
             renderACPlacement();
-        //}
+        }
 
-        //if (renderdamage.getValBoolean()) {
-            //renderACDamage();
-        //}
+        if (renderdamage.getValBoolean()) {
+            renderACDamage();
+        }
     });
+
+    public String getArraylistInfo() {
+        if (renderEnt != null) {
+            return ColourUtil.gray + " " + renderEnt.getName();
+        } else {
+            return "";
+        }
+    }
 }
