@@ -57,6 +57,12 @@ public class CrystalUtil {
         return positions;
     }
 
+    public List<BlockPos> findCrystalBlocksRewrite() {
+        NonNullList<BlockPos> positions = NonNullList.create();
+        positions.addAll(getSphere(getPlayerPos(), (float) Past.settingsManager.getSettingID("AutoCrystalRewritePlaceRange").getValueDouble(), (int) Past.settingsManager.getSettingID("AutoCrystalRewritePlaceRange").getValueDouble(), false, true, 0).stream().filter(this::canPlaceCrystal).collect(Collectors.toList()));
+        return positions;
+    }
+
     private List<BlockPos> getSphere(BlockPos loc, float r, int h, boolean hollow, boolean sphere, int plus_y) {
         List<BlockPos> circleblocks = new ArrayList<>();
         int cx = loc.getX();
