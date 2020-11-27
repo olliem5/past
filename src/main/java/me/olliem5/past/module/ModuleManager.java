@@ -27,6 +27,7 @@ public class ModuleManager {
         modules.add(new FootEXP());
         modules.add(new Criticals());
         modules.add(new AutoCrystalRewrite());
+        modules.add(new KillAura());
 
         /* Core */
         modules.add(new ClickGUI());

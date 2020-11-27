@@ -41,6 +41,10 @@ public class Nametags extends Module {
      * TODO: Armour colours for durability, also bar of durability (mode option)
      * TODO: Self nametag option
      * TODO: Change based on friends
+     * TODO: Find way to use custom font for stack numbers
+     * TODO: Enchants render over the armour piece, look at gamesense for the bordered tag
+     * TODO: EnchantNames & ItemName settings
+     * TODO: Durability setting
      */
 
     Setting scale;
@@ -194,7 +198,6 @@ public class Nametags extends Module {
 
             GlStateManager.glNormal3f(0.0F, 0.0F, 0.0F);
             glTranslatef(0, 20, 0);
-
             GlStateManager.scale(-40, -40, 40);
             GlStateManager.enableDepth();
             GlStateManager.popMatrix();
@@ -205,7 +208,6 @@ public class Nametags extends Module {
         GL11.glPushMatrix();
         GL11.glDepthMask(true);
         GlStateManager.clear(256);
-
         GlStateManager.disableDepth();
         GlStateManager.enableDepth();
 
@@ -246,13 +248,13 @@ public class Nametags extends Module {
         for (int index = 0; index < enchants.tagCount(); ++index) {
             short id = enchants.getCompoundTagAt(index).getShort("id");
             short level = enchants.getCompoundTagAt(index).getShort("lvl");
+
             Enchantment enc = Enchantment.getEnchantmentByID(id);
+
             if (enc != null) {
-                String encName = enc.isCurse()
-                        ? ColourUtil.red
-                        + enc.getTranslatedName(level).substring(11).substring(0, 1).toLowerCase()
-                        : enc.getTranslatedName(level).substring(0, 1).toLowerCase();
+                String encName = enc.isCurse() ? ColourUtil.red + enc.getTranslatedName(level).substring(11).substring(0, 1).toLowerCase() : enc.getTranslatedName(level).substring(0, 1).toLowerCase();
                 encName = encName + level;
+
                 GL11.glPushMatrix();
                 GL11.glScalef(0.9f, 0.9f, 0);
 
@@ -264,6 +266,7 @@ public class Nametags extends Module {
 
                 GL11.glScalef(1f, 1f, 1);
                 GL11.glPopMatrix();
+
                 encY += 8;
                 yCount -= 10;
             }
