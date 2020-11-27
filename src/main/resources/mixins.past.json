@@ -11,6 +11,7 @@
     "MixinEntityRenderer",
     "MixinLayerBipedArmor",
     "MixinPlayerControllerMP",
-    "MixinAbstractClientPlayer"
+    "MixinAbstractClientPlayer",
+    "MixinRenderPlayer"
   ]
 }

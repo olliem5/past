@@ -40,6 +40,7 @@ public class Nametags extends Module {
     /**
      * TODO: Armour colours for durability, also bar of durability (mode option)
      * TODO: Self nametag option
+     * TODO: Change based on friends
      */
 
     Setting scale;
@@ -52,7 +53,7 @@ public class Nametags extends Module {
 
     @Override
     public void setup() {
-        Past.settingsManager.registerSetting(scale = new Setting("Scale", "NametagsScale", 2.0, 2.5, 10.0, this));
+        Past.settingsManager.registerSetting(scale = new Setting("Scale", "NametagsScale", 0.5, 1.5, 10.0, this));
         Past.settingsManager.registerSetting(armour = new Setting("Armour", "NametagsArmour", true, this));
         Past.settingsManager.registerSetting(mainhand = new Setting("Main Hand", "NametagsMainhand", true, this));
         Past.settingsManager.registerSetting(offhand = new Setting("Off Hand", "NametagsOffhand", true, this));
