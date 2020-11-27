@@ -74,6 +74,7 @@ public class ModuleManager {
         modules.add(new HoleESP());
         modules.add(new BlockHighlight());
         modules.add(new NoRender());
+        modules.add(new Nametags());
     }
 
     public ArrayList<Module> getModules() {
