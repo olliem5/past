@@ -66,6 +66,7 @@ public class ModuleManager {
         modules.add(new AutoLog());
         modules.add(new FastUse());
         modules.add(new NoRotate());
+        modules.add(new Burrow());
 
         /* Render */
         modules.add(new NoWeather());
