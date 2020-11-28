@@ -46,6 +46,7 @@ public class Surround extends Module {
 
         disablemodes = new ArrayList<>();
         disablemodes.add("Finish");
+        disablemodes.add("Never");
         //disablemodes.add("OnJump");
 
         Past.settingsManager.registerSetting(placemode = new Setting("Place", "SurroundPlace", this, placemodes, "Standard"));
@@ -100,7 +101,7 @@ public class Surround extends Module {
         if (nullCheck()) return;
 
         if (timeout.getValBoolean()) {
-            if (this.isToggled()) {
+            if (this.isToggled() && disablemode.getValueString() != "Never") {
                 if (mc.player.ticksExisted % timeoutticks.getValueInt() == 0) {
                     if (infomessages.getValBoolean()) {
                         MessageUtil.sendSurroundMessage(ColourUtil.white + "Module is" + ColourUtil.red + " " + "disabling" + ColourUtil.gray + " " + "(Timed Out)");
@@ -157,7 +158,7 @@ public class Surround extends Module {
                     mc.player.inventory.currentItem = oldInventorySlot;
                     blocksPlaced++;
 
-                    if (blocksPlaced == blockspertick.getValueInt()) {
+                    if (blocksPlaced == blockspertick.getValueInt() && disablemode.getValueString() != "Never") {
                         return;
                     }
                 }
@@ -193,7 +194,7 @@ public class Surround extends Module {
                     mc.player.inventory.currentItem = oldInventorySlot;
                     blocksPlaced++;
 
-                    if (blocksPlaced == blockspertick.getValueInt()) {
+                    if (blocksPlaced == blockspertick.getValueInt() && disablemode.getValueString() != "Never") {
                         return;
                     }
                 }
