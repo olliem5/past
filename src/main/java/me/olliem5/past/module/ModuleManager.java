@@ -28,6 +28,7 @@ public class ModuleManager {
         modules.add(new Criticals());
         modules.add(new AutoCrystalRewrite());
         modules.add(new KillAura());
+        modules.add(new ChorusSave());
 
         /* Core */
         modules.add(new ClickGUI());
@@ -64,6 +65,7 @@ public class ModuleManager {
         modules.add(new WeaknessMsg());
         modules.add(new AutoLog());
         modules.add(new FastUse());
+        modules.add(new NoRotate());
 
         /* Render */
         modules.add(new NoWeather());

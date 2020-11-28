@@ -49,7 +49,7 @@ public class Surround extends Module {
         disablemodes.add("Never");
         //disablemodes.add("OnJump");
 
-        Past.settingsManager.registerSetting(placemode = new Setting("Place", "SurroundPlace", this, placemodes, "Standard"));
+        Past.settingsManager.registerSetting(placemode = new Setting("Place", "SurroundPlace", this, placemodes, "Full"));
         Past.settingsManager.registerSetting(disablemode = new Setting("Disable", "SurroundDisable", this, disablemodes, "Finish"));
         Past.settingsManager.registerSetting(centerplayer = new Setting("Center", "SurroundCenter", true, this));
         Past.settingsManager.registerSetting(blockspertick = new Setting("BPT", "SurroundBlocksPerTick", 1, 1, 10, this));

@@ -12,6 +12,7 @@
     "MixinLayerBipedArmor",
     "MixinPlayerControllerMP",
     "MixinAbstractClientPlayer",
-    "MixinRenderPlayer"
+    "MixinRenderPlayer",
+    "MixinItemChorusFruit"
   ]
 }

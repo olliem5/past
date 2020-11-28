@@ -14,7 +14,7 @@ public class ForgeEvents {
     @SubscribeEvent
     public void onKeyInput(InputEvent.KeyInputEvent event) {
         if (Keyboard.getEventKeyState()) {
-            if(Keyboard.getEventKey() == Keyboard.KEY_NONE || Keyboard.getEventKey() == Keyboard.CHAR_NONE) return;
+            if (Keyboard.getEventKey() == Keyboard.KEY_NONE || Keyboard.getEventKey() == Keyboard.CHAR_NONE) return;
             for (Module modules : Past.moduleManager.getModules()) {
                 if (modules.getKey() == Keyboard.getEventKey()) {
                     modules.toggle();
