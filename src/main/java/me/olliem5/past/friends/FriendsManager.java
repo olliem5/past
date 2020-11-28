@@ -37,7 +37,7 @@ public class FriendsManager {
 
         if (Past.configUtil != null) {
             try {
-                Past.configUtil.saveFriends();
+                Past.configUtil.save();
             } catch (Exception e) {}
         }
     }
@@ -47,7 +47,7 @@ public class FriendsManager {
 
         if (Past.configUtil != null) {
             try {
-                Past.configUtil.saveFriends();
+                Past.configUtil.save();
             } catch (Exception e) {}
         }
     }

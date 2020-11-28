@@ -5,13 +5,13 @@ import me.olliem5.past.gui.editor.component.components.Watermark;
 import java.util.ArrayList;
 
 public class HudComponentManager {
-    public ArrayList<HudComponent> hudComponents = new ArrayList<>();
+    public static ArrayList<HudComponent> hudComponents = new ArrayList<>();
 
     public HudComponentManager() {
         hudComponents.add(new Watermark());
     }
 
-    public ArrayList<HudComponent> getHudComponents() {
+    public static ArrayList<HudComponent> getHudComponents() {
         return hudComponents;
     }
 
