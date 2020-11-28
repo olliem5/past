@@ -38,31 +38,36 @@ public class Nametags extends Module {
      */
 
     /**
-     * TODO: Armour colours for durability, also bar of durability (mode option)
+     * TODO: Armour colours for durability
      * TODO: Self nametag option
      * TODO: Change based on friends
      * TODO: Find way to use custom font for stack numbers
-     * TODO: Enchants render over the armour piece, look at gamesense for the bordered tag
-     * TODO: EnchantNames & ItemName settings
-     * TODO: Durability setting
+     * TODO: Bordered tag
+     * TODO: ItemName setting
      */
 
+    Setting range;
     Setting scale;
     Setting armour;
     Setting mainhand;
     Setting offhand;
     Setting health;
     Setting ping;
+    Setting durability;
+    Setting enchantments;
     Setting customfont;
 
     @Override
     public void setup() {
+        Past.settingsManager.registerSetting(range = new Setting("Range", "NametagsRange", 10, 100, 260, this));
         Past.settingsManager.registerSetting(scale = new Setting("Scale", "NametagsScale", 0.5, 1.5, 10.0, this));
         Past.settingsManager.registerSetting(armour = new Setting("Armour", "NametagsArmour", true, this));
         Past.settingsManager.registerSetting(mainhand = new Setting("Main Hand", "NametagsMainhand", true, this));
         Past.settingsManager.registerSetting(offhand = new Setting("Off Hand", "NametagsOffhand", true, this));
         Past.settingsManager.registerSetting(health = new Setting("Health", "NametagsHealth", true, this));
         Past.settingsManager.registerSetting(ping = new Setting("Ping", "NametagsPing", true, this));
+        Past.settingsManager.registerSetting(durability = new Setting("Durability", "NametagsDurability", true, this));
+        Past.settingsManager.registerSetting(enchantments = new Setting("Enchantments", "NametagsEnchantments", true, this));
         Past.settingsManager.registerSetting(customfont = new Setting("Custom Font", "NametagsCustomFont", true, this));
     }
 
@@ -71,7 +76,7 @@ public class Nametags extends Module {
         if (nullCheck()) return;
 
         for (EntityPlayer entityPlayer : mc.world.playerEntities) {
-            if (entityPlayer != null && !entityPlayer.equals(mc.player)) {
+            if (entityPlayer != null && !entityPlayer.equals(mc.player) && entityPlayer.getDistance(mc.player) <= range.getValueInt()) {
                 renderNametag(entityPlayer);
             }
         }
@@ -232,14 +237,16 @@ public class Nametags extends Module {
     }
 
     private void renderEnchantText(ItemStack stack, int x, int y) {
-        int encY = y - 24;
+        int encY = y;
         int yCount = encY - -5;
 
-        if (stack.getItem() instanceof ItemArmor || stack.getItem() instanceof ItemSword || stack.getItem() instanceof ItemTool) {
-            if (customfont.getValBoolean()) {
-                Past.customFontRenderer.drawStringWithShadow(stack.getMaxDamage() - stack.getItemDamage() + "\u00A74", x * 2 + 8, y + 26, -1);
-            } else {
-                mc.fontRenderer.drawStringWithShadow(stack.getMaxDamage() - stack.getItemDamage() + "\u00A74", x * 2 + 8, y + 26, -1);
+        if (durability.getValBoolean()) {
+            if (stack.getItem() instanceof ItemArmor || stack.getItem() instanceof ItemSword || stack.getItem() instanceof ItemTool) {
+                if (customfont.getValBoolean()) {
+                    Past.customFontRenderer.drawStringWithShadow(stack.getMaxDamage() - stack.getItemDamage() + "\u00A74", x * 2 + 8, y + 26, -1);
+                } else {
+                    mc.fontRenderer.drawStringWithShadow(stack.getMaxDamage() - stack.getItemDamage() + "\u00A74", x * 2 + 8, y + 26, -1);
+                }
             }
         }
 
@@ -258,16 +265,18 @@ public class Nametags extends Module {
                 GL11.glPushMatrix();
                 GL11.glScalef(0.9f, 0.9f, 0);
 
-                if (customfont.getValBoolean()) {
-                    Past.customFontRenderer.drawStringWithShadow(encName, x * 2 + 13, yCount, -1);
-                } else {
-                    mc.fontRenderer.drawStringWithShadow(encName, x * 2 + 13, yCount, -1);
+                if (enchantments.getValBoolean()) {
+                    if (customfont.getValBoolean()) {
+                        Past.customFontRenderer.drawStringWithShadow(encName, x * 2 + 13, yCount, -1);
+                    } else {
+                        mc.fontRenderer.drawStringWithShadow(encName, x * 2 + 13, yCount, -1);
+                    }
                 }
 
                 GL11.glScalef(1f, 1f, 1);
                 GL11.glPopMatrix();
 
-                encY += 8;
+                encY += 2;
                 yCount -= 10;
             }
         }
