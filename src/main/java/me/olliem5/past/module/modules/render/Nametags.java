@@ -15,10 +15,7 @@ import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.ItemArmor;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.ItemSword;
-import net.minecraft.item.ItemTool;
+import net.minecraft.item.*;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.util.math.Vec3d;
 import net.minecraftforge.client.event.RenderWorldLastEvent;
@@ -40,7 +37,6 @@ public class Nametags extends Module {
     /**
      * TODO: Armour colours for durability
      * TODO: Self nametag option
-     * TODO: Change based on friends
      * TODO: Find way to use custom font for stack numbers
      * TODO: Bordered tag
      * TODO: ItemName setting
@@ -55,6 +51,7 @@ public class Nametags extends Module {
     Setting ping;
     Setting durability;
     Setting enchantments;
+    Setting friendschange;
     Setting customfont;
 
     @Override
@@ -68,6 +65,7 @@ public class Nametags extends Module {
         Past.settingsManager.registerSetting(ping = new Setting("Ping", "NametagsPing", true, this));
         Past.settingsManager.registerSetting(durability = new Setting("Durability", "NametagsDurability", true, this));
         Past.settingsManager.registerSetting(enchantments = new Setting("Enchantments", "NametagsEnchantments", true, this));
+        Past.settingsManager.registerSetting(friendschange = new Setting("Friends Change", "NametagsFriendsChange", true, this));
         Past.settingsManager.registerSetting(customfont = new Setting("Custom Font", "NametagsCustomFont", true, this));
     }
 
@@ -113,12 +111,18 @@ public class Nametags extends Module {
                 finalPing = getPing(entity) + "ms";
             }
 
+            String finalEntityName;
+            String namecolour = ColourUtil.white + "";
+            if (friendschange.getValBoolean() && Past.friendsManager.isFriend(entity.getName())) {
+                namecolour = ColourUtil.green + "";
+            }
+
             if (health.getValBoolean()) {
-                name = entity.getName() + " " + "|" + " " + colourHealth(entity, Math.round(entity.getHealth() + entity.getAbsorptionAmount())) + (ping.getValBoolean() ? ColourUtil.white + " " + "|" + " " + finalPing : "");
+                name = namecolour + entity.getName() + ColourUtil.white + " " + "|" + " " + colourHealth(entity, Math.round(entity.getHealth() + entity.getAbsorptionAmount())) + (ping.getValBoolean() ? ColourUtil.white + " " + "|" + " " + finalPing : "");
             } else if (ping.getValBoolean()) {
-                name = entity.getName() + " " + "|" + " " + finalPing + (health.getValBoolean() ? " " + "|" + " " + colourHealth(entity, Math.round(entity.getHealth() + entity.getAbsorptionAmount())) : "");
+                name = namecolour + entity.getName() + ColourUtil.white + " " + "|" + " " + finalPing + (health.getValBoolean() ? " " + "|" + " " + colourHealth(entity, Math.round(entity.getHealth() + entity.getAbsorptionAmount())) : "");
             } else {
-                name = entity.getName();
+                name = namecolour + entity.getName() + ColourUtil.white;
             }
 
             int length;
@@ -246,6 +250,16 @@ public class Nametags extends Module {
                     Past.customFontRenderer.drawStringWithShadow(stack.getMaxDamage() - stack.getItemDamage() + "\u00A74", x * 2 + 8, y + 26, -1);
                 } else {
                     mc.fontRenderer.drawStringWithShadow(stack.getMaxDamage() - stack.getItemDamage() + "\u00A74", x * 2 + 8, y + 26, -1);
+                }
+            }
+        }
+
+        if (enchantments.getValBoolean()) {
+            if (stack.getItem() instanceof ItemAppleGold && stack.hasEffect()) {
+                if (customfont.getValBoolean()) {
+                    Past.customFontRenderer.drawStringWithShadow(ColourUtil.gold + "God", x * 2 + 13, yCount, -1);
+                } else {
+                    mc.fontRenderer.drawStringWithShadow(ColourUtil.gold + "God", x * 2 + 13, yCount, -1);
                 }
             }
         }
