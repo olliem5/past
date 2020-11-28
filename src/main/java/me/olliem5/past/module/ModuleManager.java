@@ -17,7 +17,6 @@ public class ModuleManager {
     public ModuleManager() {
         /* Chat */
         modules.add(new ChatSuffix());
-        modules.add(new Spammer());
         modules.add(new AutoInsult());
 
         /* Combat */
