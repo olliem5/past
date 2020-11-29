@@ -4,7 +4,7 @@ import me.olliem5.past.Past;
 import net.minecraft.client.Minecraft;
 
 public class HudComponent {
-    protected Minecraft mc = Minecraft.getMinecraft();
+    protected static Minecraft mc = Minecraft.getMinecraft();
 
     private String name;
     private boolean enabled;
@@ -12,13 +12,12 @@ public class HudComponent {
     private int x = 2;
     private int y = 2;
     private int width;
-    private int height = 9; //TODO: make this change if the custom font is enabled
+    private int height;
     private int dragX;
     private int dragY;
 
-    public HudComponent(String name, int width) {
+    public HudComponent(String name) {
         this.name = name;
-        this.width = width;
         setup();
     }
 

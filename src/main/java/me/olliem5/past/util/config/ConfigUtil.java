@@ -115,6 +115,14 @@ public class ConfigUtil {
                             component.setEnabled(tempCompMap.getAsJsonObject().get("enabled").getAsBoolean());
                         }
                     }
+
+                    for (Setting setting : Past.settingsManager.getSettingsHudComponent(component)) {
+                        if (tempCompMap.getAsJsonObject().get(setting.getName()) != null) {
+                            if (setting.getType().equalsIgnoreCase("hudboolean")) {
+                                setting.setValBoolean(tempCompMap.getAsJsonObject().get(setting.getName()).getAsBoolean());
+                            }
+                        }
+                    }
                 }
             }
 
@@ -178,6 +186,13 @@ public class ConfigUtil {
         JsonObject componentsArray = new JsonObject();
         for (HudComponent component : HudComponentManager.getHudComponents()) {
             JsonObject tempcompArray = new JsonObject();
+
+            for (Setting setting : Past.settingsManager.getSettingsHudComponent(component)) {
+                if (setting.getType().equalsIgnoreCase("hudboolean")) {
+                    tempcompArray.addProperty(setting.getName(), setting.getValBoolean());
+                }
+            }
+
             tempcompArray.addProperty("x", component.getX());
             tempcompArray.addProperty("y", component.getY());
             tempcompArray.addProperty("enabled", component.isEnabled());
