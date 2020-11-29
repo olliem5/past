@@ -8,6 +8,8 @@ import me.olliem5.past.gui.click.ClickGUI;
 import me.olliem5.past.gui.click.Panel;
 import me.olliem5.past.gui.editor.component.HudComponent;
 import me.olliem5.past.gui.editor.component.HudComponentManager;
+import me.olliem5.past.gui.editor.screen.HudEditor;
+import me.olliem5.past.gui.editor.screen.HudPanel;
 import me.olliem5.past.module.Module;
 import me.olliem5.past.settings.Setting;
 import org.lwjgl.input.Keyboard;
@@ -80,6 +82,24 @@ public class ConfigUtil {
                 }
             }
 
+            JsonElement hudMap = jsonElement.getAsJsonObject().get("hudframes");
+            if (hudMap != null) {
+                for (HudPanel hudPanel : HudEditor.getHudPanels()) {
+                    JsonElement tempHudPanelMap = hudMap.getAsJsonObject().get(hudPanel.title);
+                    if (tempHudPanelMap != null) {
+                        if (tempHudPanelMap.getAsJsonObject().get("x") != null ) {
+                            hudPanel.setX(tempHudPanelMap.getAsJsonObject().get("x").getAsInt());
+                        }
+                        if (tempHudPanelMap.getAsJsonObject().get("y") != null ) {
+                            hudPanel.setY(tempHudPanelMap.getAsJsonObject().get("y").getAsInt());
+                        }
+                        if (tempHudPanelMap.getAsJsonObject().get("open") != null ) {
+                            hudPanel.setOpen(tempHudPanelMap.getAsJsonObject().get("open").getAsBoolean());
+                        }
+                    }
+                }
+            }
+
             JsonElement hudcomponents = jsonElement.getAsJsonObject().get("hudcomponents");
             if (hudcomponents != null) {
                 for (HudComponent component : HudComponentManager.getHudComponents()) {
@@ -143,6 +163,17 @@ public class ConfigUtil {
         }
 
         settingsarray.add("clickframes", panelsArray);
+
+        JsonObject hudPanelsArray = new JsonObject();
+        for (HudPanel hudPanel : HudEditor.getHudPanels()) {
+            JsonObject tempHudPanelArray = new JsonObject();
+            tempHudPanelArray.addProperty("x", hudPanel.getX());
+            tempHudPanelArray.addProperty("y", hudPanel.getY());
+            tempHudPanelArray.addProperty("open", hudPanel.isOpen());
+            hudPanelsArray.add(hudPanel.title,tempHudPanelArray);
+        }
+
+        settingsarray.add("hudframes", hudPanelsArray);
 
         JsonObject componentsArray = new JsonObject();
         for (HudComponent component : HudComponentManager.getHudComponents()) {

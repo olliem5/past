@@ -103,6 +103,10 @@ public class HudEditor extends GuiScreen {
         }
     }
 
+    public static ArrayList<HudPanel> getHudPanels() {
+        return hudpanels;
+    }
+
     @Override
     public boolean doesGuiPauseGame() {
         return false;
