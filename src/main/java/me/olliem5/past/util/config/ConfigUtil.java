@@ -15,6 +15,13 @@ import org.lwjgl.input.Keyboard;
 import java.io.*;
 
 public class ConfigUtil {
+
+    /**
+     * TODO: Allow hud component booleans to save & load
+     * TODO: Allow the hudeditor frame to save & load
+     * TODO: Fix friends not loading properly
+     */
+
     static Gson gson = new GsonBuilder()
             .setPrettyPrinting()
             .create();
@@ -42,6 +49,8 @@ public class ConfigUtil {
                             if (tempModuleMap.getAsJsonObject().get(setting.getName()) != null) {
                                 if (setting.getType().equalsIgnoreCase("intslider")) {
                                     setting.setValueInt(tempModuleMap.getAsJsonObject().get(setting.getName()).getAsInt());
+                                } else if (setting.getType().equalsIgnoreCase("doubleslider")) {
+                                    setting.setValueDouble(tempModuleMap.getAsJsonObject().get(setting.getName()).getAsDouble());
                                 } else if (setting.getType().equalsIgnoreCase("boolean")) {
                                     setting.setValBoolean(tempModuleMap.getAsJsonObject().get(setting.getName()).getAsBoolean());
                                 } else if (setting.getType().equalsIgnoreCase("mode")) {
@@ -111,6 +120,8 @@ public class ConfigUtil {
             for (Setting setting : Past.settingsManager.getSettingsModule(module)) {
                 if (setting.getType().equalsIgnoreCase("intslider")) {
                     moduleSettingsArray.addProperty(setting.getName(), setting.getValueInt());
+                } else if (setting.getType().equalsIgnoreCase("doubleslider")) {
+                    moduleSettingsArray.addProperty(setting.getName(), setting.getValueDouble());
                 } else if (setting.getType().equalsIgnoreCase("boolean")) {
                     moduleSettingsArray.addProperty(setting.getName(), setting.getValBoolean());
                 } else if (setting.getType().equalsIgnoreCase("mode")) {

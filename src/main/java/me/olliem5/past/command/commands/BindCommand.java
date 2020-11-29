@@ -21,7 +21,7 @@ public class BindCommand extends Command {
                     if (m.getName().equalsIgnoreCase(args[1])) {
                         try {
                             m.setKey(Keyboard.getKeyIndex(args[2].toUpperCase()));
-                            MessageUtil.sendMessagePrefix(ColourUtil.aqua + m.getName() + ColourUtil.white + " is now binded to " + ColourUtil.red + args[2].toUpperCase() + ColourUtil.gray + " (" + ColourUtil.white + Keyboard.getKeyIndex(args[2].toUpperCase() + "") + ColourUtil.gray + ")");
+                            MessageUtil.sendMessagePrefix(ColourUtil.aqua + m.getName() + ColourUtil.white + " is now bound to " + ColourUtil.red + args[2].toUpperCase() + ColourUtil.gray + " (" + ColourUtil.white + Keyboard.getKeyIndex(args[2].toUpperCase() + "") + ColourUtil.gray + ")");
                         } catch (Exception e) {
                             MessageUtil.sendMessagePrefix(ColourUtil.red + m.getName() + ColourUtil.white + " Something went wrong :(");
                             e.printStackTrace();
