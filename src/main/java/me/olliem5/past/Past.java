@@ -94,8 +94,11 @@ public class Past {
         hudEditor = new HudEditor();
         System.out.println("[" + nameversion + "]" + " " + "HUDEditor Initialized!");
 
-        configUtil = new ConfigUtil();
-        configUtil.init();
+        //I don't want crashes!
+        try {
+            configUtil = new ConfigUtil();
+            configUtil.init();
+        } catch (Exception ignored) {}
         System.out.println("[" + nameversion + "]" + " " + "Config Initialized!");
 
         MinecraftForge.EVENT_BUS.register(new CommandManager());

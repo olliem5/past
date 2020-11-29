@@ -1,5 +1,6 @@
 package me.olliem5.past.gui.editor.component;
 
+import me.olliem5.past.Past;
 import net.minecraft.client.Minecraft;
 
 public class HudComponent {
@@ -35,6 +36,12 @@ public class HudComponent {
 
     public void setEnabled(boolean enabled) {
         this.enabled = enabled;
+
+        if (Past.configUtil != null) {
+            try {
+                Past.configUtil.save();
+            } catch (Exception e) {}
+        }
     }
 
     public boolean isDragging() {
@@ -51,6 +58,12 @@ public class HudComponent {
 
     public void setX(int x) {
         this.x = x;
+
+        if (Past.configUtil != null) {
+            try {
+                Past.configUtil.save();
+            } catch (Exception e) {}
+        }
     }
 
     public int getY() {
@@ -59,6 +72,12 @@ public class HudComponent {
 
     public void setY(int y) {
         this.y = y;
+
+        if (Past.configUtil != null) {
+            try {
+                Past.configUtil.save();
+            } catch (Exception e) {}
+        }
     }
 
     public int getWidth() {
