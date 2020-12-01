@@ -42,7 +42,7 @@ public class HudEditor extends GuiScreen {
                 if (hudComponent.isDragging()) {
                     Gui.drawRect(hudComponent.getX() + -2, hudComponent.getY() + -2, hudComponent.getX() + hudComponent.getWidth() + 2, hudComponent.getY() + hudComponent.getHeight() + 2, ColourUtil.getMultiColour().getRGB());
                 }
-                Gui.drawRect(hudComponent.getX() + -1, hudComponent.getY() + -1, hudComponent.getX() + hudComponent.getWidth() + 1, hudComponent.getY() + hudComponent.getHeight() + 1, 0xFF111111);
+                Gui.drawRect(hudComponent.getX() + -1, hudComponent.getY() + -1, hudComponent.getX() + hudComponent.getWidth() + 1, hudComponent.getY() + hudComponent.getHeight() + 1, 0x75101010);
                 hudComponent.render(partialTicks);
             }
         }
