@@ -103,12 +103,6 @@ public class HudPanel {
 
     public void setOpen(boolean open) {
         this.open = open;
-
-        if (Past.configUtil != null) {
-            try {
-                Past.configUtil.save();
-            } catch (Exception e) {}
-        }
     }
 
     public int getX() {
@@ -121,21 +115,9 @@ public class HudPanel {
 
     public void setX(int newX) {
         this.x = newX;
-
-        if (Past.configUtil != null) {
-            try {
-                Past.configUtil.save();
-            } catch (Exception e) {}
-        }
     }
 
     public void setY(int newY) {
         this.y = newY;
-
-        if (Past.configUtil != null) {
-            try {
-                Past.configUtil.save();
-            } catch (Exception e) {}
-        }
     }
 }

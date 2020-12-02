@@ -136,7 +136,7 @@ public class Setting {
 
         if (Past.configUtil != null) {
             try {
-                Past.configUtil.save();
+                Past.configUtil.saveIntegers();
             } catch (Exception e) {}
         }
     }
@@ -146,7 +146,7 @@ public class Setting {
 
         if (Past.configUtil != null) {
             try {
-                Past.configUtil.save();
+                Past.configUtil.saveDoubles();
             } catch (Exception e) {}
         }
     }
@@ -156,7 +156,7 @@ public class Setting {
 
         if (Past.configUtil != null) {
             try {
-                Past.configUtil.save();
+                Past.configUtil.saveBooleans();
             } catch (Exception e) {}
         }
     }
@@ -166,7 +166,7 @@ public class Setting {
 
         if (Past.configUtil != null) {
             try {
-                Past.configUtil.save();
+                Past.configUtil.saveModes();
             } catch (Exception e) {}
         }
     }

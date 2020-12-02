@@ -1,10 +1,9 @@
 package me.olliem5.past.gui.editor.component;
 
-import me.olliem5.past.Past;
 import net.minecraft.client.Minecraft;
 
 public class HudComponent {
-    protected static Minecraft mc = Minecraft.getMinecraft();
+    protected Minecraft mc = Minecraft.getMinecraft();
 
     private String name;
     private boolean enabled;
@@ -12,12 +11,13 @@ public class HudComponent {
     private int x = 2;
     private int y = 2;
     private int width;
-    private int height;
+    private int height = 9; //TODO: make this change if the custom font is enabled
     private int dragX;
     private int dragY;
 
-    public HudComponent(String name) {
+    public HudComponent(String name, int width) {
         this.name = name;
+        this.width = width;
         setup();
     }
 
@@ -35,12 +35,6 @@ public class HudComponent {
 
     public void setEnabled(boolean enabled) {
         this.enabled = enabled;
-
-        if (Past.configUtil != null) {
-            try {
-                Past.configUtil.save();
-            } catch (Exception e) {}
-        }
     }
 
     public boolean isDragging() {
@@ -57,12 +51,6 @@ public class HudComponent {
 
     public void setX(int x) {
         this.x = x;
-
-        if (Past.configUtil != null) {
-            try {
-                Past.configUtil.save();
-            } catch (Exception e) {}
-        }
     }
 
     public int getY() {
@@ -71,12 +59,6 @@ public class HudComponent {
 
     public void setY(int y) {
         this.y = y;
-
-        if (Past.configUtil != null) {
-            try {
-                Past.configUtil.save();
-            } catch (Exception e) {}
-        }
     }
 
     public int getWidth() {

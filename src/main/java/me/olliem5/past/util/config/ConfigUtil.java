@@ -1,230 +1,284 @@
 package me.olliem5.past.util.config;
 
-import com.google.gson.*;
-import com.google.gson.stream.JsonReader;
 import me.olliem5.past.Past;
 import me.olliem5.past.friends.Friend;
+import me.olliem5.past.friends.FriendsManager;
 import me.olliem5.past.gui.click.ClickGUI;
 import me.olliem5.past.gui.click.Panel;
-import me.olliem5.past.gui.editor.component.HudComponent;
-import me.olliem5.past.gui.editor.component.HudComponentManager;
-import me.olliem5.past.gui.editor.screen.HudEditor;
-import me.olliem5.past.gui.editor.screen.HudPanel;
 import me.olliem5.past.module.Module;
 import me.olliem5.past.settings.Setting;
-import org.lwjgl.input.Keyboard;
+import net.minecraft.client.Minecraft;
 
 import java.io.*;
+import java.util.ArrayList;
+import java.util.Iterator;
 
 public class ConfigUtil {
+    public File MainDirectory;
 
-    /**
-     * TODO: Allow hud component booleans to save & load
-     * TODO: Allow the hudeditor frame to save & load
-     * TODO: Fix friends not loading properly
-     */
-
-    static Gson gson = new GsonBuilder()
-            .setPrettyPrinting()
-            .create();
-
-    static JsonParser parser = new JsonParser();
-    public static void load() {
-        try {
-            JsonParser jsonParser = new JsonParser();
-            Gson gson = new Gson();
-            JsonReader reader = new JsonReader(new FileReader("PastConfig.json"));
-            JsonElement jsonElement = jsonParser.parse(reader);
-
-            JsonElement moduleMap = jsonElement.getAsJsonObject().get("modules");
-            if (moduleMap != null) {
-                for (Module module : Past.moduleManager.getModules()) {
-                    JsonElement tempModuleMap = moduleMap.getAsJsonObject().get(module.getName());
-                    if (tempModuleMap != null) {
-                        module.setKey(Keyboard.getKeyIndex(tempModuleMap.getAsJsonObject().get("bind").getAsString()));
-
-                        if (tempModuleMap.getAsJsonObject().get("enabled").getAsBoolean()) {
-                            module.toggle();
-                        }
-
-                        for (Setting setting : Past.settingsManager.getSettingsModule(module)) {
-                            if (tempModuleMap.getAsJsonObject().get(setting.getName()) != null) {
-                                if (setting.getType().equalsIgnoreCase("intslider")) {
-                                    setting.setValueInt(tempModuleMap.getAsJsonObject().get(setting.getName()).getAsInt());
-                                } else if (setting.getType().equalsIgnoreCase("doubleslider")) {
-                                    setting.setValueDouble(tempModuleMap.getAsJsonObject().get(setting.getName()).getAsDouble());
-                                } else if (setting.getType().equalsIgnoreCase("boolean")) {
-                                    setting.setValBoolean(tempModuleMap.getAsJsonObject().get(setting.getName()).getAsBoolean());
-                                } else if (setting.getType().equalsIgnoreCase("mode")) {
-                                    setting.setValueString(tempModuleMap.getAsJsonObject().get(setting.getName()).getAsString());
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-
-            JsonElement clickMap = jsonElement.getAsJsonObject().get("clickframes");
-            if (clickMap != null) {
-                for (Panel panel : ClickGUI.getPanels()) {
-                    JsonElement tempPanelMap = clickMap.getAsJsonObject().get(panel.title);
-                    if (tempPanelMap != null) {
-                        if (tempPanelMap.getAsJsonObject().get("x") != null ) {
-                            panel.setX(tempPanelMap.getAsJsonObject().get("x").getAsInt());
-                        }
-                        if (tempPanelMap.getAsJsonObject().get("y") != null ) {
-                            panel.setY(tempPanelMap.getAsJsonObject().get("y").getAsInt());
-                        }
-                        if (tempPanelMap.getAsJsonObject().get("open") != null ) {
-                            panel.setOpen(tempPanelMap.getAsJsonObject().get("open").getAsBoolean());
-                        }
-                    }
-                }
-            }
-
-            JsonElement hudMap = jsonElement.getAsJsonObject().get("hudframes");
-            if (hudMap != null) {
-                for (HudPanel hudPanel : HudEditor.getHudPanels()) {
-                    JsonElement tempHudPanelMap = hudMap.getAsJsonObject().get(hudPanel.title);
-                    if (tempHudPanelMap != null) {
-                        if (tempHudPanelMap.getAsJsonObject().get("x") != null ) {
-                            hudPanel.setX(tempHudPanelMap.getAsJsonObject().get("x").getAsInt());
-                        }
-                        if (tempHudPanelMap.getAsJsonObject().get("y") != null ) {
-                            hudPanel.setY(tempHudPanelMap.getAsJsonObject().get("y").getAsInt());
-                        }
-                        if (tempHudPanelMap.getAsJsonObject().get("open") != null ) {
-                            hudPanel.setOpen(tempHudPanelMap.getAsJsonObject().get("open").getAsBoolean());
-                        }
-                    }
-                }
-            }
-
-            JsonElement hudcomponents = jsonElement.getAsJsonObject().get("hudcomponents");
-            if (hudcomponents != null) {
-                for (HudComponent component : HudComponentManager.getHudComponents()) {
-                    JsonElement tempCompMap = hudcomponents.getAsJsonObject().get(component.getName());
-                    if (tempCompMap != null) {
-                        if (tempCompMap.getAsJsonObject().get("x") != null ) {
-                            component.setX(tempCompMap.getAsJsonObject().get("x").getAsInt());
-                        }
-                        if (tempCompMap.getAsJsonObject().get("y") != null ) {
-                            component.setY(tempCompMap.getAsJsonObject().get("y").getAsInt());
-                        }
-                        if (tempCompMap.getAsJsonObject().get("enabled") != null ) {
-                            component.setEnabled(tempCompMap.getAsJsonObject().get("enabled").getAsBoolean());
-                        }
-                    }
-
-                    for (Setting setting : Past.settingsManager.getSettingsHudComponent(component)) {
-                        if (tempCompMap.getAsJsonObject().get(setting.getName()) != null) {
-                            if (setting.getType().equalsIgnoreCase("hudboolean")) {
-                                setting.setValBoolean(tempCompMap.getAsJsonObject().get(setting.getName()).getAsBoolean());
-                            }
-                        }
-                    }
-                }
-            }
-
-            JsonArray friends = jsonElement.getAsJsonObject().get("friends").getAsJsonArray();
-
-            for (JsonElement element : friends) {
-                Past.friendsManager.addFriend(element.getAsJsonObject().get("username").getAsString());
-            }
-
-        } catch (FileNotFoundException event) {
-            event.printStackTrace();
+    public ConfigUtil() {
+        MainDirectory = new File(Minecraft.getMinecraft().gameDir, "Past Client");
+        if (!MainDirectory.exists()) {
+            MainDirectory.mkdir();
         }
+
+        loadSavedModules();
+        loadKeybinds();
+        loadFriends();
+        loadGuiPanels();
     }
 
-    public static void save() {
-        JsonObject settingsarray = new JsonObject();
-        JsonObject moduleArray = new JsonObject();
-
-        for (Module module : Past.moduleManager.getModules()) {
-            JsonObject moduleSettingsArray = new JsonObject();
-            moduleSettingsArray.addProperty("bind", Keyboard.getKeyName(module.getKey()));
-            moduleSettingsArray.addProperty("enabled", module.isToggled());
-            for (Setting setting : Past.settingsManager.getSettingsModule(module)) {
-                if (setting.getType().equalsIgnoreCase("intslider")) {
-                    moduleSettingsArray.addProperty(setting.getName(), setting.getValueInt());
-                } else if (setting.getType().equalsIgnoreCase("doubleslider")) {
-                    moduleSettingsArray.addProperty(setting.getName(), setting.getValueDouble());
-                } else if (setting.getType().equalsIgnoreCase("boolean")) {
-                    moduleSettingsArray.addProperty(setting.getName(), setting.getValBoolean());
-                } else if (setting.getType().equalsIgnoreCase("mode")) {
-                    moduleSettingsArray.addProperty(setting.getName(), setting.getValueString());
-                }
-            }
-            moduleArray.add(module.getName(), moduleSettingsArray);
-        }
-
-        settingsarray.add("modules", moduleArray);
-
-        JsonObject panelsArray = new JsonObject();
-        for (Panel panel : ClickGUI.getPanels()) {
-            JsonObject tempPanelArray = new JsonObject();
-            tempPanelArray.addProperty("x", panel.getX());
-            tempPanelArray.addProperty("y", panel.getY());
-            tempPanelArray.addProperty("open", panel.isOpen());
-            panelsArray.add(panel.title,tempPanelArray);
-        }
-
-        settingsarray.add("clickframes", panelsArray);
-
-        JsonObject hudPanelsArray = new JsonObject();
-        for (HudPanel hudPanel : HudEditor.getHudPanels()) {
-            JsonObject tempHudPanelArray = new JsonObject();
-            tempHudPanelArray.addProperty("x", hudPanel.getX());
-            tempHudPanelArray.addProperty("y", hudPanel.getY());
-            tempHudPanelArray.addProperty("open", hudPanel.isOpen());
-            hudPanelsArray.add(hudPanel.title,tempHudPanelArray);
-        }
-
-        settingsarray.add("hudframes", hudPanelsArray);
-
-        JsonObject componentsArray = new JsonObject();
-        for (HudComponent component : HudComponentManager.getHudComponents()) {
-            JsonObject tempcompArray = new JsonObject();
-
-            for (Setting setting : Past.settingsManager.getSettingsHudComponent(component)) {
-                if (setting.getType().equalsIgnoreCase("hudboolean")) {
-                    tempcompArray.addProperty(setting.getName(), setting.getValBoolean());
-                }
-            }
-
-            tempcompArray.addProperty("x", component.getX());
-            tempcompArray.addProperty("y", component.getY());
-            tempcompArray.addProperty("enabled", component.isEnabled());
-            componentsArray.add(component.getName(), tempcompArray);
-        }
-
-        settingsarray.add("hudcomponents", componentsArray);
-
-        JsonArray friends = new JsonArray();
-        for (Friend friend : Past.friendsManager.getFriends()) {
-            friends.add(parser.parse(gson.toJson(friend)).getAsJsonObject());
-        }
-
-        settingsarray.add("friends", friends);
-
+    public void saveLoadedModules() {
         try {
-            FileWriter fw = new FileWriter("PastConfig.json");
-            gson.toJson(settingsarray, fw);
-            fw.flush();
-            fw.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+            File file = new File(MainDirectory, "ToggledModules.txt");
+            ArrayList<String> modulesToSave = new ArrayList<>();
+
+            for (Module module : Past.moduleManager.getModules()) {
+                if (module.isToggled()) {
+                    modulesToSave.add(module.getName());
+                }
+            }
+
+            try {
+                PrintWriter printWriter = new PrintWriter(file);
+                for (String string : modulesToSave) {
+                    printWriter.println(string);
+                }
+                printWriter.close();
+            } catch (FileNotFoundException e) {}
+        } catch (Exception e) {}
     }
 
-    public static void init() {
-        if (new File("PastConfig.json").exists()) {
-            System.out.println(Past.nameversion + " " + "Loading config!");
-            load();
-        } else {
-            System.out.println(Past.nameversion + " " + "Saving config!");
-            save();
-        }
+    public void saveKeybinds() {
+        try {
+            File file = new File(MainDirectory, "Keybinds.txt");
+            ArrayList<String> bindsToSave = new ArrayList<>();
+
+            for (Module module : Past.moduleManager.getModules()) {
+                bindsToSave.add(module.getName() + ":" + module.getKey());
+            }
+
+            try {
+                PrintWriter printWriter = new PrintWriter(file);
+                for (String string : bindsToSave) {
+                    printWriter.println(string);
+                }
+                printWriter.close();
+            } catch (FileNotFoundException e) {}
+        } catch (Exception e) {}
+    }
+
+    public void saveBooleans() {
+        try {
+            File file = new File(MainDirectory, "BooleanValues.txt");
+            ArrayList<String> booleansToSave = new ArrayList<>();
+
+            for (Setting setting : Past.settingsManager.getSettings()) {
+                if (setting.getType() == "boolean") {
+                    booleansToSave.add(setting.getParent().getName() + ":" + setting.getId() + ":" + setting.getValBoolean());
+                }
+            }
+
+            try {
+                PrintWriter printWriter = new PrintWriter(file);
+                for (String string : booleansToSave) {
+                    printWriter.println(string);
+                }
+                printWriter.close();
+            } catch (FileNotFoundException e) {}
+        } catch (Exception e) {}
+    }
+
+    public void saveIntegers() {
+        try {
+            File file = new File(MainDirectory, "IntegerValues.txt");
+            ArrayList<String> integersToSave = new ArrayList<>();
+
+            for (Setting setting : Past.settingsManager.getSettings()) {
+                if (setting.getType() == "intslider") {
+                    integersToSave.add(setting.getParent().getName() + ":" + setting.getId() + ":" + setting.getValueInt());
+                }
+            }
+
+            try {
+                PrintWriter printWriter = new PrintWriter(file);
+                for (String string : integersToSave) {
+                    printWriter.println(string);
+                }
+                printWriter.close();
+            } catch (FileNotFoundException e) {}
+        } catch (Exception e) {}
+    }
+
+    public void saveDoubles() {
+        try {
+            File file = new File(MainDirectory, "DoubleValues.txt");
+            ArrayList<String> doublesToSave = new ArrayList<>();
+
+            for (Setting setting : Past.settingsManager.getSettings()) {
+                if (setting.getType() == "doubleslider") {
+                    doublesToSave.add(setting.getParent().getName() + ":" + setting.getId() + ":" + setting.getValueDouble());
+                }
+            }
+
+            try {
+                PrintWriter printWriter = new PrintWriter(file);
+                for (String string : doublesToSave) {
+                    printWriter.println(string);
+                }
+                printWriter.close();
+            } catch (FileNotFoundException e) {}
+        } catch (Exception e) {}
+    }
+
+    public void saveModes() {
+        try {
+            File file = new File(MainDirectory, "ModeValues.txt");
+            ArrayList<String> modesToSave = new ArrayList<>();
+
+            for (Setting setting : Past.settingsManager.getSettings()) {
+                if (setting.getType() == "mode") {
+                    modesToSave.add(setting.getParent().getName() + ":" + setting.getId() + ":" + setting.getValueString());
+                }
+            }
+
+            try {
+                PrintWriter printWriter = new PrintWriter(file);
+                for (String string : modesToSave) {
+                    printWriter.println(string);
+                }
+                printWriter.close();
+            } catch (FileNotFoundException e) {}
+        } catch (Exception e) {}
+    }
+
+    public void saveGuiPanels() {
+        try {
+            File file = new File(MainDirectory, "GuiPanels.txt");
+            ArrayList<String> panelsToSave = new ArrayList<>();
+
+            for (Panel panel : ClickGUI.panels) {
+                panelsToSave.add(panel.getCategory() + ":" + panel.getX() + ":" + panel.getY() + ":" + panel.isOpen());
+            }
+
+            try {
+                PrintWriter printWriter = new PrintWriter(file);
+                for (String string : panelsToSave) {
+                    printWriter.println(string);
+                }
+                printWriter.close();
+            } catch (FileNotFoundException e) {}
+        } catch (Exception e) {}
+    }
+
+    public void saveFriends() {
+        try {
+            File file = new File(MainDirectory, "Friends.txt");
+            ArrayList<String> friendsToSave = new ArrayList<>();
+
+            for (Friend friend : FriendsManager.friends) {
+                friendsToSave.add(friend.getName());
+            }
+
+            try {
+                PrintWriter printWriter = new PrintWriter(file);
+                for (String string : friendsToSave) {
+                    printWriter.println(string);
+                }
+                printWriter.close();
+            } catch (FileNotFoundException e) {}
+        } catch (Exception e) {}
+    }
+
+    public void loadSavedModules() {
+        try {
+            File file = new File(MainDirectory, "ToggledModules.txt");
+            FileInputStream fstream = new FileInputStream(file.getAbsolutePath());
+            DataInputStream in = new DataInputStream(fstream);
+            BufferedReader br = new BufferedReader(new InputStreamReader(in));
+
+            String line;
+            while ((line = br.readLine()) != null) {
+                Iterator var6 = Past.moduleManager.getModules().iterator();
+
+                while (var6.hasNext()) {
+                    Module m = (Module) var6.next();
+                    if (m.getName().equals(line)) {
+                        m.toggle();
+                    }
+                }
+            }
+
+            br.close();
+        } catch (Exception e) {}
+    }
+
+    public void loadKeybinds() {
+        try {
+            File file = new File(MainDirectory, "Keybinds.txt");
+            FileInputStream fstream = new FileInputStream(file.getAbsolutePath());
+            DataInputStream in = new DataInputStream(fstream);
+            BufferedReader br = new BufferedReader(new InputStreamReader(in));
+
+            String line;
+            while ((line = br.readLine()) != null) {
+                String curLine = line.trim();
+                String name = curLine.split(":")[0];
+                String bind = curLine.split(":")[1];
+                for (Module m : Past.moduleManager.getModules()) {
+                    if (m != null && m.getName().equalsIgnoreCase(name)) {
+                        m.setKey(Integer.parseInt(bind));
+                    }
+                }
+            }
+
+            br.close();
+        } catch (Exception var11) {}
+    }
+
+    public void loadFriends() {
+        try {
+            File file = new File(MainDirectory, "Friends.txt");
+            FileInputStream fstream = new FileInputStream(file.getAbsolutePath());
+            DataInputStream in = new DataInputStream(fstream);
+            BufferedReader br = new BufferedReader(new InputStreamReader(in));
+
+            FriendsManager.friends.clear();
+            String line;
+            while((line = br.readLine()) != null) {
+                Past.friendsManager.addFriend(line);
+            }
+
+            br.close();
+        } catch (Exception e) {}
+    }
+
+    public void loadGuiPanels() {
+        try {
+            File file = new File(MainDirectory, "GuiPanels.txt");
+            FileInputStream fstream = new FileInputStream(file.getAbsolutePath());
+            DataInputStream in = new DataInputStream(fstream);
+            BufferedReader br = new BufferedReader(new InputStreamReader(in));
+
+            String line;
+            while((line = br.readLine()) != null) {
+                String curLine = line.trim();
+                String name = curLine.split(":")[0];
+                String x = curLine.split(":")[1];
+                String y = curLine.split(":")[2];
+                String open = curLine.split(":")[3];
+                int x1 = Integer.parseInt(x);
+                int y1 = Integer.parseInt(y);
+                boolean opened = Boolean.parseBoolean(open);
+                Panel p = ClickGUI.getPanelByName(name);
+                if (p != null) {
+                    p.x = x1;
+                    p.y = y1;
+                    p.setOpen(opened);
+                }
+            }
+
+            br.close();
+        } catch (Exception e) {}
     }
 }

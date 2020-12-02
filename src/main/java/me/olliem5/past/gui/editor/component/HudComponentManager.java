@@ -1,19 +1,17 @@
 package me.olliem5.past.gui.editor.component;
 
-import me.olliem5.past.gui.editor.component.components.*;
+import me.olliem5.past.gui.editor.component.components.Watermark;
 
 import java.util.ArrayList;
 
 public class HudComponentManager {
-    public static ArrayList<HudComponent> hudComponents = new ArrayList<>();
+    public ArrayList<HudComponent> hudComponents = new ArrayList<>();
 
     public HudComponentManager() {
         hudComponents.add(new Watermark());
-        hudComponents.add(new Welcomer());
-        hudComponents.add(new Arraylist());
     }
 
-    public static ArrayList<HudComponent> getHudComponents() {
+    public ArrayList<HudComponent> getHudComponents() {
         return hudComponents;
     }
 

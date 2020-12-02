@@ -73,7 +73,6 @@ public class Past {
         System.out.println("[" + nameversion + "]" + " " + "Modules Initialized!");
 
         commandManager = new CommandManager();
-        commandManager.init();
         System.out.println("[" + nameversion + "]" + " " + "Commands Initialized!");
 
         friendsManager = new FriendsManager();
@@ -94,13 +93,10 @@ public class Past {
         hudEditor = new HudEditor();
         System.out.println("[" + nameversion + "]" + " " + "HUDEditor Initialized!");
 
-        //I don't want crashes!
-        try {
-            configUtil = new ConfigUtil();
-            configUtil.init();
-        } catch (Exception ignored) {}
+        configUtil = new ConfigUtil();
         System.out.println("[" + nameversion + "]" + " " + "Config Initialized!");
 
+        CommandManager.init();
         MinecraftForge.EVENT_BUS.register(new CommandManager());
         MinecraftForge.EVENT_BUS.register(new ForgeEvents());
 

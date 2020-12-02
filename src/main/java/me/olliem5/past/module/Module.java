@@ -43,7 +43,7 @@ public class Module {
 
         if (Past.configUtil != null) {
             try {
-                Past.configUtil.save();
+                Past.configUtil.saveLoadedModules();
             } catch (Exception e) {}
         }
 
@@ -56,7 +56,7 @@ public class Module {
 
         if (Past.configUtil != null) {
             try {
-                Past.configUtil.save();
+                Past.configUtil.saveLoadedModules();
             } catch (Exception e) {}
         }
 
@@ -72,7 +72,7 @@ public class Module {
 
         if (Past.configUtil != null) {
             try {
-                Past.configUtil.save();
+                Past.configUtil.saveKeybinds();
             } catch (Exception e) {}
         }
     }
