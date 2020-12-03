@@ -16,4 +16,10 @@ public class Component {
     public void keyTyped(char typedChar, int key) {}
 
     public void closeAllSub() {}
+
+    public void setOff(final int newOff) {}
+
+    public int getHeight() {
+        return 0;
+    }
 }

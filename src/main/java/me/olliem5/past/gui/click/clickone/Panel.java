@@ -1,7 +1,8 @@
-package me.olliem5.past.gui.click;
+package me.olliem5.past.gui.click.clickone;
 
 import me.olliem5.past.Past;
-import me.olliem5.past.gui.click.components.ModuleButton;
+import me.olliem5.past.gui.click.Component;
+import me.olliem5.past.gui.click.clickone.components.ModuleButton;
 import me.olliem5.past.module.Category;
 import me.olliem5.past.module.Module;
 import me.olliem5.past.util.colour.ColourUtil;
@@ -51,13 +52,13 @@ public class Panel {
 
     //Initial header of module category.
     public void drawScreen(int mouseX, int mouseY, float partialTicks) {
-        if (Past.settingsManager.getSettingID("ClickGUIRainbow").getValBoolean()) {
+        if (Past.settingsManager.getSettingID("OldClickGUIRainbow").getValBoolean()) {
             Gui.drawRect(x, y, x + width, y + height, ColourUtil.getMultiColour().getRGB());
         } else {
             Gui.drawRect(x, y, x + width, y + height, 0xFF222222);
         }
 
-        if (Past.settingsManager.getSettingID("ClickGUICustomFont").getValBoolean()) {
+        if (Past.settingsManager.getSettingID("OldClickGUICustomFont").getValBoolean()) {
             Past.customFontRenderer.drawStringWithShadow(title, x + 2, y + height / 2 - mc.fontRenderer.FONT_HEIGHT / 2, -1);
         } else {
             mc.fontRenderer.drawStringWithShadow(title, x + 2, y + height / 2 - mc.fontRenderer.FONT_HEIGHT / 2, -1);

@@ -5,7 +5,8 @@ import me.olliem5.past.command.CommandManager;
 import me.olliem5.past.event.ForgeEvents;
 import me.olliem5.past.font.CustomFontRenderer;
 import me.olliem5.past.friends.FriendsManager;
-import me.olliem5.past.gui.click.ClickGUI;
+import me.olliem5.past.gui.click.clickone.ClickGUIOne;
+import me.olliem5.past.gui.click.clicktwo.ClickGUITwo;
 import me.olliem5.past.gui.editor.component.HudComponentManager;
 import me.olliem5.past.gui.editor.screen.HudEditor;
 import me.olliem5.past.module.ModuleManager;
@@ -46,7 +47,8 @@ public class Past {
     public static CustomFontRenderer customFontRenderer;
     public static CapesManager capesManager;
     public static HudComponentManager hudComponentManager;
-    public static ClickGUI clickGUI;
+    public static ClickGUIOne clickGUIOne;
+    public static ClickGUITwo clickGUITwo;
     public static HudEditor hudEditor;
     public static ConfigUtil configUtil;
 
@@ -87,8 +89,11 @@ public class Past {
         hudComponentManager = new HudComponentManager();
         System.out.println("[" + nameversion + "]" + " " + "HUD Components Initialized!");
 
-        clickGUI = new ClickGUI();
-        System.out.println("[" + nameversion + "]" + " " + "ClickGUI Initialized!");
+        clickGUIOne = new ClickGUIOne();
+        System.out.println("[" + nameversion + "]" + " " + "ClickGUI One Initialized!");
+
+        clickGUITwo = new ClickGUITwo();
+        System.out.println("[" + nameversion + "]" + " " + "ClickGUI Two Initialized!");
 
         hudEditor = new HudEditor();
         System.out.println("[" + nameversion + "]" + " " + "HUDEditor Initialized!");

@@ -3,8 +3,8 @@ package me.olliem5.past.util.config;
 import me.olliem5.past.Past;
 import me.olliem5.past.friends.Friend;
 import me.olliem5.past.friends.FriendsManager;
-import me.olliem5.past.gui.click.ClickGUI;
-import me.olliem5.past.gui.click.Panel;
+import me.olliem5.past.gui.click.clickone.ClickGUIOne;
+import me.olliem5.past.gui.click.clickone.Panel;
 import me.olliem5.past.module.Module;
 import me.olliem5.past.settings.Setting;
 import net.minecraft.client.Minecraft;
@@ -157,7 +157,7 @@ public class ConfigUtil {
             File file = new File(MainDirectory, "GuiPanels.txt");
             ArrayList<String> panelsToSave = new ArrayList<>();
 
-            for (Panel panel : ClickGUI.panels) {
+            for (Panel panel : ClickGUIOne.panels) {
                 panelsToSave.add(panel.getCategory() + ":" + panel.getX() + ":" + panel.getY() + ":" + panel.isOpen());
             }
 
@@ -270,7 +270,7 @@ public class ConfigUtil {
                 int x1 = Integer.parseInt(x);
                 int y1 = Integer.parseInt(y);
                 boolean opened = Boolean.parseBoolean(open);
-                Panel p = ClickGUI.getPanelByName(name);
+                Panel p = ClickGUIOne.getPanelByName(name);
                 if (p != null) {
                     p.x = x1;
                     p.y = y1;

@@ -30,11 +30,12 @@ public class ModuleManager {
         modules.add(new ChorusSave());
 
         /* Core */
-        modules.add(new ClickGUI());
+        modules.add(new OldClickGUI());
         modules.add(new HUD());
         modules.add(new HudEditor());
         modules.add(new Render());
         modules.add(new Capes());
+        modules.add(new ClickGUI());
 
         /* Exploit */
         modules.add(new Blink());

@@ -1,4 +1,4 @@
-package me.olliem5.past.gui.click.components;
+package me.olliem5.past.gui.click.clickone.components;
 
 import me.olliem5.past.Past;
 import me.olliem5.past.gui.click.Component;
@@ -27,7 +27,7 @@ public class ModeChanger extends Component {
     public void renderComponent() {
         Gui.drawRect(parent.parent.getX() + 80, this.parent.parent.getY() - 12 + this.offset, parent.parent.getX() + parent.parent.getWidth() + parent.parent.getWidth(), this.parent.parent.getY() + this.offset, 0xFF111111);
 
-        if (Past.settingsManager.getSettingID("ClickGUICustomFont").getValBoolean()) {
+        if (Past.settingsManager.getSettingID("OldClickGUICustomFont").getValBoolean()) {
             Past.customFontRenderer.drawStringWithShadow(this.op.getName() + " " + ColourUtil.gray + this.op.getValueString().toUpperCase(), parent.parent.getX() + 82, (parent.parent.getY() + this.offset - 10), -1);
         } else {
             mc.fontRenderer.drawStringWithShadow(this.op.getName() + " " + ColourUtil.gray + this.op.getValueString().toUpperCase(), parent.parent.getX() + 82, (parent.parent.getY() + this.offset - 10), -1);

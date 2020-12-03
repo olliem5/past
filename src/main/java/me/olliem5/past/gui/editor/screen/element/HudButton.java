@@ -1,10 +1,6 @@
 package me.olliem5.past.gui.editor.screen.element;
 
 import me.olliem5.past.Past;
-import me.olliem5.past.gui.click.components.BooleanSwitch;
-import me.olliem5.past.gui.click.components.DoubleSlider;
-import me.olliem5.past.gui.click.components.IntegerSlider;
-import me.olliem5.past.gui.click.components.ModeChanger;
 import me.olliem5.past.gui.editor.component.HudComponent;
 import me.olliem5.past.gui.editor.screen.Element;
 import me.olliem5.past.gui.editor.screen.HudPanel;

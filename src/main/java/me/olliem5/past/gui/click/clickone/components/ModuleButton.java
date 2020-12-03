@@ -1,8 +1,8 @@
-package me.olliem5.past.gui.click.components;
+package me.olliem5.past.gui.click.clickone.components;
 
 import me.olliem5.past.Past;
 import me.olliem5.past.gui.click.Component;
-import me.olliem5.past.gui.click.Panel;
+import me.olliem5.past.gui.click.clickone.Panel;
 import me.olliem5.past.module.Module;
 import me.olliem5.past.settings.Setting;
 import me.olliem5.past.util.colour.ColourUtil;
@@ -54,7 +54,7 @@ public class ModuleButton extends Component {
 
     @Override
     public void renderComponent() {
-        if (Past.settingsManager.getSettingID("ClickGUIRainbow").getValBoolean() && this.mod.isToggled()) {
+        if (Past.settingsManager.getSettingID("OldClickGUIRainbow").getValBoolean() && this.mod.isToggled()) {
             Gui.drawRect(parent.getX(), this.parent.getY() + this.offset, parent.getX() + parent.getWidth(), this.parent.getY() + 12 + this.offset, ColourUtil.getMultiColour().getRGB());
         } else if (this.mod.isToggled()) {
             Gui.drawRect(parent.getX(), this.parent.getY() + this.offset, parent.getX() + parent.getWidth(), this.parent.getY() + 12 + this.offset, 0xFF222222);
@@ -62,7 +62,7 @@ public class ModuleButton extends Component {
             Gui.drawRect(parent.getX(), this.parent.getY() + this.offset, parent.getX() + parent.getWidth(), this.parent.getY() + 12 + this.offset, 0xFF111111);
         }
 
-        if (Past.settingsManager.getSettingID("ClickGUICustomFont").getValBoolean()) {
+        if (Past.settingsManager.getSettingID("OldClickGUICustomFont").getValBoolean()) {
             Past.customFontRenderer.drawStringWithShadow(this.mod.getName(), parent.getX() + 2, (parent.getY() + offset + 2), -1);
         } else {
             mc.fontRenderer.drawStringWithShadow(this.mod.getName(), parent.getX() + 2, (parent.getY() + offset + 2), -1);
@@ -70,13 +70,13 @@ public class ModuleButton extends Component {
 
         if (this.subcomponents.size() > 1) {
             if (!this.isOpen()) {
-                if (Past.settingsManager.getSettingID("ClickGUICustomFont").getValBoolean()) {
+                if (Past.settingsManager.getSettingID("OldClickGUICustomFont").getValBoolean()) {
                     Past.customFontRenderer.drawStringWithShadow("+", parent.getX() + parent.getWidth() - 10, (parent.getY() + offset + 2), -1);
                 } else {
                     mc.fontRenderer.drawStringWithShadow("+", parent.getX() + parent.getWidth() - 10, (parent.getY() + offset + 2), -1);
                 }
             } else if (this.isOpen()) {
-                if (Past.settingsManager.getSettingID("ClickGUICustomFont").getValBoolean()) {
+                if (Past.settingsManager.getSettingID("OldClickGUICustomFont").getValBoolean()) {
                     Past.customFontRenderer.drawStringWithShadow("-", parent.getX() + parent.getWidth() - 10, (parent.getY() + offset + 2), -1);
                 } else {
                     mc.fontRenderer.drawStringWithShadow("-", parent.getX() + parent.getWidth() - 10, (parent.getY() + offset + 2), -1);
@@ -90,22 +90,22 @@ public class ModuleButton extends Component {
             }
         }
 
-        if (Past.settingsManager.getSettingID("ClickGUIDescriptions").getValBoolean() && hovered == true) {
-            if (Past.settingsManager.getSettingID("ClickGUIRainbow").getValBoolean()) {
-                if (Past.settingsManager.getSettingID("ClickGUICustomFont").getValBoolean()) {
+        if (Past.settingsManager.getSettingID("OldClickGUIDescriptions").getValBoolean() && hovered == true) {
+            if (Past.settingsManager.getSettingID("OldClickGUIRainbow").getValBoolean()) {
+                if (Past.settingsManager.getSettingID("OldClickGUICustomFont").getValBoolean()) {
                     Gui.drawRect(mousexx - 2, mouseyy - 2, mousexx + Past.customFontRenderer.getStringWidth(mod.getDescription()) + 2, mouseyy + Past.customFontRenderer.getHeight() + 2, ColourUtil.getMultiColour().getRGB());
                 } else {
                     Gui.drawRect(mousexx - 2, mouseyy - 2, mousexx + mc.fontRenderer.getStringWidth(mod.getDescription()) + 2, mouseyy + mc.fontRenderer.FONT_HEIGHT + 2, ColourUtil.getMultiColour().getRGB());
                 }
             } else {
-                if (Past.settingsManager.getSettingID("ClickGUICustomFont").getValBoolean()) {
+                if (Past.settingsManager.getSettingID("OldClickGUICustomFont").getValBoolean()) {
                     Gui.drawRect(mousexx - 2, mouseyy - 2, mousexx + Past.customFontRenderer.getStringWidth(mod.getDescription()) + 2, mouseyy + Past.customFontRenderer.getHeight() + 2, 0xFF222222);
                 } else {
                     Gui.drawRect(mousexx - 2, mouseyy - 2, mousexx + mc.fontRenderer.getStringWidth(mod.getDescription()) + 2, mouseyy + mc.fontRenderer.FONT_HEIGHT + 2, 0xFF222222);
                 }
             }
 
-            if (Past.settingsManager.getSettingID("ClickGUICustomFont").getValBoolean()) {
+            if (Past.settingsManager.getSettingID("OldClickGUICustomFont").getValBoolean()) {
                 Past.customFontRenderer.drawStringWithShadow(mod.getDescription(), mousexx, mouseyy, -1);
             } else {
                 mc.fontRenderer.drawStringWithShadow(mod.getDescription(), mousexx, mouseyy, -1);
