@@ -96,7 +96,9 @@ public class ClickGUIOne extends GuiScreen {
     public static Panel getPanelByName(String name) {
         Panel panel = null;
         for (Panel p : getPanels()) {
-            if (p.title.equalsIgnoreCase(name)) panel = p;
+            if (p.title.equalsIgnoreCase(name)) {
+                panel = p;
+            }
         }
         return panel;
     }

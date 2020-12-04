@@ -1,5 +1,6 @@
 package me.olliem5.past.gui.click.clicktwo;
 
+import me.olliem5.past.Past;
 import me.olliem5.past.gui.click.Component;
 import me.olliem5.past.module.Category;
 import net.minecraft.client.gui.GuiScreen;
@@ -11,6 +12,7 @@ public class ClickGUITwo extends GuiScreen {
 
     public ClickGUITwo() {
         panels = new ArrayList<>();
+
         int panelX = 5;
         int panelY = 5;
         int panelWidth = 100;
@@ -25,7 +27,9 @@ public class ClickGUITwo extends GuiScreen {
 
     @Override
     public void drawScreen(int mouseX, int mouseY, float partialTicks) {
-        drawDefaultBackground();
+        if (Past.settingsManager.getSettingID("ClickGUIBackground").getValBoolean()) {
+            drawDefaultBackground();
+        }
 
         for (Panel p : panels) {
             p.updatePosition(mouseX, mouseY);
@@ -44,13 +48,9 @@ public class ClickGUITwo extends GuiScreen {
                 p.setDragging(true);
                 p.dragX = mouseX - p.getX();
                 p.dragY = mouseY - p.getY();
-            }
-
-            if (p.isWithinHeader(mouseX, mouseY) && mouseButton == 1) {
+            } else if (p.isWithinHeader(mouseX, mouseY) && mouseButton == 1) {
                 p.setOpen(!p.isOpen());
-            }
-
-            if (p.isOpen() && !p.getComponents().isEmpty()) {
+            } else if (p.isOpen() && !p.getComponents().isEmpty()) {
                 for (Component component : p.getComponents()) {
                     component.mouseClicked(mouseX, mouseY, mouseButton);
                 }
@@ -92,13 +92,19 @@ public class ClickGUITwo extends GuiScreen {
     public static Panel getPanelByName(String name) {
         Panel panel = null;
         for (Panel p : getPanels()) {
-            if (p.title.equalsIgnoreCase(name)) panel = p;
+            if (p.title.equalsIgnoreCase(name)) {
+                panel = p;
+            }
         }
         return panel;
     }
 
     @Override
     public boolean doesGuiPauseGame() {
-        return false;
+        if (Past.settingsManager.getSettingID("ClickGUIPauseGame").getValBoolean()) {
+            return false;
+        } else {
+            return true;
+        }
     }
 }

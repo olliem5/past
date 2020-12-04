@@ -1,7 +1,10 @@
 package me.olliem5.past.gui.click.clicktwo;
 
+import me.olliem5.past.Past;
 import me.olliem5.past.gui.click.Component;
+import me.olliem5.past.gui.click.clicktwo.components.ModuleButton;
 import me.olliem5.past.module.Category;
+import me.olliem5.past.module.Module;
 import me.olliem5.past.util.colour.ColourUtil;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Gui;
@@ -39,14 +42,14 @@ public class Panel {
         this.cat = cat;
         this.tY = this.height;
 
-//        for (Module mod : Past.moduleManager.getModules()) {
-//            if (mod.getCategory() == cat) {
-//                ModuleButton modButton = new ModuleButton(mod, this, tY);
-//                this.components.add(modButton);
-//                tY += 15;
-//            }
-//        }
-//        this.refresh();
+        for (Module mod : Past.moduleManager.getModules()) {
+            if (mod.getCategory() == cat) {
+                ModuleButton modButton = new ModuleButton(mod, this, tY);
+                this.components.add(modButton);
+                tY += 15;
+            }
+        }
+        this.refresh();
     }
 
     public void drawScreen(int mouseX, int mouseY, float partialTicks) {
