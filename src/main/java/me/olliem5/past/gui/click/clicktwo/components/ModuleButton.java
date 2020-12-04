@@ -44,7 +44,7 @@ public class ModuleButton extends Component {
 //                }
             }
         }
-//        this.subcomponents.add(new KeybindComponent(this, opY));
+        this.subcomponents.add(new KeybindComponent(this, opY));
     }
 
     @Override
