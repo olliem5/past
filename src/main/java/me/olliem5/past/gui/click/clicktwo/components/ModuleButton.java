@@ -6,7 +6,9 @@ import me.olliem5.past.gui.click.clicktwo.Panel;
 import me.olliem5.past.module.Module;
 import me.olliem5.past.settings.Setting;
 import me.olliem5.past.util.colour.ColourUtil;
+import me.olliem5.past.util.text.StringUtil;
 import net.minecraft.client.gui.Gui;
+import net.minecraft.client.gui.ScaledResolution;
 
 import java.util.ArrayList;
 
@@ -16,6 +18,7 @@ public class ModuleButton extends Component {
     public Panel parent;
     public int offset;
     private boolean open;
+    private boolean hovered;
 
     public ModuleButton(Module mod, Panel parent, int offset) {
         this.mod = mod;
@@ -60,19 +63,31 @@ public class ModuleButton extends Component {
             Gui.drawRect(parent.getX() -1, this.parent.getY() + this.offset, parent.getX(), this.parent.getY() + 15 + this.offset, ColourUtil.getMultiColour().getRGB());
             Gui.drawRect(parent.getX() + parent.getWidth(), this.parent.getY() + this.offset, parent.getX() + parent.getWidth() + 1, this.parent.getY() + 15 + this.offset, ColourUtil.getMultiColour().getRGB());
 
-            Gui.drawRect(parent.getX(), this.parent.getY() + this.offset, parent.getX() + parent.getWidth(), this.parent.getY() + 15 + this.offset, ColourUtil.getMultiColour().getRGB());
-            Gui.drawRect(parent.getX(), this.parent.getY() + this.offset, parent.getX() + parent.getWidth(), this.parent.getY() + 15 + this.offset, 0x75101010);
+            if (Past.settingsManager.getSettingID("ClickGUIHoverChange").getValBoolean() && hovered == true) {
+                Gui.drawRect(parent.getX(), this.parent.getY() + this.offset, parent.getX() + parent.getWidth(), this.parent.getY() + 15 + this.offset, 0x90101010);
+            } else {
+                Gui.drawRect(parent.getX(), this.parent.getY() + this.offset, parent.getX() + parent.getWidth(), this.parent.getY() + 15 + this.offset, ColourUtil.getMultiColour().getRGB());
+                Gui.drawRect(parent.getX(), this.parent.getY() + this.offset, parent.getX() + parent.getWidth(), this.parent.getY() + 15 + this.offset, 0x75101010);
+            }
         } else {
             Gui.drawRect(parent.getX() -1, this.parent.getY() + this.offset, parent.getX(), this.parent.getY() + 15 + this.offset, ColourUtil.getMultiColour().getRGB());
             Gui.drawRect(parent.getX() + parent.getWidth(), this.parent.getY() + this.offset, parent.getX() + parent.getWidth() + 1, this.parent.getY() + 15 + this.offset, ColourUtil.getMultiColour().getRGB());
 
-            Gui.drawRect(parent.getX(), this.parent.getY() + this.offset, parent.getX() + parent.getWidth(), this.parent.getY() + 15 + this.offset, 0x75101010);
+            if (Past.settingsManager.getSettingID("ClickGUIHoverChange").getValBoolean() && hovered == true) {
+                Gui.drawRect(parent.getX(), this.parent.getY() + this.offset, parent.getX() + parent.getWidth(), this.parent.getY() + 15 + this.offset, 0x90101010);
+            } else {
+                Gui.drawRect(parent.getX(), this.parent.getY() + this.offset, parent.getX() + parent.getWidth(), this.parent.getY() + 15 + this.offset, 0x75101010);
+            }
         }
 
         mc.fontRenderer.drawStringWithShadow(this.mod.getName(), parent.getX() + 3, parent.getY() + this.offset + 3, -1);
 
         if (this.subcomponents.size() > 1) {
             mc.fontRenderer.drawStringWithShadow("...", parent.getX() + parent.getWidth() - 10, (parent.getY() + offset + 3), -1);
+        }
+
+        if (Past.settingsManager.getSettingID("ClickGUIDescriptions").getValBoolean() && hovered == true) {
+            mc.fontRenderer.drawStringWithShadow(mod.getDescription(), 2, (new ScaledResolution(mc).getScaledHeight() - mc.fontRenderer.FONT_HEIGHT - 2), -1);
         }
 
         if (this.open && !this.subcomponents.isEmpty()) {
@@ -97,6 +112,8 @@ public class ModuleButton extends Component {
 
     @Override
     public void updateComponent(int mouseX, int mouseY) {
+        this.hovered = this.isMouseOnButton(mouseX, mouseY);
+
         if (!this.subcomponents.isEmpty()) {
             for (Component comp : this.subcomponents) {
                 comp.updateComponent(mouseX, mouseY);
