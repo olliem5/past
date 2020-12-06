@@ -30,10 +30,10 @@ public class ModuleButton extends Component {
 
         if (Past.settingsManager.getSettingsModule(mod) != null) {
             for (Setting setting : Past.settingsManager.getSettingsModule(mod)) {
-//                if (setting.getType() == "boolean") {
-//                    this.subcomponents.add(new BooleanComponent(setting, this, opY));
-//                    opY += 15;
-//                }
+                if (setting.getType() == "boolean") {
+                    this.subcomponents.add(new BooleanComponent(setting, this, opY));
+                    opY += 15;
+                }
 //                if (setting.getType() == "intslider") {
 //                    this.subcomponents.add(new IntegerComponent(setting, this, opY));
 //                    opY += 15;
