@@ -18,6 +18,7 @@ public class ModuleManager {
         /* Chat */
         modules.add(new ChatSuffix());
         modules.add(new AutoInsult());
+        modules.add(new DurabilityWarn());
 
         /* Combat */
         modules.add(new AutoTotem());

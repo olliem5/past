@@ -60,7 +60,7 @@ public class AutoInsult extends Module {
                     if (sendtimer.passed(delay.getValueInt())) {
                         sendtimer.reset();
                         if (sendmode.getValueString() == "Whisper") {
-                            mc.player.sendChatMessage("/w" + " " + entity.getName() + " " + "Hey, bowspammer, fuck you!");
+                            mc.player.sendChatMessage("/msg" + " " + entity.getName() + " " + "Hey, bowspammer, fuck you!");
                         } else if (sendmode.getValueString() == "Public") {
                             mc.player.sendChatMessage(entity.getName() + "," + " " + "Nasty bowspammer, kys!");
                         } else {
