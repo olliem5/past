@@ -11,12 +11,16 @@ public class KeybindComponent extends Component {
     private int offset;
     private int x;
     private int y;
+    private String points;
+    private float tick;
 
     public KeybindComponent(ModuleButton parent, int offset) {
         this.parent = parent;
         this.x = parent.parent.getX() + parent.parent.getWidth();
         this.y = parent.parent.getY() + parent.offset;
         this.offset = offset;
+        this.points = ".";
+        this.tick = 0;
     }
 
     @Override
@@ -28,13 +32,31 @@ public class KeybindComponent extends Component {
     public void renderComponent() {
         Gui.drawRect(parent.parent.getX() -1, this.parent.parent.getY() + this.offset, parent.parent.getX(), this.parent.parent.getY() + 15 + this.offset, ColourUtil.getMultiColour().getRGB());
         Gui.drawRect(parent.parent.getX() + parent.parent.getWidth(), this.parent.parent.getY() + this.offset, parent.parent.getX() + parent.parent.getWidth() + 1, this.parent.parent.getY() + 15 + this.offset, ColourUtil.getMultiColour().getRGB());
+        Gui.drawRect(parent.parent.getX() -1, parent.parent.getY() + offset, parent.parent.getX() + parent.parent.getWidth() + 1, parent.parent.getY() + offset + 16, ColourUtil.getMultiColour().getRGB());
 
-        Gui.drawRect(parent.parent.getX(), parent.parent.getY() + offset, parent.parent.getX() + parent.parent.getWidth(), parent.parent.getY() + offset + 15, 0x75101010);
+        Gui.drawRect(parent.parent.getX(), parent.parent.getY() + offset, parent.parent.getX() + parent.parent.getWidth(), parent.parent.getY() + offset + 15, 0xFF111111);
+
+        Gui.drawRect(parent.parent.getX(), parent.parent.getY() + offset, parent.parent.getX() + 1, parent.parent.getY() + offset + 15, ColourUtil.getMultiColour().getRGB());
+        Gui.drawRect(parent.parent.getX() + parent.parent.getWidth(), parent.parent.getY() + offset, parent.parent.getX() + parent.parent.getWidth() -1, parent.parent.getY() + offset + 15, ColourUtil.getMultiColour().getRGB());
 
         if (isBinding) {
-            mc.fontRenderer.drawStringWithShadow("Listening" + ColourUtil.gray + " " + "...", parent.parent.getX() + 4, parent.parent.getY() + this.offset + 3, -1);
+            tick += 0.5f;
+            mc.fontRenderer.drawStringWithShadow("Listening" + ColourUtil.gray + " " + points, parent.parent.getX() + 4, parent.parent.getY() + this.offset + 4, -1);
         } else {
-            mc.fontRenderer.drawStringWithShadow("Bind" + ColourUtil.gray + " " + Keyboard.getKeyName(this.parent.mod.getKey()), parent.parent.getX() + 4, parent.parent.getY() + this.offset + 3, -1);
+            mc.fontRenderer.drawStringWithShadow("Bind" + ColourUtil.gray + " " + Keyboard.getKeyName(this.parent.mod.getKey()), parent.parent.getX() + 4, parent.parent.getY() + this.offset + 4, -1);
+        }
+
+        if (isBinding) {
+            if (tick >= 15) {
+                points = "..";
+            }
+            if (tick >= 30) {
+                points = "...";
+            }
+            if (tick >= 45) {
+                points = ".";
+                tick = 0.0f;
+            }
         }
     }
 

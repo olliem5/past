@@ -28,6 +28,7 @@ public class ModuleManager {
         modules.add(new Criticals());
         modules.add(new KillAura());
         modules.add(new ChorusSave());
+        modules.add(new AutoTrap());
 
         /* Core */
         modules.add(new OldClickGUI());

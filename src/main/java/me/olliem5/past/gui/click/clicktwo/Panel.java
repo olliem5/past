@@ -53,13 +53,9 @@ public class Panel {
     }
 
     public void drawScreen(int mouseX, int mouseY, float partialTicks) {
-        if (open) {
-            Gui.drawRect(x - 1, y - 1, x + width + 1, y + height, ColourUtil.getMultiColour().getRGB());
-            Gui.drawRect(x -1, y + tY, x + width + 1,y + tY + 1, ColourUtil.getMultiColour().getRGB());
-        } else {
-            Gui.drawRect(x -1, y -1, x + width + 1, y + height + 1, ColourUtil.getMultiColour().getRGB());
-        }
+        Gui.drawRect(x -1, y -1, x + width + 1, y + height + 1, ColourUtil.getMultiColour().getRGB());
         Gui.drawRect(x, y, x + width, y + height, 0x75101010);
+
         mc.fontRenderer.drawStringWithShadow(title, x + 2 + width / 2 - mc.fontRenderer.getStringWidth(title) / 2, y + height / 2 - mc.fontRenderer.FONT_HEIGHT / 2, -1);
 
         if (this.open && !this.components.isEmpty()) {

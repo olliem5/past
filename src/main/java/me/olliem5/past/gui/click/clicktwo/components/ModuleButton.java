@@ -60,30 +60,28 @@ public class ModuleButton extends Component {
     @Override
     public void renderComponent() {
         if (this.mod.isToggled()) {
+            Gui.drawRect(parent.getX() -1, this.parent.getY() + this.offset, parent.getX() + parent.getWidth() + 1, this.parent.getY() + 15 + this.offset + 1, ColourUtil.getMultiColour().getRGB());
             Gui.drawRect(parent.getX() -1, this.parent.getY() + this.offset, parent.getX(), this.parent.getY() + 15 + this.offset, ColourUtil.getMultiColour().getRGB());
             Gui.drawRect(parent.getX() + parent.getWidth(), this.parent.getY() + this.offset, parent.getX() + parent.getWidth() + 1, this.parent.getY() + 15 + this.offset, ColourUtil.getMultiColour().getRGB());
 
-            if (Past.settingsManager.getSettingID("ClickGUIHoverChange").getValBoolean() && hovered == true) {
-                Gui.drawRect(parent.getX(), this.parent.getY() + this.offset, parent.getX() + parent.getWidth(), this.parent.getY() + 15 + this.offset, 0x90101010);
-            } else {
-                Gui.drawRect(parent.getX(), this.parent.getY() + this.offset, parent.getX() + parent.getWidth(), this.parent.getY() + 15 + this.offset, ColourUtil.getMultiColour().getRGB());
-                Gui.drawRect(parent.getX(), this.parent.getY() + this.offset, parent.getX() + parent.getWidth(), this.parent.getY() + 15 + this.offset, 0x75101010);
-            }
+            Gui.drawRect(parent.getX(), this.parent.getY() + this.offset, parent.getX() + parent.getWidth(), this.parent.getY() + 15 + this.offset, ColourUtil.getMultiColour().getRGB());
+            Gui.drawRect(parent.getX(), this.parent.getY() + this.offset, parent.getX() + parent.getWidth(), this.parent.getY() + 15 + this.offset, 0x75101010);
         } else {
+            Gui.drawRect(parent.getX() -1, this.parent.getY() + this.offset, parent.getX() + parent.getWidth() + 1, this.parent.getY() + 15 + this.offset + 1, ColourUtil.getMultiColour().getRGB());
             Gui.drawRect(parent.getX() -1, this.parent.getY() + this.offset, parent.getX(), this.parent.getY() + 15 + this.offset, ColourUtil.getMultiColour().getRGB());
             Gui.drawRect(parent.getX() + parent.getWidth(), this.parent.getY() + this.offset, parent.getX() + parent.getWidth() + 1, this.parent.getY() + 15 + this.offset, ColourUtil.getMultiColour().getRGB());
 
-            if (Past.settingsManager.getSettingID("ClickGUIHoverChange").getValBoolean() && hovered == true) {
-                Gui.drawRect(parent.getX(), this.parent.getY() + this.offset, parent.getX() + parent.getWidth(), this.parent.getY() + 15 + this.offset, 0x90101010);
-            } else {
-                Gui.drawRect(parent.getX(), this.parent.getY() + this.offset, parent.getX() + parent.getWidth(), this.parent.getY() + 15 + this.offset, 0x75101010);
-            }
+            Gui.drawRect(parent.getX(), this.parent.getY() + this.offset, parent.getX() + parent.getWidth(), this.parent.getY() + 15 + this.offset, 0xFF111111);
         }
 
-        mc.fontRenderer.drawStringWithShadow(this.mod.getName(), parent.getX() + 3, parent.getY() + this.offset + 3, -1);
+        if (Past.settingsManager.getSettingID("ClickGUIHoverChange").getValBoolean() && hovered == true) {
+            mc.fontRenderer.drawStringWithShadow(this.mod.getName(), parent.getX() + 6, parent.getY() + this.offset + 4, -1);
+        } else {
+            mc.fontRenderer.drawStringWithShadow(this.mod.getName(), parent.getX() + 4, parent.getY() + this.offset + 4, -1);
+        }
 
         if (this.subcomponents.size() > 1) {
-            mc.fontRenderer.drawStringWithShadow("...", parent.getX() + parent.getWidth() - 10, (parent.getY() + offset + 3), -1);
+            mc.fontRenderer.drawStringWithShadow("...", parent.getX() + parent.getWidth() - 10, (parent.getY() + offset + 4), -1);
         }
 
         if (Past.settingsManager.getSettingID("ClickGUIDescriptions").getValBoolean() && hovered == true) {
