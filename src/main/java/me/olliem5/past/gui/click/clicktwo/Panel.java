@@ -6,9 +6,12 @@ import me.olliem5.past.gui.click.clicktwo.components.ModuleButton;
 import me.olliem5.past.module.Category;
 import me.olliem5.past.module.Module;
 import me.olliem5.past.util.colour.ColourUtil;
+import me.olliem5.past.util.module.ClickGUIUtil;
+import me.olliem5.past.util.text.StringUtil;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Gui;
 
+import java.awt.*;
 import java.util.ArrayList;
 
 public class Panel {
@@ -53,10 +56,18 @@ public class Panel {
     }
 
     public void drawScreen(int mouseX, int mouseY, float partialTicks) {
-        Gui.drawRect(x -1, y -1, x + width + 1, y + height + 1, ColourUtil.getMultiColour().getRGB());
+        if (Past.settingsManager.getSettingID("ClickGUIRainbow").getValBoolean()) {
+            Gui.drawRect(x - 1, y - 1, x + width + 1, y + height + 1, ColourUtil.getMultiColour().getRGB());
+        } else {
+            Gui.drawRect(x - 1, y - 1, x + width + 1, y + height + 1, ClickGUIUtil.getGUIColour());
+        }
         Gui.drawRect(x, y, x + width, y + height, 0x75101010);
 
-        mc.fontRenderer.drawStringWithShadow(title, x + 2 + width / 2 - mc.fontRenderer.getStringWidth(title) / 2, y + height / 2 - mc.fontRenderer.FONT_HEIGHT / 2, -1);
+        if (Past.settingsManager.getSettingID("ClickGUICustomFont").getValBoolean()) {
+            Past.customFontRenderer.drawStringWithShadow(title, x + 2 + width / 2 - StringUtil.getStringWidthCustomFont(title) / 2, y + height / 2 - Past.customFontRenderer.getHeight() / 2, -1);
+        } else {
+            mc.fontRenderer.drawStringWithShadow(title, x + 2 + width / 2 - StringUtil.getStringWidth(title) / 2, y + height / 2 - mc.fontRenderer.FONT_HEIGHT / 2, -1);
+        }
 
         if (this.open && !this.components.isEmpty()) {
             for (Component component : components) {

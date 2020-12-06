@@ -51,15 +51,11 @@ public class CrystalUtil {
         return new BlockPos(Math.floor(mc.player.posX), Math.floor(mc.player.posY), Math.floor(mc.player.posZ));
     }
 
+    //TODO: Not make specific to AutoCrystal
+
     public List<BlockPos> findCrystalBlocks() {
         NonNullList<BlockPos> positions = NonNullList.create();
         positions.addAll(getSphere(getPlayerPos(), (float) Past.settingsManager.getSettingID("AutoCrystalPlaceRange").getValueDouble(), (int) Past.settingsManager.getSettingID("AutoCrystalPlaceRange").getValueDouble(), false, true, 0).stream().filter(this::canPlaceCrystal).collect(Collectors.toList()));
-        return positions;
-    }
-
-    public List<BlockPos> findCrystalBlocksRewrite() {
-        NonNullList<BlockPos> positions = NonNullList.create();
-        positions.addAll(getSphere(getPlayerPos(), (float) Past.settingsManager.getSettingID("AutoCrystalRewritePlaceRange").getValueDouble(), (int) Past.settingsManager.getSettingID("AutoCrystalRewritePlaceRange").getValueDouble(), false, true, 0).stream().filter(this::canPlaceCrystal).collect(Collectors.toList()));
         return positions;
     }
 

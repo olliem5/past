@@ -5,17 +5,19 @@ import java.util.ArrayList;
 
 /**
  * Java Code to get a color name from rgb/hex value/awt color
- * <p>
+ *
  * The part of looking up a color name from the rgb values is edited from
  * https://gist.github.com/nightlark/6482130#file-gistfile1-java (that has some errors) by Ryan Mast (nightlark)
  *
  * @author Xiaoxiao Li
  */
+
 public class ColourListUtil {
 
     /**
      * Initialize the color list that we have.
      */
+
     private ArrayList<ColorName> initColorList() {
         ArrayList<ColorName> colorList = new ArrayList<ColorName>();
         colorList.add(new ColorName("AliceBlue", 0xF0, 0xF8, 0xFF));
@@ -158,6 +160,7 @@ public class ColourListUtil {
         colorList.add(new ColorName("WhiteSmoke", 0xF5, 0xF5, 0xF5));
         colorList.add(new ColorName("Yellow", 0xFF, 0xFF, 0x00));
         colorList.add(new ColorName("YellowGreen", 0x9A, 0xCD, 0x32));
+
         return colorList;
     }
 
@@ -166,6 +169,7 @@ public class ColourListUtil {
      *
      * @author Xiaoxiao Li
      */
+
     public static int toRGBA(double r, double g, double b, double a) {
         return toRGBA((float) r, (float) g, (float) b, (float) a);
     }
@@ -178,6 +182,7 @@ public class ColourListUtil {
      * @param b
      * @return
      */
+
     public String getColorNameFromRgb(int r, int g, int b) {
         ArrayList<ColorName> colorList = initColorList();
         ColorName closestMatch = null;
@@ -204,6 +209,7 @@ public class ColourListUtil {
      * @param hexColor
      * @return
      */
+
     public String getColorNameFromHex(int hexColor) {
         int r = (hexColor & 0xFF0000) >> 16;
         int g = (hexColor & 0xFF00) >> 8;
@@ -212,13 +218,11 @@ public class ColourListUtil {
     }
 
     public int colorToHex(Color c) {
-        return Integer.decode("0x"
-                + Integer.toHexString(c.getRGB()).substring(2));
+        return Integer.decode("0x" + Integer.toHexString(c.getRGB()).substring(2));
     }
 
     public String getColorNameFromColor(Color color) {
-        return getColorNameFromRgb(color.getRed(), color.getGreen(),
-                color.getBlue());
+        return getColorNameFromRgb(color.getRed(), color.getGreen(), color.getBlue());
     }
 
     public class ColorName {
@@ -234,8 +238,7 @@ public class ColourListUtil {
         }
 
         public int computeMSE(int pixR, int pixG, int pixB) {
-            return (int) (((pixR - r) * (pixR - r) + (pixG - g) * (pixG - g) + (pixB - b)
-                    * (pixB - b)) / 3);
+            return (int) (((pixR - r) * (pixR - r) + (pixG - g) * (pixG - g) + (pixB - b) * (pixB - b)) / 3);
         }
 
         public int getR() {
