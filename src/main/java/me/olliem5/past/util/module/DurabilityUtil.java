@@ -8,10 +8,10 @@ public class DurabilityUtil {
     }
 
     public static float getDamageInPercent(ItemStack stack) {
-        return (getItemDamage(stack) / (float)stack.getMaxDamage()) * 100;
+        return (getItemDamage(stack) / (float) stack.getMaxDamage()) * 100;
     }
 
     public static int getRoundedDamage(ItemStack stack) {
-        return (int)getDamageInPercent(stack);
+        return (int) getDamageInPercent(stack);
     }
 }

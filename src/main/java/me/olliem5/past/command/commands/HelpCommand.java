@@ -1,8 +1,8 @@
 package me.olliem5.past.command.commands;
 
 import me.olliem5.past.command.Command;
-import me.olliem5.past.util.colour.ColourUtil;
 import me.olliem5.past.util.client.MessageUtil;
+import me.olliem5.past.util.colour.ColourUtil;
 
 public class HelpCommand extends Command {
     public HelpCommand() {

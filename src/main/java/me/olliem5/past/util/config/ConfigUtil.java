@@ -261,7 +261,8 @@ public class ConfigUtil {
             BufferedReader br = new BufferedReader(new InputStreamReader(in));
 
             String line;
-            while((line = br.readLine()) != null) {
+
+            while ((line = br.readLine()) != null) {
                 String curLine = line.trim();
                 String name = curLine.split(":")[0];
                 String x = curLine.split(":")[1];
