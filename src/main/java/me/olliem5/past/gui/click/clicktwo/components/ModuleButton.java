@@ -34,15 +34,16 @@ public class ModuleButton extends Component {
                 if (setting.getType() == "boolean") {
                     this.subcomponents.add(new BooleanComponent(setting, this, opY));
                     opY += 15;
+                } else if (setting.getType() == "intslider") {
+                    this.subcomponents.add(new IntegerComponent(setting, this, opY));
+                    opY += 15;
+                } else if (setting.getType() == "doubleslider") {
+                    this.subcomponents.add(new DoubleComponent(setting, this, opY));
+                    opY += 15;
+                } else if (setting.getType() == "mode") {
+                    this.subcomponents.add(new ModeComponent(setting, this, opY));
+                    opY += 15;
                 }
-//                if (setting.getType() == "intslider") {
-//                    this.subcomponents.add(new IntegerComponent(setting, this, opY));
-//                    opY += 15;
-//                }
-//                if (setting.getType() == "mode") {
-//                    this.subcomponents.add(new ModeChanger(setting, this, opY));
-//                    opY += 15;
-//                }
             }
         }
         this.subcomponents.add(new KeybindComponent(this, opY));
