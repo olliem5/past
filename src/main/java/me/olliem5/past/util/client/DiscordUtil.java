@@ -31,13 +31,13 @@ public class DiscordUtil {
                     state = "discord.gg/3DBphxC";
 
                     if (mc.isIntegratedServerRunning()) {
-                        details = "Singleplayer - " + mc.getIntegratedServer().getWorldName();
+                        details = "Singleplayer | " + mc.getIntegratedServer().getWorldName();
                     } else if (mc.currentScreen instanceof GuiMultiplayer) {
                         details = "Multiplayer Menu";
                     } else if (mc.currentScreen instanceof GuiWorldSelection) {
                         details = "Singleplayer Menu";
                     } else if (mc.getCurrentServerData() != null) {
-                        details = "On " + mc.getCurrentServerData().serverIP.toLowerCase();
+                        details = "Server | " + mc.getCurrentServerData().serverIP.toLowerCase();
                     }
 
                     rp.details = details;

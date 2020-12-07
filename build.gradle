@@ -54,7 +54,6 @@ repositories {
 }
 
 dependencies {
-    //mixin needs to be distributed with the mod, very important
     compile("org.spongepowered:mixin:0.7.4-SNAPSHOT") {
         exclude module: 'launchwrapper'
         exclude module: 'guava'
@@ -63,27 +62,18 @@ dependencies {
     }
     compile "com.github.ZeroMemes:Alpine:1.5"
     compile group: 'net.jodah', name: 'typetools', version: '0.5.0'
-    compile group: 'org.yaml', name: 'snakeyaml', version: '1.19'
-    compile(group: 'org.reflections', name: 'reflections', version: '0.9.11') {
-        exclude group: 'com.google.guava', module: 'guava'
-    }
     compile group: 'club.minnced', name: 'java-discord-rpc', version: '2.0.1'
 }
 
 processResources {
-    // this will ensure that this task is redone when the versions change.
     inputs.property "version", project.version
     inputs.property "mcversion", project.minecraft.version
 
-    // replace stuff in mcmod.info, nothing else
     from(sourceSets.main.resources.srcDirs) {
         include "mcmod.info"
-
-        // replace version and mcversion
         expand "version": project.version, "mcversion": project.minecraft.version
     }
 
-    // copy everything else, thats not the mcmod.info
     from(sourceSets.main.resources.srcDirs) {
         exclude "mcmod.info"
     }
@@ -95,9 +85,6 @@ shadowJar {
     dependencies {
         include(dependency('org.spongepowered:mixin'))
         include(dependency('net.jodah:typetools'))
-        include(dependency('org.yaml:snakeyaml'))
-        include(dependency('org.reflections:reflections'))
-        include(dependency('org.javassist:javassist'))
         include(dependency('club.minnced:java-discord-rpc:2.0.1'))
         include(dependency('com.github.ZeroMemes:Alpine'))
     }
