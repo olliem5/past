@@ -29,7 +29,7 @@ public class Setting {
         this.min = min;
         this.start = start;
         this.max = max;
-        this.type = "intslider";
+        this.type = "integer";
     }
 
     public Setting(String name, String id, double dmin, double dstart, double dmax, Module module) {
@@ -39,7 +39,7 @@ public class Setting {
         this.dmin = dmin;
         this.dstart = dstart;
         this.dmax = dmax;
-        this.type = "doubleslider";
+        this.type = "double";
     }
 
     public Setting(String name, String id, boolean bval, Module module) {

@@ -95,7 +95,7 @@ public class ConfigUtil {
             ArrayList<String> integersToSave = new ArrayList<>();
 
             for (Setting setting : Past.settingsManager.getSettings()) {
-                if (setting.getType() == "intslider") {
+                if (setting.getType() == "integer") {
                     integersToSave.add(setting.getParent().getName() + ":" + setting.getId() + ":" + setting.getValueInt());
                 }
             }
@@ -116,7 +116,7 @@ public class ConfigUtil {
             ArrayList<String> doublesToSave = new ArrayList<>();
 
             for (Setting setting : Past.settingsManager.getSettings()) {
-                if (setting.getType() == "doubleslider") {
+                if (setting.getType() == "double") {
                     doublesToSave.add(setting.getParent().getName() + ":" + setting.getId() + ":" + setting.getValueDouble());
                 }
             }

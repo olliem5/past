@@ -5,11 +5,11 @@
   "description": "A utility mod for Minecraft 1.12.2, geared towards Anarchy Servers.",
   "version": "1.4",
   "mcversion": "1.12.2",
-  "url": "",
+  "url": "https://github.com/olliem5/past",
   "updateUrl": "",
   "authorList": ["olliem5"],
-  "credits": "See GitHub - https://github.com/olliem5/past",
-  "logoFile": "",
+  "credits": "See GitHub for a full list of credits.",
+  "logoFile": "assets/pastclient/pastbanner.png",
   "screenshots": [],
   "dependencies": []
 }

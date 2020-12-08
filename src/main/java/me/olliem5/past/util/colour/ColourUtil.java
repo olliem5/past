@@ -35,24 +35,7 @@ public class ColourUtil {
     public static char prefixCode = ChatFormatting.PREFIX_CODE;
 
     //RGB.
-    private int redRGB;
-    private int greenRGB;
-    private int blueRGB;
-    private int rgb;
-
-    public ColourUtil(Color colour) {
-        this.redRGB = colour.getRed();
-        this.greenRGB = colour.getGreen();
-        this.blueRGB = colour.getBlue();
-        this.rgb = colour.getRGB();
-    }
-
-    public static ColourUtil getMultiColour() {
-        ColourUtil theRGB = new ColourUtil(Color.getHSBColor((float) (System.currentTimeMillis() % 7500L) / 7500f, 0.8f, 0.8f));
-        return theRGB;
-    }
-
-    public int getRGB() {
-        return rgb;
+    public static Color getMultiColour() {
+        return Color.getHSBColor((float) (System.currentTimeMillis() % 7500L) / 7500f, 0.8f, 0.8f);
     }
 }

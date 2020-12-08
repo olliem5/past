@@ -33,10 +33,10 @@ public class ModuleButton extends Component {
                 if (setting.getType() == "boolean") {
                     this.subcomponents.add(new BooleanComponent(setting, this, opY));
                     opY += 15;
-                } else if (setting.getType() == "intslider") {
+                } else if (setting.getType() == "integer") {
                     this.subcomponents.add(new IntegerComponent(setting, this, opY));
                     opY += 15;
-                } else if (setting.getType() == "doubleslider") {
+                } else if (setting.getType() == "double") {
                     this.subcomponents.add(new DoubleComponent(setting, this, opY));
                     opY += 15;
                 } else if (setting.getType() == "mode") {

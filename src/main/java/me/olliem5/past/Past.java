@@ -32,7 +32,6 @@ public class Past {
     public static final String name = "Past Utility Mod";
     public static final String modid = "past";
     public static final String version = "1.4";
-    public static final String author = "olliem5";
     public static final String github = "https://github.com/olliem5/past";
     public static final String appid = "754509326902886411";
     public static String prefix = "@";

@@ -34,11 +34,11 @@ public class ModuleButton extends Component {
                     this.subcomponents.add(new BooleanSwitch(setting, this, opY));
                     opY += 12;
                 }
-                if (setting.getType() == "intslider") {
+                if (setting.getType() == "integer") {
                     this.subcomponents.add(new IntegerSlider(setting, this, opY));
                     opY += 12;
                 }
-                if (setting.getType() == "doubleslider") {
+                if (setting.getType() == "double") {
                     this.subcomponents.add(new DoubleSlider(setting, this, opY));
                     opY += 12;
                 }

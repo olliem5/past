@@ -203,7 +203,6 @@ public class BonBedAura extends Module {
                     .filter(e -> mc.player.getDistance(e.getPos().getX(), e.getPos().getY(), e.getPos().getZ()) <= range.getValueInt())
                     .sorted(Comparator.comparing(e -> mc.player.getDistance(e.getPos().getX(), e.getPos().getY(), e.getPos().getZ())))
                     .forEach(bed -> {
-                        //If the explode setting is on.
                         if (mc.player.dimension != 0 && explode.getValBoolean()) {
                             mc.player.connection.sendPacket(new CPacketPlayerTryUseItemOnBlock(bed.getPos(), EnumFacing.UP, EnumHand.OFF_HAND, 0, 0, 0));
                         }
@@ -260,19 +259,19 @@ public class BonBedAura extends Module {
         }
     }
 
-    private void findClosestTarget() { //TODO: Friend Check.
+    private void findClosestTarget() {
         List<EntityPlayer> playerList = mc.world.playerEntities;
+
         closestTarget = null;
+
         for (EntityPlayer target : playerList) {
-            if (target == mc.player) {
-                continue;
-            }
-            if (!isLiving(target)) {
-                continue;
-            }
-            if ((target).getHealth() <= 0) {
-                continue;
-            }
+            if (target == mc.player) continue;
+
+            if (Past.friendsManager.isFriend(target.getName())) continue;
+
+            if (!isLiving(target)) continue;
+
+            if ((target).getHealth() <= 0) continue;
 
             if (closestTarget == null) {
                 closestTarget = target;
@@ -286,7 +285,6 @@ public class BonBedAura extends Module {
     }
 
     private void placeBlock(BlockPos pos, EnumFacing side) {
-        //If the place setting is on.
         if (place.getValBoolean()) {
             BlockPos neighbour = pos.offset(side);
             EnumFacing opposite = side.getOpposite();

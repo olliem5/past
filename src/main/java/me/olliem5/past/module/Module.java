@@ -115,8 +115,6 @@ public class Module {
 
     public void setup() {}
 
-    public void selfSettings() {}
-
     public void onEnable() {}
 
     public void onDisable() {}
