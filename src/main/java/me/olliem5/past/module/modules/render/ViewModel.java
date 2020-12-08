@@ -10,27 +10,28 @@ import net.minecraftforge.client.event.EntityViewRenderEvent;
 
 public class ViewModel extends Module {
     public ViewModel() {
-        super("ViewModel", "Changes the way your player looks", Category.RENDER);
+        super("ViewModel", "Changes the way your player looks in first person", Category.RENDER);
     }
-
-    //Arm Yaw is disabled atm, because when you pop a totem the values change.
 
     Setting itemfov;
     Setting armpitch;
-//    Setting armyaw;
+    Setting mainhand;
+    Setting offhand;
 
     @Override
     public void setup() {
         Past.settingsManager.registerSetting(itemfov = new Setting("Item FOV", "ViewModelItemFOV", 110, 130, 170, this));
         Past.settingsManager.registerSetting(armpitch = new Setting("Arm Pitch", "ViewModelArmPitch", -360, 90, 360, this));
-//        Past.settingsManager.registerSetting(armyaw = new Setting("Arm Yaw", -360, 220, 1080, this));
+        Past.settingsManager.registerSetting(mainhand = new Setting("Main Hand", "ViewModelMainHand", 0.0, 1.0, 1.0, this));
+        Past.settingsManager.registerSetting(offhand = new Setting("Off Hand", "ViewModelOffHand", 0.0, 1.0, 1.0, this));
     }
 
     public void onUpdate() {
         if (nullCheck()) return;
 
         mc.player.renderArmPitch = armpitch.getValueInt();
-//        mc.player.renderArmYaw = armyaw.getValueInt();
+        mc.entityRenderer.itemRenderer.equippedProgressMainHand = (float) mainhand.getValueDouble();
+        mc.entityRenderer.itemRenderer.equippedProgressOffHand = (float) offhand.getValueDouble();
     }
 
     @EventHandler

@@ -1,5 +1,6 @@
 package me.olliem5.past.gui.editor.component;
 
+import me.olliem5.past.gui.editor.component.components.Inventory;
 import me.olliem5.past.gui.editor.component.components.Watermark;
 
 import java.util.ArrayList;
@@ -9,6 +10,7 @@ public class HudComponentManager {
 
     public HudComponentManager() {
         hudComponents.add(new Watermark());
+        hudComponents.add(new Inventory());
     }
 
     public ArrayList<HudComponent> getHudComponents() {

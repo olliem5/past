@@ -6,14 +6,12 @@ import me.olliem5.past.util.text.StringUtil;
 
 public class Watermark extends HudComponent {
     public Watermark() {
-        super("Watermark", boxWidth);
+        super("Watermark");
+        setWidth(StringUtil.getStringWidth(Past.nameversion));
+        setHeight(mc.fontRenderer.FONT_HEIGHT);
     }
 
-    private static String renderText = Past.nameversion;
-
-    private static int boxWidth = StringUtil.getStringWidth(renderText);
-
     public void render(float ticks) {
-        mc.fontRenderer.drawStringWithShadow(renderText, getX(), getY(), -1);
+        mc.fontRenderer.drawStringWithShadow(Past.nameversion, getX(), getY(), -1);
     }
 }

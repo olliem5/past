@@ -112,6 +112,14 @@ public class HudButton extends Element {
     }
 
     @Override
+    public int getHeight() {
+        if (this.open) {
+            return 15 * (this.subelements.size() + 1);
+        }
+        return 15;
+    }
+
+    @Override
     public void updateElement(int mouseX, int mouseY) {
         this.hovered = this.isMouseOnButton(mouseX, mouseY);
 
