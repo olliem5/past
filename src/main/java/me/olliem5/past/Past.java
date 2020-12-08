@@ -34,7 +34,6 @@ public class Past {
     public static final String version = "1.4";
     public static final String github = "https://github.com/olliem5/past";
     public static final String appid = "754509326902886411";
-    public static String prefix = "@";
     public static String nameversion = name + " " + version;
 
     public static EventBus EVENT_BUS;
@@ -56,7 +55,6 @@ public class Past {
         Display.setTitle(nameversion);
     }
 
-    //Initializing the client
     @Mod.EventHandler
     public void pastInitialize(FMLInitializationEvent event) {
         System.out.println("[" + nameversion + "]" + " " + "Starting client initialization!");
@@ -99,10 +97,6 @@ public class Past {
 
         configUtil = new ConfigUtil();
         System.out.println("[" + nameversion + "]" + " " + "Config Initialized!");
-
-        CommandManager.init();
-        MinecraftForge.EVENT_BUS.register(new CommandManager());
-        MinecraftForge.EVENT_BUS.register(new ForgeEvents());
 
         System.out.println("[" + nameversion + "]" + " " + "Client has finished initializing!");
     }

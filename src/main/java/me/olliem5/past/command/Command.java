@@ -1,22 +1,27 @@
 package me.olliem5.past.command;
 
-/* Credit: LittleDraily */
 public class Command {
-    private String command;
-    private String usage;
+    private String name;
+    private String description;
+    private String syntax;
 
-    public Command(String name, String usage) {
-        this.command = name;
-        this.usage = usage;
+    public Command(String name, String description, String syntax) {
+        this.name = name;
+        this.description = description;
+        this.syntax = syntax;
     }
 
-    public String getCommand() {
-        return command;
+    public String getName() {
+        return name;
     }
 
-    public String getUsage() {
-        return usage;
+    public String getDescription() {
+        return description;
     }
 
-    public void onCommand(String[] args) {}
+    public String getSyntax() {
+        return syntax;
+    }
+
+    public void runCommand(String[] args) {}
 }

@@ -2,37 +2,39 @@ package me.olliem5.past.command;
 
 import me.olliem5.past.Past;
 import me.olliem5.past.command.commands.BindCommand;
-import me.olliem5.past.command.commands.HelpCommand;
-import me.olliem5.past.command.commands.ModulesCommand;
 import me.olliem5.past.command.commands.ToggleCommand;
+import me.zero.alpine.listener.EventHandler;
+import me.zero.alpine.listener.Listener;
 import net.minecraftforge.client.event.ClientChatEvent;
-import net.minecraftforge.fml.common.eventhandler.EventPriority;
-import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
-import java.util.HashSet;
+import java.util.ArrayList;
 
-/* Credit: LittleDraily */
 public class CommandManager {
-    public static HashSet<Command> commands = new HashSet<>();
 
-    public static void init() {
-        commands.clear();
-        commands.add(new ToggleCommand());
-        commands.add(new BindCommand());
-        commands.add(new ModulesCommand());
-        commands.add(new HelpCommand());
+    public String prefix = "@";
+
+    public CommandManager() {
+        Past.EVENT_BUS.subscribe(this);
+        init();
     }
 
-    @SubscribeEvent(priority = EventPriority.HIGHEST)
-    public void chatEvent(ClientChatEvent event) {
+    public static ArrayList<Command> commands = new ArrayList<>();
+
+    public static void init() {
+        commands.add(new ToggleCommand());
+        commands.add(new BindCommand());
+    }
+
+    @EventHandler
+    public Listener<ClientChatEvent> listener = new Listener<>(event -> {
         String[] args = event.getMessage().split(" ");
-        if (event.getMessage().startsWith(Past.prefix)) {
+        if (event.getMessage().startsWith(prefix)) {
             event.setCanceled(true);
-            for (Command c : commands) {
-                if (args[0].equalsIgnoreCase(Past.prefix + c.getCommand())) {
-                    c.onCommand(args);
+            for (Command command : commands) {
+                if (args[0].equalsIgnoreCase(prefix + command.getName())) {
+                    command.runCommand(args);
                 }
             }
         }
-    }
+    });
 }

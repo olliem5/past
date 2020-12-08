@@ -1,8 +1,6 @@
 package me.olliem5.past.module;
 
-import me.olliem5.past.module.modules.chat.AutoInsult;
-import me.olliem5.past.module.modules.chat.ChatSuffix;
-import me.olliem5.past.module.modules.chat.DurabilityWarn;
+import me.olliem5.past.module.modules.chat.*;
 import me.olliem5.past.module.modules.combat.*;
 import me.olliem5.past.module.modules.core.*;
 import me.olliem5.past.module.modules.exploit.*;

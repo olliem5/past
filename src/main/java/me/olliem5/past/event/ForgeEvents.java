@@ -4,12 +4,17 @@ import me.olliem5.past.Past;
 import me.olliem5.past.gui.editor.component.HudComponent;
 import me.olliem5.past.module.Module;
 import net.minecraftforge.client.event.*;
+import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.InputEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
 import org.lwjgl.input.Keyboard;
 
 public class ForgeEvents {
+
+    public ForgeEvents() {
+        MinecraftForge.EVENT_BUS.register(this);
+    }
 
     @SubscribeEvent
     public void onKeyInput(InputEvent.KeyInputEvent event) {
@@ -71,6 +76,11 @@ public class ForgeEvents {
 
     @SubscribeEvent
     public void renderBlockOverlay(RenderBlockOverlayEvent event) {
+        Past.EVENT_BUS.post(event);
+    }
+
+    @SubscribeEvent
+    public void onChat(ClientChatEvent event) {
         Past.EVENT_BUS.post(event);
     }
 }

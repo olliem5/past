@@ -41,7 +41,7 @@ public class ChatSuffix extends Module {
 
             String s = ((CPacketChatMessage) event.getPacket()).getMessage();
 
-            if (s.startsWith("/") || s.startsWith(Past.prefix)) return;
+            if (s.startsWith("/") || s.startsWith(Past.commandManager.prefix)) return;
 
             if (suffixmode.getValueString() == "Classic") {
                 if (blue.getValBoolean()) {
