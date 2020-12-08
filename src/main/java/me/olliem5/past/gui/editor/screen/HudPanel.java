@@ -4,6 +4,8 @@ import me.olliem5.past.Past;
 import me.olliem5.past.gui.editor.component.HudComponent;
 import me.olliem5.past.gui.editor.screen.element.HudButton;
 import me.olliem5.past.util.colour.ColourUtil;
+import me.olliem5.past.util.module.GUIColourUtil;
+import me.olliem5.past.util.text.StringUtil;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Gui;
 
@@ -23,6 +25,7 @@ public class HudPanel {
     private boolean open;
     public int dragX;
     public int dragY;
+    public int tY;
 
     public HudPanel(String title, int x, int y, int width, int height) {
         this.elements = new ArrayList<>();
@@ -40,27 +43,37 @@ public class HudPanel {
         for (HudComponent hudComponent : Past.hudComponentManager.getHudComponents()) {
             HudButton hudButton = new HudButton(hudComponent, this, tY);
             this.elements.add(hudButton);
-            tY += 12;
+            tY += 15;
         }
+        this.refresh();
     }
 
     public void drawScreen(int mouseX, int mouseY, float partialTicks) {
         if (Past.settingsManager.getSettingID("HudEditorRainbow").getValBoolean()) {
-            Gui.drawRect(x, y, x + width, y + height, ColourUtil.getMultiColour().getRGB());
+            Gui.drawRect(x - 1, y - 1, x + width + 1, y + height + 1, ColourUtil.getMultiColour().getRGB());
         } else {
-            Gui.drawRect(x, y, x + width, y + height, 0xFF222222);
+            Gui.drawRect(x - 1, y - 1, x + width + 1, y + height + 1, GUIColourUtil.getHudEditorColour());
         }
+        Gui.drawRect(x, y, x + width, y + height, 0x75101010);
 
         if (Past.settingsManager.getSettingID("HudEditorCustomFont").getValBoolean()) {
-            Past.customFontRenderer.drawStringWithShadow(title, x + 2, y + height / 2 - mc.fontRenderer.FONT_HEIGHT / 2, -1);
+            Past.customFontRenderer.drawStringWithShadow(title, x + 2 + width / 2 - StringUtil.getStringWidthCustomFont(title) / 2, y + height / 2 - Past.customFontRenderer.getHeight() / 2, -1);
         } else {
-            mc.fontRenderer.drawStringWithShadow(title, x + 2, y + height / 2 - mc.fontRenderer.FONT_HEIGHT / 2, -1);
+            mc.fontRenderer.drawStringWithShadow(title, x + 2 + width / 2 - StringUtil.getStringWidth(title) / 2, y + height / 2 - mc.fontRenderer.FONT_HEIGHT / 2, -1);
         }
 
         if (this.open && !this.elements.isEmpty()) {
-            for (Element elem : elements) {
-                elem.renderElement();
+            for (Element element : elements) {
+                element.renderElement();
             }
+        }
+    }
+
+    public void refresh() {
+        int off = this.height;
+        for (Element element : elements) {
+            element.setOff(off);
+            off += element.getHeight();
         }
     }
 

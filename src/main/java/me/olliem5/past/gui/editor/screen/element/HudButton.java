@@ -6,6 +6,7 @@ import me.olliem5.past.gui.editor.screen.Element;
 import me.olliem5.past.gui.editor.screen.HudPanel;
 import me.olliem5.past.settings.Setting;
 import me.olliem5.past.util.colour.ColourUtil;
+import me.olliem5.past.util.module.GUIColourUtil;
 import net.minecraft.client.gui.Gui;
 
 import java.util.ArrayList;
@@ -16,6 +17,7 @@ public class HudButton extends Element {
     public HudPanel parent;
     public int offset;
     private boolean open;
+    private boolean hovered;
 
     public HudButton(HudComponent comp, HudPanel parent, int offset) {
         this.comp = comp;
@@ -23,47 +25,77 @@ public class HudButton extends Element {
         this.offset = offset;
         this.subelements = new ArrayList<>();
         this.open = false;
-        int opY = offset + 12;
+        int opY = offset + 15;
 
         if (Past.settingsManager.getSettingsHudComponent(comp) != null) {
             for (Setting setting : Past.settingsManager.getSettingsHudComponent(comp)) {
                 if (setting.getType() == "hudboolean") {
                     this.subelements.add(new HudBooleanSwitch(setting, this, opY));
-                    opY += 12;
+                    opY += 15;
                 }
             }
         }
     }
 
     @Override
+    public void setOff(final int newOff) {
+        this.offset = newOff;
+        int opY = this.offset + 15;
+        for (final Element elem : this.subelements) {
+            elem.setOff(opY);
+            opY += 15;
+        }
+    }
+
+    @Override
     public void renderElement() {
-        if (Past.settingsManager.getSettingID("HudEditorRainbow").getValBoolean() && this.comp.isEnabled()) {
-            Gui.drawRect(parent.getX(), this.parent.getY() + this.offset, parent.getX() + parent.getWidth(), this.parent.getY() + 12 + this.offset, ColourUtil.getMultiColour().getRGB());
-        } else if (this.comp.isEnabled()) {
-            Gui.drawRect(parent.getX(), this.parent.getY() + this.offset, parent.getX() + parent.getWidth(), this.parent.getY() + 12 + this.offset, 0xFF222222);
+        if (this.comp.isEnabled()) {
+            if (Past.settingsManager.getSettingID("HudEditorRainbow").getValBoolean()) {
+                Gui.drawRect(parent.getX() - 1, this.parent.getY() + this.offset, parent.getX() + parent.getWidth() + 1, this.parent.getY() + 15 + this.offset + 1, ColourUtil.getMultiColour().getRGB());
+                Gui.drawRect(parent.getX() - 1, this.parent.getY() + this.offset, parent.getX(), this.parent.getY() + 15 + this.offset, ColourUtil.getMultiColour().getRGB());
+                Gui.drawRect(parent.getX() + parent.getWidth(), this.parent.getY() + this.offset, parent.getX() + parent.getWidth() + 1, this.parent.getY() + 15 + this.offset, ColourUtil.getMultiColour().getRGB());
+                Gui.drawRect(parent.getX(), this.parent.getY() + this.offset, parent.getX() + parent.getWidth(), this.parent.getY() + 15 + this.offset, ColourUtil.getMultiColour().getRGB());
+            } else {
+                Gui.drawRect(parent.getX() - 1, this.parent.getY() + this.offset, parent.getX() + parent.getWidth() + 1, this.parent.getY() + 15 + this.offset + 1, GUIColourUtil.getHudEditorColour());
+                Gui.drawRect(parent.getX() - 1, this.parent.getY() + this.offset, parent.getX(), this.parent.getY() + 15 + this.offset, GUIColourUtil.getHudEditorColour());
+                Gui.drawRect(parent.getX() + parent.getWidth(), this.parent.getY() + this.offset, parent.getX() + parent.getWidth() + 1, this.parent.getY() + 15 + this.offset, GUIColourUtil.getHudEditorColour());
+                Gui.drawRect(parent.getX(), this.parent.getY() + this.offset, parent.getX() + parent.getWidth(), this.parent.getY() + 15 + this.offset, GUIColourUtil.getHudEditorColour());
+            }
+
+            Gui.drawRect(parent.getX(), this.parent.getY() + this.offset, parent.getX() + parent.getWidth(), this.parent.getY() + 15 + this.offset, 0x75101010);
         } else {
-            Gui.drawRect(parent.getX(), this.parent.getY() + this.offset, parent.getX() + parent.getWidth(), this.parent.getY() + 12 + this.offset, 0xFF111111);
+            if (Past.settingsManager.getSettingID("HudEditorRainbow").getValBoolean()) {
+                Gui.drawRect(parent.getX() - 1, this.parent.getY() + this.offset, parent.getX() + parent.getWidth() + 1, this.parent.getY() + 15 + this.offset + 1, ColourUtil.getMultiColour().getRGB());
+                Gui.drawRect(parent.getX() - 1, this.parent.getY() + this.offset, parent.getX(), this.parent.getY() + 15 + this.offset, ColourUtil.getMultiColour().getRGB());
+                Gui.drawRect(parent.getX() + parent.getWidth(), this.parent.getY() + this.offset, parent.getX() + parent.getWidth() + 1, this.parent.getY() + 15 + this.offset, ColourUtil.getMultiColour().getRGB());
+            } else {
+                Gui.drawRect(parent.getX() - 1, this.parent.getY() + this.offset, parent.getX() + parent.getWidth() + 1, this.parent.getY() + 15 + this.offset + 1, GUIColourUtil.getHudEditorColour());
+                Gui.drawRect(parent.getX() - 1, this.parent.getY() + this.offset, parent.getX(), this.parent.getY() + 15 + this.offset, GUIColourUtil.getHudEditorColour());
+                Gui.drawRect(parent.getX() + parent.getWidth(), this.parent.getY() + this.offset, parent.getX() + parent.getWidth() + 1, this.parent.getY() + 15 + this.offset, GUIColourUtil.getHudEditorColour());
+            }
+
+            Gui.drawRect(parent.getX(), this.parent.getY() + this.offset, parent.getX() + parent.getWidth(), this.parent.getY() + 15 + this.offset, 0xFF111111);
         }
 
-        if (Past.settingsManager.getSettingID("HudEditorCustomFont").getValBoolean()) {
-            Past.customFontRenderer.drawStringWithShadow(this.comp.getName(), parent.getX() + 2, (parent.getY() + offset + 2), -1);
+        if (Past.settingsManager.getSettingID("HudEditorHoverChange").getValBoolean() && hovered == true) {
+            if (Past.settingsManager.getSettingID("HudEditorCustomFont").getValBoolean()) {
+                Past.customFontRenderer.drawStringWithShadow(this.comp.getName(), parent.getX() + 6, parent.getY() + this.offset + 4, -1);
+            } else {
+                mc.fontRenderer.drawStringWithShadow(this.comp.getName(), parent.getX() + 6, parent.getY() + this.offset + 4, -1);
+            }
         } else {
-            mc.fontRenderer.drawStringWithShadow(this.comp.getName(), parent.getX() + 2, (parent.getY() + offset + 2), -1);
+            if (Past.settingsManager.getSettingID("HudEditorCustomFont").getValBoolean()) {
+                Past.customFontRenderer.drawStringWithShadow(this.comp.getName(), parent.getX() + 4, parent.getY() + this.offset + 4, -1);
+            } else {
+                mc.fontRenderer.drawStringWithShadow(this.comp.getName(), parent.getX() + 4, parent.getY() + this.offset + 4, -1);
+            }
         }
 
         if (this.subelements.size() > 0) {
-            if (!this.isOpen()) {
-                if (Past.settingsManager.getSettingID("HudEditorCustomFont").getValBoolean()) {
-                    Past.customFontRenderer.drawStringWithShadow("+", parent.getX() + parent.getWidth() - 10, (parent.getY() + offset + 2), -1);
-                } else {
-                    mc.fontRenderer.drawStringWithShadow("+", parent.getX() + parent.getWidth() - 10, (parent.getY() + offset + 2), -1);
-                }
-            } else if (this.isOpen()) {
-                if (Past.settingsManager.getSettingID("HudEditorCustomFont").getValBoolean()) {
-                    Past.customFontRenderer.drawStringWithShadow("-", parent.getX() + parent.getWidth() - 10, (parent.getY() + offset + 2), -1);
-                } else {
-                    mc.fontRenderer.drawStringWithShadow("-", parent.getX() + parent.getWidth() - 10, (parent.getY() + offset + 2), -1);
-                }
+            if (Past.settingsManager.getSettingID("HudEditorCustomFont").getValBoolean()) {
+                Past.customFontRenderer.drawStringWithShadow("...", parent.getX() + parent.getWidth() - 10, (parent.getY() + offset + 4), -1);
+            } else {
+                mc.fontRenderer.drawStringWithShadow("...", parent.getX() + parent.getWidth() - 10, (parent.getY() + offset + 4), -1);
             }
         }
 
@@ -81,6 +113,8 @@ public class HudButton extends Element {
 
     @Override
     public void updateElement(int mouseX, int mouseY) {
+        this.hovered = this.isMouseOnButton(mouseX, mouseY);
+
         if (!this.subelements.isEmpty()) {
             for (Element elem : this.subelements) {
                 elem.updateElement(mouseX, mouseY);

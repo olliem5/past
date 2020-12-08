@@ -13,9 +13,9 @@ public class HudEditor extends GuiScreen {
 
     public HudEditor() {
         hudpanels = new ArrayList<>();
-        int hudPanelX = 10;
+        int hudPanelX = 5;
         int hudPanelY = 5;
-        int hudPanelWidth = 80;
+        int hudPanelWidth = 100;
         int hudPanelHeight = 15;
 
         HudEditor.hudpanels.add(new HudPanel("Past Client HUD", hudPanelX, hudPanelY, hudPanelWidth, hudPanelHeight));

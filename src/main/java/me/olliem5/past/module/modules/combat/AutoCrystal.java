@@ -321,7 +321,7 @@ public class AutoCrystal extends Module {
                     } else if (bPos.getY() == 255) {
                         mc.player.connection.sendPacket(new CPacketPlayerTryUseItemOnBlock(bPos, EnumFacing.DOWN, offhand ? EnumHand.OFF_HAND : EnumHand.MAIN_HAND, 0, 0, 0));
                         if (infomessages.getValBoolean()) {
-                            MessageUtil.sendAutoCrystalMessage(ColourUtil.white + "Place packet sent" + ColourUtil.aqua + " " + "above y255 place");
+                            MessageUtil.sendAutoCrystalMessage(ColourUtil.white + "Place packet sent" + ColourUtil.aqua + " " + "y255 place");
                         }
                     } else {
                         mc.player.connection.sendPacket(new CPacketPlayerTryUseItemOnBlock(bPos, EnumFacing.UP, offhand ? EnumHand.OFF_HAND : EnumHand.MAIN_HAND, 0, 0, 0));
