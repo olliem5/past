@@ -9,6 +9,7 @@ import net.minecraft.item.ItemStack;
 public class Inventory extends HudComponent {
     public Inventory() {
         super("Inventory");
+
         setWidth(144);
         setHeight(48);
     }

@@ -7,6 +7,7 @@ import me.olliem5.past.util.text.StringUtil;
 public class Watermark extends HudComponent {
     public Watermark() {
         super("Watermark");
+
         setWidth(StringUtil.getStringWidth(Past.nameversion));
         setHeight(mc.fontRenderer.FONT_HEIGHT);
     }

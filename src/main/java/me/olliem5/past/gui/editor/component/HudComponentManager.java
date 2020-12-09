@@ -1,7 +1,6 @@
 package me.olliem5.past.gui.editor.component;
 
-import me.olliem5.past.gui.editor.component.components.Inventory;
-import me.olliem5.past.gui.editor.component.components.Watermark;
+import me.olliem5.past.gui.editor.component.components.*;
 
 import java.util.ArrayList;
 

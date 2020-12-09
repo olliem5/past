@@ -4,12 +4,14 @@ import me.olliem5.past.Past;
 import me.olliem5.past.module.Category;
 import me.olliem5.past.module.Module;
 import me.olliem5.past.settings.Setting;
+import net.minecraft.util.ResourceLocation;
 
 public class ClickGUI extends Module {
     public ClickGUI() {
         super("ClickGUI", "Opens the client ClickGUI", Category.CORE);
     }
 
+    Setting scrollspeed;
     Setting rainbow;
     Setting customfont;
     Setting descriptions;
@@ -23,6 +25,7 @@ public class ClickGUI extends Module {
 
     @Override
     public void setup() {
+        Past.settingsManager.registerSetting(scrollspeed = new Setting("Scroll Speed", "ClickGUIScrollSpeed", 0.0, 10.0, 20.0, this));
         Past.settingsManager.registerSetting(rainbow = new Setting("Rainbow", "ClickGUIRainbow", true, this));
         Past.settingsManager.registerSetting(customfont = new Setting("Custom Font","ClickGUICustomFont", true, this));
         Past.settingsManager.registerSetting(descriptions = new Setting("Descriptions", "ClickGUIDescriptions", true, this));

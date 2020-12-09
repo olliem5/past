@@ -10,6 +10,7 @@ import me.olliem5.past.util.module.GUIColourUtil;
 import me.olliem5.past.util.text.StringUtil;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Gui;
+import org.lwjgl.input.Mouse;
 
 import java.util.ArrayList;
 
@@ -95,6 +96,20 @@ public class Panel {
         if (this.isDragging) {
             this.setX(mouseX - dragX);
             this.setY(mouseY - dragY);
+        }
+        scroll();
+    }
+
+    public void scroll() {
+        int scrollWheel = Mouse.getDWheel();
+
+        for (Panel panels : Past.clickGUITwo.panels) {
+            if (scrollWheel < 0) {
+                panels.setY((int) (panels.getY() - Past.settingsManager.getSettingID("ClickGUIScrollSpeed").getValueDouble()));
+                continue;
+            }
+            if (scrollWheel <= 0) continue;
+            panels.setY((int) (panels.getY() + Past.settingsManager.getSettingID("ClickGUIScrollSpeed").getValueDouble()));
         }
     }
 
