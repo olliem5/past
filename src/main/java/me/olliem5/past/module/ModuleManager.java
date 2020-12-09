@@ -81,6 +81,7 @@ public class ModuleManager {
         modules.add(new BlockHighlight());
         modules.add(new NoRender());
         modules.add(new Trajectories());
+        modules.add(new HandProgress());
     }
 
     public ArrayList<Module> getModules() {
