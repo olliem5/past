@@ -70,25 +70,17 @@ public class BlockHighlight extends Module {
                 if (!rainbow.getValBoolean()) {
                     if (rendermode.getValueString() == "Full") {
                         RenderUtil.drawBox(RenderUtil.generateBB(blockPos.getX(), blockPos.getY(), blockPos.getZ()), red.getValueInt(), green.getValueInt(), blue.getValueInt(), opacity.getValueInt());
-                    }
-
-                    if (rendermode.getValueString() == "FullFrame") {
+                    } else if (rendermode.getValueString() == "FullFrame") {
                         RenderUtil.drawBoxOutline(RenderUtil.generateBB(blockPos.getX(), blockPos.getY(), blockPos.getZ()), red.getValueInt(), green.getValueInt(), blue.getValueInt(), opacity.getValueInt());
-                    }
-
-                    if (rendermode.getValueString() == "Frame") {
+                    } else {
                         RenderUtil.drawOutline(RenderUtil.generateBB(blockPos.getX(), blockPos.getY(), blockPos.getZ()), red.getValueInt(), green.getValueInt(), blue.getValueInt(), opacity.getValueInt());
                     }
                 } else {
                     if (rendermode.getValueString() == "Full") {
                         RenderUtil.drawBox(RenderUtil.generateBB(blockPos.getX(), blockPos.getY(), blockPos.getZ()), rgbred / 255f, rgbgreen / 255f, rgbblue / 255f, opacity.getValueInt());
-                    }
-
-                    if (rendermode.getValueString() == "FullFrame") {
+                    } else if (rendermode.getValueString() == "FullFrame") {
                         RenderUtil.drawBoxOutline(RenderUtil.generateBB(blockPos.getX(), blockPos.getY(), blockPos.getZ()), rgbred / 255f, rgbgreen / 255f, rgbblue / 255f, opacity.getValueInt());
-                    }
-
-                    if (rendermode.getValueString() == "Frame") {
+                    } else {
                         RenderUtil.drawOutline(RenderUtil.generateBB(blockPos.getX(), blockPos.getY(), blockPos.getZ()), rgbred / 255f, rgbgreen / 255f, rgbblue / 255f, opacity.getValueInt());
                     }
                 }

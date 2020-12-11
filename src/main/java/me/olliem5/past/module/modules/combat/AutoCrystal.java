@@ -358,25 +358,17 @@ public class AutoCrystal extends Module {
             if (!rainbow.getValBoolean()) {
                 if (rendermode.getValueString() == "Full") {
                     RenderUtil.drawBox(RenderUtil.generateBB(renderBlock.getX(), renderBlock.getY(), renderBlock.getZ()), red.getValueInt(), green.getValueInt(), blue.getValueInt(), opacity.getValueInt());
-                }
-
-                if (rendermode.getValueString() == "FullFrame") {
+                } else if (rendermode.getValueString() == "FullFrame") {
                     RenderUtil.drawBoxOutline(RenderUtil.generateBB(renderBlock.getX(), renderBlock.getY(), renderBlock.getZ()), red.getValueInt(), green.getValueInt(), blue.getValueInt(), opacity.getValueInt());
-                }
-
-                if (rendermode.getValueString() == "Frame") {
+                } else {
                     RenderUtil.drawOutline(RenderUtil.generateBB(renderBlock.getX(), renderBlock.getY(), renderBlock.getZ()), red.getValueInt(), green.getValueInt(), blue.getValueInt(), opacity.getValueInt());
                 }
             } else {
                 if (rendermode.getValueString() == "Full") {
                     RenderUtil.drawBox(RenderUtil.generateBB(renderBlock.getX(), renderBlock.getY(), renderBlock.getZ()), rgbred / 255f, rgbgreen / 255f, rgbblue / 255f, opacity.getValueInt());
-                }
-
-                if (rendermode.getValueString() == "FullFrame") {
+                } else if (rendermode.getValueString() == "FullFrame") {
                     RenderUtil.drawBoxOutline(RenderUtil.generateBB(renderBlock.getX(), renderBlock.getY(), renderBlock.getZ()), rgbred / 255f, rgbgreen / 255f, rgbblue / 255f, opacity.getValueInt());
-                }
-
-                if (rendermode.getValueString() == "Frame") {
+                } else {
                     RenderUtil.drawOutline(RenderUtil.generateBB(renderBlock.getX(), renderBlock.getY(), renderBlock.getZ()), rgbred / 255f, rgbgreen / 255f, rgbblue / 255f, opacity.getValueInt());
                 }
             }

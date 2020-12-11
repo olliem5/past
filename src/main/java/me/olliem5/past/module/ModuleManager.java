@@ -64,7 +64,7 @@ public class ModuleManager {
         modules.add(new ElytraFly());
 
         /* Player */
-        modules.add(new WeaknessMsg());
+        modules.add(new WeaknessAlert());
         modules.add(new AutoLog());
         modules.add(new FastUse());
         modules.add(new NoRotate());

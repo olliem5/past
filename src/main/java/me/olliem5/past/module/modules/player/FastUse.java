@@ -44,27 +44,19 @@ public class FastUse extends Module {
                     mc.player.stopActiveHand();
                 }
             }
-        }
-
-        if (mc.player.getHeldItemMainhand().getItem() instanceof ItemExpBottle) {
+        } else if (mc.player.getHeldItemMainhand().getItem() instanceof ItemExpBottle) {
             if (exp.getValBoolean()) {
                 mc.rightClickDelayTimer = 0;
             }
-        }
-
-        if (mc.player.getHeldItemMainhand().getItem() instanceof ItemEndCrystal) {
+        } else if (mc.player.getHeldItemMainhand().getItem() instanceof ItemEndCrystal) {
             if (crystals.getValBoolean()) {
                 mc.rightClickDelayTimer = 0;
             }
-        }
-
-        if (Block.getBlockFromItem(mc.player.getHeldItemMainhand().getItem()).getDefaultState().isFullBlock()) {
+        } else if (Block.getBlockFromItem(mc.player.getHeldItemMainhand().getItem()).getDefaultState().isFullBlock()) {
             if (blocks.getValBoolean()) {
                 mc.rightClickDelayTimer = 0;
             }
-        }
-
-        if (!(mc.player.getHeldItemMainhand().getItem() instanceof ItemBlock)) {
+        } else if (!(mc.player.getHeldItemMainhand().getItem() instanceof ItemBlock)) {
             if (other.getValBoolean()) {
                 mc.rightClickDelayTimer = 0;
             }

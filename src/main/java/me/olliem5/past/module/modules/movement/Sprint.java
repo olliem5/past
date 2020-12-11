@@ -35,8 +35,7 @@ public class Sprint extends Module {
                     mc.player.setSprinting(true);
                 }
             } catch (Exception ignored) {}
-        }
-        if (sprintmode.getValueString() == "Rage") {
+        } else {
             try {
                 if (!(mc.player.isSneaking()) && !(mc.player.collidedHorizontally) && mc.player.getFoodStats().getFoodLevel() > 6f && mc.gameSettings.keyBindForward.isKeyDown() || mc.gameSettings.keyBindLeft.isKeyDown() || mc.gameSettings.keyBindRight.isKeyDown() || mc.gameSettings.keyBindBack.isKeyDown()) {
                     mc.player.setSprinting(true);

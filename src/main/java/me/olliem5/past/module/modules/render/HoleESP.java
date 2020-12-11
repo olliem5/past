@@ -81,25 +81,17 @@ public class HoleESP extends Module {
                     if (!obsidianrainbow.getValBoolean()) {
                         if (rendermode.getValueString() == "Full") {
                             RenderUtil.drawBox(RenderUtil.generateBB(obiHoles.getX(), obiHoles.getY(), obiHoles.getZ()), obsidianred.getValueInt(), obsidiangreen.getValueInt(), obsidianblue.getValueInt(), obsidianopacity.getValueInt());
-                        }
-
-                        if (rendermode.getValueString() == "FullFrame") {
+                        } else if (rendermode.getValueString() == "FullFrame") {
                             RenderUtil.drawBoxOutline(RenderUtil.generateBB(obiHoles.getX(), obiHoles.getY(), obiHoles.getZ()), obsidianred.getValueInt(), obsidiangreen.getValueInt(), obsidianblue.getValueInt(), obsidianopacity.getValueInt());
-                        }
-
-                        if (rendermode.getValueString() == "Frame") {
+                        } else {
                             RenderUtil.drawOutline(RenderUtil.generateBB(obiHoles.getX(), obiHoles.getY(), obiHoles.getZ()), obsidianred.getValueInt(), obsidiangreen.getValueInt(), obsidianblue.getValueInt(), obsidianopacity.getValueInt());
                         }
                     } else {
                         if (rendermode.getValueString() == "Full") {
                             RenderUtil.drawBox(RenderUtil.generateBB(obiHoles.getX(), obiHoles.getY(), obiHoles.getZ()), rgbred / 255f, rgbgreen / 255f, rgbblue / 255f, obsidianopacity.getValueInt());
-                        }
-
-                        if (rendermode.getValueString() == "FullFrame") {
+                        } else if (rendermode.getValueString() == "FullFrame") {
                             RenderUtil.drawBoxOutline(RenderUtil.generateBB(obiHoles.getX(), obiHoles.getY(), obiHoles.getZ()), rgbred / 255f, rgbgreen / 255f, rgbblue / 255f, obsidianopacity.getValueInt());
-                        }
-
-                        if (rendermode.getValueString() == "Frame") {
+                        } else {
                             RenderUtil.drawOutline(RenderUtil.generateBB(obiHoles.getX(), obiHoles.getY(), obiHoles.getZ()), rgbred / 255f, rgbgreen / 255f, rgbblue / 255f, obsidianopacity.getValueInt());
                         }
                     }
@@ -113,25 +105,17 @@ public class HoleESP extends Module {
                     if (!bedrockrainbow.getValBoolean()) {
                         if (rendermode.getValueString() == "Full") {
                             RenderUtil.drawBox(RenderUtil.generateBB(bRockHoles.getX(), bRockHoles.getY(), bRockHoles.getZ()), bedrockred.getValueInt(), bedrockgreen.getValueInt(), bedrockblue.getValueInt(), bedrockopacity.getValueInt());
-                        }
-
-                        if (rendermode.getValueString() == "FullFrame") {
+                        } else if (rendermode.getValueString() == "FullFrame") {
                             RenderUtil.drawBoxOutline(RenderUtil.generateBB(bRockHoles.getX(), bRockHoles.getY(), bRockHoles.getZ()), bedrockred.getValueInt(), bedrockgreen.getValueInt(), bedrockblue.getValueInt(), bedrockopacity.getValueInt());
-                        }
-
-                        if (rendermode.getValueString() == "Frame") {
+                        } else {
                             RenderUtil.drawOutline(RenderUtil.generateBB(bRockHoles.getX(), bRockHoles.getY(), bRockHoles.getZ()), bedrockred.getValueInt(), bedrockgreen.getValueInt(), bedrockblue.getValueInt(), bedrockopacity.getValueInt());
                         }
                     } else {
                         if (rendermode.getValueString() == "Full") {
                             RenderUtil.drawBox(RenderUtil.generateBB(bRockHoles.getX(), bRockHoles.getY(), bRockHoles.getZ()), rgbred / 255f, rgbgreen / 255f, rgbblue / 255f, bedrockopacity.getValueInt());
-                        }
-
-                        if (rendermode.getValueString() == "FullFrame") {
+                        } else if (rendermode.getValueString() == "FullFrame") {
                             RenderUtil.drawBoxOutline(RenderUtil.generateBB(bRockHoles.getX(), bRockHoles.getY(), bRockHoles.getZ()), rgbred / 255f, rgbgreen / 255f, rgbblue / 255f, bedrockopacity.getValueInt());
-                        }
-
-                        if (rendermode.getValueString() == "Frame") {
+                        } else {
                             RenderUtil.drawOutline(RenderUtil.generateBB(bRockHoles.getX(), bRockHoles.getY(), bRockHoles.getZ()), rgbred / 255f, rgbgreen / 255f, rgbblue / 255f, bedrockopacity.getValueInt());
                         }
                     }

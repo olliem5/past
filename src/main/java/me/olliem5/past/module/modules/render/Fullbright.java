@@ -37,9 +37,7 @@ public class Fullbright extends Module {
         if (brightnessmode.getValueString() == "Gamma") {
             originalGamma = mc.gameSettings.gammaSetting;
             mc.gameSettings.gammaSetting = 10;
-        }
-
-        if (brightnessmode.getValueString() == "Potion") {
+        } else {
             mc.player.addPotionEffect(fullbrighteffect);
         }
     }
@@ -48,9 +46,7 @@ public class Fullbright extends Module {
     public void onDisable() {
         if (brightnessmode.getValueString() == "Gamma") {
             mc.gameSettings.gammaSetting = originalGamma;
-        }
-
-        if (brightnessmode.getValueString() == "Potion") {
+        } else {
             mc.player.removeActivePotionEffect(fullbrighteffect.getPotion());
         }
     }

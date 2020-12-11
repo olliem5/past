@@ -225,8 +225,7 @@ public class AutoBuilder extends Module {
                     }
                     break;
             }
-        }
-        if (buildmode.getValueString() == "Highway") {
+        } else if (buildmode.getValueString() == "Highway") {
             switch (PlayerUtil.getFacing()) {
                 case NORTH:
                     for (Vec3d placePositions : highwayBuildNegativeZ) {

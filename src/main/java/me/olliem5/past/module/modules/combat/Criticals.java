@@ -43,8 +43,7 @@ public class Criticals extends Module {
                 if (mode.getValueString() == "Packet") {
                     mc.player.connection.sendPacket(new CPacketPlayer.Position(mc.player.posX, mc.player.posY + 0.1f, mc.player.posZ, false));
                     mc.player.connection.sendPacket(new CPacketPlayer.Position(mc.player.posX, mc.player.posY, mc.player.posZ, false));
-                }
-                if (mode.getValueString() == "2b2t") {
+                } else if (mode.getValueString() == "2b2t") {
                     mc.player.connection.sendPacket(new CPacketPlayer.Position(mc.player.posX, mc.player.posY + 0.11, mc.player.posZ, false));
                     mc.player.connection.sendPacket(new CPacketPlayer.Position(mc.player.posX, mc.player.posY + 0.11, mc.player.posZ, false));
                     mc.player.connection.sendPacket(new CPacketPlayer.Position(mc.player.posX, mc.player.posY + 0.1100013579, mc.player.posZ, false));
@@ -52,8 +51,7 @@ public class Criticals extends Module {
                     mc.player.connection.sendPacket(new CPacketPlayer.Position(mc.player.posX, mc.player.posY + 0.1100013579, mc.player.posZ, false));
                     mc.player.connection.sendPacket(new CPacketPlayer.Position(mc.player.posX, mc.player.posY + 0.1100013579, mc.player.posZ, false));
                     mc.player.connection.sendPacket(new CPacketPlayer.Position(mc.player.posX, mc.player.posY, mc.player.posZ, false));
-                }
-                if (mode.getValueString() == "Bypass") {
+                } else if (mode.getValueString() == "Bypass") {
                     if (this.mc.player.fallDistance > 0.0f) {
                         return;
                     } if (this.mc.player.isInLava() || this.mc.player.isInWater()) {
@@ -64,8 +62,7 @@ public class Criticals extends Module {
                         this.mc.player.connection.sendPacket(new CPacketPlayer.Position(this.mc.player.posX, this.mc.player.posY + 0.1100013579, this.mc.player.posZ, false));
                         this.mc.player.connection.sendPacket(new CPacketPlayer.Position(this.mc.player.posX, this.mc.player.posY + 1.3579E-6, this.mc.player.posZ, false));
                     }
-                }
-                if (mode.getValueString() == "Jump") {
+                } else {
                     mc.player.jump();
                 }
             }
