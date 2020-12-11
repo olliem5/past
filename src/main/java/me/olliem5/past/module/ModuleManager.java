@@ -30,6 +30,7 @@ public class ModuleManager {
         modules.add(new KillAura());
         modules.add(new ChorusSave());
         modules.add(new AutoTrap());
+        modules.add(new AutoCreeper());
 
         /* Core */
         modules.add(new OldClickGUI());

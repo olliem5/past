@@ -9,16 +9,21 @@ import java.util.ArrayList;
 public class Setting {
     private Module parent;
     private HudComponent hudParent;
+
     private String name;
     private String id;
     private String type;
+
     private int min;
     private int start;
     private int max;
+
     private double dmin;
     private double dstart;
     private double dmax;
+
     private boolean bval;
+
     private String sval;
     private ArrayList<String> modes;
 
