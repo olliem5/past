@@ -36,6 +36,11 @@ public class BonBedAura extends Module {
 
     //TODO: Mode for 1.12.2. (Probably just AutoBreak).
 
+    /**
+     * @author bon55
+     * I got permission from him to use this when he made it very early on :)
+     */
+
     Setting place;
     Setting explode;
     Setting autoswitch;

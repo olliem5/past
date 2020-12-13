@@ -21,8 +21,6 @@ public class Surround extends Module {
         super("Surround", "Automatically surrounds you with obsidian", Category.COMBAT);
     }
 
-    //TODO: Fix OnJump disable
-
     Setting placemode;
     Setting disablemode;
     Setting centerplayer;
@@ -38,6 +36,8 @@ public class Surround extends Module {
     private boolean hasPlaced;
     private Vec3d center = Vec3d.ZERO;
 
+    private int blocksPlaced;
+
     @Override
     public void setup() {
         placemodes = new ArrayList<>();
@@ -48,7 +48,7 @@ public class Surround extends Module {
         disablemodes = new ArrayList<>();
         disablemodes.add("Finish");
         disablemodes.add("Never");
-        //disablemodes.add("OnJump");
+        disablemodes.add("OnJump");
 
         Past.settingsManager.registerSetting(placemode = new Setting("Place", "SurroundPlace", this, placemodes, "Full"));
         Past.settingsManager.registerSetting(disablemode = new Setting("Disable", "SurroundDisable", this, disablemodes, "Finish"));
@@ -78,42 +78,6 @@ public class Surround extends Module {
         }
     }
 
-    private final List<Vec3d> standardSurround = new ArrayList<>(Arrays.asList(
-            new Vec3d(0, -1, 0), //Bottom Block
-            new Vec3d(1, 0, 0), //X Block
-            new Vec3d(-1, 0, 0), //X-Minus Block
-            new Vec3d(0, 0, 1), //Z Block
-            new Vec3d(0, 0, -1) //Z-Minus Block
-    ));
-
-    private final List<Vec3d> fullSurround = new ArrayList<>(Arrays.asList(
-            new Vec3d(0, -1, 0), //Bottom Block
-            new Vec3d(1, -1, 0), //X-Down Block
-            new Vec3d(0, -1, 1), //Z-Down Block
-            new Vec3d(-1, -1, 0), //X-Minus-Down Block
-            new Vec3d(0, -1, -1), //Z-Minus-Down Block
-            new Vec3d(1, 0, 0), //X Block
-            new Vec3d(0, 0, 1), //Z Block
-            new Vec3d(-1, 0, 0), //X-Minus Block
-            new Vec3d(0, 0, -1) //Z-Minus Block
-    ));
-
-    private final List<Vec3d> antiCitySurround = new ArrayList<>(Arrays.asList(
-            new Vec3d(0, -1, 0), //Bottom Block
-            new Vec3d(1, 0, 0), //X Block
-            new Vec3d(-1, 0, 0), //X-Minus Block
-            new Vec3d(0, 0, 1), //Z Block
-            new Vec3d(0, 0, -1), //Z-Minus Block
-            new Vec3d(2, 0, 0), //X Block
-            new Vec3d(-2, 0, 0), //X-Minus Block
-            new Vec3d(0, 0, 2), //Z Block
-            new Vec3d(0, 0, -2), //Z-Minus Block
-            new Vec3d(3, 0, 0), //X Block
-            new Vec3d(-3, 0, 0), //X-Minus Block
-            new Vec3d(0, 0, 3), //Z Block
-            new Vec3d(0, 0, -3) //Z-Minus Block
-    ));
-
     public void onUpdate() {
         if (nullCheck()) return;
 
@@ -126,127 +90,49 @@ public class Surround extends Module {
                     toggle();
                 }
             }
-        }
-
-        if (hasPlaced == true && disablemode.getValueString() == "Finish") {
+        } else if (hasPlaced == true && disablemode.getValueString() == "Finish") {
             if (infomessages.getValBoolean()) {
                 MessageUtil.sendSurroundMessage(ColourUtil.white + "Module is" + ColourUtil.red + " " + "disabling" + ColourUtil.gray + " " + "(Finished)");
             }
             toggle();
+        } else {
+            if (!mc.player.onGround) {
+                if (infomessages.getValBoolean()) {
+                    MessageUtil.sendSurroundMessage(ColourUtil.white + "Module is" + ColourUtil.red + " " + "disabling" + ColourUtil.gray + " " + "(OnJump)");
+                }
+                toggle();
+            }
         }
 
-//        if (hasPlaced == true && disablemode.getValueString() == "OnJump") {
-//            if (!mc.player.onGround) {
-//                if (infomessages.getValBoolean()) {
-//                    MessageUtil.sendSurroundMessage(ColourUtil.white + "Module is" + ColourUtil.red + " " + "disabling" + ColourUtil.gray + " " + "(OnJump)");
-//                }
-//                toggle();
-//            }
-//        }
+        blocksPlaced = 0;
 
-        int blocksPlaced = 0;
+        for (Vec3d placePositions : getSurroundType()) {
+            BlockPos blockPos = new BlockPos(placePositions.add(mc.player.getPositionVector()));
 
-        if (placemode.getValueString() == "Standard") {
-            for (Vec3d placePositions : standardSurround) {
+            if (mc.world.getBlockState(blockPos).getBlock().equals(Blocks.AIR)) {
+                int oldInventorySlot = mc.player.inventory.currentItem;
 
-                BlockPos blockPos = new BlockPos(placePositions.add(mc.player.getPositionVector()));
-
-                if (mc.world.getBlockState(blockPos).getBlock().equals(Blocks.AIR)) {
-
-                    int oldInventorySlot = mc.player.inventory.currentItem;
-
-                    if (preferobi.getValBoolean()) {
-                        if (infomessages.getValBoolean()) {
-                            MessageUtil.sendSurroundMessage(ColourUtil.white + "Switching to" + " " + ColourUtil.aqua + "obsidian");
-                        }
-                        mc.player.inventory.currentItem = PlayerUtil.getBlockInHotbar(Blocks.OBSIDIAN);
-                    } else {
-                        if (infomessages.getValBoolean()) {
-                            MessageUtil.sendSurroundMessage(ColourUtil.white + "Switching to" + " " + ColourUtil.aqua + "any block");
-                        }
-                        mc.player.inventory.currentItem = PlayerUtil.getAnyBlockInHotbar();
-                    }
-
+                if (preferobi.getValBoolean()) {
                     if (infomessages.getValBoolean()) {
-                        MessageUtil.sendSurroundMessage(ColourUtil.white + "Placing block");
+                        MessageUtil.sendSurroundMessage(ColourUtil.white + "Switching to" + " " + ColourUtil.aqua + "obsidian");
                     }
-
-                    PlayerUtil.placeBlock(blockPos);
-                    mc.player.inventory.currentItem = oldInventorySlot;
-                    blocksPlaced++;
-
-                    if (blocksPlaced == blockspertick.getValueInt() && disablemode.getValueString() != "Never") {
-                        return;
-                    }
-                }
-            }
-        } else if (placemode.getValueString() == "Full") {
-            for (Vec3d placePositions : fullSurround) {
-
-                BlockPos blockPos = new BlockPos(placePositions.add(mc.player.getPositionVector()));
-
-                if (mc.world.getBlockState(blockPos).getBlock().equals(Blocks.AIR)) {
-
-                    int oldInventorySlot = mc.player.inventory.currentItem;
-
-                    if (preferobi.getValBoolean()) {
-                        if (infomessages.getValBoolean()) {
-                            MessageUtil.sendSurroundMessage(ColourUtil.white + "Switching to" + " " + ColourUtil.aqua + "obsidian");
-                        }
-                        mc.player.inventory.currentItem = PlayerUtil.getBlockInHotbar(Blocks.OBSIDIAN);
-                    } else {
-                        if (infomessages.getValBoolean()) {
-                            MessageUtil.sendSurroundMessage(ColourUtil.white + "Switching to" + " " + ColourUtil.aqua + "any block");
-                        }
-                        mc.player.inventory.currentItem = PlayerUtil.getAnyBlockInHotbar();
-                    }
-
+                    mc.player.inventory.currentItem = PlayerUtil.getBlockInHotbar(Blocks.OBSIDIAN);
+                } else {
                     if (infomessages.getValBoolean()) {
-                        MessageUtil.sendSurroundMessage(ColourUtil.white + "Placing block");
+                        MessageUtil.sendSurroundMessage(ColourUtil.white + "Switching to" + " " + ColourUtil.aqua + "any block");
                     }
-
-                    PlayerUtil.placeBlock(blockPos);
-                    mc.player.inventory.currentItem = oldInventorySlot;
-                    blocksPlaced++;
-
-                    if (blocksPlaced == blockspertick.getValueInt() && disablemode.getValueString() != "Never") {
-                        return;
-                    }
+                    mc.player.inventory.currentItem = PlayerUtil.getAnyBlockInHotbar();
                 }
-            }
-        } else if (placemode.getValueString() == "AntiCity") {
-            for (Vec3d placePositions : antiCitySurround) {
 
-                BlockPos blockPos = new BlockPos(placePositions.add(mc.player.getPositionVector()));
-
-                if (mc.world.getBlockState(blockPos).getBlock().equals(Blocks.AIR)) {
-
-                    int oldInventorySlot = mc.player.inventory.currentItem;
-
-                    if (preferobi.getValBoolean()) {
-                        if (infomessages.getValBoolean()) {
-                            MessageUtil.sendSurroundMessage(ColourUtil.white + "Switching to" + " " + ColourUtil.aqua + "obsidian");
-                        }
-                        mc.player.inventory.currentItem = PlayerUtil.getBlockInHotbar(Blocks.OBSIDIAN);
-                    } else {
-                        if (infomessages.getValBoolean()) {
-                            MessageUtil.sendSurroundMessage(ColourUtil.white + "Switching to" + " " + ColourUtil.aqua + "any block");
-                        }
-                        mc.player.inventory.currentItem = PlayerUtil.getAnyBlockInHotbar();
-                    }
-
-                    if (infomessages.getValBoolean()) {
-                        MessageUtil.sendSurroundMessage(ColourUtil.white + "Placing block");
-                    }
-
-                    PlayerUtil.placeBlock(blockPos);
-                    mc.player.inventory.currentItem = oldInventorySlot;
-                    blocksPlaced++;
-
-                    if (blocksPlaced == blockspertick.getValueInt() && disablemode.getValueString() != "Never") {
-                        return;
-                    }
+                if (infomessages.getValBoolean()) {
+                    MessageUtil.sendSurroundMessage(ColourUtil.white + "Placing block");
                 }
+
+                PlayerUtil.placeBlock(blockPos);
+                mc.player.inventory.currentItem = oldInventorySlot;
+                blocksPlaced++;
+
+                if (blocksPlaced == blockspertick.getValueInt() && disablemode.getValueString() != "Never") return;
             }
         }
 
@@ -254,6 +140,51 @@ public class Surround extends Module {
             hasPlaced = true;
         }
     }
+
+    private List<Vec3d> getSurroundType() {
+        if (placemode.getValueString() == "Standard") {
+            return standardSurround;
+        } else if (placemode.getValueString() == "Full") {
+            return fullSurround;
+        }
+        return antiCitySurround;
+    }
+
+    private final List<Vec3d> standardSurround = new ArrayList<>(Arrays.asList(
+            new Vec3d(0, -1, 0),
+            new Vec3d(1, 0, 0),
+            new Vec3d(-1, 0, 0),
+            new Vec3d(0, 0, 1),
+            new Vec3d(0, 0, -1)
+    ));
+
+    private final List<Vec3d> fullSurround = new ArrayList<>(Arrays.asList(
+            new Vec3d(0, -1, 0),
+            new Vec3d(1, -1, 0),
+            new Vec3d(0, -1, 1),
+            new Vec3d(-1, -1, 0),
+            new Vec3d(0, -1, -1),
+            new Vec3d(1, 0, 0),
+            new Vec3d(0, 0, 1),
+            new Vec3d(-1, 0, 0),
+            new Vec3d(0, 0, -1)
+    ));
+
+    private final List<Vec3d> antiCitySurround = new ArrayList<>(Arrays.asList(
+            new Vec3d(0, -1, 0),
+            new Vec3d(1, 0, 0),
+            new Vec3d(-1, 0, 0),
+            new Vec3d(0, 0, 1),
+            new Vec3d(0, 0, -1),
+            new Vec3d(2, 0, 0),
+            new Vec3d(-2, 0, 0),
+            new Vec3d(0, 0, 2),
+            new Vec3d(0, 0, -2),
+            new Vec3d(3, 0, 0),
+            new Vec3d(-3, 0, 0),
+            new Vec3d(0, 0, 3),
+            new Vec3d(0, 0, -3)
+    ));
 
     public Vec3d getCenter(double posX, double posY, double posZ) {
         double x = Math.floor(posX) + 0.5D;

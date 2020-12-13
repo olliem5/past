@@ -37,86 +37,6 @@ public class AutoBuilder extends Module {
         Past.settingsManager.registerSetting(infomessages = new Setting("Info Messages", "AutoBuilderInfoMessages", false, this));
     }
 
-    private final List<Vec3d> ppBuildPositiveX = new ArrayList<>(Arrays.asList(
-            new Vec3d(2, 0, 0), //Middle Block
-            new Vec3d(2, 0, 1), //Right Side
-            new Vec3d(2, 0, -1), //Left Side
-            new Vec3d(2, 1, 0), //Up
-            new Vec3d(2, 2, 0) //Up
-    ));
-
-    private final List<Vec3d> ppBuildPositiveZ = new ArrayList<>(Arrays.asList(
-            new Vec3d(0, 0, 2), //Middle Block
-            new Vec3d(-1, 0, 2), //Right Side
-            new Vec3d(1, 0, 2), //Left Side
-            new Vec3d(0, 1, 2), //Up
-            new Vec3d(0, 2, 2) //Up
-    ));
-
-    private final List<Vec3d> ppBuildNegativeX = new ArrayList<>(Arrays.asList(
-            new Vec3d(-2, 0, 0), //Middle Block
-            new Vec3d(-2, 0, -1), //Right Side
-            new Vec3d(-2, 0, 1), //Left Side
-            new Vec3d(-2, 1, 0), //Up
-            new Vec3d(-2, 2, 0) //Up
-    ));
-
-    private final List<Vec3d> ppBuildNegativeZ = new ArrayList<>(Arrays.asList(
-            new Vec3d(0, 0, -2), //Middle Block
-            new Vec3d(1, 0, -2), //Right Side
-            new Vec3d(-1, 0, -2), //Left Side
-            new Vec3d(0, 1, -2), //Up
-            new Vec3d(0, 2, -2) //Up
-    ));
-
-    private final List<Vec3d> highwayBuildPositiveX = new ArrayList<>(Arrays.asList(
-            new Vec3d(0, -1, 0), //Center
-            new Vec3d(0, -1, 1), //Right
-            new Vec3d(0, -1, -1), //Left
-            new Vec3d(0, -1, 2), //Right Right
-            new Vec3d(0, -1, -2), //Left Left
-            new Vec3d(0, -1, 3), //Right Right Right
-            new Vec3d(0, -1, -3), //Left Left Left
-            new Vec3d(0, 0, 3), //Right Wall
-            new Vec3d(0, 0, -3) //Left Wall
-    ));
-
-    private final List<Vec3d> highwayBuildPositiveZ = new ArrayList<>(Arrays.asList(
-            new Vec3d(0, -1, 0), //Center
-            new Vec3d(-1, -1, 0), //Right
-            new Vec3d(1, -1, 0), //Left
-            new Vec3d(-2, -1, 0), //Right Right
-            new Vec3d(2, -1, 0), //Left Left
-            new Vec3d(-3, -1, 0), //Right Right Right
-            new Vec3d(3, -1, 0), //Left Left Left
-            new Vec3d(-3, 0, 0), //Right Wall
-            new Vec3d(3, 0, 0) //Left Wall
-    ));
-
-    private final List<Vec3d> highwayBuildNegativeX = new ArrayList<>(Arrays.asList(
-            new Vec3d(0, -1, 0), //Center
-            new Vec3d(0, -1, -1), //Right
-            new Vec3d(0, -1, 1), //Left
-            new Vec3d(0, -1, -2), //Right Right
-            new Vec3d(0, -1, 2), //Left Left
-            new Vec3d(0, -1, -3), //Right Right Right
-            new Vec3d(0, -1, 3), //Left Left Left
-            new Vec3d(0, 0, -3), //Right Wall
-            new Vec3d(0, 0, 3) //Left Wall
-    ));
-
-    private final List<Vec3d> highwayBuildNegativeZ = new ArrayList<>(Arrays.asList(
-            new Vec3d(0, -1, 0), //Center
-            new Vec3d(1, -1, 0), //Right
-            new Vec3d(-1, -1, 0), //Left
-            new Vec3d(2, -1, 0), //Right Right
-            new Vec3d(-2, -1, 0), //Left Left
-            new Vec3d(3, -1, 0), //Right Right Right
-            new Vec3d(-3, -1, 0), //Left Left Left
-            new Vec3d(3, 0, 0), //Right Wall
-            new Vec3d(-3, 0, 0) //Left Wall
-    ));
-
     public void onUpdate() {
         if (nullCheck()) return;
 
@@ -330,6 +250,86 @@ public class AutoBuilder extends Module {
             }
         }
     }
+
+    private final List<Vec3d> ppBuildPositiveX = new ArrayList<>(Arrays.asList(
+            new Vec3d(2, 0, 0),
+            new Vec3d(2, 0, 1),
+            new Vec3d(2, 0, -1),
+            new Vec3d(2, 1, 0),
+            new Vec3d(2, 2, 0)
+    ));
+
+    private final List<Vec3d> ppBuildPositiveZ = new ArrayList<>(Arrays.asList(
+            new Vec3d(0, 0, 2),
+            new Vec3d(-1, 0, 2),
+            new Vec3d(1, 0, 2),
+            new Vec3d(0, 1, 2),
+            new Vec3d(0, 2, 2)
+    ));
+
+    private final List<Vec3d> ppBuildNegativeX = new ArrayList<>(Arrays.asList(
+            new Vec3d(-2, 0, 0),
+            new Vec3d(-2, 0, -1),
+            new Vec3d(-2, 0, 1),
+            new Vec3d(-2, 1, 0),
+            new Vec3d(-2, 2, 0)
+    ));
+
+    private final List<Vec3d> ppBuildNegativeZ = new ArrayList<>(Arrays.asList(
+            new Vec3d(0, 0, -2),
+            new Vec3d(1, 0, -2),
+            new Vec3d(-1, 0, -2),
+            new Vec3d(0, 1, -2),
+            new Vec3d(0, 2, -2)
+    ));
+
+    private final List<Vec3d> highwayBuildPositiveX = new ArrayList<>(Arrays.asList(
+            new Vec3d(0, -1, 0),
+            new Vec3d(0, -1, 1),
+            new Vec3d(0, -1, -1),
+            new Vec3d(0, -1, 2),
+            new Vec3d(0, -1, -2),
+            new Vec3d(0, -1, 3),
+            new Vec3d(0, -1, -3),
+            new Vec3d(0, 0, 3),
+            new Vec3d(0, 0, -3)
+    ));
+
+    private final List<Vec3d> highwayBuildPositiveZ = new ArrayList<>(Arrays.asList(
+            new Vec3d(0, -1, 0),
+            new Vec3d(-1, -1, 0),
+            new Vec3d(1, -1, 0),
+            new Vec3d(-2, -1, 0),
+            new Vec3d(2, -1, 0),
+            new Vec3d(-3, -1, 0),
+            new Vec3d(3, -1, 0),
+            new Vec3d(-3, 0, 0),
+            new Vec3d(3, 0, 0)
+    ));
+
+    private final List<Vec3d> highwayBuildNegativeX = new ArrayList<>(Arrays.asList(
+            new Vec3d(0, -1, 0),
+            new Vec3d(0, -1, -1),
+            new Vec3d(0, -1, 1),
+            new Vec3d(0, -1, -2),
+            new Vec3d(0, -1, 2),
+            new Vec3d(0, -1, -3),
+            new Vec3d(0, -1, 3),
+            new Vec3d(0, 0, -3),
+            new Vec3d(0, 0, 3)
+    ));
+
+    private final List<Vec3d> highwayBuildNegativeZ = new ArrayList<>(Arrays.asList(
+            new Vec3d(0, -1, 0),
+            new Vec3d(1, -1, 0),
+            new Vec3d(-1, -1, 0),
+            new Vec3d(2, -1, 0),
+            new Vec3d(-2, -1, 0),
+            new Vec3d(3, -1, 0),
+            new Vec3d(-3, -1, 0),
+            new Vec3d(3, 0, 0),
+            new Vec3d(-3, 0, 0)
+    ));
 
     public String getArraylistInfo() {
         return ColourUtil.gray + " " + buildmode.getValueString().toUpperCase();

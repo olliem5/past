@@ -19,6 +19,10 @@ public class Criticals extends Module {
         super("Criticals", "Makes every attack a critical", Category.COMBAT);
     }
 
+    /**
+     * @author linustouchtips
+     */
+
     Setting mode;
 
     CooldownUtil timer = new CooldownUtil();
