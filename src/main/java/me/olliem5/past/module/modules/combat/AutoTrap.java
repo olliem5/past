@@ -38,24 +38,6 @@ public class AutoTrap extends Module {
         hasPlaced = false;
     }
 
-    private final List<Vec3d> autoTrap = new ArrayList<>(Arrays.asList(
-            new Vec3d(0, -1, -1),
-            new Vec3d(1, -1, 0),
-            new Vec3d(0, -1, 1),
-            new Vec3d(-1, -1, 0),
-            new Vec3d(0, 0, -1),
-            new Vec3d(1, 0, 0),
-            new Vec3d(0, 0, 1),
-            new Vec3d(-1, 0, 0),
-            new Vec3d(0, 1, -1),
-            new Vec3d(1, 1, 0),
-            new Vec3d(0, 1, 1),
-            new Vec3d(-1, 1, 0),
-            new Vec3d(0, 2, -1),
-            new Vec3d(0, 2, 1),
-            new Vec3d(0, 2, 0)
-    ));
-
     public void onUpdate() {
         if (nullCheck()) return;
 
@@ -101,6 +83,24 @@ public class AutoTrap extends Module {
         }
         return closestPlayer;
     }
+
+    private final List<Vec3d> autoTrap = new ArrayList<>(Arrays.asList(
+            new Vec3d(0, -1, -1),
+            new Vec3d(1, -1, 0),
+            new Vec3d(0, -1, 1),
+            new Vec3d(-1, -1, 0),
+            new Vec3d(0, 0, -1),
+            new Vec3d(1, 0, 0),
+            new Vec3d(0, 0, 1),
+            new Vec3d(-1, 0, 0),
+            new Vec3d(0, 1, -1),
+            new Vec3d(1, 1, 0),
+            new Vec3d(0, 1, 1),
+            new Vec3d(-1, 1, 0),
+            new Vec3d(0, 2, -1),
+            new Vec3d(0, 2, 1),
+            new Vec3d(0, 2, 0)
+    ));
 
     public String getArraylistInfo() {
         if (getClosestPlayer() != null) {

@@ -57,7 +57,6 @@ public class ModuleManager {
 
         /* Movement */
         modules.add(new Sprint());
-        modules.add(new HoleTP());
         modules.add(new Step());
         modules.add(new Flight());
         modules.add(new Velocity());
