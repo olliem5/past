@@ -23,13 +23,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * AutoCrystal utils made by 086
+ * https://github.com/zeroeightysix/KAMI/blob/master/src/main/java/me/zeroeightsix/kami/module/modules/combat/CrystalAura.java
+ */
+
 public class CrystalUtil {
     protected static Minecraft mc = Minecraft.getMinecraft();
-
-    /**
-     * AutoCrystal utils made by 086
-     * https://github.com/zeroeightysix/KAMI/blob/master/src/main/java/me/zeroeightsix/kami/module/modules/combat/CrystalAura.java
-     */
 
     public void lookAtPacket(double px, double py, double pz, EntityPlayer me) {
         double[] v = calculateLookAt(px, py, pz, me);

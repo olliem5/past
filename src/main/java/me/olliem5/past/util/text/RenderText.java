@@ -6,13 +6,13 @@ import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.math.BlockPos;
 
+/**
+ * Modified from Wurst+2
+ * https://github.com/TrvsF/wurstplus-two/blob/77b6ac96dbbf840c46e549c8df1b0f600ddc7221/src/main/java/me/travis/wurstplus/wurstplustwo/util/WurstplusRenderUtil.java#L20
+ */
+
 public class RenderText {
     protected static Minecraft mc = Minecraft.getMinecraft();
-
-    /**
-     * Credit TrvsF / Wurst+2
-     * https://github.com/TrvsF/wurstplus-two/blob/77b6ac96dbbf840c46e549c8df1b0f600ddc7221/src/main/java/me/travis/wurstplus/wurstplustwo/util/WurstplusRenderUtil.java#L20
-     */
 
     public static void glBillboard(final float x, final float y, final float z) {
         final float scale = 0.02666667f;

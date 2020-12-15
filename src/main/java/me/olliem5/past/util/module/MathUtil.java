@@ -2,13 +2,12 @@ package me.olliem5.past.util.module;
 
 import net.minecraft.client.Minecraft;
 
+/**
+ * From Seppuku Client
+ * https://github.com/seppukudevelopment/seppuku/blob/master/src/main/java/me/rigamortis/seppuku/api/util/MathUtil.java
+ */
+
 public class MathUtil {
-
-    /**
-     * Credit Seppuku Client
-     * https://github.com/seppukudevelopment/seppuku/blob/master/src/main/java/me/rigamortis/seppuku/api/util/MathUtil.java
-     */
-
     public static double[] directionSpeed(double speed) {
         final Minecraft mc = Minecraft.getMinecraft();
         float forward = mc.player.movementInput.moveForward;

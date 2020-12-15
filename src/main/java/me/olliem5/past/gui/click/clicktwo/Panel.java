@@ -56,11 +56,7 @@ public class Panel {
     }
 
     public void drawScreen(int mouseX, int mouseY, float partialTicks) {
-        if (Past.settingsManager.getSettingID("ClickGUIRainbow").getValBoolean()) {
-            Gui.drawRect(x - 1, y - 1, x + width + 1, y + height + 1, ColourUtil.getMultiColour().getRGB());
-        } else {
-            Gui.drawRect(x - 1, y - 1, x + width + 1, y + height + 1, GUIColourUtil.getGUIColour());
-        }
+        Gui.drawRect(x - 1, y - 1, x + width + 1, y + height + 1, Past.settingsManager.getSettingID("ClickGUIRainbow").getValBoolean() ? ColourUtil.getMultiColour().getRGB() : GUIColourUtil.getGUIColour());
         Gui.drawRect(x, y, x + width, y + height, 0x75101010);
 
         if (Past.settingsManager.getSettingID("ClickGUICustomFont").getValBoolean()) {

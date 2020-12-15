@@ -47,8 +47,6 @@ public class AutoCreeper extends Module {
 
     int holeBlocks;
 
-    private CooldownUtil targetMessageCooldown = new CooldownUtil();
-
     public void onDisable() {
         placePosition = null;
         target = null;

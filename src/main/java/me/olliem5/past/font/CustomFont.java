@@ -7,13 +7,12 @@ import java.awt.*;
 import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
 
+/**
+ * @author 086
+ * https://github.com/zeroeightysix/KAMI/blob/master/src/main/java/me/zeroeightsix/kami/gui/font/CFont.java
+ */
+
 public class CustomFont {
-
-    /**
-     * @author 086
-     * https://github.com/zeroeightysix/KAMI/blob/master/src/main/java/me/zeroeightsix/kami/gui/font/CFont.java
-     */
-
     private float imgSize = 512;
     protected CharData[] charData = new CharData[256];
     protected Font font;

@@ -1,7 +1,6 @@
 package me.olliem5.past.util.module;
 
 public class CooldownUtil {
-
     private long time;
 
     public CooldownUtil() {

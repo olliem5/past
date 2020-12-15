@@ -61,29 +61,16 @@ public class ModuleButton extends Component {
     @Override
     public void renderComponent() {
         if (this.mod.isToggled()) {
-            if (Past.settingsManager.getSettingID("ClickGUIRainbow").getValBoolean()) {
-                Gui.drawRect(parent.getX() - 1, this.parent.getY() + this.offset, parent.getX() + parent.getWidth() + 1, this.parent.getY() + 15 + this.offset + 1, ColourUtil.getMultiColour().getRGB());
-                Gui.drawRect(parent.getX() - 1, this.parent.getY() + this.offset, parent.getX(), this.parent.getY() + 15 + this.offset, ColourUtil.getMultiColour().getRGB());
-                Gui.drawRect(parent.getX() + parent.getWidth(), this.parent.getY() + this.offset, parent.getX() + parent.getWidth() + 1, this.parent.getY() + 15 + this.offset, ColourUtil.getMultiColour().getRGB());
-                Gui.drawRect(parent.getX(), this.parent.getY() + this.offset, parent.getX() + parent.getWidth(), this.parent.getY() + 15 + this.offset, ColourUtil.getMultiColour().getRGB());
-            } else {
-                Gui.drawRect(parent.getX() - 1, this.parent.getY() + this.offset, parent.getX() + parent.getWidth() + 1, this.parent.getY() + 15 + this.offset + 1, GUIColourUtil.getGUIColour());
-                Gui.drawRect(parent.getX() - 1, this.parent.getY() + this.offset, parent.getX(), this.parent.getY() + 15 + this.offset, GUIColourUtil.getGUIColour());
-                Gui.drawRect(parent.getX() + parent.getWidth(), this.parent.getY() + this.offset, parent.getX() + parent.getWidth() + 1, this.parent.getY() + 15 + this.offset, GUIColourUtil.getGUIColour());
-                Gui.drawRect(parent.getX(), this.parent.getY() + this.offset, parent.getX() + parent.getWidth(), this.parent.getY() + 15 + this.offset, GUIColourUtil.getGUIColour());
-            }
+            Gui.drawRect(parent.getX() - 1, this.parent.getY() + this.offset, parent.getX() + parent.getWidth() + 1, this.parent.getY() + 15 + this.offset + 1, Past.settingsManager.getSettingID("ClickGUIRainbow").getValBoolean() ? ColourUtil.getMultiColour().getRGB() : GUIColourUtil.getGUIColour());
+            Gui.drawRect(parent.getX() - 1, this.parent.getY() + this.offset, parent.getX(), this.parent.getY() + 15 + this.offset, Past.settingsManager.getSettingID("ClickGUIRainbow").getValBoolean() ? ColourUtil.getMultiColour().getRGB() : GUIColourUtil.getGUIColour());
+            Gui.drawRect(parent.getX() + parent.getWidth(), this.parent.getY() + this.offset, parent.getX() + parent.getWidth() + 1, this.parent.getY() + 15 + this.offset, Past.settingsManager.getSettingID("ClickGUIRainbow").getValBoolean() ? ColourUtil.getMultiColour().getRGB() : GUIColourUtil.getGUIColour());
+            Gui.drawRect(parent.getX(), this.parent.getY() + this.offset, parent.getX() + parent.getWidth(), this.parent.getY() + 15 + this.offset, Past.settingsManager.getSettingID("ClickGUIRainbow").getValBoolean() ? ColourUtil.getMultiColour().getRGB() : GUIColourUtil.getGUIColour());
 
             Gui.drawRect(parent.getX(), this.parent.getY() + this.offset, parent.getX() + parent.getWidth(), this.parent.getY() + 15 + this.offset, 0x75101010);
         } else {
-            if (Past.settingsManager.getSettingID("ClickGUIRainbow").getValBoolean()) {
-                Gui.drawRect(parent.getX() - 1, this.parent.getY() + this.offset, parent.getX() + parent.getWidth() + 1, this.parent.getY() + 15 + this.offset + 1, ColourUtil.getMultiColour().getRGB());
-                Gui.drawRect(parent.getX() - 1, this.parent.getY() + this.offset, parent.getX(), this.parent.getY() + 15 + this.offset, ColourUtil.getMultiColour().getRGB());
-                Gui.drawRect(parent.getX() + parent.getWidth(), this.parent.getY() + this.offset, parent.getX() + parent.getWidth() + 1, this.parent.getY() + 15 + this.offset, ColourUtil.getMultiColour().getRGB());
-            } else {
-                Gui.drawRect(parent.getX() - 1, this.parent.getY() + this.offset, parent.getX() + parent.getWidth() + 1, this.parent.getY() + 15 + this.offset + 1, GUIColourUtil.getGUIColour());
-                Gui.drawRect(parent.getX() - 1, this.parent.getY() + this.offset, parent.getX(), this.parent.getY() + 15 + this.offset, GUIColourUtil.getGUIColour());
-                Gui.drawRect(parent.getX() + parent.getWidth(), this.parent.getY() + this.offset, parent.getX() + parent.getWidth() + 1, this.parent.getY() + 15 + this.offset, GUIColourUtil.getGUIColour());
-            }
+            Gui.drawRect(parent.getX() - 1, this.parent.getY() + this.offset, parent.getX() + parent.getWidth() + 1, this.parent.getY() + 15 + this.offset + 1, Past.settingsManager.getSettingID("ClickGUIRainbow").getValBoolean() ? ColourUtil.getMultiColour().getRGB() : GUIColourUtil.getGUIColour());
+            Gui.drawRect(parent.getX() - 1, this.parent.getY() + this.offset, parent.getX(), this.parent.getY() + 15 + this.offset, Past.settingsManager.getSettingID("ClickGUIRainbow").getValBoolean() ? ColourUtil.getMultiColour().getRGB() : GUIColourUtil.getGUIColour());
+            Gui.drawRect(parent.getX() + parent.getWidth(), this.parent.getY() + this.offset, parent.getX() + parent.getWidth() + 1, this.parent.getY() + 15 + this.offset, Past.settingsManager.getSettingID("ClickGUIRainbow").getValBoolean() ? ColourUtil.getMultiColour().getRGB() : GUIColourUtil.getGUIColour());
 
             Gui.drawRect(parent.getX(), this.parent.getY() + this.offset, parent.getX() + parent.getWidth(), this.parent.getY() + 15 + this.offset, 0xFF111111);
         }

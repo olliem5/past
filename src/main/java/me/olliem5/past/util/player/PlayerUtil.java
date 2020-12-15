@@ -15,20 +15,19 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 
-public class PlayerUtil {
+/**
+ * Credit Yoink for block placement
+ * https://github.com/Katatje/Dream/blob/master/src/main/java/cat/yoink/dream/api/util/PlayerUtil.java
+ *
+ * Credit ionar2 for the facing util
+ * https://github.com/ionar2/spidermod/blob/master/src/main/java/me/ionar/salhack/util/entity/PlayerUtil.java
+ */
 
-    /**
-     * Credit Yoink for block placement
-     * https://github.com/Katatje/Dream/blob/master/src/main/java/cat/yoink/dream/api/util/PlayerUtil.java
-     *
-     * Credit ionar2 for the facing util
-     * https://github.com/ionar2/spidermod/blob/master/src/main/java/me/ionar/salhack/util/entity/PlayerUtil.java
-     */
+public class PlayerUtil {
 
     //TODO: Blacklist shulkers & like blocks for placements
 
     public static void placeBlock(BlockPos pos) {
-
         for (EnumFacing enumFacing : EnumFacing.values()) {
 
             if (!Minecraft.getMinecraft().world.getBlockState(pos.offset(enumFacing)).getBlock().equals(Blocks.AIR) && !isIntercepted(pos)) {

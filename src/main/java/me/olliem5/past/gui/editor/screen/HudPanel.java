@@ -49,11 +49,7 @@ public class HudPanel {
     }
 
     public void drawScreen(int mouseX, int mouseY, float partialTicks) {
-        if (Past.settingsManager.getSettingID("HudEditorRainbow").getValBoolean()) {
-            Gui.drawRect(x - 1, y - 1, x + width + 1, y + height + 1, ColourUtil.getMultiColour().getRGB());
-        } else {
-            Gui.drawRect(x - 1, y - 1, x + width + 1, y + height + 1, GUIColourUtil.getHudEditorColour());
-        }
+        Gui.drawRect(x - 1, y - 1, x + width + 1, y + height + 1, Past.settingsManager.getSettingID("HudEditorRainbow").getValBoolean() ? ColourUtil.getMultiColour().getRGB() : GUIColourUtil.getGUIColour());
         Gui.drawRect(x, y, x + width, y + height, 0x75101010);
 
         if (Past.settingsManager.getSettingID("HudEditorCustomFont").getValBoolean()) {

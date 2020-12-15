@@ -8,13 +8,12 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * @author 086
+ * https://github.com/zeroeightysix/KAMI/blob/master/src/main/java/me/zeroeightsix/kami/gui/font/CFontRenderer.java
+ */
+
 public class CustomFontRenderer extends CustomFont {
-
-    /**
-     * @author 086
-     * https://github.com/zeroeightysix/KAMI/blob/master/src/main/java/me/zeroeightsix/kami/gui/font/CFontRenderer.java
-     */
-
     protected CharData[] boldChars = new CharData[256];
     protected CharData[] italicChars = new CharData[256];
     protected CharData[] boldItalicChars = new CharData[256];

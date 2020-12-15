@@ -4,7 +4,6 @@ import me.olliem5.past.Past;
 import me.olliem5.past.util.colour.ColourListUtil;
 
 public class GUIColourUtil {
-
     public static int getGUIColour() {
         return ColourListUtil.toRGBA(
                 Past.settingsManager.getSettingID("ClickGUIRed").getValueInt(),

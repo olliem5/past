@@ -30,13 +30,15 @@ public class RenderUtil {
 
     public static AxisAlignedBB generateBB(long x, long y, long z) {
         BlockPos blockPos = new BlockPos(x, y, z);
-        final AxisAlignedBB bb = new AxisAlignedBB(
+        final AxisAlignedBB bb = new AxisAlignedBB
+                (
                 blockPos.getX() - mc.getRenderManager().viewerPosX,
                 blockPos.getY() - mc.getRenderManager().viewerPosY,
                 blockPos.getZ() - mc.getRenderManager().viewerPosZ,
                 blockPos.getX() + 1 - mc.getRenderManager().viewerPosX,
                 blockPos.getY() + (1) - mc.getRenderManager().viewerPosY,
-                blockPos.getZ() + 1 - mc.getRenderManager().viewerPosZ);
+                blockPos.getZ() + 1 - mc.getRenderManager().viewerPosZ
+                );
         return bb;
     }
 
