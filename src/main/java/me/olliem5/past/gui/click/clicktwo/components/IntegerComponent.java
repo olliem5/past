@@ -5,6 +5,7 @@ import me.olliem5.past.gui.click.Component;
 import me.olliem5.past.settings.Setting;
 import me.olliem5.past.util.colour.ColourUtil;
 import me.olliem5.past.util.module.GUIColourUtil;
+import me.olliem5.past.util.text.FontUtil;
 import net.minecraft.client.gui.Gui;
 
 import java.math.BigDecimal;
@@ -48,11 +49,7 @@ public class IntegerComponent extends Component {
 
         Gui.drawRect(parent.parent.getX() + 1, parent.parent.getY() + offset, parent.parent.getX() + parent.parent.getWidth() -1, parent.parent.getY() + offset + 15, 0x75101010);
 
-        if (Past.settingsManager.getSettingID("ClickGUICustomFont").getValBoolean()) {
-            Past.customFontRenderer.drawStringWithShadow(set.getName() + ColourUtil.gray + " " + set.getValueInt(), parent.parent.getX() + 4, parent.parent.getY() + this.offset + 3, -1);
-        } else {
-            mc.fontRenderer.drawStringWithShadow(set.getName() + ColourUtil.gray + " " + set.getValueInt(), parent.parent.getX() + 4, parent.parent.getY() + this.offset + 3, -1);
-        }
+        FontUtil.drawText(set.getName() + ColourUtil.gray + " " + set.getValueInt(), parent.parent.getX() + 4, parent.parent.getY() + this.offset + 3, -1);
     }
 
     @Override

@@ -8,7 +8,7 @@ public class Watermark extends HudComponent {
     public Watermark() {
         super("Watermark");
 
-        setWidth(StringUtil.getStringWidth(Past.nameversion));
+        setWidth(mc.fontRenderer.getStringWidth(Past.nameversion));
         setHeight(mc.fontRenderer.FONT_HEIGHT);
     }
 

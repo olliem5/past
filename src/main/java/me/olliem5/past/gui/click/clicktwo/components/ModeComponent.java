@@ -5,6 +5,7 @@ import me.olliem5.past.gui.click.Component;
 import me.olliem5.past.settings.Setting;
 import me.olliem5.past.util.colour.ColourUtil;
 import me.olliem5.past.util.module.GUIColourUtil;
+import me.olliem5.past.util.text.FontUtil;
 import net.minecraft.client.gui.Gui;
 
 public class ModeComponent extends Component {
@@ -40,11 +41,7 @@ public class ModeComponent extends Component {
         Gui.drawRect(parent.parent.getX(), parent.parent.getY() + offset, parent.parent.getX() + 1, parent.parent.getY() + offset + 15, Past.settingsManager.getSettingID("ClickGUIRainbow").getValBoolean() ? ColourUtil.getMultiColour().getRGB() : GUIColourUtil.getGUIColour());
         Gui.drawRect(parent.parent.getX() + parent.parent.getWidth(), parent.parent.getY() + offset, parent.parent.getX() + parent.parent.getWidth() - 1, parent.parent.getY() + offset + 15, Past.settingsManager.getSettingID("ClickGUIRainbow").getValBoolean() ? ColourUtil.getMultiColour().getRGB() : GUIColourUtil.getGUIColour());
 
-        if (Past.settingsManager.getSettingID("ClickGUICustomFont").getValBoolean()) {
-            Past.customFontRenderer.drawStringWithShadow(this.op.getName() + " " + ColourUtil.gray + this.op.getValueString().toUpperCase(), parent.parent.getX() + 4, parent.parent.getY() + this.offset + 4, -1);
-        } else {
-            mc.fontRenderer.drawStringWithShadow(this.op.getName() + " " + ColourUtil.gray + this.op.getValueString().toUpperCase(), parent.parent.getX() + 4, parent.parent.getY() + this.offset + 4, -1);
-        }
+        FontUtil.drawText(this.op.getName() + " " + ColourUtil.gray + this.op.getValueString().toUpperCase(), parent.parent.getX() + 4, parent.parent.getY() + this.offset + 4, -1);
     }
 
     @Override

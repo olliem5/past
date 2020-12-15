@@ -13,14 +13,12 @@ public class OldClickGUI extends Module {
     Setting rgb;
     Setting background;
     Setting descriptions;
-    Setting customfont;
 
     @Override
     public void setup() {
         Past.settingsManager.registerSetting(rgb = new Setting("RainbowGUI", "OldClickGUIRainbow", true, this));
         Past.settingsManager.registerSetting(background = new Setting("Background", "OldClickGUIBackground", true, this));
         Past.settingsManager.registerSetting(descriptions = new Setting("Descriptions", "OldClickGUIDescriptions", true, this));
-        Past.settingsManager.registerSetting(customfont = new Setting("Custom Font", "OldClickGUICustomFont", true, this));
     }
 
     public void onEnable() {

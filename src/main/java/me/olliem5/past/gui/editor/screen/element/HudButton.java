@@ -7,6 +7,7 @@ import me.olliem5.past.gui.editor.screen.HudPanel;
 import me.olliem5.past.settings.Setting;
 import me.olliem5.past.util.colour.ColourUtil;
 import me.olliem5.past.util.module.GUIColourUtil;
+import me.olliem5.past.util.text.FontUtil;
 import net.minecraft.client.gui.Gui;
 
 import java.util.ArrayList;
@@ -65,25 +66,13 @@ public class HudButton extends Element {
         }
 
         if (Past.settingsManager.getSettingID("HudEditorHoverChange").getValBoolean() && hovered == true) {
-            if (Past.settingsManager.getSettingID("HudEditorCustomFont").getValBoolean()) {
-                Past.customFontRenderer.drawStringWithShadow(this.comp.getName(), parent.getX() + 6, parent.getY() + this.offset + 4, -1);
-            } else {
-                mc.fontRenderer.drawStringWithShadow(this.comp.getName(), parent.getX() + 6, parent.getY() + this.offset + 4, -1);
-            }
+            FontUtil.drawText(this.comp.getName(), parent.getX() + 6, parent.getY() + this.offset + 4, -1);
         } else {
-            if (Past.settingsManager.getSettingID("HudEditorCustomFont").getValBoolean()) {
-                Past.customFontRenderer.drawStringWithShadow(this.comp.getName(), parent.getX() + 4, parent.getY() + this.offset + 4, -1);
-            } else {
-                mc.fontRenderer.drawStringWithShadow(this.comp.getName(), parent.getX() + 4, parent.getY() + this.offset + 4, -1);
-            }
+            FontUtil.drawText(this.comp.getName(), parent.getX() + 4, parent.getY() + this.offset + 4, -1);
         }
 
         if (this.subelements.size() > 0) {
-            if (Past.settingsManager.getSettingID("HudEditorCustomFont").getValBoolean()) {
-                Past.customFontRenderer.drawStringWithShadow("...", parent.getX() + parent.getWidth() - 10, (parent.getY() + offset + 4), -1);
-            } else {
-                mc.fontRenderer.drawStringWithShadow("...", parent.getX() + parent.getWidth() - 10, (parent.getY() + offset + 4), -1);
-            }
+            FontUtil.drawText("...", parent.getX() + parent.getWidth() - 10, (parent.getY() + offset + 4), -1);
         }
 
         if (this.open && !this.subelements.isEmpty()) {

@@ -6,6 +6,7 @@ import me.olliem5.past.gui.click.clickone.Panel;
 import me.olliem5.past.module.Module;
 import me.olliem5.past.settings.Setting;
 import me.olliem5.past.util.colour.ColourUtil;
+import me.olliem5.past.util.text.FontUtil;
 import net.minecraft.client.gui.Gui;
 
 import java.util.ArrayList;
@@ -62,25 +63,13 @@ public class ModuleButton extends Component {
             Gui.drawRect(parent.getX(), this.parent.getY() + this.offset, parent.getX() + parent.getWidth(), this.parent.getY() + 12 + this.offset, 0xFF111111);
         }
 
-        if (Past.settingsManager.getSettingID("OldClickGUICustomFont").getValBoolean()) {
-            Past.customFontRenderer.drawStringWithShadow(this.mod.getName(), parent.getX() + 2, (parent.getY() + offset + 2), -1);
-        } else {
-            mc.fontRenderer.drawStringWithShadow(this.mod.getName(), parent.getX() + 2, (parent.getY() + offset + 2), -1);
-        }
+        FontUtil.drawText(this.mod.getName(), parent.getX() + 2, (parent.getY() + offset + 2), -1);
 
         if (this.subcomponents.size() > 1) {
             if (!this.isOpen()) {
-                if (Past.settingsManager.getSettingID("OldClickGUICustomFont").getValBoolean()) {
-                    Past.customFontRenderer.drawStringWithShadow("+", parent.getX() + parent.getWidth() - 10, (parent.getY() + offset + 2), -1);
-                } else {
-                    mc.fontRenderer.drawStringWithShadow("+", parent.getX() + parent.getWidth() - 10, (parent.getY() + offset + 2), -1);
-                }
+                FontUtil.drawText("+", parent.getX() + parent.getWidth() - 10, (parent.getY() + offset + 2), -1);
             } else if (this.isOpen()) {
-                if (Past.settingsManager.getSettingID("OldClickGUICustomFont").getValBoolean()) {
-                    Past.customFontRenderer.drawStringWithShadow("-", parent.getX() + parent.getWidth() - 10, (parent.getY() + offset + 2), -1);
-                } else {
-                    mc.fontRenderer.drawStringWithShadow("-", parent.getX() + parent.getWidth() - 10, (parent.getY() + offset + 2), -1);
-                }
+                FontUtil.drawText("-", parent.getX() + parent.getWidth() - 10, (parent.getY() + offset + 2), -1);
             }
         }
 
@@ -92,24 +81,28 @@ public class ModuleButton extends Component {
 
         if (Past.settingsManager.getSettingID("OldClickGUIDescriptions").getValBoolean() && hovered == true) {
             if (Past.settingsManager.getSettingID("OldClickGUIRainbow").getValBoolean()) {
-                if (Past.settingsManager.getSettingID("OldClickGUICustomFont").getValBoolean()) {
-                    Gui.drawRect(mousexx - 2, mouseyy - 2, mousexx + Past.customFontRenderer.getStringWidth(mod.getDescription()) + 2, mouseyy + Past.customFontRenderer.getHeight() + 2, ColourUtil.getMultiColour().getRGB());
+                if (Past.settingsManager.getSettingID("FontFont").getValueString() == "Lato") {
+                    Gui.drawRect(mousexx - 2, mouseyy - 2, mousexx + Past.latoFont.getStringWidth(mod.getDescription()) + 2, mouseyy + FontUtil.getFontHeight() + 2, ColourUtil.getMultiColour().getRGB());
+                } else if (Past.settingsManager.getSettingID("FontFont").getValueString() == "Verdana") {
+                    Gui.drawRect(mousexx - 2, mouseyy - 2, mousexx + Past.verdanaFont.getStringWidth(mod.getDescription()) + 2, mouseyy + FontUtil.getFontHeight() + 2, ColourUtil.getMultiColour().getRGB());
+                } else if (Past.settingsManager.getSettingID("FontFont").getValueString() == "Arial") {
+                    Gui.drawRect(mousexx - 2, mouseyy - 2, mousexx + Past.arialFont.getStringWidth(mod.getDescription()) + 2, mouseyy + FontUtil.getFontHeight() + 2, ColourUtil.getMultiColour().getRGB());
                 } else {
-                    Gui.drawRect(mousexx - 2, mouseyy - 2, mousexx + mc.fontRenderer.getStringWidth(mod.getDescription()) + 2, mouseyy + mc.fontRenderer.FONT_HEIGHT + 2, ColourUtil.getMultiColour().getRGB());
+                    Gui.drawRect(mousexx - 2, mouseyy - 2, mousexx + mc.fontRenderer.getStringWidth(mod.getDescription()) + 2, mouseyy + FontUtil.getFontHeight() + 2, ColourUtil.getMultiColour().getRGB());
                 }
             } else {
-                if (Past.settingsManager.getSettingID("OldClickGUICustomFont").getValBoolean()) {
-                    Gui.drawRect(mousexx - 2, mouseyy - 2, mousexx + Past.customFontRenderer.getStringWidth(mod.getDescription()) + 2, mouseyy + Past.customFontRenderer.getHeight() + 2, 0xFF222222);
+                if (Past.settingsManager.getSettingID("FontFont").getValueString() == "Lato") {
+                    Gui.drawRect(mousexx - 2, mouseyy - 2, mousexx + Past.latoFont.getStringWidth(mod.getDescription()) + 2, mouseyy + FontUtil.getFontHeight() + 2, 0xFF222222);
+                } else if (Past.settingsManager.getSettingID("FontFont").getValueString() == "Verdana") {
+                    Gui.drawRect(mousexx - 2, mouseyy - 2, mousexx + Past.verdanaFont.getStringWidth(mod.getDescription()) + 2, mouseyy + FontUtil.getFontHeight() + 2, 0xFF222222);
+                } else if (Past.settingsManager.getSettingID("FontFont").getValueString() == "Arial") {
+                    Gui.drawRect(mousexx - 2, mouseyy - 2, mousexx + Past.arialFont.getStringWidth(mod.getDescription()) + 2, mouseyy + FontUtil.getFontHeight() + 2, 0xFF222222);
                 } else {
-                    Gui.drawRect(mousexx - 2, mouseyy - 2, mousexx + mc.fontRenderer.getStringWidth(mod.getDescription()) + 2, mouseyy + mc.fontRenderer.FONT_HEIGHT + 2, 0xFF222222);
+                    Gui.drawRect(mousexx - 2, mouseyy - 2, mousexx + mc.fontRenderer.getStringWidth(mod.getDescription()) + 2, mouseyy + FontUtil.getFontHeight() + 2, 0xFF222222);
                 }
             }
 
-            if (Past.settingsManager.getSettingID("OldClickGUICustomFont").getValBoolean()) {
-                Past.customFontRenderer.drawStringWithShadow(mod.getDescription(), mousexx, mouseyy, -1);
-            } else {
-                mc.fontRenderer.drawStringWithShadow(mod.getDescription(), mousexx, mouseyy, -1);
-            }
+            FontUtil.drawText(mod.getDescription(), mousexx, mouseyy, -1);
         }
     }
 

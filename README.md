@@ -5,6 +5,11 @@
 * It features helpful mods for anarchy servers, like 2b2t/9b9t ect.
 * Don't expect the best coding practices being used here, I'll do my best to improve!
 
+#### TODO before public release
+* Function for string width in FontUtil.java
+* Code cleanup/unmonke
+* Rewrite settings!
+
 #### Credits
 * While creating this, I looked at many other open-source projects to use as reference code, or to use a snippet of code from it, such as an util.
 * I made sure to credit all the original code authors in the specified class in a comment, but just for good measure, I'll put them here as well.

@@ -7,6 +7,7 @@ import me.olliem5.past.module.Module;
 import me.olliem5.past.settings.Setting;
 import me.olliem5.past.util.colour.ColourUtil;
 import me.olliem5.past.util.module.GUIColourUtil;
+import me.olliem5.past.util.text.FontUtil;
 import net.minecraft.client.gui.Gui;
 import net.minecraft.client.gui.ScaledResolution;
 
@@ -76,33 +77,17 @@ public class ModuleButton extends Component {
         }
 
         if (Past.settingsManager.getSettingID("ClickGUIHoverChange").getValBoolean() && hovered == true) {
-            if (Past.settingsManager.getSettingID("ClickGUICustomFont").getValBoolean()) {
-                Past.customFontRenderer.drawStringWithShadow(this.mod.getName(), parent.getX() + 6, parent.getY() + this.offset + 4, -1);
-            } else {
-                mc.fontRenderer.drawStringWithShadow(this.mod.getName(), parent.getX() + 6, parent.getY() + this.offset + 4, -1);
-            }
+            FontUtil.drawText(this.mod.getName(), parent.getX() + 6, parent.getY() + this.offset + 4, -1);
         } else {
-            if (Past.settingsManager.getSettingID("ClickGUICustomFont").getValBoolean()) {
-                Past.customFontRenderer.drawStringWithShadow(this.mod.getName(), parent.getX() + 4, parent.getY() + this.offset + 4, -1);
-            } else {
-                mc.fontRenderer.drawStringWithShadow(this.mod.getName(), parent.getX() + 4, parent.getY() + this.offset + 4, -1);
-            }
+            FontUtil.drawText(this.mod.getName(), parent.getX() + 4, parent.getY() + this.offset + 4, -1);
         }
 
         if (this.subcomponents.size() > 1) {
-            if (Past.settingsManager.getSettingID("ClickGUICustomFont").getValBoolean()) {
-                Past.customFontRenderer.drawStringWithShadow("...", parent.getX() + parent.getWidth() - 10, (parent.getY() + offset + 4), -1);
-            } else {
-                mc.fontRenderer.drawStringWithShadow("...", parent.getX() + parent.getWidth() - 10, (parent.getY() + offset + 4), -1);
-            }
+            FontUtil.drawText("...", parent.getX() + parent.getWidth() - 10, (parent.getY() + offset + 4), -1);
         }
 
         if (Past.settingsManager.getSettingID("ClickGUIDescriptions").getValBoolean() && hovered == true) {
-            if (Past.settingsManager.getSettingID("ClickGUICustomFont").getValBoolean()) {
-                Past.customFontRenderer.drawStringWithShadow(mod.getDescription(), 2, (new ScaledResolution(mc).getScaledHeight() - Past.customFontRenderer.getHeight() - 2), -1);
-            } else {
-                mc.fontRenderer.drawStringWithShadow(mod.getDescription(), 2, (new ScaledResolution(mc).getScaledHeight() - mc.fontRenderer.FONT_HEIGHT - 2), -1);
-            }
+            FontUtil.drawText(mod.getDescription(), 2, (new ScaledResolution(mc).getScaledHeight() - FontUtil.getFontHeight() - 2), -1);
         }
 
         if (this.open && !this.subcomponents.isEmpty()) {

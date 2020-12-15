@@ -1,8 +1,5 @@
 package me.olliem5.past.util.text;
 
-import me.olliem5.past.Past;
-import net.minecraft.client.Minecraft;
-
 import java.util.regex.Pattern;
 
 public class StringUtil {
@@ -16,13 +13,9 @@ public class StringUtil {
         return string.substring(0, 1).toUpperCase() + string.substring(1);
     }
 
-    public static int getStringWidth(String text) {
-        return Minecraft.getMinecraft().fontRenderer.getStringWidth(stripColors(text));
-    }
-
-    public static int getStringWidthCustomFont(String text) {
-        return Past.customFontRenderer.getStringWidth(stripColors(text));
-    }
+//    public static int getStringWidth(String text) {
+//        return FontUtil.getStringWidth(stripColors(text));
+//    }
 
     public static String stripColors(String string) {
         return COLOR_CODE_PATTERN.matcher(simpleTranslateColors(string)).replaceAll("");

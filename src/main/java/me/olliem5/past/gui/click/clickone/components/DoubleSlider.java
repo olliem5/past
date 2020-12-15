@@ -4,6 +4,7 @@ import me.olliem5.past.Past;
 import me.olliem5.past.gui.click.Component;
 import me.olliem5.past.settings.Setting;
 import me.olliem5.past.util.colour.ColourUtil;
+import me.olliem5.past.util.text.FontUtil;
 import net.minecraft.client.gui.Gui;
 
 import java.math.BigDecimal;
@@ -36,11 +37,7 @@ public class DoubleSlider extends Component {
             Gui.drawRect(parent.parent.getX() + 80, this.parent.parent.getY() - 12 + this.offset, parent.parent.getX() + parent.parent.getWidth() + (int) this.sliderWidth, this.parent.parent.getY() + this.offset, 0xFF222222);
         }
 
-        if (Past.settingsManager.getSettingID("OldClickGUICustomFont").getValBoolean()) {
-            Past.customFontRenderer.drawStringWithShadow(this.set.getName() + " " + ColourUtil.gray + this.set.getValueDouble(), parent.parent.getX() + 82, (parent.parent.getY() + this.offset - 10), -1);
-        } else {
-            mc.fontRenderer.drawStringWithShadow(this.set.getName() + " " + ColourUtil.gray + this.set.getValueDouble(), parent.parent.getX() + 82, (parent.parent.getY() + this.offset - 10), -1);
-        }
+        FontUtil.drawText(this.set.getName() + " " + ColourUtil.gray + this.set.getValueDouble(), parent.parent.getX() + 82, (parent.parent.getY() + this.offset - 10), -1);
     }
 
     @Override

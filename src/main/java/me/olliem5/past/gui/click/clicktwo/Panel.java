@@ -7,6 +7,7 @@ import me.olliem5.past.module.Category;
 import me.olliem5.past.module.Module;
 import me.olliem5.past.util.colour.ColourUtil;
 import me.olliem5.past.util.module.GUIColourUtil;
+import me.olliem5.past.util.text.FontUtil;
 import me.olliem5.past.util.text.StringUtil;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Gui;
@@ -59,10 +60,14 @@ public class Panel {
         Gui.drawRect(x - 1, y - 1, x + width + 1, y + height + 1, Past.settingsManager.getSettingID("ClickGUIRainbow").getValBoolean() ? ColourUtil.getMultiColour().getRGB() : GUIColourUtil.getGUIColour());
         Gui.drawRect(x, y, x + width, y + height, 0x75101010);
 
-        if (Past.settingsManager.getSettingID("ClickGUICustomFont").getValBoolean()) {
-            Past.customFontRenderer.drawStringWithShadow(title, x + 2 + width / 2 - StringUtil.getStringWidthCustomFont(title) / 2, y + height / 2 - Past.customFontRenderer.getHeight() / 2, -1);
+        if (Past.settingsManager.getSettingID("FontFont").getValueString() == "Lato") {
+            FontUtil.drawText(title, x + 2 + width / 2 - Past.latoFont.getStringWidth(title) / 2, y + height / 2 - FontUtil.getFontHeight() / 2, -1);
+        } else if (Past.settingsManager.getSettingID("FontFont").getValueString() == "Verdana") {
+            FontUtil.drawText(title, x + 2 + width / 2 - Past.verdanaFont.getStringWidth(title) / 2, y + height / 2 - FontUtil.getFontHeight() / 2, -1);
+        } else if (Past.settingsManager.getSettingID("FontFont").getValueString() == "Arial") {
+            FontUtil.drawText(title, x + 2 + width / 2 - Past.arialFont.getStringWidth(title) / 2, y + height / 2 - FontUtil.getFontHeight() / 2, -1);
         } else {
-            mc.fontRenderer.drawStringWithShadow(title, x + 2 + width / 2 - StringUtil.getStringWidth(title) / 2, y + height / 2 - mc.fontRenderer.FONT_HEIGHT / 2, -1);
+            FontUtil.drawText(title, x + 2 + width / 2 - mc.fontRenderer.getStringWidth(title) / 2, y + height / 2 - FontUtil.getFontHeight() / 2, -1);
         }
 
         if (this.open && !this.components.isEmpty()) {

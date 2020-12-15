@@ -32,9 +32,12 @@ public class Past {
     public static final String name = "Past Utility Mod";
     public static final String modid = "past";
     public static final String version = "1.5";
-    public static final String github = "https://github.com/olliem5/past";
     public static final String appid = "754509326902886411";
     public static String nameversion = name + " " + version;
+
+    public static CustomFontRenderer latoFont;
+    public static CustomFontRenderer verdanaFont;
+    public static CustomFontRenderer arialFont;
 
     public static EventBus EVENT_BUS;
     public static ForgeEvents forgeEvents;
@@ -42,7 +45,6 @@ public class Past {
     public static ModuleManager moduleManager;
     public static CommandManager commandManager;
     public static FriendsManager friendsManager;
-    public static CustomFontRenderer customFontRenderer;
     public static CapesManager capesManager;
     public static HudComponentManager hudComponentManager;
     public static ClickGUIOne clickGUIOne;
@@ -77,11 +79,12 @@ public class Past {
         friendsManager = new FriendsManager();
         System.out.println("[" + nameversion + "]" + " " + "Friends Initialized!");
 
-        customFontRenderer = new CustomFontRenderer(new Font("Arial", 0, 18), true, false);
-        System.out.println("[" + nameversion + "]" + " " + "Custom Font Renderer Initialized! (Author 086)");
-
         capesManager = new CapesManager();
         System.out.println("[" + nameversion + "]" + " " + "Capes Initialized!");
+
+        latoFont = new CustomFontRenderer(new Font("Lato", 0, 18), true, false);latoFont = new CustomFontRenderer(new Font("Lato", 0, 18), true, false);
+        verdanaFont = new CustomFontRenderer(new Font("Verdana", 0, 18), true, false);
+        arialFont = new CustomFontRenderer(new Font("Arial", 0, 18), true, false);
 
         hudComponentManager = new HudComponentManager();
         System.out.println("[" + nameversion + "]" + " " + "HUD Components Initialized!");

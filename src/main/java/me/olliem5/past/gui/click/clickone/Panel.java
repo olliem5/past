@@ -6,6 +6,7 @@ import me.olliem5.past.gui.click.clickone.components.ModuleButton;
 import me.olliem5.past.module.Category;
 import me.olliem5.past.module.Module;
 import me.olliem5.past.util.colour.ColourUtil;
+import me.olliem5.past.util.text.FontUtil;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Gui;
 
@@ -58,11 +59,7 @@ public class Panel {
             Gui.drawRect(x, y, x + width, y + height, 0xFF222222);
         }
 
-        if (Past.settingsManager.getSettingID("OldClickGUICustomFont").getValBoolean()) {
-            Past.customFontRenderer.drawStringWithShadow(title, x + 2, y + height / 2 - mc.fontRenderer.FONT_HEIGHT / 2, -1);
-        } else {
-            mc.fontRenderer.drawStringWithShadow(title, x + 2, y + height / 2 - mc.fontRenderer.FONT_HEIGHT / 2, -1);
-        }
+        FontUtil.drawText(title, x + 2, y + height / 2 - mc.fontRenderer.FONT_HEIGHT / 2, -1);
 
         //Rendering components when the GUI is opened.
         if (this.open && !this.components.isEmpty()) {

@@ -13,7 +13,6 @@ public class ClickGUI extends Module {
 
     Setting scrollspeed;
     Setting rainbow;
-    Setting customfont;
     Setting descriptions;
     Setting hoverchange;
     Setting background;
@@ -27,7 +26,6 @@ public class ClickGUI extends Module {
     public void setup() {
         Past.settingsManager.registerSetting(scrollspeed = new Setting("Scroll Speed", "ClickGUIScrollSpeed", 0.0, 10.0, 20.0, this));
         Past.settingsManager.registerSetting(rainbow = new Setting("Rainbow", "ClickGUIRainbow", true, this));
-        Past.settingsManager.registerSetting(customfont = new Setting("Custom Font","ClickGUICustomFont", true, this));
         Past.settingsManager.registerSetting(descriptions = new Setting("Descriptions", "ClickGUIDescriptions", true, this));
         Past.settingsManager.registerSetting(hoverchange = new Setting("Hover Change", "ClickGUIHoverChange", true, this));
         Past.settingsManager.registerSetting(background = new Setting("Background", "ClickGUIBackground", true, this));

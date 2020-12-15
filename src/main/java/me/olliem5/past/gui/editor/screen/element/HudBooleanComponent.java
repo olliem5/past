@@ -5,6 +5,7 @@ import me.olliem5.past.gui.editor.screen.Element;
 import me.olliem5.past.settings.Setting;
 import me.olliem5.past.util.colour.ColourUtil;
 import me.olliem5.past.util.module.GUIColourUtil;
+import me.olliem5.past.util.text.FontUtil;
 import net.minecraft.client.gui.Gui;
 
 public class HudBooleanComponent extends Element {
@@ -43,11 +44,7 @@ public class HudBooleanComponent extends Element {
         Gui.drawRect(parent.parent.getX(), parent.parent.getY() + offset, parent.parent.getX() + 1, parent.parent.getY() + offset + 15, Past.settingsManager.getSettingID("HudEditorRainbow").getValBoolean() ? ColourUtil.getMultiColour().getRGB() : GUIColourUtil.getGUIColour());
         Gui.drawRect(parent.parent.getX() + parent.parent.getWidth(), parent.parent.getY() + offset, parent.parent.getX() + parent.parent.getWidth() - 1, parent.parent.getY() + offset + 15, Past.settingsManager.getSettingID("HudEditorRainbow").getValBoolean() ? ColourUtil.getMultiColour().getRGB() : GUIColourUtil.getGUIColour());
 
-        if (Past.settingsManager.getSettingID("HudEditorCustomFont").getValBoolean()) {
-            Past.customFontRenderer.drawStringWithShadow(op.getName(), parent.parent.getX() + 4, parent.parent.getY() + this.offset + 4, -1);
-        } else {
-            mc.fontRenderer.drawStringWithShadow(op.getName(), parent.parent.getX() + 4, parent.parent.getY() + this.offset + 4, -1);
-        }
+        FontUtil.drawText(op.getName(), parent.parent.getX() + 4, parent.parent.getY() + this.offset + 4, -1);
     }
 
     @Override

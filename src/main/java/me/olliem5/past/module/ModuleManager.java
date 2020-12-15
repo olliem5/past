@@ -39,6 +39,7 @@ public class ModuleManager {
         modules.add(new Render());
         modules.add(new Capes());
         modules.add(new ClickGUI());
+        modules.add(new Font());
 
         /* Exploit */
         modules.add(new Blink());

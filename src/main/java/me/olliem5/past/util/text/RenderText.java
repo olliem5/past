@@ -33,21 +33,22 @@ public class RenderText {
         GlStateManager.scale(scaleDistance, scaleDistance, scaleDistance);
     }
 
-    public static void drawTextMCFont(final BlockPos pos, final String text) {
+    public static void drawText(final BlockPos pos, final String text) {
         GlStateManager.pushMatrix();
         glBillboardDistanceScaled(pos.getX() + 0.5f, pos.getY() + 0.5f, pos.getZ() + 0.5f, mc.player, 1.0f);
         GlStateManager.disableDepth();
-        GlStateManager.translate(-(mc.fontRenderer.getStringWidth(text) / 2.0), 0.0, 0.0);
-        mc.fontRenderer.drawStringWithShadow(text, 0.0f, 0.0f, -1);
-        GlStateManager.popMatrix();
-    }
 
-    public static void drawTextCustomFont(final BlockPos pos, final String text) {
-        GlStateManager.pushMatrix();
-        glBillboardDistanceScaled(pos.getX() + 0.5f, pos.getY() + 0.5f, pos.getZ() + 0.5f, mc.player, 1.0f);
-        GlStateManager.disableDepth();
-        GlStateManager.translate(-(Past.customFontRenderer.getStringWidth(text) / 2.0), 0.0, 0.0);
-        Past.customFontRenderer.drawStringWithShadow(text, 0.0f, 0.0f, -1);
+        if (Past.settingsManager.getSettingID("FontFont").getValueString() == "Lato") {
+            GlStateManager.translate(-(Past.latoFont.getStringWidth(text) / 2.0), 0.0, 0.0);
+        } else if (Past.settingsManager.getSettingID("FontFont").getValueString() == "Verdana") {
+            GlStateManager.translate(-(Past.verdanaFont.getStringWidth(text) / 2.0), 0.0, 0.0);
+        } else if (Past.settingsManager.getSettingID("FontFont").getValueString() == "Arial") {
+            GlStateManager.translate(-(Past.arialFont.getStringWidth(text) / 2.0), 0.0, 0.0);
+        } else {
+            GlStateManager.translate(-(mc.fontRenderer.getStringWidth(text) / 2.0), 0.0, 0.0);
+        }
+
+        FontUtil.drawText(text, 0.0f, 0.0f, -1);
         GlStateManager.popMatrix();
     }
 }

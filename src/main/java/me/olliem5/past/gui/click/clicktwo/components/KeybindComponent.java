@@ -4,6 +4,7 @@ import me.olliem5.past.Past;
 import me.olliem5.past.gui.click.Component;
 import me.olliem5.past.util.colour.ColourUtil;
 import me.olliem5.past.util.module.GUIColourUtil;
+import me.olliem5.past.util.text.FontUtil;
 import net.minecraft.client.gui.Gui;
 import org.lwjgl.input.Keyboard;
 
@@ -44,17 +45,9 @@ public class KeybindComponent extends Component {
         if (isBinding) {
             tick += 0.5f;
 
-            if (Past.settingsManager.getSettingID("ClickGUICustomFont").getValBoolean()) {
-                Past.customFontRenderer.drawStringWithShadow("Listening" + ColourUtil.gray + " " + points, parent.parent.getX() + 4, parent.parent.getY() + this.offset + 4, -1);
-            } else {
-                mc.fontRenderer.drawStringWithShadow("Listening" + ColourUtil.gray + " " + points, parent.parent.getX() + 4, parent.parent.getY() + this.offset + 4, -1);
-            }
+            FontUtil.drawText("Listening" + ColourUtil.gray + " " + points, parent.parent.getX() + 4, parent.parent.getY() + this.offset + 4, -1);
         } else {
-            if (Past.settingsManager.getSettingID("ClickGUICustomFont").getValBoolean()) {
-                Past.customFontRenderer.drawStringWithShadow("Bind" + ColourUtil.gray + " " + Keyboard.getKeyName(this.parent.mod.getKey()), parent.parent.getX() + 4, parent.parent.getY() + this.offset + 4, -1);
-            } else {
-                mc.fontRenderer.drawStringWithShadow("Bind" + ColourUtil.gray + " " + Keyboard.getKeyName(this.parent.mod.getKey()), parent.parent.getX() + 4, parent.parent.getY() + this.offset + 4, -1);
-            }
+            FontUtil.drawText("Bind" + ColourUtil.gray + " " + Keyboard.getKeyName(this.parent.mod.getKey()), parent.parent.getX() + 4, parent.parent.getY() + this.offset + 4, -1);
         }
 
         if (isBinding) {

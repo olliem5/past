@@ -77,7 +77,6 @@ public class AutoCrystal extends Module {
     Setting maxselfdamage;
     Setting faceplace;
     Setting infomessages;
-    Setting customfont;
     Setting renderdamage;
     Setting renderplace;
     Setting rendermode;
@@ -135,7 +134,6 @@ public class AutoCrystal extends Module {
         Past.settingsManager.registerSetting(maxselfdamage = new Setting("Max Self Dmg", "AutoCrystalMaxSelfDamage", 0.0, 8.0, 36.0, this));
         Past.settingsManager.registerSetting(faceplace = new Setting("Faceplace HP", "AutoCrystalFaceplace", 0.0, 8.0, 36.0, this));
         Past.settingsManager.registerSetting(infomessages = new Setting("Info Messages", "AutoCrystalInfoMessages", false, this));
-        Past.settingsManager.registerSetting(customfont = new Setting("Custom Font", "AutoCrystalCustomFont", true, this));
         Past.settingsManager.registerSetting(renderdamage = new Setting("Render Damage", "AutoCrystalRenderDamage", true, this));
         Past.settingsManager.registerSetting(renderplace = new Setting("Render Place", "AutoCrystalRenderPlace", true, this));
         Past.settingsManager.registerSetting(rendermode = new Setting("Mode", "AutoCrystalRenderMode", this, rendermodes, "FullFrame"));
@@ -378,11 +376,7 @@ public class AutoCrystal extends Module {
     private void renderACDamage() {
         if (renderBlock != null && renderEnt != null) {
             String renderDamageText3dp = String.format ("%.3f", renderDamageText);
-            if (customfont.getValBoolean()) {
-                RenderText.drawTextCustomFont(renderBlock, renderDamageText3dp + "");
-            } else {
-                RenderText.drawTextMCFont(renderBlock, renderDamageText3dp + "");
-            }
+            RenderText.drawText(renderBlock, renderDamageText3dp + "");
         }
     }
 
