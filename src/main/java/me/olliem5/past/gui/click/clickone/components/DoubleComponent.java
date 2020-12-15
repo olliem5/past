@@ -10,7 +10,7 @@ import net.minecraft.client.gui.Gui;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 
-public class IntegerSlider extends Component {
+public class DoubleComponent extends Component {
     private Setting set;
     private ModuleButton parent;
     private int offset;
@@ -19,7 +19,7 @@ public class IntegerSlider extends Component {
     private boolean dragging;
     private double sliderWidth;
 
-    public IntegerSlider(Setting value, ModuleButton button, int offset) {
+    public DoubleComponent(Setting value, ModuleButton button, int offset) {
         this.dragging = false;
         this.set = value;
         this.parent = button;
@@ -30,14 +30,14 @@ public class IntegerSlider extends Component {
 
     @Override
     public void renderComponent() {
-        Gui.drawRect(parent.parent.getX() + 80, this.parent.parent.getY() - 12 + this.offset, parent.parent.getX() + parent.parent.getWidth() + parent.parent.getWidth(), this.parent.parent.getY() + this.offset, 0xFF111111);
+        Gui.drawRect(parent.parent.getX() + 80, parent.parent.getY() - 12 + offset, parent.parent.getX() + parent.parent.getWidth() + parent.parent.getWidth(), parent.parent.getY() + offset, 0xFF111111);
         if (Past.settingsManager.getSettingID("OldClickGUIRainbow").getValBoolean()) {
-            Gui.drawRect(parent.parent.getX() + 80, this.parent.parent.getY() - 12 + this.offset, parent.parent.getX() + parent.parent.getWidth() + (int) this.sliderWidth, this.parent.parent.getY() + this.offset, ColourUtil.getMultiColour().getRGB());
+            Gui.drawRect(parent.parent.getX() + 80, parent.parent.getY() - 12 + offset, parent.parent.getX() + parent.parent.getWidth() + (int) sliderWidth, parent.parent.getY() + offset, ColourUtil.getMultiColour().getRGB());
         } else {
-            Gui.drawRect(parent.parent.getX() + 80, this.parent.parent.getY() - 12 + this.offset, parent.parent.getX() + parent.parent.getWidth() + (int) this.sliderWidth, this.parent.parent.getY() + this.offset, 0xFF222222);
+            Gui.drawRect(parent.parent.getX() + 80, parent.parent.getY() - 12 + offset, parent.parent.getX() + parent.parent.getWidth() + (int) sliderWidth, parent.parent.getY() + offset, 0xFF222222);
         }
 
-        FontUtil.drawText(this.set.getName() + " " + ColourUtil.gray + this.set.getValueInt(), parent.parent.getX() + 82, (parent.parent.getY() + this.offset - 10), -1);
+        FontUtil.drawText(this.set.getName() + " " + ColourUtil.gray + this.set.getValueDouble(), parent.parent.getX() + 82, (parent.parent.getY() + offset - 10), -1);
     }
 
     @Override
@@ -45,15 +45,15 @@ public class IntegerSlider extends Component {
         this.y = parent.parent.getY() - 12 + this.offset;
         this.x = parent.parent.getX() + 80;
         double diff = Math.min(80, Math.max(0, mouseX - this.x));
-        int min = this.set.getMin();
-        int max = this.set.getMax();
-        this.sliderWidth = 80 * (this.set.getValueInt() - min) / (max - min);
+        double min = this.set.getDmin();
+        double max = this.set.getDmax();
+        this.sliderWidth = 80 * (this.set.getValueDouble() - min) / (max - min);
         if (this.dragging) {
             if (diff == 0) {
-                this.set.setValueInt(this.set.getMin());
+                this.set.setValueDouble(this.set.getDmin());
             } else {
-                int newValue = (int) roundToPlace(diff / 80 * (max - min) + min, 2);
-                this.set.setValueInt(newValue);
+                double newValue = roundToPlace(diff / 80 * (max - min) + min, 2);
+                this.set.setValueDouble(newValue);
             }
         }
     }
@@ -62,6 +62,7 @@ public class IntegerSlider extends Component {
         if (places < 0) {
             throw new IllegalArgumentException();
         }
+
         BigDecimal bd = new BigDecimal(value);
         bd = bd.setScale(places, RoundingMode.HALF_UP);
         return bd.doubleValue();

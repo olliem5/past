@@ -2,7 +2,6 @@ package me.olliem5.past.gui.editor.screen;
 
 import me.olliem5.past.Past;
 import me.olliem5.past.gui.editor.component.HudComponent;
-import me.olliem5.past.util.colour.ColourUtil;
 import net.minecraft.client.gui.Gui;
 import net.minecraft.client.gui.GuiScreen;
 

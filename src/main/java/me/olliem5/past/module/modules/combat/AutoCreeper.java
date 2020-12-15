@@ -5,7 +5,6 @@ import me.olliem5.past.module.Category;
 import me.olliem5.past.module.Module;
 import me.olliem5.past.settings.Setting;
 import me.olliem5.past.util.colour.ColourUtil;
-import me.olliem5.past.util.module.CooldownUtil;
 import me.olliem5.past.util.render.RenderUtil;
 import me.zero.alpine.listener.EventHandler;
 import me.zero.alpine.listener.Listener;

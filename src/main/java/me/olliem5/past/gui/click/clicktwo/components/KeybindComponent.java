@@ -33,8 +33,8 @@ public class KeybindComponent extends Component {
 
     @Override
     public void renderComponent() {
-        Gui.drawRect(parent.parent.getX() - 1, this.parent.parent.getY() + this.offset, parent.parent.getX(), this.parent.parent.getY() + 15 + this.offset, Past.settingsManager.getSettingID("ClickGUIRainbow").getValBoolean() ? ColourUtil.getMultiColour().getRGB() : GUIColourUtil.getGUIColour());
-        Gui.drawRect(parent.parent.getX() + parent.parent.getWidth(), this.parent.parent.getY() + this.offset, parent.parent.getX() + parent.parent.getWidth() + 1, this.parent.parent.getY() + 15 + this.offset, Past.settingsManager.getSettingID("ClickGUIRainbow").getValBoolean() ? ColourUtil.getMultiColour().getRGB() : GUIColourUtil.getGUIColour());
+        Gui.drawRect(parent.parent.getX() - 1, parent.parent.getY() + offset, parent.parent.getX(), parent.parent.getY() + 15 + offset, Past.settingsManager.getSettingID("ClickGUIRainbow").getValBoolean() ? ColourUtil.getMultiColour().getRGB() : GUIColourUtil.getGUIColour());
+        Gui.drawRect(parent.parent.getX() + parent.parent.getWidth(), parent.parent.getY() + offset, parent.parent.getX() + parent.parent.getWidth() + 1, parent.parent.getY() + 15 + offset, Past.settingsManager.getSettingID("ClickGUIRainbow").getValBoolean() ? ColourUtil.getMultiColour().getRGB() : GUIColourUtil.getGUIColour());
         Gui.drawRect(parent.parent.getX() - 1, parent.parent.getY() + offset, parent.parent.getX() + parent.parent.getWidth() + 1, parent.parent.getY() + offset + 16, Past.settingsManager.getSettingID("ClickGUIRainbow").getValBoolean() ? ColourUtil.getMultiColour().getRGB() : GUIColourUtil.getGUIColour());
 
         Gui.drawRect(parent.parent.getX(), parent.parent.getY() + offset, parent.parent.getX() + parent.parent.getWidth(), parent.parent.getY() + offset + 15, 0xFF111111);
@@ -45,9 +45,9 @@ public class KeybindComponent extends Component {
         if (isBinding) {
             tick += 0.5f;
 
-            FontUtil.drawText("Listening" + ColourUtil.gray + " " + points, parent.parent.getX() + 4, parent.parent.getY() + this.offset + 4, -1);
+            FontUtil.drawText("Listening" + ColourUtil.gray + " " + points, parent.parent.getX() + 4, parent.parent.getY() + offset + 4, -1);
         } else {
-            FontUtil.drawText("Bind" + ColourUtil.gray + " " + Keyboard.getKeyName(this.parent.mod.getKey()), parent.parent.getX() + 4, parent.parent.getY() + this.offset + 4, -1);
+            FontUtil.drawText("Bind" + ColourUtil.gray + " " + Keyboard.getKeyName(this.parent.mod.getKey()), parent.parent.getX() + 4, parent.parent.getY() + offset + 4, -1);
         }
 
         if (isBinding) {

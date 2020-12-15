@@ -19,8 +19,7 @@ public class ClickGUITwo extends GuiScreen {
         int panelHeight = 15;
 
         for (Category c : Category.values()) {
-            String paneltitle = Character.toUpperCase(c.name().toLowerCase().charAt(0)) + c.name().toLowerCase().substring(1);
-            ClickGUITwo.panels.add(new Panel(paneltitle, panelX, panelY, panelWidth, panelHeight, c));
+            ClickGUITwo.panels.add(new Panel(c.getCategoryName(), panelX, panelY, panelWidth, panelHeight, c));
             panelX += 105;
         }
     }

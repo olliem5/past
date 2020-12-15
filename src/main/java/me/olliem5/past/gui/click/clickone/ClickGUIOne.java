@@ -18,8 +18,7 @@ public class ClickGUIOne extends GuiScreen {
         int panelHeight = 15;
 
         for (Category c : Category.values()) {
-            String paneltitle = Character.toUpperCase(c.name().toLowerCase().charAt(0)) + c.name().toLowerCase().substring(1);
-            ClickGUIOne.panels.add(new Panel(paneltitle, panelX, panelY, panelWidth, panelHeight, c));
+            ClickGUIOne.panels.add(new Panel(c.getCategoryName(), panelX, panelY, panelWidth, panelHeight, c));
             panelX += 81;
         }
     }
@@ -42,13 +41,12 @@ public class ClickGUIOne extends GuiScreen {
     @Override
     public void mouseClicked(int mouseX, int mouseY, int mouseButton) {
         for (Panel p : panels) {
-            //Left mouse button, puts the panel into dragging mode.
             if (p.isWithinHeader(mouseX, mouseY) && mouseButton == 0) {
                 p.setDragging(true);
                 p.dragX = mouseX - p.getX();
                 p.dragY = mouseY - p.getY();
             }
-            //Right mouse button, sets the panel to be opened, displaying the module buttons.
+
             if (p.isWithinHeader(mouseX, mouseY) && mouseButton == 1) {
                 p.setOpen(!p.isOpen());
             }
@@ -70,7 +68,6 @@ public class ClickGUIOne extends GuiScreen {
                 }
             }
         }
-        //So you are able to close the GUI.
         if (keyCode == 1) {
             this.mc.displayGuiScreen(null);
         }

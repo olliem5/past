@@ -32,35 +32,34 @@ public class ModuleButton extends Component {
         if (Past.settingsManager.getSettingsModule(mod) != null) {
             for (Setting setting : Past.settingsManager.getSettingsModule(mod)) {
                 if (setting.getType() == "boolean") {
-                    this.subcomponents.add(new BooleanSwitch(setting, this, opY));
+                    this.subcomponents.add(new BooleanComponent(setting, this, opY));
                     opY += 12;
                 }
                 if (setting.getType() == "integer") {
-                    this.subcomponents.add(new IntegerSlider(setting, this, opY));
+                    this.subcomponents.add(new IntegerComponent(setting, this, opY));
                     opY += 12;
                 }
                 if (setting.getType() == "double") {
-                    this.subcomponents.add(new DoubleSlider(setting, this, opY));
+                    this.subcomponents.add(new DoubleComponent(setting, this, opY));
                     opY += 12;
                 }
                 if (setting.getType() == "mode") {
-                    this.subcomponents.add(new ModeChanger(setting, this, opY));
+                    this.subcomponents.add(new ModeComponent(setting, this, opY));
                     opY += 12;
                 }
             }
         }
-        //Add keybind component to all modules.
-        this.subcomponents.add(new KeybindListener(this, opY));
+        this.subcomponents.add(new KeybindComponent(this, opY));
     }
 
     @Override
     public void renderComponent() {
         if (Past.settingsManager.getSettingID("OldClickGUIRainbow").getValBoolean() && this.mod.isToggled()) {
-            Gui.drawRect(parent.getX(), this.parent.getY() + this.offset, parent.getX() + parent.getWidth(), this.parent.getY() + 12 + this.offset, ColourUtil.getMultiColour().getRGB());
+            Gui.drawRect(parent.getX(), parent.getY() + offset, parent.getX() + parent.getWidth(), parent.getY() + 12 + offset, ColourUtil.getMultiColour().getRGB());
         } else if (this.mod.isToggled()) {
-            Gui.drawRect(parent.getX(), this.parent.getY() + this.offset, parent.getX() + parent.getWidth(), this.parent.getY() + 12 + this.offset, 0xFF222222);
+            Gui.drawRect(parent.getX(), parent.getY() + offset, parent.getX() + parent.getWidth(), parent.getY() + 12 + offset, 0xFF222222);
         } else {
-            Gui.drawRect(parent.getX(), this.parent.getY() + this.offset, parent.getX() + parent.getWidth(), this.parent.getY() + 12 + this.offset, 0xFF111111);
+            Gui.drawRect(parent.getX(), parent.getY() + offset, parent.getX() + parent.getWidth(), parent.getY() + 12 + offset, 0xFF111111);
         }
 
         FontUtil.drawText(this.mod.getName(), parent.getX() + 2, (parent.getY() + offset + 2), -1);
@@ -114,8 +113,10 @@ public class ModuleButton extends Component {
     @Override
     public void updateComponent(int mouseX, int mouseY) {
         this.hovered = this.isMouseOnButton(mouseX, mouseY);
+
         mousexx = mouseX + 10;
         mouseyy = mouseY - 5;
+
         if (!this.subcomponents.isEmpty()) {
             for (Component comp : this.subcomponents) {
                 comp.updateComponent(mouseX, mouseY);
@@ -125,11 +126,10 @@ public class ModuleButton extends Component {
 
     @Override
     public void mouseClicked(int mouseX, int mouseY, int button) {
-        //Left mouse button, when clicked the module the button belongs to is toggled.
         if (isMouseOnButton(mouseX, mouseY) && button == 0) {
             this.mod.toggle();
         }
-        //Right mouse button, when clicked the module button will display it's subcomponents specific to the module it belongs to.
+
         if (isMouseOnButton(mouseX, mouseY) && button == 1) {
             if (!this.isOpen()) {
                 parent.closeAllSetting();
@@ -138,6 +138,7 @@ public class ModuleButton extends Component {
                 this.setOpen(false);
             }
         }
+
         for (Component comp : this.subcomponents) {
             comp.mouseClicked(mouseX, mouseY, button);
         }

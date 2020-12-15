@@ -10,7 +10,6 @@ import me.olliem5.past.util.text.FontUtil;
 import me.olliem5.past.util.text.StringUtil;
 import me.zero.alpine.listener.EventHandler;
 import me.zero.alpine.listener.Listener;
-import net.minecraft.client.gui.Gui;
 import net.minecraft.client.gui.ScaledResolution;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
 

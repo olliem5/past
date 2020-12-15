@@ -26,7 +26,7 @@ public class Panel {
     private boolean open;
     public int dragX;
     public int dragY;
-    Category cat;
+    public Category cat;
 
     public Panel(String title, int x, int y, int width, int height, Category cat) {
         this.components = new ArrayList<>();
@@ -51,7 +51,6 @@ public class Panel {
         }
     }
 
-    //Initial header of module category.
     public void drawScreen(int mouseX, int mouseY, float partialTicks) {
         if (Past.settingsManager.getSettingID("OldClickGUIRainbow").getValBoolean()) {
             Gui.drawRect(x, y, x + width, y + height, ColourUtil.getMultiColour().getRGB());
@@ -61,7 +60,6 @@ public class Panel {
 
         FontUtil.drawText(title, x + 2, y + height / 2 - mc.fontRenderer.FONT_HEIGHT / 2, -1);
 
-        //Rendering components when the GUI is opened.
         if (this.open && !this.components.isEmpty()) {
             for (Component component : components) {
                 component.renderComponent();

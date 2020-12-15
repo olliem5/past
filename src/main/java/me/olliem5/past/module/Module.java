@@ -2,7 +2,6 @@ package me.olliem5.past.module;
 
 import me.olliem5.past.Past;
 import net.minecraft.client.Minecraft;
-import net.minecraftforge.common.MinecraftForge;
 import org.lwjgl.input.Keyboard;
 
 public class Module {

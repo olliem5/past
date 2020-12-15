@@ -10,17 +10,16 @@ import net.minecraftforge.client.event.ClientChatEvent;
 import java.util.ArrayList;
 
 public class CommandManager {
-
-    public String prefix = "@";
-
     public CommandManager() {
         Past.EVENT_BUS.subscribe(this);
         init();
     }
 
-    public static ArrayList<Command> commands = new ArrayList<>();
+    public String prefix = "@";
 
-    public static void init() {
+    public ArrayList<Command> commands = new ArrayList<>();
+
+    public void init() {
         commands.add(new ToggleCommand());
         commands.add(new BindCommand());
     }

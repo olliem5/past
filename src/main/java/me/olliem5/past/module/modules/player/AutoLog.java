@@ -6,7 +6,6 @@ import me.olliem5.past.module.Module;
 import me.olliem5.past.settings.Setting;
 import me.olliem5.past.util.colour.ColourUtil;
 import net.minecraft.client.gui.GuiMainMenu;
-import net.minecraft.network.play.client.CPacketPlayer;
 
 import java.util.ArrayList;
 

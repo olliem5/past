@@ -6,7 +6,6 @@ import me.olliem5.past.gui.editor.screen.element.HudButton;
 import me.olliem5.past.util.colour.ColourUtil;
 import me.olliem5.past.util.module.GUIColourUtil;
 import me.olliem5.past.util.text.FontUtil;
-import me.olliem5.past.util.text.StringUtil;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Gui;
 

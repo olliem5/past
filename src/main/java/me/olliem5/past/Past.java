@@ -14,7 +14,6 @@ import me.olliem5.past.settings.SettingsManager;
 import me.olliem5.past.util.config.ConfigUtil;
 import me.zero.alpine.EventBus;
 import me.zero.alpine.EventManager;
-import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
@@ -79,12 +78,13 @@ public class Past {
         friendsManager = new FriendsManager();
         System.out.println("[" + nameversion + "]" + " " + "Friends Initialized!");
 
-        capesManager = new CapesManager();
-        System.out.println("[" + nameversion + "]" + " " + "Capes Initialized!");
-
-        latoFont = new CustomFontRenderer(new Font("Lato", 0, 18), true, false);latoFont = new CustomFontRenderer(new Font("Lato", 0, 18), true, false);
+        latoFont = new CustomFontRenderer(new Font("Lato", 0, 18), true, false);
         verdanaFont = new CustomFontRenderer(new Font("Verdana", 0, 18), true, false);
         arialFont = new CustomFontRenderer(new Font("Arial", 0, 18), true, false);
+        System.out.println("[" + nameversion + "]" + " " + "Custom Fonts Initialized! (Author 086)!");
+
+        capesManager = new CapesManager();
+        System.out.println("[" + nameversion + "]" + " " + "Capes Initialized!");
 
         hudComponentManager = new HudComponentManager();
         System.out.println("[" + nameversion + "]" + " " + "HUD Components Initialized!");

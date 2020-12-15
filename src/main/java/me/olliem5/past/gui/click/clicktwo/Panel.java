@@ -8,7 +8,6 @@ import me.olliem5.past.module.Module;
 import me.olliem5.past.util.colour.ColourUtil;
 import me.olliem5.past.util.module.GUIColourUtil;
 import me.olliem5.past.util.text.FontUtil;
-import me.olliem5.past.util.text.StringUtil;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Gui;
 import org.lwjgl.input.Mouse;
@@ -29,7 +28,7 @@ public class Panel {
     private boolean open;
     public int dragX;
     public int dragY;
-    Category cat;
+    public Category cat;
     public int tY;
 
     public Panel(String title, int x, int y, int width, int height, Category cat) {

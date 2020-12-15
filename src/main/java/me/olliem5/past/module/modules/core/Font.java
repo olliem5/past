@@ -28,4 +28,9 @@ public class Font extends Module {
         Past.settingsManager.registerSetting(font = new Setting("Font", "FontFont", this, fonts, "Lato"));
         Past.settingsManager.registerSetting(shadow = new Setting("Shadow", "FontShadow", true, this));
     }
+
+    @Override
+    public void onEnable() {
+        toggle();
+    }
 }
