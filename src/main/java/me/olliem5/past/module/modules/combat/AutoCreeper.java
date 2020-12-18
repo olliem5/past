@@ -28,8 +28,16 @@ public class AutoCreeper extends Module {
 
     Setting mode;
     Setting playerrange;
+    Setting renderplace;
+    Setting rendermode;
+    Setting red;
+    Setting green;
+    Setting blue;
+    Setting alpha;
+    Setting rainbow;
 
     public ArrayList<String> creepermodes;
+    public ArrayList<String> rendermodes;
 
     @Override
     public void setup() {
@@ -38,6 +46,13 @@ public class AutoCreeper extends Module {
 
         Past.settingsManager.registerSetting(mode = new Setting("Mode", "AutoCreeperMode", this, creepermodes, "Hole"));
         Past.settingsManager.registerSetting(playerrange = new Setting("Player Range", "AutoCreeperPlayerRange", 1.0, 25.0, 50.0, this));
+        Past.settingsManager.registerSetting(renderplace = new Setting("Render Place", "AutoCrystalRenderPlace", true, this));
+        Past.settingsManager.registerSetting(rendermode = new Setting("Mode", "AutoCreeperRenderMode", this, rendermodes, "FullFrame"));
+        Past.settingsManager.registerSetting(red = new Setting("Red", "AutoCreeperRed", 0, 100, 255, this));
+        Past.settingsManager.registerSetting(green = new Setting("Green", "AutoCreeperGreen", 0, 100, 255, this));
+        Past.settingsManager.registerSetting(blue = new Setting("Blue", "AutoCreeperBlue", 0, 100, 255, this));
+        Past.settingsManager.registerSetting(alpha = new Setting("Alpha", "AutoCreeperAlpha", 0, 100, 255, this));
+        Past.settingsManager.registerSetting(rainbow = new Setting("Rainbow", "AutoCreeperRainbow", true, this));
     }
 
     private BlockPos placePosition = null;
@@ -57,13 +72,6 @@ public class AutoCreeper extends Module {
         findPlacePosition();
         placeCreeperEggs();
     }
-
-    @EventHandler
-    public Listener<RenderWorldLastEvent> listener = new Listener<>(event -> {
-        if (nullCheck()) return;
-
-        renderPlacementBlock();
-    });
 
     private void findPlacePosition() {
         for (EntityPlayer player : mc.world.playerEntities) {
@@ -124,15 +132,39 @@ public class AutoCreeper extends Module {
 
     private void renderPlacementBlock() {
         if (placePosition != null) {
-            float[] hue = new float[]{(float) (System.currentTimeMillis() % 7500L) / 7500f};
-            int rgb = Color.HSBtoRGB(hue[0], 0.8f, 0.8f);
-            int r = rgb >> 16 & 255;
-            int g = rgb >> 8 & 255;
-            int b = rgb & 255;
 
-            RenderUtil.drawBox(RenderUtil.generateBB(placePosition.getX(), placePosition.getY(), placePosition.getZ()), r / 255f, g / 255f, b / 255f, 100);
+            float[] hue = new float[] {(float) (System.currentTimeMillis() % 7500L) / 7500f};
+            int rgb = Color.HSBtoRGB(hue[0], 0.8f, 0.8f);
+            int rgbred = rgb >> 16 & 255;
+            int rgbgreen = rgb >> 8 & 255;
+            int rgbblue = rgb & 255;
+
+            if (!rainbow.getValBoolean()) {
+                if (rendermode.getValueString() == "Full") {
+                    RenderUtil.drawBox(RenderUtil.generateBB(placePosition.getX(), placePosition.getY(), placePosition.getZ()), red.getValueInt(), green.getValueInt(), blue.getValueInt(), alpha.getValueInt());
+                } else if (rendermode.getValueString() == "FullFrame") {
+                    RenderUtil.drawBoxOutline(RenderUtil.generateBB(placePosition.getX(), placePosition.getY(), placePosition.getZ()), red.getValueInt(), green.getValueInt(), blue.getValueInt(), alpha.getValueInt());
+                } else {
+                    RenderUtil.drawOutline(RenderUtil.generateBB(placePosition.getX(), placePosition.getY(), placePosition.getZ()), red.getValueInt(), green.getValueInt(), blue.getValueInt(), alpha.getValueInt());
+                }
+            } else {
+                if (rendermode.getValueString() == "Full") {
+                    RenderUtil.drawBox(RenderUtil.generateBB(placePosition.getX(), placePosition.getY(), placePosition.getZ()), rgbred / 255f, rgbgreen / 255f, rgbblue / 255f, alpha.getValueInt());
+                } else if (rendermode.getValueString() == "FullFrame") {
+                    RenderUtil.drawBoxOutline(RenderUtil.generateBB(placePosition.getX(), placePosition.getY(), placePosition.getZ()), rgbred / 255f, rgbgreen / 255f, rgbblue / 255f, alpha.getValueInt());
+                } else {
+                    RenderUtil.drawOutline(RenderUtil.generateBB(placePosition.getX(), placePosition.getY(), placePosition.getZ()), rgbred / 255f, rgbgreen / 255f, rgbblue / 255f, alpha.getValueInt());
+                }
+            }
         }
     }
+
+    @EventHandler
+    public Listener<RenderWorldLastEvent> listener = new Listener<>(event -> {
+        if (nullCheck()) return;
+
+        renderPlacementBlock();
+    });
 
     public String getArraylistInfo() {
         if (target != null) {

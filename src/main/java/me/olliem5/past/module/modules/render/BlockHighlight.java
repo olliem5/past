@@ -23,7 +23,7 @@ public class BlockHighlight extends Module {
     Setting red;
     Setting green;
     Setting blue;
-    Setting opacity;
+    Setting alpha;
     Setting rainbow;
 
     private ArrayList<String> rendermodes;
@@ -41,7 +41,7 @@ public class BlockHighlight extends Module {
         Past.settingsManager.registerSetting(red = new Setting("Red", "BlockHighlightRed", 0, 100, 255, this));
         Past.settingsManager.registerSetting(green = new Setting("Green", "BlockHighlightGreen", 0, 100, 255, this));
         Past.settingsManager.registerSetting(blue = new Setting("Blue", "BlockHighlightBlue", 0, 100, 255, this));
-        Past.settingsManager.registerSetting(opacity = new Setting("Opacity", "BlockHighlightOpacity", 0, 100, 255, this));
+        Past.settingsManager.registerSetting(alpha = new Setting("Alpha", "BlockHighlightAlpha", 0, 100, 255, this));
         Past.settingsManager.registerSetting(rainbow = new Setting("Rainbow", "BlockHighlightRainbow", false, this));
     }
 
@@ -69,19 +69,19 @@ public class BlockHighlight extends Module {
             if (rayTraceResult != null) {
                 if (!rainbow.getValBoolean()) {
                     if (rendermode.getValueString() == "Full") {
-                        RenderUtil.drawBox(RenderUtil.generateBB(blockPos.getX(), blockPos.getY(), blockPos.getZ()), red.getValueInt(), green.getValueInt(), blue.getValueInt(), opacity.getValueInt());
+                        RenderUtil.drawBox(RenderUtil.generateBB(blockPos.getX(), blockPos.getY(), blockPos.getZ()), red.getValueInt(), green.getValueInt(), blue.getValueInt(), alpha.getValueInt());
                     } else if (rendermode.getValueString() == "FullFrame") {
-                        RenderUtil.drawBoxOutline(RenderUtil.generateBB(blockPos.getX(), blockPos.getY(), blockPos.getZ()), red.getValueInt(), green.getValueInt(), blue.getValueInt(), opacity.getValueInt());
+                        RenderUtil.drawBoxOutline(RenderUtil.generateBB(blockPos.getX(), blockPos.getY(), blockPos.getZ()), red.getValueInt(), green.getValueInt(), blue.getValueInt(), alpha.getValueInt());
                     } else {
-                        RenderUtil.drawOutline(RenderUtil.generateBB(blockPos.getX(), blockPos.getY(), blockPos.getZ()), red.getValueInt(), green.getValueInt(), blue.getValueInt(), opacity.getValueInt());
+                        RenderUtil.drawOutline(RenderUtil.generateBB(blockPos.getX(), blockPos.getY(), blockPos.getZ()), red.getValueInt(), green.getValueInt(), blue.getValueInt(), alpha.getValueInt());
                     }
                 } else {
                     if (rendermode.getValueString() == "Full") {
-                        RenderUtil.drawBox(RenderUtil.generateBB(blockPos.getX(), blockPos.getY(), blockPos.getZ()), rgbred / 255f, rgbgreen / 255f, rgbblue / 255f, opacity.getValueInt());
+                        RenderUtil.drawBox(RenderUtil.generateBB(blockPos.getX(), blockPos.getY(), blockPos.getZ()), rgbred / 255f, rgbgreen / 255f, rgbblue / 255f, alpha.getValueInt());
                     } else if (rendermode.getValueString() == "FullFrame") {
-                        RenderUtil.drawBoxOutline(RenderUtil.generateBB(blockPos.getX(), blockPos.getY(), blockPos.getZ()), rgbred / 255f, rgbgreen / 255f, rgbblue / 255f, opacity.getValueInt());
+                        RenderUtil.drawBoxOutline(RenderUtil.generateBB(blockPos.getX(), blockPos.getY(), blockPos.getZ()), rgbred / 255f, rgbgreen / 255f, rgbblue / 255f, alpha.getValueInt());
                     } else {
-                        RenderUtil.drawOutline(RenderUtil.generateBB(blockPos.getX(), blockPos.getY(), blockPos.getZ()), rgbred / 255f, rgbgreen / 255f, rgbblue / 255f, opacity.getValueInt());
+                        RenderUtil.drawOutline(RenderUtil.generateBB(blockPos.getX(), blockPos.getY(), blockPos.getZ()), rgbred / 255f, rgbgreen / 255f, rgbblue / 255f, alpha.getValueInt());
                     }
                 }
             }

@@ -83,7 +83,7 @@ public class AutoCrystal extends Module {
     Setting red;
     Setting green;
     Setting blue;
-    Setting opacity;
+    Setting alpha;
     Setting rainbow;
 
     private ArrayList<String> logicmodes;
@@ -140,7 +140,7 @@ public class AutoCrystal extends Module {
         Past.settingsManager.registerSetting(red = new Setting("Red", "AutoCrystalRed", 0, 100, 255, this));
         Past.settingsManager.registerSetting(green = new Setting("Green", "AutoCrystalGreen", 0, 100, 255, this));
         Past.settingsManager.registerSetting(blue = new Setting("Blue", "AutoCrystalBlue", 0, 100, 255, this));
-        Past.settingsManager.registerSetting(opacity = new Setting("Opacity", "AutoCrystalOpacity", 0, 100, 255, this));
+        Past.settingsManager.registerSetting(alpha = new Setting("Alpha", "AutoCrystalAlpha", 0, 100, 255, this));
         Past.settingsManager.registerSetting(rainbow = new Setting("Rainbow", "AutoCrystalRainbow", true, this));
     }
 
@@ -355,19 +355,19 @@ public class AutoCrystal extends Module {
 
             if (!rainbow.getValBoolean()) {
                 if (rendermode.getValueString() == "Full") {
-                    RenderUtil.drawBox(RenderUtil.generateBB(renderBlock.getX(), renderBlock.getY(), renderBlock.getZ()), red.getValueInt(), green.getValueInt(), blue.getValueInt(), opacity.getValueInt());
+                    RenderUtil.drawBox(RenderUtil.generateBB(renderBlock.getX(), renderBlock.getY(), renderBlock.getZ()), red.getValueInt(), green.getValueInt(), blue.getValueInt(), alpha.getValueInt());
                 } else if (rendermode.getValueString() == "FullFrame") {
-                    RenderUtil.drawBoxOutline(RenderUtil.generateBB(renderBlock.getX(), renderBlock.getY(), renderBlock.getZ()), red.getValueInt(), green.getValueInt(), blue.getValueInt(), opacity.getValueInt());
+                    RenderUtil.drawBoxOutline(RenderUtil.generateBB(renderBlock.getX(), renderBlock.getY(), renderBlock.getZ()), red.getValueInt(), green.getValueInt(), blue.getValueInt(), alpha.getValueInt());
                 } else {
-                    RenderUtil.drawOutline(RenderUtil.generateBB(renderBlock.getX(), renderBlock.getY(), renderBlock.getZ()), red.getValueInt(), green.getValueInt(), blue.getValueInt(), opacity.getValueInt());
+                    RenderUtil.drawOutline(RenderUtil.generateBB(renderBlock.getX(), renderBlock.getY(), renderBlock.getZ()), red.getValueInt(), green.getValueInt(), blue.getValueInt(), alpha.getValueInt());
                 }
             } else {
                 if (rendermode.getValueString() == "Full") {
-                    RenderUtil.drawBox(RenderUtil.generateBB(renderBlock.getX(), renderBlock.getY(), renderBlock.getZ()), rgbred / 255f, rgbgreen / 255f, rgbblue / 255f, opacity.getValueInt());
+                    RenderUtil.drawBox(RenderUtil.generateBB(renderBlock.getX(), renderBlock.getY(), renderBlock.getZ()), rgbred / 255f, rgbgreen / 255f, rgbblue / 255f, alpha.getValueInt());
                 } else if (rendermode.getValueString() == "FullFrame") {
-                    RenderUtil.drawBoxOutline(RenderUtil.generateBB(renderBlock.getX(), renderBlock.getY(), renderBlock.getZ()), rgbred / 255f, rgbgreen / 255f, rgbblue / 255f, opacity.getValueInt());
+                    RenderUtil.drawBoxOutline(RenderUtil.generateBB(renderBlock.getX(), renderBlock.getY(), renderBlock.getZ()), rgbred / 255f, rgbgreen / 255f, rgbblue / 255f, alpha.getValueInt());
                 } else {
-                    RenderUtil.drawOutline(RenderUtil.generateBB(renderBlock.getX(), renderBlock.getY(), renderBlock.getZ()), rgbred / 255f, rgbgreen / 255f, rgbblue / 255f, opacity.getValueInt());
+                    RenderUtil.drawOutline(RenderUtil.generateBB(renderBlock.getX(), renderBlock.getY(), renderBlock.getZ()), rgbred / 255f, rgbgreen / 255f, rgbblue / 255f, alpha.getValueInt());
                 }
             }
         }
