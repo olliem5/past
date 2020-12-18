@@ -21,12 +21,7 @@ import org.lwjgl.opengl.Display;
 
 import java.awt.*;
 
-@Mod(
-        name = Past.name,
-        modid = Past.modid,
-        version = Past.version
-)
-
+@Mod(name = Past.name, modid = Past.modid, version = Past.version)
 public class Past {
     public static final String name = "Past Utility Mod";
     public static final String modid = "past";

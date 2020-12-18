@@ -1,10 +1,10 @@
 package me.olliem5.past.module.modules.combat;
 
+import com.mojang.realmsclient.gui.ChatFormatting;
 import me.olliem5.past.Past;
 import me.olliem5.past.module.Category;
 import me.olliem5.past.module.Module;
 import me.olliem5.past.settings.Setting;
-import me.olliem5.past.util.colour.ColourUtil;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.passive.EntityAnimal;
@@ -78,7 +78,7 @@ public class KillAura extends Module {
 
     public String getArraylistInfo() {
         if (target != null) {
-            return ColourUtil.gray + " " + target.getName();
+            return ChatFormatting.GRAY + " " + target.getName();
         } else {
             return "";
         }

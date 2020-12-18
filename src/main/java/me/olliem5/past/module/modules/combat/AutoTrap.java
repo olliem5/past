@@ -1,10 +1,10 @@
 package me.olliem5.past.module.modules.combat;
 
+import com.mojang.realmsclient.gui.ChatFormatting;
 import me.olliem5.past.Past;
 import me.olliem5.past.module.Category;
 import me.olliem5.past.module.Module;
 import me.olliem5.past.settings.Setting;
-import me.olliem5.past.util.colour.ColourUtil;
 import me.olliem5.past.util.player.PlayerUtil;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
@@ -104,7 +104,7 @@ public class AutoTrap extends Module {
 
     public String getArraylistInfo() {
         if (getClosestPlayer() != null) {
-            return ColourUtil.gray + " " + getClosestPlayer().getName();
+            return ChatFormatting.GRAY + " " + getClosestPlayer().getName();
         } else {
             return "";
         }

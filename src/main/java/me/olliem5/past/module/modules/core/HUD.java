@@ -5,7 +5,7 @@ import me.olliem5.past.module.Category;
 import me.olliem5.past.module.Module;
 import me.olliem5.past.settings.Setting;
 import me.olliem5.past.util.colour.ColourListUtil;
-import me.olliem5.past.util.colour.ColourUtil;
+import me.olliem5.past.util.colour.RainbowUtil;
 import me.olliem5.past.util.text.FontUtil;
 import me.olliem5.past.util.text.StringUtil;
 import me.zero.alpine.listener.EventHandler;
@@ -51,7 +51,7 @@ public class HUD extends Module {
 
     private int getColour() {
         if (rgb.getValBoolean()) {
-            return ColourUtil.getMultiColour().getRGB();
+            return RainbowUtil.getMultiColour().getRGB();
         } else {
             return ColourListUtil.toRGBA(red.getValueInt(), green.getValueInt(), blue.getValueInt(), 255);
         }

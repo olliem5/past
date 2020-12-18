@@ -1,11 +1,11 @@
 package me.olliem5.past.module.modules.misc;
 
+import com.mojang.realmsclient.gui.ChatFormatting;
 import me.olliem5.past.Past;
 import me.olliem5.past.module.Category;
 import me.olliem5.past.module.Module;
 import me.olliem5.past.settings.Setting;
 import me.olliem5.past.util.client.MessageUtil;
-import me.olliem5.past.util.colour.ColourUtil;
 import me.olliem5.past.util.player.PlayerUtil;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.math.BlockPos;
@@ -56,7 +56,7 @@ public class AutoBuilder extends Module {
                             mc.player.inventory.currentItem = PlayerUtil.getAnyBlockInHotbar();
 
                             if (infomessages.getValBoolean()) {
-                                MessageUtil.sendAutoBuilderMessage(ColourUtil.white + "Placing block");
+                                MessageUtil.sendAutoBuilderMessage(ChatFormatting.WHITE + "Placing block");
                             }
 
                             PlayerUtil.placeBlock(blockPos);
@@ -81,7 +81,7 @@ public class AutoBuilder extends Module {
                             mc.player.inventory.currentItem = PlayerUtil.getAnyBlockInHotbar();
 
                             if (infomessages.getValBoolean()) {
-                                MessageUtil.sendAutoBuilderMessage(ColourUtil.white + "Placing block");
+                                MessageUtil.sendAutoBuilderMessage(ChatFormatting.WHITE + "Placing block");
                             }
 
                             PlayerUtil.placeBlock(blockPos);
@@ -106,7 +106,7 @@ public class AutoBuilder extends Module {
                             mc.player.inventory.currentItem = PlayerUtil.getAnyBlockInHotbar();
 
                             if (infomessages.getValBoolean()) {
-                                MessageUtil.sendAutoBuilderMessage(ColourUtil.white + "Placing block");
+                                MessageUtil.sendAutoBuilderMessage(ChatFormatting.WHITE + "Placing block");
                             }
 
                             PlayerUtil.placeBlock(blockPos);
@@ -131,7 +131,7 @@ public class AutoBuilder extends Module {
                             mc.player.inventory.currentItem = PlayerUtil.getAnyBlockInHotbar();
 
                             if (infomessages.getValBoolean()) {
-                                MessageUtil.sendAutoBuilderMessage(ColourUtil.white + "Placing block");
+                                MessageUtil.sendAutoBuilderMessage(ChatFormatting.WHITE + "Placing block");
                             }
 
                             PlayerUtil.placeBlock(blockPos);
@@ -159,7 +159,7 @@ public class AutoBuilder extends Module {
                             mc.player.inventory.currentItem = PlayerUtil.getAnyBlockInHotbar();
 
                             if (infomessages.getValBoolean()) {
-                                MessageUtil.sendAutoBuilderMessage(ColourUtil.white + "Placing block");
+                                MessageUtil.sendAutoBuilderMessage(ChatFormatting.WHITE + "Placing block");
                             }
 
                             PlayerUtil.placeBlock(blockPos);
@@ -184,7 +184,7 @@ public class AutoBuilder extends Module {
                             mc.player.inventory.currentItem = PlayerUtil.getAnyBlockInHotbar();
 
                             if (infomessages.getValBoolean()) {
-                                MessageUtil.sendAutoBuilderMessage(ColourUtil.white + "Placing block");
+                                MessageUtil.sendAutoBuilderMessage(ChatFormatting.WHITE + "Placing block");
                             }
 
                             PlayerUtil.placeBlock(blockPos);
@@ -209,7 +209,7 @@ public class AutoBuilder extends Module {
                             mc.player.inventory.currentItem = PlayerUtil.getAnyBlockInHotbar();
 
                             if (infomessages.getValBoolean()) {
-                                MessageUtil.sendAutoBuilderMessage(ColourUtil.white + "Placing block");
+                                MessageUtil.sendAutoBuilderMessage(ChatFormatting.WHITE + "Placing block");
                             }
 
                             PlayerUtil.placeBlock(blockPos);
@@ -234,7 +234,7 @@ public class AutoBuilder extends Module {
                             mc.player.inventory.currentItem = PlayerUtil.getAnyBlockInHotbar();
 
                             if (infomessages.getValBoolean()) {
-                                MessageUtil.sendAutoBuilderMessage(ColourUtil.white + "Placing block");
+                                MessageUtil.sendAutoBuilderMessage(ChatFormatting.WHITE + "Placing block");
                             }
 
                             PlayerUtil.placeBlock(blockPos);
@@ -332,6 +332,6 @@ public class AutoBuilder extends Module {
     ));
 
     public String getArraylistInfo() {
-        return ColourUtil.gray + " " + buildmode.getValueString().toUpperCase();
+        return ChatFormatting.GRAY + " " + buildmode.getValueString().toUpperCase();
     }
 }

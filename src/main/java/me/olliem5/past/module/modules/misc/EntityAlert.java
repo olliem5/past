@@ -1,11 +1,11 @@
 package me.olliem5.past.module.modules.misc;
 
+import com.mojang.realmsclient.gui.ChatFormatting;
 import me.olliem5.past.Past;
 import me.olliem5.past.module.Category;
 import me.olliem5.past.module.Module;
 import me.olliem5.past.settings.Setting;
 import me.olliem5.past.util.client.MessageUtil;
-import me.olliem5.past.util.colour.ColourUtil;
 import me.olliem5.past.util.module.CooldownUtil;
 import net.minecraft.client.audio.PositionedSoundRecord;
 import net.minecraft.entity.Entity;
@@ -48,19 +48,19 @@ public class EntityAlert extends Module {
         for (Entity entity : mc.world.getLoadedEntityList()) {
             if (entity instanceof EntityDonkey && donkey.getValBoolean() && donkeyCooldown.passed(donkeydelay.getValueInt())) {
                 donkeyCooldown.reset();
-                MessageUtil.sendEntityAlertMessage(ColourUtil.white + "Found a " + ColourUtil.aqua + "donkey " + ColourUtil.white + "at " + ColourUtil.gray + "[" + ColourUtil.white + Math.round(entity.lastTickPosX) + ColourUtil.gray + ", " + ColourUtil.white + Math.round(entity.lastTickPosY) + ColourUtil.gray + ", " + ColourUtil.white + Math.round(entity.lastTickPosZ) + ColourUtil.gray + "]");
+                MessageUtil.sendEntityAlertMessage(ChatFormatting.WHITE + "Found a " + ChatFormatting.AQUA + "donkey " + ChatFormatting.WHITE + "at " + ChatFormatting.GRAY + "[" + ChatFormatting.WHITE + Math.round(entity.lastTickPosX) + ChatFormatting.GRAY + ", " + ChatFormatting.WHITE + Math.round(entity.lastTickPosY) + ChatFormatting.GRAY + ", " + ChatFormatting.WHITE + Math.round(entity.lastTickPosZ) + ChatFormatting.GRAY + "]");
                 if (sound.getValBoolean()) {
                     mc.getSoundHandler().playSound(PositionedSoundRecord.getRecord(SoundEvents.ENTITY_EXPERIENCE_ORB_PICKUP, 1.0F, 1.0F));
                 }
             } else if (entity instanceof EntityLlama && llama.getValBoolean() && llamaCooldown.passed(llamadelay.getValueInt())) {
                 llamaCooldown.reset();
-                MessageUtil.sendEntityAlertMessage(ColourUtil.white + "Found a " + ColourUtil.aqua + "llama " + ColourUtil.white + "at " + ColourUtil.gray + "[" + ColourUtil.white + Math.round(entity.lastTickPosX) + ColourUtil.gray + ", " + ColourUtil.white + Math.round(entity.lastTickPosY) + ColourUtil.gray + ", " + ColourUtil.white + Math.round(entity.lastTickPosZ) + ColourUtil.gray + "]");
+                MessageUtil.sendEntityAlertMessage(ChatFormatting.WHITE + "Found a " + ChatFormatting.AQUA + "llama " + ChatFormatting.WHITE + "at " + ChatFormatting.GRAY + "[" + ChatFormatting.WHITE + Math.round(entity.lastTickPosX) + ChatFormatting.GRAY + ", " + ChatFormatting.WHITE + Math.round(entity.lastTickPosY) + ChatFormatting.GRAY + ", " + ChatFormatting.WHITE + Math.round(entity.lastTickPosZ) + ChatFormatting.GRAY + "]");
                 if (sound.getValBoolean()) {
                     mc.getSoundHandler().playSound(PositionedSoundRecord.getRecord(SoundEvents.ENTITY_EXPERIENCE_ORB_PICKUP, 1.0F, 1.0F));
                 }
             } else if (entity instanceof EntityMule && mule.getValBoolean() && muleCooldown.passed(muledelay.getValueInt())) {
                 muleCooldown.reset();
-                MessageUtil.sendEntityAlertMessage(ColourUtil.white + "Found a " + ColourUtil.aqua + "mule " + ColourUtil.white + "at " + ColourUtil.gray + "[" + ColourUtil.white + Math.round(entity.lastTickPosX) + ColourUtil.gray + ", " + ColourUtil.white + Math.round(entity.lastTickPosY) + ColourUtil.gray + ", " + ColourUtil.white + Math.round(entity.lastTickPosZ) + ColourUtil.gray + "]");
+                MessageUtil.sendEntityAlertMessage(ChatFormatting.WHITE + "Found a " + ChatFormatting.AQUA + "mule " + ChatFormatting.WHITE + "at " + ChatFormatting.GRAY + "[" + ChatFormatting.WHITE + Math.round(entity.lastTickPosX) + ChatFormatting.GRAY + ", " + ChatFormatting.WHITE + Math.round(entity.lastTickPosY) + ChatFormatting.GRAY + ", " + ChatFormatting.WHITE + Math.round(entity.lastTickPosZ) + ChatFormatting.GRAY + "]");
                 if (sound.getValBoolean()) {
                     mc.getSoundHandler().playSound(PositionedSoundRecord.getRecord(SoundEvents.ENTITY_EXPERIENCE_ORB_PICKUP, 1.0F, 1.0F));
                 }

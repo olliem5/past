@@ -1,10 +1,10 @@
 package me.olliem5.past.command.commands;
 
+import com.mojang.realmsclient.gui.ChatFormatting;
 import me.olliem5.past.Past;
 import me.olliem5.past.command.Command;
 import me.olliem5.past.module.Module;
 import me.olliem5.past.util.client.MessageUtil;
-import me.olliem5.past.util.colour.ColourUtil;
 
 public class ToggleCommand extends Command {
     public ToggleCommand() {
@@ -19,9 +19,9 @@ public class ToggleCommand extends Command {
                     if (m.getName().equalsIgnoreCase(args[1])) {
                         m.toggle();
                         if (m.isToggled()) {
-                            MessageUtil.sendMessagePrefix(ColourUtil.aqua + m.getName() + ColourUtil.white + " has been " + ColourUtil.green + "enabled");
+                            MessageUtil.sendMessagePrefix(ChatFormatting.AQUA + m.getName() + ChatFormatting.WHITE + " has been " + ChatFormatting.GREEN + "enabled");
                         } else {
-                            MessageUtil.sendMessagePrefix(ColourUtil.aqua + m.getName() + ColourUtil.white + " has been " + ColourUtil.red + "disabled");
+                            MessageUtil.sendMessagePrefix(ChatFormatting.AQUA + m.getName() + ChatFormatting.WHITE + " has been " + ChatFormatting.RED + "disabled");
                         }
                     }
                 }

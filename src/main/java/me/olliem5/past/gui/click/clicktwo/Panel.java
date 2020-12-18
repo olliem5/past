@@ -5,7 +5,7 @@ import me.olliem5.past.gui.click.Component;
 import me.olliem5.past.gui.click.clicktwo.components.ModuleButton;
 import me.olliem5.past.module.Category;
 import me.olliem5.past.module.Module;
-import me.olliem5.past.util.colour.ColourUtil;
+import me.olliem5.past.util.colour.RainbowUtil;
 import me.olliem5.past.util.module.GUIColourUtil;
 import me.olliem5.past.util.text.FontUtil;
 import net.minecraft.client.Minecraft;
@@ -56,7 +56,7 @@ public class Panel {
     }
 
     public void drawScreen(int mouseX, int mouseY, float partialTicks) {
-        Gui.drawRect(x - 1, y - 1, x + width + 1, y + height + 1, Past.settingsManager.getSettingID("ClickGUIRainbow").getValBoolean() ? ColourUtil.getMultiColour().getRGB() : GUIColourUtil.getGUIColour());
+        Gui.drawRect(x - 1, y - 1, x + width + 1, y + height + 1, Past.settingsManager.getSettingID("ClickGUIRainbow").getValBoolean() ? RainbowUtil.getMultiColour().getRGB() : GUIColourUtil.getGUIColour());
         Gui.drawRect(x, y, x + width, y + height, 0x75101010);
 
         if (Past.settingsManager.getSettingID("FontFont").getValueString() == "Lato") {

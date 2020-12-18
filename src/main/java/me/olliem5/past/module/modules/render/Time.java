@@ -1,10 +1,10 @@
 package me.olliem5.past.module.modules.render;
 
+import com.mojang.realmsclient.gui.ChatFormatting;
 import me.olliem5.past.Past;
 import me.olliem5.past.module.Category;
 import me.olliem5.past.module.Module;
 import me.olliem5.past.settings.Setting;
-import me.olliem5.past.util.colour.ColourUtil;
 
 import java.util.ArrayList;
 
@@ -54,6 +54,6 @@ public class Time extends Module {
     }
 
     public String getArraylistInfo() {
-        return ColourUtil.gray + " " + timemode.getValueString().toUpperCase();
+        return ChatFormatting.GRAY + " " + timemode.getValueString().toUpperCase();
     }
 }

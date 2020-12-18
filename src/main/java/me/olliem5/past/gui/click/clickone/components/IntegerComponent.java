@@ -1,9 +1,10 @@
 package me.olliem5.past.gui.click.clickone.components;
 
+import com.mojang.realmsclient.gui.ChatFormatting;
 import me.olliem5.past.Past;
 import me.olliem5.past.gui.click.Component;
 import me.olliem5.past.settings.Setting;
-import me.olliem5.past.util.colour.ColourUtil;
+import me.olliem5.past.util.colour.RainbowUtil;
 import me.olliem5.past.util.text.FontUtil;
 import net.minecraft.client.gui.Gui;
 
@@ -32,12 +33,12 @@ public class IntegerComponent extends Component {
     public void renderComponent() {
         Gui.drawRect(parent.parent.getX() + 80, parent.parent.getY() - 12 + offset, parent.parent.getX() + parent.parent.getWidth() + parent.parent.getWidth(), parent.parent.getY() + offset, 0xFF111111);
         if (Past.settingsManager.getSettingID("OldClickGUIRainbow").getValBoolean()) {
-            Gui.drawRect(parent.parent.getX() + 80, parent.parent.getY() - 12 + offset, parent.parent.getX() + parent.parent.getWidth() + (int) sliderWidth, parent.parent.getY() + offset, ColourUtil.getMultiColour().getRGB());
+            Gui.drawRect(parent.parent.getX() + 80, parent.parent.getY() - 12 + offset, parent.parent.getX() + parent.parent.getWidth() + (int) sliderWidth, parent.parent.getY() + offset, RainbowUtil.getMultiColour().getRGB());
         } else {
             Gui.drawRect(parent.parent.getX() + 80, parent.parent.getY() - 12 + offset, parent.parent.getX() + parent.parent.getWidth() + (int) sliderWidth, parent.parent.getY() + offset, 0xFF222222);
         }
 
-        FontUtil.drawText(this.set.getName() + " " + ColourUtil.gray + this.set.getValueInt(), parent.parent.getX() + 82, (parent.parent.getY() + offset - 10), -1);
+        FontUtil.drawText(this.set.getName() + " " + ChatFormatting.GRAY + this.set.getValueInt(), parent.parent.getX() + 82, (parent.parent.getY() + offset - 10), -1);
     }
 
     @Override

@@ -1,12 +1,12 @@
 package me.olliem5.past.module.modules.combat;
 
+import com.mojang.realmsclient.gui.ChatFormatting;
 import me.olliem5.past.Past;
 import me.olliem5.past.event.events.PacketEvent;
 import me.olliem5.past.module.Category;
 import me.olliem5.past.module.Module;
 import me.olliem5.past.settings.Setting;
 import me.olliem5.past.util.client.MessageUtil;
-import me.olliem5.past.util.colour.ColourUtil;
 import me.olliem5.past.util.module.CooldownUtil;
 import me.olliem5.past.util.module.CrystalUtil;
 import me.olliem5.past.util.render.RenderUtil;
@@ -207,7 +207,7 @@ public class AutoCrystal extends Module {
 
                     if (rotate.getValBoolean()) {
                         if (infomessages.getValBoolean()) {
-                            MessageUtil.sendAutoCrystalMessage(ColourUtil.white + "Rotating to" + ColourUtil.aqua + " " + "crystal" + " " + ColourUtil.white + crystal.posX + ", " + crystal.posY + ", " + crystal.posZ);
+                            MessageUtil.sendAutoCrystalMessage(ChatFormatting.WHITE + "Rotating to" + ChatFormatting.AQUA + " " + "crystal" + " " + ChatFormatting.WHITE + crystal.posX + ", " + crystal.posY + ", " + crystal.posZ);
                         }
                         crystalUtil.lookAtPacket(crystal.posX, crystal.posY, crystal.posZ, mc.player);
                     }
@@ -216,12 +216,12 @@ public class AutoCrystal extends Module {
 
                     if (swinghand.getValueString() == "Offhand") {
                         if (infomessages.getValBoolean()) {
-                            MessageUtil.sendAutoCrystalMessage(ColourUtil.white + "Swinging the" + ColourUtil.aqua + " " + "offhand" + ColourUtil.white + " " + "at a crystal");
+                            MessageUtil.sendAutoCrystalMessage(ChatFormatting.WHITE + "Swinging the" + ChatFormatting.AQUA + " " + "offhand" + ChatFormatting.WHITE + " " + "at a crystal");
                         }
                         mc.player.swingArm(EnumHand.OFF_HAND);
                     } else {
                         if (infomessages.getValBoolean()) {
-                            MessageUtil.sendAutoCrystalMessage(ColourUtil.white + "Swinging the" + ColourUtil.aqua + " " + "mainhand" + ColourUtil.white + " " + "at a crystal");
+                            MessageUtil.sendAutoCrystalMessage(ChatFormatting.WHITE + "Swinging the" + ChatFormatting.AQUA + " " + "mainhand" + ChatFormatting.WHITE + " " + "at a crystal");
                         }
                         mc.player.swingArm(EnumHand.MAIN_HAND);
                     }
@@ -292,7 +292,7 @@ public class AutoCrystal extends Module {
 
                 if (rotate.getValBoolean()) {
                     if (infomessages.getValBoolean()) {
-                        MessageUtil.sendAutoCrystalMessage(ColourUtil.white + "Rotating to" + ColourUtil.aqua + " " + "block" + " " + ColourUtil.white + bPos.getX() + 0.5D + ", " + (bPos.getY() - 0.5D) + ", " + bPos.getZ() + 0.5D);
+                        MessageUtil.sendAutoCrystalMessage(ChatFormatting.WHITE + "Rotating to" + ChatFormatting.AQUA + " " + "block" + " " + ChatFormatting.WHITE + bPos.getX() + 0.5D + ", " + (bPos.getY() - 0.5D) + ", " + bPos.getZ() + 0.5D);
                     }
                     crystalUtil.lookAtPacket(bPos.getX() + 0.5D, bPos.getY() - 0.5D, bPos.getZ() + 0.5D, mc.player);
                 }
@@ -314,17 +314,17 @@ public class AutoCrystal extends Module {
                     if (raytrace.getValBoolean() && enumFacing != null) {
                         mc.player.connection.sendPacket(new CPacketPlayerTryUseItemOnBlock(bPos, enumFacing, offhand ? EnumHand.OFF_HAND : EnumHand.MAIN_HAND, 0, 0, 0));
                         if (infomessages.getValBoolean()) {
-                            MessageUtil.sendAutoCrystalMessage(ColourUtil.white + "Place packet sent" + ColourUtil.aqua + " " + "raytrace");
+                            MessageUtil.sendAutoCrystalMessage(ChatFormatting.WHITE + "Place packet sent" + ChatFormatting.AQUA + " " + "raytrace");
                         }
                     } else if (bPos.getY() == 255) {
                         mc.player.connection.sendPacket(new CPacketPlayerTryUseItemOnBlock(bPos, EnumFacing.DOWN, offhand ? EnumHand.OFF_HAND : EnumHand.MAIN_HAND, 0, 0, 0));
                         if (infomessages.getValBoolean()) {
-                            MessageUtil.sendAutoCrystalMessage(ColourUtil.white + "Place packet sent" + ColourUtil.aqua + " " + "y255 place");
+                            MessageUtil.sendAutoCrystalMessage(ChatFormatting.WHITE + "Place packet sent" + ChatFormatting.AQUA + " " + "y255 place");
                         }
                     } else {
                         mc.player.connection.sendPacket(new CPacketPlayerTryUseItemOnBlock(bPos, EnumFacing.UP, offhand ? EnumHand.OFF_HAND : EnumHand.MAIN_HAND, 0, 0, 0));
                         if (infomessages.getValBoolean()) {
-                            MessageUtil.sendAutoCrystalMessage(ColourUtil.white + "Place packet sent" + ColourUtil.aqua + " " + "normal");
+                            MessageUtil.sendAutoCrystalMessage(ChatFormatting.WHITE + "Place packet sent" + ChatFormatting.AQUA + " " + "normal");
                         }
                     }
                 }
@@ -402,7 +402,7 @@ public class AutoCrystal extends Module {
                     if (e instanceof EntityEnderCrystal) {
                         if (e.getDistance(packet.getX(), packet.getY(), packet.getZ()) <= 6.0f) {
                             if (infomessages.getValBoolean()) {
-                                MessageUtil.sendAutoCrystalMessage(ColourUtil.white + "Desync crystal" + ColourUtil.red + " " + "removed");
+                                MessageUtil.sendAutoCrystalMessage(ChatFormatting.WHITE + "Desync crystal" + ChatFormatting.RED + " " + "removed");
                             }
                             e.setDead();
                         }
@@ -419,11 +419,11 @@ public class AutoCrystal extends Module {
             if (crystalUtil.isSpoofingAngles) {
                 ((CPacketPlayer) packet).yaw = (float) crystalUtil.yaw;
                 if (infomessages.getValBoolean()) {
-                    MessageUtil.sendAutoCrystalMessage(ColourUtil.white + "Setting" + " " + ColourUtil.aqua + "yaw" + " " + ColourUtil.white + "to" + " " + crystalUtil.yaw);
+                    MessageUtil.sendAutoCrystalMessage(ChatFormatting.WHITE + "Setting" + " " + ChatFormatting.AQUA + "yaw" + " " + ChatFormatting.WHITE + "to" + " " + crystalUtil.yaw);
                 }
                 ((CPacketPlayer) packet).pitch = (float) crystalUtil.pitch;
                 if (infomessages.getValBoolean()) {
-                    MessageUtil.sendAutoCrystalMessage(ColourUtil.white + "Setting" + " " + ColourUtil.aqua + "pitch" + " " + ColourUtil.white + "to" + " " + crystalUtil.pitch);
+                    MessageUtil.sendAutoCrystalMessage(ChatFormatting.WHITE + "Setting" + " " + ChatFormatting.AQUA + "pitch" + " " + ChatFormatting.WHITE + "to" + " " + crystalUtil.pitch);
                 }
             }
         }
@@ -431,7 +431,7 @@ public class AutoCrystal extends Module {
 
     public String getArraylistInfo() {
         if (renderEnt != null) {
-            return ColourUtil.gray + " " + renderEnt.getName();
+            return ChatFormatting.GRAY + " " + renderEnt.getName();
         } else {
             return "";
         }

@@ -1,11 +1,11 @@
 package me.olliem5.past.module.modules.chat;
 
+import com.mojang.realmsclient.gui.ChatFormatting;
 import me.olliem5.past.Past;
 import me.olliem5.past.module.Category;
 import me.olliem5.past.module.Module;
 import me.olliem5.past.settings.Setting;
 import me.olliem5.past.util.client.MessageUtil;
-import me.olliem5.past.util.colour.ColourUtil;
 import me.olliem5.past.util.module.CooldownUtil;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
@@ -64,7 +64,7 @@ public class AutoInsult extends Module {
                         } else if (sendmode.getValueString() == "Public") {
                             mc.player.sendChatMessage(entity.getName() + "," + " " + "Nasty bowspammer, kys!");
                         } else {
-                            MessageUtil.sendAutoInsultMessage(ColourUtil.aqua + entity.getName() + " " + ColourUtil.white + "Fuck you, dirty bowspammer!");
+                            MessageUtil.sendAutoInsultMessage(ChatFormatting.AQUA + entity.getName() + " " + ChatFormatting.WHITE + "Fuck you, dirty bowspammer!");
                         }
                     }
                 }

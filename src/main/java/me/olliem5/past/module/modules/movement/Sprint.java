@@ -1,10 +1,10 @@
 package me.olliem5.past.module.modules.movement;
 
+import com.mojang.realmsclient.gui.ChatFormatting;
 import me.olliem5.past.Past;
 import me.olliem5.past.module.Category;
 import me.olliem5.past.module.Module;
 import me.olliem5.past.settings.Setting;
-import me.olliem5.past.util.colour.ColourUtil;
 
 import java.util.ArrayList;
 
@@ -50,6 +50,6 @@ public class Sprint extends Module {
     }
 
     public String getArraylistInfo() {
-        return ColourUtil.gray + " " + sprintmode.getValueString().toUpperCase();
+        return ChatFormatting.GRAY + " " + sprintmode.getValueString().toUpperCase();
     }
 }

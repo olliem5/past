@@ -5,7 +5,7 @@ import me.olliem5.past.gui.click.Component;
 import me.olliem5.past.gui.click.clickone.Panel;
 import me.olliem5.past.module.Module;
 import me.olliem5.past.settings.Setting;
-import me.olliem5.past.util.colour.ColourUtil;
+import me.olliem5.past.util.colour.RainbowUtil;
 import me.olliem5.past.util.text.FontUtil;
 import net.minecraft.client.gui.Gui;
 
@@ -55,7 +55,7 @@ public class ModuleButton extends Component {
     @Override
     public void renderComponent() {
         if (Past.settingsManager.getSettingID("OldClickGUIRainbow").getValBoolean() && this.mod.isToggled()) {
-            Gui.drawRect(parent.getX(), parent.getY() + offset, parent.getX() + parent.getWidth(), parent.getY() + 12 + offset, ColourUtil.getMultiColour().getRGB());
+            Gui.drawRect(parent.getX(), parent.getY() + offset, parent.getX() + parent.getWidth(), parent.getY() + 12 + offset, RainbowUtil.getMultiColour().getRGB());
         } else if (this.mod.isToggled()) {
             Gui.drawRect(parent.getX(), parent.getY() + offset, parent.getX() + parent.getWidth(), parent.getY() + 12 + offset, 0xFF222222);
         } else {
@@ -81,13 +81,13 @@ public class ModuleButton extends Component {
         if (Past.settingsManager.getSettingID("OldClickGUIDescriptions").getValBoolean() && hovered == true) {
             if (Past.settingsManager.getSettingID("OldClickGUIRainbow").getValBoolean()) {
                 if (Past.settingsManager.getSettingID("FontFont").getValueString() == "Lato") {
-                    Gui.drawRect(mousexx - 2, mouseyy - 2, mousexx + Past.latoFont.getStringWidth(mod.getDescription()) + 2, mouseyy + FontUtil.getFontHeight() + 2, ColourUtil.getMultiColour().getRGB());
+                    Gui.drawRect(mousexx - 2, mouseyy - 2, mousexx + Past.latoFont.getStringWidth(mod.getDescription()) + 2, mouseyy + FontUtil.getFontHeight() + 2, RainbowUtil.getMultiColour().getRGB());
                 } else if (Past.settingsManager.getSettingID("FontFont").getValueString() == "Verdana") {
-                    Gui.drawRect(mousexx - 2, mouseyy - 2, mousexx + Past.verdanaFont.getStringWidth(mod.getDescription()) + 2, mouseyy + FontUtil.getFontHeight() + 2, ColourUtil.getMultiColour().getRGB());
+                    Gui.drawRect(mousexx - 2, mouseyy - 2, mousexx + Past.verdanaFont.getStringWidth(mod.getDescription()) + 2, mouseyy + FontUtil.getFontHeight() + 2, RainbowUtil.getMultiColour().getRGB());
                 } else if (Past.settingsManager.getSettingID("FontFont").getValueString() == "Arial") {
-                    Gui.drawRect(mousexx - 2, mouseyy - 2, mousexx + Past.arialFont.getStringWidth(mod.getDescription()) + 2, mouseyy + FontUtil.getFontHeight() + 2, ColourUtil.getMultiColour().getRGB());
+                    Gui.drawRect(mousexx - 2, mouseyy - 2, mousexx + Past.arialFont.getStringWidth(mod.getDescription()) + 2, mouseyy + FontUtil.getFontHeight() + 2, RainbowUtil.getMultiColour().getRGB());
                 } else {
-                    Gui.drawRect(mousexx - 2, mouseyy - 2, mousexx + mc.fontRenderer.getStringWidth(mod.getDescription()) + 2, mouseyy + FontUtil.getFontHeight() + 2, ColourUtil.getMultiColour().getRGB());
+                    Gui.drawRect(mousexx - 2, mouseyy - 2, mousexx + mc.fontRenderer.getStringWidth(mod.getDescription()) + 2, mouseyy + FontUtil.getFontHeight() + 2, RainbowUtil.getMultiColour().getRGB());
                 }
             } else {
                 if (Past.settingsManager.getSettingID("FontFont").getValueString() == "Lato") {

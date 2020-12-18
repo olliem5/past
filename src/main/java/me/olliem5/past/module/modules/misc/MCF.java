@@ -1,10 +1,10 @@
 package me.olliem5.past.module.modules.misc;
 
+import com.mojang.realmsclient.gui.ChatFormatting;
 import me.olliem5.past.Past;
 import me.olliem5.past.module.Category;
 import me.olliem5.past.module.Module;
 import me.olliem5.past.util.client.MessageUtil;
-import me.olliem5.past.util.colour.ColourUtil;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.math.RayTraceResult;
@@ -35,10 +35,10 @@ public class MCF extends Module {
 
             if (Past.friendsManager.isFriend(player.getName())) {
                 Past.friendsManager.delFriend(mc.objectMouseOver.entityHit.getName());
-                MessageUtil.sendFreindsMessage(ColourUtil.white + "Player" + " " + ColourUtil.aqua + mc.objectMouseOver.entityHit.getName() + " " + ColourUtil.white + "has been" + " " + ColourUtil.red + "removed" + " " + ColourUtil.white + "from the friends list");
+                MessageUtil.sendFreindsMessage(ChatFormatting.WHITE + "Player" + " " + ChatFormatting.AQUA + mc.objectMouseOver.entityHit.getName() + " " + ChatFormatting.WHITE + "has been" + " " + ChatFormatting.RED + "removed" + " " + ChatFormatting.WHITE + "from the friends list");
             } else {
                 Past.friendsManager.addFriend(mc.objectMouseOver.entityHit.getName());
-                MessageUtil.sendFreindsMessage(ColourUtil.white + "Player" + " " + ColourUtil.aqua + mc.objectMouseOver.entityHit.getName() + " " + ColourUtil.white + "has been" + " " + ColourUtil.green + "added" + " " + ColourUtil.white + "to the friends list");
+                MessageUtil.sendFreindsMessage(ChatFormatting.WHITE + "Player" + " " + ChatFormatting.AQUA + mc.objectMouseOver.entityHit.getName() + " " + ChatFormatting.WHITE + "has been" + " " + ChatFormatting.GREEN + "added" + " " + ChatFormatting.WHITE + "to the friends list");
             }
         }
     }

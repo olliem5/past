@@ -1,8 +1,8 @@
 package me.olliem5.past.module.modules.combat;
 
+import com.mojang.realmsclient.gui.ChatFormatting;
 import me.olliem5.past.module.Category;
 import me.olliem5.past.module.Module;
-import me.olliem5.past.util.colour.ColourUtil;
 import net.minecraft.init.Items;
 import net.minecraft.inventory.ClickType;
 import net.minecraft.inventory.EntityEquipmentSlot;
@@ -57,6 +57,6 @@ public class AutoTotem extends Module {
     }
 
     public String getArraylistInfo() {
-        return ColourUtil.gray + " " + getTotemCount();
+        return ChatFormatting.GRAY + " " + getTotemCount();
     }
 }

@@ -1,7 +1,7 @@
 package me.olliem5.past.gui.click.clickone.components;
 
+import com.mojang.realmsclient.gui.ChatFormatting;
 import me.olliem5.past.gui.click.Component;
-import me.olliem5.past.util.colour.ColourUtil;
 import me.olliem5.past.util.text.FontUtil;
 import net.minecraft.client.gui.Gui;
 import org.lwjgl.input.Keyboard;
@@ -25,9 +25,9 @@ public class KeybindComponent extends Component {
         Gui.drawRect(parent.parent.getX() + 80, parent.parent.getY() - 12 + offset, parent.parent.getX() + parent.parent.getWidth() + parent.parent.getWidth(), parent.parent.getY() + offset, 0xFF111111);
 
         if (isBinding) {
-            FontUtil.drawText("Listening" + ColourUtil.gray + " " + "...", parent.parent.getX() + 82, (parent.parent.getY() + offset - 10), -1);
+            FontUtil.drawText("Listening" + ChatFormatting.GRAY + " " + "...", parent.parent.getX() + 82, (parent.parent.getY() + offset - 10), -1);
         } else {
-            FontUtil.drawText("Bind" + ColourUtil.gray + " " + Keyboard.getKeyName(this.parent.mod.getKey()), parent.parent.getX() + 82, (parent.parent.getY() + offset - 10), -1);
+            FontUtil.drawText("Bind" + ChatFormatting.GRAY + " " + Keyboard.getKeyName(this.parent.mod.getKey()), parent.parent.getX() + 82, (parent.parent.getY() + offset - 10), -1);
         }
     }
 

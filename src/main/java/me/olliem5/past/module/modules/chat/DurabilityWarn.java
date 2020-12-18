@@ -1,11 +1,11 @@
 package me.olliem5.past.module.modules.chat;
 
+import com.mojang.realmsclient.gui.ChatFormatting;
 import me.olliem5.past.Past;
 import me.olliem5.past.module.Category;
 import me.olliem5.past.module.Module;
 import me.olliem5.past.settings.Setting;
 import me.olliem5.past.util.client.MessageUtil;
-import me.olliem5.past.util.colour.ColourUtil;
 import me.olliem5.past.util.module.CooldownUtil;
 import me.olliem5.past.util.module.DurabilityUtil;
 import net.minecraft.entity.Entity;
@@ -65,7 +65,7 @@ public class DurabilityWarn extends Module {
                             } else if (sendmode.getValueString() == "Public") {
                                 mc.player.sendChatMessage(entity.getName() + "'s" + " " + getArmourPiece(itemStack) + " " + "getting low on durability" + "!");
                             } else if (sendmode.getValueString() == "Client") {
-                                MessageUtil.sendDurabilityWarnMessage(ColourUtil.green + entity.getName() + "'s" + " " + ColourUtil.aqua + getArmourPiece(itemStack) + " " + ColourUtil.white + "getting low on durability" + "!");
+                                MessageUtil.sendDurabilityWarnMessage(ChatFormatting.GREEN + entity.getName() + "'s" + " " + ChatFormatting.AQUA + getArmourPiece(itemStack) + " " + ChatFormatting.WHITE + "getting low on durability" + "!");
                             }
                         }
                     }
@@ -74,14 +74,14 @@ public class DurabilityWarn extends Module {
         }
     }
 
-    private String getArmourPiece(ItemStack stack) {
-        if (stack.getItem() == Items.DIAMOND_HELMET || stack.getItem() == Items.GOLDEN_HELMET || stack.getItem() == Items.IRON_HELMET || stack.getItem() == Items.CHAINMAIL_HELMET || stack.getItem() == Items.LEATHER_HELMET) {
+    private String getArmourPiece(ItemStack itemStack) {
+        if (itemStack.getItem() == Items.DIAMOND_HELMET || itemStack.getItem() == Items.GOLDEN_HELMET || itemStack.getItem() == Items.IRON_HELMET || itemStack.getItem() == Items.CHAINMAIL_HELMET || itemStack.getItem() == Items.LEATHER_HELMET) {
             return "helmet is";
-        } else if (stack.getItem() == Items.DIAMOND_CHESTPLATE || stack.getItem() == Items.GOLDEN_CHESTPLATE || stack.getItem() == Items.IRON_CHESTPLATE || stack.getItem() == Items.CHAINMAIL_CHESTPLATE || stack.getItem() == Items.LEATHER_CHESTPLATE) {
+        } else if (itemStack.getItem() == Items.DIAMOND_CHESTPLATE || itemStack.getItem() == Items.GOLDEN_CHESTPLATE || itemStack.getItem() == Items.IRON_CHESTPLATE || itemStack.getItem() == Items.CHAINMAIL_CHESTPLATE || itemStack.getItem() == Items.LEATHER_CHESTPLATE) {
             return "chestplate is";
-        } else if (stack.getItem() == Items.DIAMOND_LEGGINGS || stack.getItem() == Items.GOLDEN_LEGGINGS || stack.getItem() == Items.IRON_LEGGINGS || stack.getItem() == Items.CHAINMAIL_LEGGINGS || stack.getItem() == Items.LEATHER_LEGGINGS) {
+        } else if (itemStack.getItem() == Items.DIAMOND_LEGGINGS || itemStack.getItem() == Items.GOLDEN_LEGGINGS || itemStack.getItem() == Items.IRON_LEGGINGS || itemStack.getItem() == Items.CHAINMAIL_LEGGINGS || itemStack.getItem() == Items.LEATHER_LEGGINGS) {
             return "leggings are";
-        } else if (stack.getItem() == Items.DIAMOND_BOOTS || stack.getItem() == Items.GOLDEN_BOOTS || stack.getItem() == Items.IRON_BOOTS || stack.getItem() == Items.CHAINMAIL_BOOTS || stack.getItem() == Items.LEATHER_BOOTS) {
+        } else if (itemStack.getItem() == Items.DIAMOND_BOOTS || itemStack.getItem() == Items.GOLDEN_BOOTS || itemStack.getItem() == Items.IRON_BOOTS || itemStack.getItem() == Items.CHAINMAIL_BOOTS || itemStack.getItem() == Items.LEATHER_BOOTS) {
             return "boots are";
         } else {
             return "";

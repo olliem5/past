@@ -3,7 +3,7 @@ package me.olliem5.past.gui.editor.screen;
 import me.olliem5.past.Past;
 import me.olliem5.past.gui.editor.component.HudComponent;
 import me.olliem5.past.gui.editor.screen.element.HudButton;
-import me.olliem5.past.util.colour.ColourUtil;
+import me.olliem5.past.util.colour.RainbowUtil;
 import me.olliem5.past.util.module.GUIColourUtil;
 import me.olliem5.past.util.text.FontUtil;
 import net.minecraft.client.Minecraft;
@@ -49,7 +49,7 @@ public class HudPanel {
     }
 
     public void drawScreen(int mouseX, int mouseY, float partialTicks) {
-        Gui.drawRect(x - 1, y - 1, x + width + 1, y + height + 1, Past.settingsManager.getSettingID("HudEditorRainbow").getValBoolean() ? ColourUtil.getMultiColour().getRGB() : GUIColourUtil.getGUIColour());
+        Gui.drawRect(x - 1, y - 1, x + width + 1, y + height + 1, Past.settingsManager.getSettingID("HudEditorRainbow").getValBoolean() ? RainbowUtil.getMultiColour().getRGB() : GUIColourUtil.getGUIColour());
         Gui.drawRect(x, y, x + width, y + height, 0x75101010);
 
         if (Past.settingsManager.getSettingID("FontFont").getValueString() == "Lato") {

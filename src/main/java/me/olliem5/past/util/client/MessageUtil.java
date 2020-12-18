@@ -1,6 +1,6 @@
 package me.olliem5.past.util.client;
 
-import me.olliem5.past.util.colour.ColourUtil;
+import com.mojang.realmsclient.gui.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.util.text.TextComponentString;
@@ -8,16 +8,16 @@ import net.minecraft.util.text.TextComponentString;
 public class MessageUtil {
     private static final EntityPlayerSP player = Minecraft.getMinecraft().player;
 
-    public static String prefix = ColourUtil.gray + "[" + ColourUtil.red + "Past Client" + ColourUtil.gray + "]";
-    public static String entityalertPrefix = ColourUtil.gray + "[" + ColourUtil.darkRed + "EntityAlert" + ColourUtil.gray + "]";
-    public static String weaknessAlertPrefix = ColourUtil.gray + "[" + ColourUtil.darkRed + "WeaknessDetect" + ColourUtil.gray + "]";
-    public static String bedAuraPrefix = ColourUtil.gray + "[" + ColourUtil.darkRed + "BedAura" + ColourUtil.gray + "]";
-    public static String surroundPrefix = ColourUtil.gray + "[" + ColourUtil.darkRed + "Surround" + ColourUtil.gray + "]";
-    public static String autoBuilderPrefix = ColourUtil.gray + "[" + ColourUtil.darkRed + "AutoBuilder" + ColourUtil.gray + "]";
-    public static String friendsPrefix = ColourUtil.gray + "[" + ColourUtil.darkRed + "Friends" + ColourUtil.gray + "]";
-    public static String autoCrystalPrefix = ColourUtil.gray + "[" + ColourUtil.darkRed + "AutoCrystal" + ColourUtil.gray + "]";
-    public static String autoInsultPrefix = ColourUtil.gray + "[" + ColourUtil.darkRed + "AutoInsult" + ColourUtil.gray + "]";
-    public static String durabilityWarnPrefix = ColourUtil.gray + "[" + ColourUtil.darkRed + "DurabilityWarn" + ColourUtil.gray + "]";
+    public static String prefix = ChatFormatting.GRAY + "[" + ChatFormatting.RED + "Past Client" + ChatFormatting.GRAY + "]";
+    public static String entityalertPrefix = ChatFormatting.GRAY + "[" + ChatFormatting.DARK_RED + "EntityAlert" + ChatFormatting.GRAY + "]";
+    public static String weaknessAlertPrefix = ChatFormatting.GRAY + "[" + ChatFormatting.DARK_RED + "WeaknessDetect" + ChatFormatting.GRAY + "]";
+    public static String bedAuraPrefix = ChatFormatting.GRAY + "[" + ChatFormatting.DARK_RED + "BedAura" + ChatFormatting.GRAY + "]";
+    public static String surroundPrefix = ChatFormatting.GRAY + "[" + ChatFormatting.DARK_RED + "Surround" + ChatFormatting.GRAY + "]";
+    public static String autoBuilderPrefix = ChatFormatting.GRAY + "[" + ChatFormatting.DARK_RED + "AutoBuilder" + ChatFormatting.GRAY + "]";
+    public static String friendsPrefix = ChatFormatting.GRAY + "[" + ChatFormatting.DARK_RED + "Friends" + ChatFormatting.GRAY + "]";
+    public static String autoCrystalPrefix = ChatFormatting.GRAY + "[" + ChatFormatting.DARK_RED + "AutoCrystal" + ChatFormatting.GRAY + "]";
+    public static String autoInsultPrefix = ChatFormatting.GRAY + "[" + ChatFormatting.DARK_RED + "AutoInsult" + ChatFormatting.GRAY + "]";
+    public static String durabilityWarnPrefix = ChatFormatting.GRAY + "[" + ChatFormatting.DARK_RED + "DurabilityWarn" + ChatFormatting.GRAY + "]";
 
     public static void sendRawMessage(String message) {
         player.sendMessage(new TextComponentString(message));

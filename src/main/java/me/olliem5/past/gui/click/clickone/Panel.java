@@ -5,7 +5,7 @@ import me.olliem5.past.gui.click.Component;
 import me.olliem5.past.gui.click.clickone.components.ModuleButton;
 import me.olliem5.past.module.Category;
 import me.olliem5.past.module.Module;
-import me.olliem5.past.util.colour.ColourUtil;
+import me.olliem5.past.util.colour.RainbowUtil;
 import me.olliem5.past.util.text.FontUtil;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Gui;
@@ -53,7 +53,7 @@ public class Panel {
 
     public void drawScreen(int mouseX, int mouseY, float partialTicks) {
         if (Past.settingsManager.getSettingID("OldClickGUIRainbow").getValBoolean()) {
-            Gui.drawRect(x, y, x + width, y + height, ColourUtil.getMultiColour().getRGB());
+            Gui.drawRect(x, y, x + width, y + height, RainbowUtil.getMultiColour().getRGB());
         } else {
             Gui.drawRect(x, y, x + width, y + height, 0xFF222222);
         }

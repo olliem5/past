@@ -1,11 +1,11 @@
 package me.olliem5.past.module.modules.combat;
 
+import com.mojang.realmsclient.gui.ChatFormatting;
 import me.olliem5.past.Past;
 import me.olliem5.past.module.Category;
 import me.olliem5.past.module.Module;
 import me.olliem5.past.settings.Setting;
 import me.olliem5.past.util.client.MessageUtil;
-import me.olliem5.past.util.colour.ColourUtil;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
@@ -93,7 +93,7 @@ public class BonBedAura extends Module {
             mc.player.inventory.currentItem = playerHotbarSlot;
         }
         if (debugMessages.getValBoolean()) {
-            MessageUtil.sendBedAuraMessage(ColourUtil.white + "Module has been" + " " + ColourUtil.red + "disabled" + ColourUtil.gray + ".");
+            MessageUtil.sendBedAuraMessage(ChatFormatting.WHITE + "Module has been" + " " + ChatFormatting.RED + "disabled" + ChatFormatting.GRAY + ".");
         }
 
         MinecraftForge.EVENT_BUS.unregister(this);
@@ -110,7 +110,7 @@ public class BonBedAura extends Module {
         }
 
         if (mc.player.dimension == 0) {
-            MessageUtil.sendBedAuraMessage(ColourUtil.gray + "[" + ColourUtil.red + "Error" + ColourUtil.gray + "]" + " " + ColourUtil.white + "You are in the" + " " + ColourUtil.green + "Overworld" + ColourUtil.gray + "!" + " " + ColourUtil.white + "Please go into the" + " " + ColourUtil.red + "Nether" + " " + ColourUtil.white + "to use this feature" + ColourUtil.gray + ".");
+            MessageUtil.sendBedAuraMessage(ChatFormatting.GRAY + "[" + ChatFormatting.RED + "Error" + ChatFormatting.GRAY + "]" + " " + ChatFormatting.WHITE + "You are in the" + " " + ChatFormatting.GRAY + "Overworld" + ChatFormatting.GRAY + "!" + " " + ChatFormatting.WHITE + "Please go into the" + " " + ChatFormatting.RED + "Nether" + " " + ChatFormatting.WHITE + "to use this feature" + ChatFormatting.GRAY + ".");
             this.toggle();
         }
 
@@ -123,7 +123,7 @@ public class BonBedAura extends Module {
             if (firstRun) {
                 firstRun = false;
                 if (debugMessages.getValBoolean()) {
-                    MessageUtil.sendBedAuraMessage(ColourUtil.white + "Module has been" + " " + ColourUtil.green + "enabled" + ColourUtil.gray + "," + " " + ColourUtil.white + "waiting for a target" + ColourUtil.gray + "...");
+                    MessageUtil.sendBedAuraMessage(ChatFormatting.WHITE + "Module has been" + " " + ChatFormatting.GREEN + "enabled" + ChatFormatting.GRAY + "," + " " + ChatFormatting.WHITE + "waiting for a target" + ChatFormatting.GRAY + "...");
                 }
             }
         }
@@ -132,7 +132,7 @@ public class BonBedAura extends Module {
             firstRun = false;
             lastTickTargetName = closestTarget.getName();
             if (debugMessages.getValBoolean()) {
-                MessageUtil.sendBedAuraMessage(ColourUtil.white + "Module has been" + " " + ColourUtil.green + "activated" + ColourUtil.gray + "," + " " + ColourUtil.white + "the target is" + " " + ColourUtil.aqua.toString() + lastTickTargetName + ColourUtil.gray + ".");
+                MessageUtil.sendBedAuraMessage(ChatFormatting.WHITE + "Module has been" + " " + ChatFormatting.GREEN + "activated" + ChatFormatting.GRAY + "," + " " + ChatFormatting.WHITE + "the target is" + " " + ChatFormatting.AQUA.toString() + lastTickTargetName + ChatFormatting.GRAY + ".");
             }
         }
 
@@ -140,7 +140,7 @@ public class BonBedAura extends Module {
             if (!lastTickTargetName.equals(closestTarget.getName())) {
                 lastTickTargetName = closestTarget.getName();
                 if (debugMessages.getValBoolean()) {
-                    MessageUtil.sendBedAuraMessage(ColourUtil.white + "New target" + ColourUtil.gray + " " + "-" + " " + ColourUtil.aqua.toString() + lastTickTargetName + ColourUtil.gray + ".");
+                    MessageUtil.sendBedAuraMessage(ChatFormatting.WHITE + "New target" + ChatFormatting.GRAY + " " + "-" + " " + ChatFormatting.AQUA + lastTickTargetName + ChatFormatting.GRAY + ".");
                 }
             }
         }
@@ -308,7 +308,7 @@ public class BonBedAura extends Module {
 
     public String getArraylistInfo() {
         if (closestTarget != null) {
-            return ColourUtil.gray + " " + closestTarget.getName();
+            return ChatFormatting.GRAY + " " + closestTarget.getName();
         } else {
             return "";
         }

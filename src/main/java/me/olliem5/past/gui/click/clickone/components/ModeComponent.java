@@ -1,8 +1,8 @@
 package me.olliem5.past.gui.click.clickone.components;
 
+import com.mojang.realmsclient.gui.ChatFormatting;
 import me.olliem5.past.gui.click.Component;
 import me.olliem5.past.settings.Setting;
-import me.olliem5.past.util.colour.ColourUtil;
 import me.olliem5.past.util.text.FontUtil;
 import net.minecraft.client.gui.Gui;
 
@@ -27,7 +27,7 @@ public class ModeComponent extends Component {
     public void renderComponent() {
         Gui.drawRect(parent.parent.getX() + 80, parent.parent.getY() - 12 + offset, parent.parent.getX() + parent.parent.getWidth() + parent.parent.getWidth(), parent.parent.getY() + offset, 0xFF111111);
 
-        FontUtil.drawText(this.op.getName() + " " + ColourUtil.gray + this.op.getValueString().toUpperCase(), parent.parent.getX() + 82, (parent.parent.getY() + offset - 10), -1);
+        FontUtil.drawText(this.op.getName() + " " + ChatFormatting.GRAY + this.op.getValueString().toUpperCase(), parent.parent.getX() + 82, (parent.parent.getY() + offset - 10), -1);
     }
 
     @Override

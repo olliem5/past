@@ -1,11 +1,11 @@
 package me.olliem5.past.module.modules.combat;
 
+import com.mojang.realmsclient.gui.ChatFormatting;
 import me.olliem5.past.Past;
 import me.olliem5.past.module.Category;
 import me.olliem5.past.module.Module;
 import me.olliem5.past.settings.Setting;
 import me.olliem5.past.util.client.MessageUtil;
-import me.olliem5.past.util.colour.ColourUtil;
 import me.olliem5.past.util.player.PlayerUtil;
 import net.minecraft.init.Blocks;
 import net.minecraft.network.play.client.CPacketPlayer;
@@ -70,7 +70,7 @@ public class Surround extends Module {
             mc.player.motionZ = 0;
 
             if (infomessages.getValBoolean()) {
-                MessageUtil.sendSurroundMessage(ColourUtil.white + "Centering!");
+                MessageUtil.sendSurroundMessage(ChatFormatting.WHITE + "Centering!");
             }
 
             mc.player.connection.sendPacket(new CPacketPlayer.Position(center.x, center.y, center.z, true));
@@ -85,20 +85,20 @@ public class Surround extends Module {
             if (this.isToggled() && disablemode.getValueString() != "Never") {
                 if (mc.player.ticksExisted % timeoutticks.getValueInt() == 0) {
                     if (infomessages.getValBoolean()) {
-                        MessageUtil.sendSurroundMessage(ColourUtil.white + "Module is" + ColourUtil.red + " " + "disabling" + ColourUtil.gray + " " + "(Timed Out)");
+                        MessageUtil.sendSurroundMessage(ChatFormatting.WHITE + "Module is" + ChatFormatting.RED + " " + "disabling" + ChatFormatting.GRAY + " " + "(Timed Out)");
                     }
                     toggle();
                 }
             }
         } else if (hasPlaced == true && disablemode.getValueString() == "Finish") {
             if (infomessages.getValBoolean()) {
-                MessageUtil.sendSurroundMessage(ColourUtil.white + "Module is" + ColourUtil.red + " " + "disabling" + ColourUtil.gray + " " + "(Finished)");
+                MessageUtil.sendSurroundMessage(ChatFormatting.WHITE + "Module is" + ChatFormatting.RED + " " + "disabling" + ChatFormatting.GRAY + " " + "(Finished)");
             }
             toggle();
         } else {
             if (!mc.player.onGround) {
                 if (infomessages.getValBoolean()) {
-                    MessageUtil.sendSurroundMessage(ColourUtil.white + "Module is" + ColourUtil.red + " " + "disabling" + ColourUtil.gray + " " + "(OnJump)");
+                    MessageUtil.sendSurroundMessage(ChatFormatting.WHITE + "Module is" + ChatFormatting.RED + " " + "disabling" + ChatFormatting.GRAY + " " + "(OnJump)");
                 }
                 toggle();
             }
@@ -114,18 +114,18 @@ public class Surround extends Module {
 
                 if (preferobi.getValBoolean()) {
                     if (infomessages.getValBoolean()) {
-                        MessageUtil.sendSurroundMessage(ColourUtil.white + "Switching to" + " " + ColourUtil.aqua + "obsidian");
+                        MessageUtil.sendSurroundMessage(ChatFormatting.WHITE + "Switching to" + " " + ChatFormatting.AQUA + "obsidian");
                     }
                     mc.player.inventory.currentItem = PlayerUtil.getBlockInHotbar(Blocks.OBSIDIAN);
                 } else {
                     if (infomessages.getValBoolean()) {
-                        MessageUtil.sendSurroundMessage(ColourUtil.white + "Switching to" + " " + ColourUtil.aqua + "any block");
+                        MessageUtil.sendSurroundMessage(ChatFormatting.WHITE + "Switching to" + " " + ChatFormatting.AQUA + "any block");
                     }
                     mc.player.inventory.currentItem = PlayerUtil.getAnyBlockInHotbar();
                 }
 
                 if (infomessages.getValBoolean()) {
-                    MessageUtil.sendSurroundMessage(ColourUtil.white + "Placing block");
+                    MessageUtil.sendSurroundMessage(ChatFormatting.WHITE + "Placing block");
                 }
 
                 PlayerUtil.placeBlock(blockPos);
@@ -195,6 +195,6 @@ public class Surround extends Module {
     }
 
     public String getArraylistInfo() {
-        return ColourUtil.gray + " " + placemode.getValueString().toUpperCase();
+        return ChatFormatting.GRAY + " " + placemode.getValueString().toUpperCase();
     }
 }

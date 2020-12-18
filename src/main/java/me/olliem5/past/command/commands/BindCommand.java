@@ -1,10 +1,10 @@
 package me.olliem5.past.command.commands;
 
+import com.mojang.realmsclient.gui.ChatFormatting;
 import me.olliem5.past.Past;
 import me.olliem5.past.command.Command;
 import me.olliem5.past.module.Module;
 import me.olliem5.past.util.client.MessageUtil;
-import me.olliem5.past.util.colour.ColourUtil;
 import org.lwjgl.input.Keyboard;
 
 public class BindCommand extends Command {
@@ -19,9 +19,9 @@ public class BindCommand extends Command {
                 if (module.getName().equalsIgnoreCase(args[1])) {
                     try {
                         module.setKey(Keyboard.getKeyIndex(args[2].toUpperCase()));
-                        MessageUtil.sendMessagePrefix(ColourUtil.aqua + module.getName() + ColourUtil.white + " is now bound to " + ColourUtil.red + args[2].toUpperCase() + ColourUtil.gray + " (" + ColourUtil.white + Keyboard.getKeyIndex(args[2].toUpperCase()) + ColourUtil.gray + ")");
+                        MessageUtil.sendMessagePrefix(ChatFormatting.AQUA + module.getName() + ChatFormatting.WHITE + " is now bound to " + ChatFormatting.RED + args[2].toUpperCase() + ChatFormatting.GRAY + " (" + ChatFormatting.WHITE + Keyboard.getKeyIndex(args[2].toUpperCase()) + ChatFormatting.GRAY + ")");
                     } catch (Exception e) {
-                        MessageUtil.sendMessagePrefix(ColourUtil.red + "Something went wrong, yikes!");
+                        MessageUtil.sendMessagePrefix(ChatFormatting.RED + "Something went wrong, yikes!");
                     }
                 }
             }

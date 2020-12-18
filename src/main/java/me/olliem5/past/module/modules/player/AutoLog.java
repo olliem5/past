@@ -1,10 +1,10 @@
 package me.olliem5.past.module.modules.player;
 
+import com.mojang.realmsclient.gui.ChatFormatting;
 import me.olliem5.past.Past;
 import me.olliem5.past.module.Category;
 import me.olliem5.past.module.Module;
 import me.olliem5.past.settings.Setting;
-import me.olliem5.past.util.colour.ColourUtil;
 import net.minecraft.client.gui.GuiMainMenu;
 
 import java.util.ArrayList;
@@ -49,6 +49,6 @@ public class AutoLog extends Module {
     }
 
     public String getArraylistInfo() {
-        return ColourUtil.gray + " " + logmode.getValueString().toUpperCase();
+        return ChatFormatting.GRAY + " " + logmode.getValueString().toUpperCase();
     }
 }

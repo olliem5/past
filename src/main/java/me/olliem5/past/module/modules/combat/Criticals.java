@@ -1,11 +1,11 @@
 package me.olliem5.past.module.modules.combat;
 
+import com.mojang.realmsclient.gui.ChatFormatting;
 import me.olliem5.past.Past;
 import me.olliem5.past.event.events.PacketEvent;
 import me.olliem5.past.module.Category;
 import me.olliem5.past.module.Module;
 import me.olliem5.past.settings.Setting;
-import me.olliem5.past.util.colour.ColourUtil;
 import me.olliem5.past.util.module.CooldownUtil;
 import me.zero.alpine.listener.EventHandler;
 import me.zero.alpine.listener.Listener;
@@ -14,14 +14,14 @@ import net.minecraft.network.play.client.CPacketUseEntity;
 
 import java.util.ArrayList;
 
+/**
+ * @author linustouchtips
+ */
+
 public class Criticals extends Module {
     public Criticals() {
         super("Criticals", "Makes every attack a critical", Category.COMBAT);
     }
-
-    /**
-     * @author linustouchtips
-     */
 
     Setting mode;
 
@@ -74,6 +74,6 @@ public class Criticals extends Module {
     });
 
     public String getArraylistInfo() {
-        return ColourUtil.gray + " " + mode.getValueString().toUpperCase();
+        return ChatFormatting.GRAY + " " + mode.getValueString().toUpperCase();
     }
 }
