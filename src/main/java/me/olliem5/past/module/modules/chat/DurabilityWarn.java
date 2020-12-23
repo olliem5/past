@@ -61,7 +61,7 @@ public class DurabilityWarn extends Module {
                         if (sendtimer.passed(delay.getValueInt())) {
                             sendtimer.reset();
                             if (sendmode.getValueString() == "Whisper") {
-                                mc.player.sendChatMessage("/msg" + " " + entity.getName() + " " + "Boi, your" + " " + getArmourPiece(itemStack) + " " + "getting low on durability" + "!");
+                                mc.player.sendChatMessage("/msg" + " " + entity.getName() + " " + "Hey, your" + " " + getArmourPiece(itemStack) + " " + "getting low on durability" + "!");
                             } else if (sendmode.getValueString() == "Public") {
                                 mc.player.sendChatMessage(entity.getName() + "'s" + " " + getArmourPiece(itemStack) + " " + "getting low on durability" + "!");
                             } else if (sendmode.getValueString() == "Client") {

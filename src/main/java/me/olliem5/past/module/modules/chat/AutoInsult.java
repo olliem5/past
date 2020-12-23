@@ -43,6 +43,12 @@ public class AutoInsult extends Module {
         Past.settingsManager.registerSetting(bowspammsg = new Setting("Bowspam Msg", "AutoInsultBowspamMsg", true, this));
     }
 
+    /**
+     * TODO: More modes for this
+     * * Phase mode
+     * * Sword mode
+     */
+
     public void onUpdate() {
         if (nullCheck()) return;
 
@@ -60,11 +66,11 @@ public class AutoInsult extends Module {
                     if (sendtimer.passed(delay.getValueInt())) {
                         sendtimer.reset();
                         if (sendmode.getValueString() == "Whisper") {
-                            mc.player.sendChatMessage("/msg" + " " + entity.getName() + " " + "Hey, bowspammer, fuck you!");
+                            mc.player.sendChatMessage("/msg" + " " + entity.getName() + " " + "Hey, bowspammer, no one likes you!");
                         } else if (sendmode.getValueString() == "Public") {
-                            mc.player.sendChatMessage(entity.getName() + "," + " " + "Nasty bowspammer, kys!");
+                            mc.player.sendChatMessage(entity.getName() + "," + " " + "Nasty bowspammer, fight like a real man!");
                         } else {
-                            MessageUtil.sendAutoInsultMessage(ChatFormatting.AQUA + entity.getName() + " " + ChatFormatting.WHITE + "Fuck you, dirty bowspammer!");
+                            MessageUtil.sendAutoInsultMessage(ChatFormatting.AQUA + entity.getName() + " " + ChatFormatting.WHITE + "is a dumb bowspammer!");
                         }
                     }
                 }
