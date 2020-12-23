@@ -62,8 +62,11 @@ public class AutoCrystal extends Module {
     Setting placemode;
     Setting breakmode;
     Setting swinghand;
+    Setting syncBreak;
+    Setting reloadCrystal;
     Setting rotate;
     Setting raytrace;
+    Setting breakAttempts;
     Setting nodesync;
     Setting enemyrange;
     Setting antisuicide;
@@ -121,6 +124,9 @@ public class AutoCrystal extends Module {
         Past.settingsManager.registerSetting(swinghand = new Setting("Swing", "AutoCrystalSwing", this, swinghands, "Mainhand"));
         Past.settingsManager.registerSetting(rotate = new Setting("Rotate", "AutoCrystalRotate", true, this));
         Past.settingsManager.registerSetting(raytrace = new Setting("Raytrace", "AutoCrystalRaytrace", true, this));
+        Past.settingsManager.registerSetting(syncBreak = new Setting("SyncBreak", "AutoCrystalSyncBreak", true, this));
+        Past.settingsManager.registerSetting(reloadCrystal = new Setting("Reload Crystal", "AutoCrystalReload", true, this));
+        Past.settingsManager.registerSetting(breakAttempts = new Setting("Break Attempts", "AutoCrystalBreakAttempts", 1.0, 1.0, 5.0, this));
         Past.settingsManager.registerSetting(nodesync = new Setting("No Desync", "AutoCrystalNoDesync", true, this));
         Past.settingsManager.registerSetting(enemyrange = new Setting("Enemy Rng", "AutoCrystalEnemyRange", 1.0, 15.0, 50.0, this));
         Past.settingsManager.registerSetting(antisuicide = new Setting("Anti Suicide", "AutoCrystalAntiSuicide", true, this));
@@ -128,9 +134,9 @@ public class AutoCrystal extends Module {
         Past.settingsManager.registerSetting(placedelay = new Setting("Place Delay", "AutoCrystalPlaceDelay", 0, 2, 20, this));
         Past.settingsManager.registerSetting(breakdelay = new Setting("Break Delay", "AutoCrystalBreakDelay", 0, 2, 20, this));
         Past.settingsManager.registerSetting(wallsrange = new Setting("Walls Range", "AutoCrystalWallsRange", 0.0, 3.5, 10.0, this));
-        Past.settingsManager.registerSetting(placerange = new Setting("Place Range", "AutoCrystalPlaceRange", 0.0, 4.4, 10.0, this));
-        Past.settingsManager.registerSetting(breakrange = new Setting("Break Range", "AutoCrystalBreakRange", 0.0, 4.4, 10.0, this));
-        Past.settingsManager.registerSetting(mindamage = new Setting("Min Damage", "AutoCrystalMinDamage", 0.0, 6.0, 36.0, this));
+        Past.settingsManager.registerSetting(placerange = new Setting("Place Range", "AutoCrystalPlaceRange", 0.0, 5.5, 10.0, this));
+        Past.settingsManager.registerSetting(breakrange = new Setting("Break Range", "AutoCrystalBreakRange", 0.0, 5.5, 10.0, this));
+        Past.settingsManager.registerSetting(mindamage = new Setting("Min Damage", "AutoCrystalMinDamage", 0.0, 7.0, 36.0, this));
         Past.settingsManager.registerSetting(maxselfdamage = new Setting("Max Self Dmg", "AutoCrystalMaxSelfDamage", 0.0, 8.0, 36.0, this));
         Past.settingsManager.registerSetting(faceplace = new Setting("Faceplace HP", "AutoCrystalFaceplace", 0.0, 8.0, 36.0, this));
         Past.settingsManager.registerSetting(infomessages = new Setting("Info Messages", "AutoCrystalInfoMessages", false, this));
@@ -212,7 +218,9 @@ public class AutoCrystal extends Module {
                         crystalUtil.lookAtPacket(crystal.posX, crystal.posY, crystal.posZ, mc.player);
                     }
 
-                    mc.playerController.attackEntity(mc.player, crystal);
+                    for (int i = 0; i < breakAttempts.getValueDouble(); i++) {
+                        mc.playerController.attackEntity(mc.player, crystal);
+                    }
 
                     if (swinghand.getValueString() == "Offhand") {
                         if (infomessages.getValBoolean()) {
@@ -226,7 +234,15 @@ public class AutoCrystal extends Module {
                         mc.player.swingArm(EnumHand.MAIN_HAND);
                     }
 
+                    if (syncBreak.getValBoolean())
+                        crystal.setDead();
+
+                    if (reloadCrystal.getValBoolean()) {
+                        mc.world.removeAllEntities();
+                        mc.world.getLoadedEntityList();
+                    }
                 }
+
                 if (breakmode.getValueString() == "None") return;
                 //Other break modes in the future, OnlyOwn, Smart/MostDamage
                 breaktimer.reset();
