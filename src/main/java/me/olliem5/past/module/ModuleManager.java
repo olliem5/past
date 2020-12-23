@@ -62,7 +62,6 @@ public class ModuleManager {
         modules.add(new Flight());
         modules.add(new Velocity());
         modules.add(new NoSlow());
-        modules.add(new ElytraFly());
 
         /* Player */
         modules.add(new WeaknessAlert());
