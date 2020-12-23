@@ -80,19 +80,19 @@ public class HoleESP extends Module {
                 for (BlockPos obiHoles : holeUtil.findObsidianHoles()) {
                     if (!obsidianrainbow.getValBoolean()) {
                         if (rendermode.getValueString() == "Full") {
-                            RenderUtil.drawBox(RenderUtil.generateBB(obiHoles.getX(), obiHoles.getY(), obiHoles.getZ()), obsidianred.getValueInt(), obsidiangreen.getValueInt(), obsidianblue.getValueInt(), obsidianalpha.getValueInt());
+                            RenderUtil.drawBox(RenderUtil.generateBB(obiHoles.getX(), obiHoles.getY(), obiHoles.getZ()), obsidianred.getValueInt() / 255f, obsidiangreen.getValueInt() / 255f, obsidianblue.getValueInt() / 255f, obsidianalpha.getValueInt() / 255f);
                         } else if (rendermode.getValueString() == "FullFrame") {
-                            RenderUtil.drawBoxOutline(RenderUtil.generateBB(obiHoles.getX(), obiHoles.getY(), obiHoles.getZ()), obsidianred.getValueInt(), obsidiangreen.getValueInt(), obsidianblue.getValueInt(), obsidianalpha.getValueInt());
+                            RenderUtil.drawBoxOutline(RenderUtil.generateBB(obiHoles.getX(), obiHoles.getY(), obiHoles.getZ()), obsidianred.getValueInt() / 255f, obsidiangreen.getValueInt() / 255f, obsidianblue.getValueInt() / 255f, obsidianalpha.getValueInt() / 255f);
                         } else {
-                            RenderUtil.drawOutline(RenderUtil.generateBB(obiHoles.getX(), obiHoles.getY(), obiHoles.getZ()), obsidianred.getValueInt(), obsidiangreen.getValueInt(), obsidianblue.getValueInt(), obsidianalpha.getValueInt());
+                            RenderUtil.drawOutline(RenderUtil.generateBB(obiHoles.getX(), obiHoles.getY(), obiHoles.getZ()), obsidianred.getValueInt() / 255f, obsidiangreen.getValueInt() / 255f, obsidianblue.getValueInt() / 255f, obsidianalpha.getValueInt() / 255f);
                         }
                     } else {
                         if (rendermode.getValueString() == "Full") {
-                            RenderUtil.drawBox(RenderUtil.generateBB(obiHoles.getX(), obiHoles.getY(), obiHoles.getZ()), rgbred / 255f, rgbgreen / 255f, rgbblue / 255f, obsidianalpha.getValueInt());
+                            RenderUtil.drawBox(RenderUtil.generateBB(obiHoles.getX(), obiHoles.getY(), obiHoles.getZ()), rgbred / 255f, rgbgreen / 255f, rgbblue / 255f, obsidianalpha.getValueInt() / 255f);
                         } else if (rendermode.getValueString() == "FullFrame") {
-                            RenderUtil.drawBoxOutline(RenderUtil.generateBB(obiHoles.getX(), obiHoles.getY(), obiHoles.getZ()), rgbred / 255f, rgbgreen / 255f, rgbblue / 255f, obsidianalpha.getValueInt());
+                            RenderUtil.drawBoxOutline(RenderUtil.generateBB(obiHoles.getX(), obiHoles.getY(), obiHoles.getZ()), rgbred / 255f, rgbgreen / 255f, rgbblue / 255f, obsidianalpha.getValueInt() / 255f);
                         } else {
-                            RenderUtil.drawOutline(RenderUtil.generateBB(obiHoles.getX(), obiHoles.getY(), obiHoles.getZ()), rgbred / 255f, rgbgreen / 255f, rgbblue / 255f, obsidianalpha.getValueInt());
+                            RenderUtil.drawOutline(RenderUtil.generateBB(obiHoles.getX(), obiHoles.getY(), obiHoles.getZ()), rgbred / 255f, rgbgreen / 255f, rgbblue / 255f, obsidianalpha.getValueInt() / 255f);
                         }
                     }
                 }
@@ -104,19 +104,19 @@ public class HoleESP extends Module {
                 for (BlockPos bRockHoles : holeUtil.findBedrockHoles()) {
                     if (!bedrockrainbow.getValBoolean()) {
                         if (rendermode.getValueString() == "Full") {
-                            RenderUtil.drawBox(RenderUtil.generateBB(bRockHoles.getX(), bRockHoles.getY(), bRockHoles.getZ()), bedrockred.getValueInt(), bedrockgreen.getValueInt(), bedrockblue.getValueInt(), bedrockalpha.getValueInt());
+                            RenderUtil.drawBox(RenderUtil.generateBB(bRockHoles.getX(), bRockHoles.getY(), bRockHoles.getZ()), bedrockred.getValueInt() / 255f, bedrockgreen.getValueInt() / 255f, bedrockblue.getValueInt() / 255f, bedrockalpha.getValueInt() / 255f);
                         } else if (rendermode.getValueString() == "FullFrame") {
-                            RenderUtil.drawBoxOutline(RenderUtil.generateBB(bRockHoles.getX(), bRockHoles.getY(), bRockHoles.getZ()), bedrockred.getValueInt(), bedrockgreen.getValueInt(), bedrockblue.getValueInt(), bedrockalpha.getValueInt());
+                            RenderUtil.drawBoxOutline(RenderUtil.generateBB(bRockHoles.getX(), bRockHoles.getY(), bRockHoles.getZ()), bedrockred.getValueInt() / 255f, bedrockgreen.getValueInt() / 255f, bedrockblue.getValueInt() / 255f, bedrockalpha.getValueInt() / 255f);
                         } else {
-                            RenderUtil.drawOutline(RenderUtil.generateBB(bRockHoles.getX(), bRockHoles.getY(), bRockHoles.getZ()), bedrockred.getValueInt(), bedrockgreen.getValueInt(), bedrockblue.getValueInt(), bedrockalpha.getValueInt());
+                            RenderUtil.drawOutline(RenderUtil.generateBB(bRockHoles.getX(), bRockHoles.getY(), bRockHoles.getZ()), bedrockred.getValueInt() / 255f, bedrockgreen.getValueInt() / 255f, bedrockblue.getValueInt() / 255f, bedrockalpha.getValueInt() / 255f);
                         }
                     } else {
                         if (rendermode.getValueString() == "Full") {
-                            RenderUtil.drawBox(RenderUtil.generateBB(bRockHoles.getX(), bRockHoles.getY(), bRockHoles.getZ()), rgbred / 255f, rgbgreen / 255f, rgbblue / 255f, bedrockalpha.getValueInt());
+                            RenderUtil.drawBox(RenderUtil.generateBB(bRockHoles.getX(), bRockHoles.getY(), bRockHoles.getZ()), rgbred / 255f, rgbgreen / 255f, rgbblue / 255f, bedrockalpha.getValueInt() / 255f);
                         } else if (rendermode.getValueString() == "FullFrame") {
-                            RenderUtil.drawBoxOutline(RenderUtil.generateBB(bRockHoles.getX(), bRockHoles.getY(), bRockHoles.getZ()), rgbred / 255f, rgbgreen / 255f, rgbblue / 255f, bedrockalpha.getValueInt());
+                            RenderUtil.drawBoxOutline(RenderUtil.generateBB(bRockHoles.getX(), bRockHoles.getY(), bRockHoles.getZ()), rgbred / 255f, rgbgreen / 255f, rgbblue / 255f, bedrockalpha.getValueInt() / 255f);
                         } else {
-                            RenderUtil.drawOutline(RenderUtil.generateBB(bRockHoles.getX(), bRockHoles.getY(), bRockHoles.getZ()), rgbred / 255f, rgbgreen / 255f, rgbblue / 255f, bedrockalpha.getValueInt());
+                            RenderUtil.drawOutline(RenderUtil.generateBB(bRockHoles.getX(), bRockHoles.getY(), bRockHoles.getZ()), rgbred / 255f, rgbgreen / 255f, rgbblue / 255f, bedrockalpha.getValueInt() / 255f);
                         }
                     }
                 }

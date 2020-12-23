@@ -112,19 +112,19 @@ public class AutoCreeper extends Module {
 
             if (!rainbow.getValBoolean()) {
                 if (rendermode.getValueString() == "Full") {
-                    RenderUtil.drawBox(RenderUtil.generateBB(placePosition.getX(), placePosition.getY(), placePosition.getZ()), red.getValueInt(), green.getValueInt(), blue.getValueInt(), alpha.getValueInt());
+                    RenderUtil.drawBox(RenderUtil.generateBB(placePosition.getX(), placePosition.getY(), placePosition.getZ()), red.getValueInt() / 255f, green.getValueInt() / 255f, blue.getValueInt() / 255f, alpha.getValueInt() / 255f);
                 } else if (rendermode.getValueString() == "FullFrame") {
-                    RenderUtil.drawBoxOutline(RenderUtil.generateBB(placePosition.getX(), placePosition.getY(), placePosition.getZ()), red.getValueInt(), green.getValueInt(), blue.getValueInt(), alpha.getValueInt());
+                    RenderUtil.drawBoxOutline(RenderUtil.generateBB(placePosition.getX(), placePosition.getY(), placePosition.getZ()), red.getValueInt() / 255f, green.getValueInt() / 255f, blue.getValueInt() / 255f, alpha.getValueInt() / 255f);
                 } else {
-                    RenderUtil.drawOutline(RenderUtil.generateBB(placePosition.getX(), placePosition.getY(), placePosition.getZ()), red.getValueInt(), green.getValueInt(), blue.getValueInt(), alpha.getValueInt());
+                    RenderUtil.drawOutline(RenderUtil.generateBB(placePosition.getX(), placePosition.getY(), placePosition.getZ()), red.getValueInt() / 255f, green.getValueInt() / 255f, blue.getValueInt() / 255f, alpha.getValueInt() / 255f);
                 }
             } else {
                 if (rendermode.getValueString() == "Full") {
-                    RenderUtil.drawBox(RenderUtil.generateBB(placePosition.getX(), placePosition.getY(), placePosition.getZ()), rgbred / 255f, rgbgreen / 255f, rgbblue / 255f, alpha.getValueInt());
+                    RenderUtil.drawBox(RenderUtil.generateBB(placePosition.getX(), placePosition.getY(), placePosition.getZ()), rgbred / 255f, rgbgreen / 255f, rgbblue / 255f, alpha.getValueInt() / 255f);
                 } else if (rendermode.getValueString() == "FullFrame") {
-                    RenderUtil.drawBoxOutline(RenderUtil.generateBB(placePosition.getX(), placePosition.getY(), placePosition.getZ()), rgbred / 255f, rgbgreen / 255f, rgbblue / 255f, alpha.getValueInt());
+                    RenderUtil.drawBoxOutline(RenderUtil.generateBB(placePosition.getX(), placePosition.getY(), placePosition.getZ()), rgbred / 255f, rgbgreen / 255f, rgbblue / 255f, alpha.getValueInt() / 255f);
                 } else {
-                    RenderUtil.drawOutline(RenderUtil.generateBB(placePosition.getX(), placePosition.getY(), placePosition.getZ()), rgbred / 255f, rgbgreen / 255f, rgbblue / 255f, alpha.getValueInt());
+                    RenderUtil.drawOutline(RenderUtil.generateBB(placePosition.getX(), placePosition.getY(), placePosition.getZ()), rgbred / 255f, rgbgreen / 255f, rgbblue / 255f, alpha.getValueInt() / 255f);
                 }
             }
         }
