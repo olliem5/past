@@ -29,7 +29,7 @@ minecraft {
     version = project.forgeVersion
     runDir = "run"
     mappings = project.mcpVersion
-    coreMod = 'me.olliem5.past.mixin.MixinLoader'
+    coreMod = 'me.olliem5.past.api.mixin.MixinLoader'
     makeObfSourceJar = false
 }
 
@@ -113,7 +113,7 @@ jar {
                 'TweakClass': 'org.spongepowered.asm.launch.MixinTweaker',
                 'TweakOrder': 0,
                 'FMLCorePluginContainsFMLMod': 'true',
-                'FMLCorePlugin': 'me.olliem5.past.mixin.MixinLoader',
+                'FMLCorePlugin': 'me.olliem5.past.api.mixin.MixinLoader',
                 'ForceLoadAsMod': 'true',
                 'FMLAT': 'past_at.cfg'
         )

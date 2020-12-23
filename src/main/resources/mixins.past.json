@@ -1,7 +1,7 @@
 {
   "required": true,
   "compatibilityLevel": "JAVA_8",
-  "package": "me.olliem5.past.mixin.mixins",
+  "package": "me.olliem5.past.impl.mixins",
   "refmap": "mixins.past.refmap.json",
   "mixins": [
     "MixinGuiMainMenu",
