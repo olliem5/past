@@ -2,9 +2,11 @@ package me.olliem5.past.util.module;
 
 import me.olliem5.past.Past;
 import net.minecraft.client.Minecraft;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Vec3d;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -84,5 +86,30 @@ public class HoleUtil {
             ++x;
         }
         return circleblocks;
+    }
+
+    public static boolean isPlayerInHole(EntityPlayer entityPlayer) {
+        Vec3d[] hole = {
+                entityPlayer.getPositionVector().add(1.0D, 0.0D, 0.0D),
+                entityPlayer.getPositionVector().add(-1.0D, 0.0D, 0.0D),
+                entityPlayer.getPositionVector().add(0.0D, 0.0D, 1.0D),
+                entityPlayer.getPositionVector().add(0.0D, 0.0D, -1.0D),
+                entityPlayer.getPositionVector().add(0.0D, -1.0D, 0.0D)
+        };
+
+        int holeBlocks = 0;
+
+        for (Vec3d vec3d : hole) {
+            BlockPos offset = new BlockPos(vec3d.x, vec3d.y, vec3d.z);
+
+            if (mc.world.getBlockState(offset).getBlock() == Blocks.OBSIDIAN || mc.world.getBlockState(offset).getBlock() == Blocks.BEDROCK) {
+                ++holeBlocks;
+            }
+
+            if (holeBlocks == 5) {
+                return true;
+            }
+        }
+        return false;
     }
 }

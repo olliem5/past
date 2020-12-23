@@ -124,7 +124,7 @@ public class AutoCrystal extends Module {
         Past.settingsManager.registerSetting(swinghand = new Setting("Swing", "AutoCrystalSwing", this, swinghands, "Mainhand"));
         Past.settingsManager.registerSetting(rotate = new Setting("Rotate", "AutoCrystalRotate", true, this));
         Past.settingsManager.registerSetting(raytrace = new Setting("Raytrace", "AutoCrystalRaytrace", true, this));
-        Past.settingsManager.registerSetting(syncBreak = new Setting("SyncBreak", "AutoCrystalSyncBreak", true, this));
+        Past.settingsManager.registerSetting(syncBreak = new Setting("Sync Break", "AutoCrystalSyncBreak", true, this));
         Past.settingsManager.registerSetting(reloadCrystal = new Setting("Reload Crystal", "AutoCrystalReload", true, this));
         Past.settingsManager.registerSetting(breakAttempts = new Setting("Break Attempts", "AutoCrystalBreakAttempts", 1.0, 1.0, 5.0, this));
         Past.settingsManager.registerSetting(nodesync = new Setting("No Desync", "AutoCrystalNoDesync", true, this));

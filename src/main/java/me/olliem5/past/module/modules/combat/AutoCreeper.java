@@ -5,9 +5,11 @@ import me.olliem5.past.Past;
 import me.olliem5.past.module.Category;
 import me.olliem5.past.module.Module;
 import me.olliem5.past.settings.Setting;
+import me.olliem5.past.util.module.HoleUtil;
 import me.olliem5.past.util.render.RenderUtil;
 import me.zero.alpine.listener.EventHandler;
 import me.zero.alpine.listener.Listener;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
@@ -20,6 +22,9 @@ import net.minecraftforge.client.event.RenderWorldLastEvent;
 
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class AutoCreeper extends Module {
     public AutoCreeper() {
@@ -43,6 +48,7 @@ public class AutoCreeper extends Module {
     public void setup() {
         creepermodes = new ArrayList<>();
         creepermodes.add("Hole");
+        creepermodes.add("Always");
 
         Past.settingsManager.registerSetting(mode = new Setting("Mode", "AutoCreeperMode", this, creepermodes, "Hole"));
         Past.settingsManager.registerSetting(playerrange = new Setting("Player Range", "AutoCreeperPlayerRange", 1.0, 25.0, 50.0, this));
@@ -55,74 +61,39 @@ public class AutoCreeper extends Module {
         Past.settingsManager.registerSetting(rainbow = new Setting("Rainbow", "AutoCreeperRainbow", true, this));
     }
 
-    private BlockPos placePosition = null;
     private EntityPlayer target = null;
+    private BlockPos placePosition = null;
+
     private boolean offhand = false;
 
-    int holeBlocks;
-
     public void onDisable() {
-        placePosition = null;
         target = null;
+        placePosition = null;
     }
 
     public void onUpdate() {
         if (nullCheck()) return;
 
-        findPlacePosition();
-        placeCreeperEggs();
-    }
-
-    private void findPlacePosition() {
-        for (EntityPlayer player : mc.world.playerEntities) {
-            if (player != null && player != mc.player && !player.isDead && player.getDistanceSq(mc.player) < playerrange.getValueDouble()) {
-                if (mode.getValueString() == "Hole") {
-
-                    Vec3d[] hole = {
-                            player.getPositionVector().add(1.0D, 0.0D, 0.0D),
-                            player.getPositionVector().add(-1.0D, 0.0D, 0.0D),
-                            player.getPositionVector().add(0.0D, 0.0D, 1.0D),
-                            player.getPositionVector().add(0.0D, 0.0D, -1.0D),
-                            player.getPositionVector().add(0.0D, -1.0D, 0.0D)
-                    };
-
-                    Vec3d[] bottomHoleBlock = {
-                            player.getPositionVector().add(0.0D, -1.0D, 0.0D)
-                    };
-
-                    holeBlocks = 0;
-
-                    for (Vec3d vec3d : hole) {
-                        BlockPos offset = new BlockPos(vec3d.x, vec3d.y, vec3d.z);
-
-                        if (mc.world.getBlockState(offset).getBlock() == Blocks.OBSIDIAN || mc.world.getBlockState(offset).getBlock() == Blocks.BEDROCK) {
-                            ++holeBlocks;
-                        }
-
-                        if (holeBlocks == 5) {
-                            target = player;
-
-                            for (Vec3d vec3d1 : bottomHoleBlock) {
-                                BlockPos offset1 = new BlockPos(vec3d1.x, vec3d1.y, vec3d1.z);
-
-                                if (!(mc.player.getDistanceSq(target) <= 1)) {
-                                    placePosition = offset1;
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        }
-    }
-
-    private void placeCreeperEggs() {
         if (mc.player.getHeldItemOffhand().getItem() == Items.SPAWN_EGG) {
             offhand = true;
         } else {
             offhand = false;
         }
 
+        mc.world.playerEntities.stream()
+                .filter(target -> target != null)
+                .filter(target -> target != mc.player)
+                .filter(target -> mc.player.getDistance(target) <= playerrange.getValueDouble())
+                .filter(target -> !target.isDead)
+                .filter(target -> target.getHealth() > 0)
+                .filter(target -> HoleUtil.isPlayerInHole(target) || mode.getValueString() == "Always")
+                .forEach(target -> {
+                    placePosition = new BlockPos(target.posX, target.posY -1, target.posZ);
+                    placeCreeperEggs();
+                });
+    }
+
+    private void placeCreeperEggs() {
         if (placePosition != null) {
             if (mc.player.getHeldItemMainhand().getItem() == Items.SPAWN_EGG || mc.player.getHeldItemOffhand().getItem() == Items.SPAWN_EGG) {
                 mc.player.connection.sendPacket(new CPacketPlayerTryUseItemOnBlock(placePosition, EnumFacing.UP, offhand ? EnumHand.OFF_HAND : EnumHand.MAIN_HAND, 0, 0, 0));
