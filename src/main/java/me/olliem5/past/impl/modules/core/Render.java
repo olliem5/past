@@ -3,12 +3,11 @@ package me.olliem5.past.impl.modules.core;
 import me.olliem5.past.Past;
 import me.olliem5.past.api.module.Category;
 import me.olliem5.past.api.module.Module;
+import me.olliem5.past.api.module.ModuleInfo;
 import me.olliem5.past.api.setting.Setting;
 
+@ModuleInfo(name = "Render", description = "Changes values for client rendering", category = Category.CORE)
 public class Render extends Module {
-    public Render() {
-        super("Render", "Changes values for client rendering", Category.CORE);
-    }
 
     /**
      * Just to store values for RenderUtil.java

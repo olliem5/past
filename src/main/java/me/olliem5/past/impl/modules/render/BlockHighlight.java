@@ -3,6 +3,7 @@ package me.olliem5.past.impl.modules.render;
 import me.olliem5.past.Past;
 import me.olliem5.past.api.module.Category;
 import me.olliem5.past.api.module.Module;
+import me.olliem5.past.api.module.ModuleInfo;
 import me.olliem5.past.api.setting.Setting;
 import me.olliem5.past.api.util.render.RenderUtil;
 import me.zero.alpine.listener.EventHandler;
@@ -14,10 +15,8 @@ import net.minecraftforge.client.event.RenderWorldLastEvent;
 import java.awt.*;
 import java.util.ArrayList;
 
+@ModuleInfo(name = "BlockHighlight", description = "Highlights the block that you are looking at", category = Category.RENDER)
 public class BlockHighlight extends Module {
-    public BlockHighlight() {
-        super("BlockHighlight", "Highlights the block that you are looking at", Category.RENDER);
-    }
 
     Setting rendermode;
     Setting red;

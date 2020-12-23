@@ -1,6 +1,7 @@
 package me.olliem5.past.impl.modules.combat;
 
 import me.olliem5.past.Past;
+import me.olliem5.past.api.module.ModuleInfo;
 import me.olliem5.past.impl.events.PacketEvent;
 import me.olliem5.past.api.module.Category;
 import me.olliem5.past.api.module.Module;
@@ -11,10 +12,8 @@ import net.minecraft.item.ItemExpBottle;
 import net.minecraft.network.play.client.CPacketPlayer;
 import net.minecraft.network.play.client.CPacketPlayerTryUseItem;
 
+@ModuleInfo(name = "FootEXP", description = "Makes you look down server side while using EXP bottles", category = Category.COMBAT)
 public class FootEXP extends Module {
-    public FootEXP() {
-        super("FootEXP", "Makes you look down server side while using EXP bottles", Category.COMBAT);
-    }
 
     Setting usecustompitch;
     Setting custompitch;

@@ -4,14 +4,17 @@ import com.mojang.realmsclient.gui.ChatFormatting;
 import me.olliem5.past.Past;
 import me.olliem5.past.api.module.Category;
 import me.olliem5.past.api.module.Module;
+import me.olliem5.past.api.module.ModuleInfo;
 import me.olliem5.past.api.setting.Setting;
 
 import java.util.ArrayList;
 
+@ModuleInfo(name = "Step", description = "Allows you to step up blocks", category = Category.MOVEMENT)
 public class Step extends Module {
-    public Step() {
-        super("Step", "Allows you to step up blocks", Category.MOVEMENT);
-    }
+
+    /**
+     * TODO: Packet mode!
+     */
 
     Setting mode;
     Setting height;

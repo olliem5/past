@@ -2,6 +2,7 @@ package me.olliem5.past.impl.modules.chat;
 
 import com.mojang.realmsclient.gui.ChatFormatting;
 import me.olliem5.past.Past;
+import me.olliem5.past.api.module.ModuleInfo;
 import me.olliem5.past.impl.events.PacketEvent;
 import me.olliem5.past.api.module.Category;
 import me.olliem5.past.api.module.Module;
@@ -12,10 +13,8 @@ import net.minecraft.network.play.client.CPacketChatMessage;
 
 import java.util.ArrayList;
 
+@ModuleInfo(name = "ChatSuffix", description = "Adds a custom ending to your messages", category = Category.CHAT)
 public class ChatSuffix extends Module {
-    public ChatSuffix() {
-        super("ChatSuffix", "Adds a custom ending to your messages", Category.CHAT);
-    }
 
     Setting suffixmode;
     Setting blue;

@@ -4,16 +4,15 @@ import com.mojang.authlib.GameProfile;
 import me.olliem5.past.Past;
 import me.olliem5.past.api.module.Category;
 import me.olliem5.past.api.module.Module;
+import me.olliem5.past.api.module.ModuleInfo;
 import me.olliem5.past.api.setting.Setting;
 import net.minecraft.client.entity.EntityOtherPlayerMP;
 
 import java.util.ArrayList;
 import java.util.UUID;
 
+@ModuleInfo(name = "FakePlayer", description = "Summons a fake player, usually for testing other modules", category = Category.MISC)
 public class FakePlayer extends Module {
-    public FakePlayer() {
-        super("FakePlayer", "Creates a fake player, usually for testing other modules", Category.MISC);
-    }
 
     Setting name;
 

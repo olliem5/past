@@ -4,16 +4,15 @@ import com.mojang.realmsclient.gui.ChatFormatting;
 import me.olliem5.past.Past;
 import me.olliem5.past.api.module.Category;
 import me.olliem5.past.api.module.Module;
+import me.olliem5.past.api.module.ModuleInfo;
 import me.olliem5.past.api.setting.Setting;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 
 import java.util.ArrayList;
 
+@ModuleInfo(name = "Fullbright", description = "Makes your game brighter, re-enable after changing mode", category = Category.RENDER)
 public class Fullbright extends Module {
-    public Fullbright() {
-        super("Fullbright", "Makes your game brighter, re-enable after changing mode", Category.RENDER);
-    }
 
     private PotionEffect fullbrighteffect = new PotionEffect(Potion.getPotionById(16));
 

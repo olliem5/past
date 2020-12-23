@@ -3,14 +3,17 @@ package me.olliem5.past.impl.modules.movement;
 import me.olliem5.past.Past;
 import me.olliem5.past.api.module.Category;
 import me.olliem5.past.api.module.Module;
+import me.olliem5.past.api.module.ModuleInfo;
 import me.olliem5.past.api.setting.Setting;
 
 import java.util.ArrayList;
 
+@ModuleInfo(name = "Flight", description = "Allows you to fly", category = Category.MOVEMENT)
 public class Flight extends Module {
-    public Flight() {
-        super("Flight", "Allows you to fly", Category.MOVEMENT);
-    }
+
+    /**
+     * TODO: Packet mode!
+     */
 
     Setting flymode;
     Setting flyspeed;

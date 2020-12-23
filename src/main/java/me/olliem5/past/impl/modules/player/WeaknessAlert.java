@@ -4,16 +4,15 @@ import com.mojang.realmsclient.gui.ChatFormatting;
 import me.olliem5.past.Past;
 import me.olliem5.past.api.module.Category;
 import me.olliem5.past.api.module.Module;
+import me.olliem5.past.api.module.ModuleInfo;
 import me.olliem5.past.api.setting.Setting;
 import me.olliem5.past.api.util.client.MessageUtil;
 import net.minecraft.client.audio.PositionedSoundRecord;
 import net.minecraft.init.MobEffects;
 import net.minecraft.init.SoundEvents;
 
+@ModuleInfo(name = "WeaknessAlert", description = "Notifies you if you get weakness", category = Category.PLAYER)
 public class WeaknessAlert extends Module {
-    public WeaknessAlert() {
-        super("WeaknessAlert", "Notifies you if you get weakness", Category.PLAYER);
-    }
 
     Setting sound;
 

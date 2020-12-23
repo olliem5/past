@@ -2,6 +2,7 @@ package me.olliem5.past.impl.modules.combat;
 
 import com.mojang.realmsclient.gui.ChatFormatting;
 import me.olliem5.past.Past;
+import me.olliem5.past.api.module.ModuleInfo;
 import me.olliem5.past.impl.events.PacketEvent;
 import me.olliem5.past.api.module.Category;
 import me.olliem5.past.api.module.Module;
@@ -18,10 +19,8 @@ import java.util.ArrayList;
  * @author linustouchtips
  */
 
+@ModuleInfo(name = "Criticals", description = "Makes every hit a critical", category = Category.COMBAT)
 public class Criticals extends Module {
-    public Criticals() {
-        super("Criticals", "Makes every attack a critical", Category.COMBAT);
-    }
 
     Setting mode;
 

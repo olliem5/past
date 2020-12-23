@@ -3,15 +3,14 @@ package me.olliem5.past.impl.modules.player;
 import me.olliem5.past.Past;
 import me.olliem5.past.api.module.Category;
 import me.olliem5.past.api.module.Module;
+import me.olliem5.past.api.module.ModuleInfo;
 import me.olliem5.past.api.setting.Setting;
 import me.olliem5.past.api.util.player.PlayerUtil;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.math.BlockPos;
 
+@ModuleInfo(name = "Burrow", description = "Places an obsidian block inside of you", category = Category.PLAYER)
 public class Burrow extends Module {
-    public Burrow() {
-        super("Burrow", "Places an obsidian block inside of you", Category.PLAYER);
-    }
 
     Setting height;
     Setting autoswitch;

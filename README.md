@@ -14,6 +14,7 @@
 * Make the font system actually good & switch to slick for rendering
 * Make the HUD system good with changing based on screen position
 * JSON config system (WIP)
+* Make the command system better
 
 #### Credits
 * When creating this, I used other open-source projects as refrence code, or used a bit of code from them. They are listed below, and in the class with the code.

@@ -2,6 +2,7 @@ package me.olliem5.past.impl.modules.combat;
 
 import com.mojang.realmsclient.gui.ChatFormatting;
 import me.olliem5.past.Past;
+import me.olliem5.past.api.module.ModuleInfo;
 import me.olliem5.past.impl.events.PacketEvent;
 import me.olliem5.past.api.module.Category;
 import me.olliem5.past.api.module.Module;
@@ -37,12 +38,8 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
+@ModuleInfo(name = "AutoCrystal", description = "Places and breaks end crystals to kill enemies", category = Category.COMBAT)
 public class AutoCrystal extends Module {
-    static Minecraft mc = Minecraft.getMinecraft();
-
-    public AutoCrystal() {
-        super("AutoCrystal", "Places and breaks end crystals to kill enemies", Category.COMBAT);
-    }
 
     /**
      * TODO: AutoSwitch
@@ -54,18 +51,15 @@ public class AutoCrystal extends Module {
      * TODO: better delay system
      */
 
-    CooldownUtil breaktimer = new CooldownUtil();
-    CooldownUtil placetimer = new CooldownUtil();
-
     Setting logicmode;
     Setting placemode;
     Setting breakmode;
     Setting swinghand;
     Setting syncBreak;
-    Setting reloadCrystal;
+    Setting reloadcrystal;
     Setting rotate;
     Setting raytrace;
-    Setting breakAttempts;
+    Setting breakattempts;
     Setting nodesync;
     Setting enemyrange;
     Setting antisuicide;
@@ -117,15 +111,15 @@ public class AutoCrystal extends Module {
         rendermodes.add("FullFrame");
         rendermodes.add("Frame");
 
-        Past.settingsManager.registerSetting(logicmode = new Setting("Logic", "AutoCrystalLogic", this, logicmodes, "PlBreak"));
+        Past.settingsManager.registerSetting(logicmode = new Setting("Logic", "AutoCrystalLogic", this, logicmodes, "BrPlace"));
         Past.settingsManager.registerSetting(placemode = new Setting("Place", "AutoCrystalPlace", this, placemodes, "Single"));
         Past.settingsManager.registerSetting(breakmode = new Setting("Break", "AutoCrystalBreak", this, breakmodes, "Nearest"));
         Past.settingsManager.registerSetting(swinghand = new Setting("Swing", "AutoCrystalSwing", this, swinghands, "Mainhand"));
         Past.settingsManager.registerSetting(rotate = new Setting("Rotate", "AutoCrystalRotate", true, this));
         Past.settingsManager.registerSetting(raytrace = new Setting("Raytrace", "AutoCrystalRaytrace", true, this));
         Past.settingsManager.registerSetting(syncBreak = new Setting("Sync Break", "AutoCrystalSyncBreak", true, this));
-        Past.settingsManager.registerSetting(reloadCrystal = new Setting("Reload Crystal", "AutoCrystalReload", true, this));
-        Past.settingsManager.registerSetting(breakAttempts = new Setting("Break Attempts", "AutoCrystalBreakAttempts", 1.0, 1.0, 5.0, this));
+        Past.settingsManager.registerSetting(reloadcrystal = new Setting("Reload Crystal", "AutoCrystalReload", true, this));
+        Past.settingsManager.registerSetting(breakattempts = new Setting("Break Attempts", "AutoCrystalBreakAttempts", 1.0, 1.0, 5.0, this));
         Past.settingsManager.registerSetting(nodesync = new Setting("No Desync", "AutoCrystalNoDesync", true, this));
         Past.settingsManager.registerSetting(enemyrange = new Setting("Enemy Rng", "AutoCrystalEnemyRange", 1.0, 15.0, 50.0, this));
         Past.settingsManager.registerSetting(antisuicide = new Setting("Anti Suicide", "AutoCrystalAntiSuicide", true, this));
@@ -150,6 +144,9 @@ public class AutoCrystal extends Module {
     }
 
     private static CrystalUtil crystalUtil = new CrystalUtil();
+
+    CooldownUtil breaktimer = new CooldownUtil();
+    CooldownUtil placetimer = new CooldownUtil();
 
     private BlockPos renderBlock;
     private EnumFacing enumFacing;
@@ -217,7 +214,7 @@ public class AutoCrystal extends Module {
                         crystalUtil.lookAtPacket(crystal.posX, crystal.posY, crystal.posZ, mc.player);
                     }
 
-                    for (int i = 0; i < breakAttempts.getValueDouble(); i++) {
+                    for (int i = 0; i < breakattempts.getValueDouble(); i++) {
                         mc.playerController.attackEntity(mc.player, crystal);
                     }
 
@@ -236,7 +233,7 @@ public class AutoCrystal extends Module {
                     if (syncBreak.getValBoolean())
                         crystal.setDead();
 
-                    if (reloadCrystal.getValBoolean()) {
+                    if (reloadcrystal.getValBoolean()) {
                         mc.world.removeAllEntities();
                         mc.world.getLoadedEntityList();
                     }

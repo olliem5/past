@@ -3,6 +3,7 @@ package me.olliem5.past.impl.modules.render;
 import me.olliem5.past.Past;
 import me.olliem5.past.api.module.Category;
 import me.olliem5.past.api.module.Module;
+import me.olliem5.past.api.module.ModuleInfo;
 import me.olliem5.past.api.setting.Setting;
 import me.olliem5.past.api.util.world.HoleUtil;
 import me.olliem5.past.api.util.render.RenderUtil;
@@ -15,10 +16,8 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
+@ModuleInfo(name = "HoleESP", description = "Highlights safe holes for crystal pvp", category = Category.RENDER)
 public class HoleESP extends Module {
-    public HoleESP() {
-        super("HoleESP", "Highlights safe holes for crystal pvp", Category.RENDER);
-    }
 
     Setting rendermode;
     Setting holerange;

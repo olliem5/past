@@ -4,16 +4,19 @@ import com.mojang.realmsclient.gui.ChatFormatting;
 import me.olliem5.past.Past;
 import me.olliem5.past.api.module.Category;
 import me.olliem5.past.api.module.Module;
+import me.olliem5.past.api.module.ModuleInfo;
 import me.olliem5.past.api.util.client.MessageUtil;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.math.RayTraceResult;
 import org.lwjgl.input.Mouse;
 
+@ModuleInfo(name = "MCF", description = "Allows you to middle click to add/del friends", category = Category.MISC)
 public class MCF extends Module {
-    public MCF() {
-        super("MCF", "Allows you to middle click to add/del friends", Category.MISC);
-    }
+
+    /**
+     * TODO: Make this a MiddleClick module with modes: friend, pearl
+     */
 
     private boolean hasClicked = false;
 

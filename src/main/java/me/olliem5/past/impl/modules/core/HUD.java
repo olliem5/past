@@ -3,6 +3,7 @@ package me.olliem5.past.impl.modules.core;
 import me.olliem5.past.Past;
 import me.olliem5.past.api.module.Category;
 import me.olliem5.past.api.module.Module;
+import me.olliem5.past.api.module.ModuleInfo;
 import me.olliem5.past.api.setting.Setting;
 import me.olliem5.past.api.util.colour.ColourListUtil;
 import me.olliem5.past.api.util.colour.RainbowUtil;
@@ -15,10 +16,12 @@ import net.minecraftforge.client.event.RenderGameOverlayEvent;
 
 import java.util.Calendar;
 
+@ModuleInfo(name = "HUD", description = "Draws Past's HUD (Temp)", category = Category.CORE)
 public class HUD extends Module {
-    public HUD() {
-        super("HUD", "Draws the HUD", Category.CORE);
-    }
+
+    /**
+     * TODO: Remove, and put all HUD in HUDEditor
+     */
 
     Setting rgb;
     Setting shadow;

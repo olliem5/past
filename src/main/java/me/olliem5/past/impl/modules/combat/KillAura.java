@@ -4,6 +4,7 @@ import com.mojang.realmsclient.gui.ChatFormatting;
 import me.olliem5.past.Past;
 import me.olliem5.past.api.module.Category;
 import me.olliem5.past.api.module.Module;
+import me.olliem5.past.api.module.ModuleInfo;
 import me.olliem5.past.api.setting.Setting;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.monster.EntityMob;
@@ -15,10 +16,8 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
+@ModuleInfo(name = "KillAura", description = "Automatically attacks entities in range", category = Category.COMBAT)
 public class KillAura extends Module {
-    public KillAura() {
-        super("KillAura", "Automatically attacks entities in range", Category.COMBAT);
-    }
 
     Setting range;
     Setting players;

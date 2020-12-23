@@ -3,12 +3,11 @@ package me.olliem5.past.impl.modules.core;
 import me.olliem5.past.Past;
 import me.olliem5.past.api.module.Category;
 import me.olliem5.past.api.module.Module;
+import me.olliem5.past.api.module.ModuleInfo;
 import me.olliem5.past.api.setting.Setting;
 
+@ModuleInfo(name = "ClickGUI", description = "Opens Past's ClickGUI", category = Category.CORE)
 public class ClickGUI extends Module {
-    public ClickGUI() {
-        super("ClickGUI", "Opens the client ClickGUI", Category.CORE);
-    }
 
     Setting scrollspeed;
     Setting rainbow;

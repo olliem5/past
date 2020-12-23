@@ -4,6 +4,7 @@ import com.mojang.realmsclient.gui.ChatFormatting;
 import me.olliem5.past.Past;
 import me.olliem5.past.api.module.Category;
 import me.olliem5.past.api.module.Module;
+import me.olliem5.past.api.module.ModuleInfo;
 import me.olliem5.past.api.setting.Setting;
 import me.olliem5.past.api.util.world.HoleUtil;
 import me.olliem5.past.api.util.render.RenderUtil;
@@ -20,10 +21,8 @@ import net.minecraftforge.client.event.RenderWorldLastEvent;
 import java.awt.*;
 import java.util.ArrayList;
 
+@ModuleInfo(name = "AutoCreeper", description = "Automatically attacks with creeper eggs, for anarchypvp.pw", category = Category.COMBAT)
 public class AutoCreeper extends Module {
-    public AutoCreeper() {
-        super("AutoCreeper", "Automatically attacks with creeper eggs, for anarchypvp.pw", Category.COMBAT);
-    }
 
     Setting mode;
     Setting playerrange;

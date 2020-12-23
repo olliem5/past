@@ -4,15 +4,18 @@ import com.mojang.realmsclient.gui.ChatFormatting;
 import me.olliem5.past.Past;
 import me.olliem5.past.api.module.Category;
 import me.olliem5.past.api.module.Module;
+import me.olliem5.past.api.module.ModuleInfo;
 import me.olliem5.past.api.setting.Setting;
 import net.minecraft.client.gui.GuiMainMenu;
 
 import java.util.ArrayList;
 
+@ModuleInfo(name = "AutoLog", description = "Leaves the current server at a certain health", category = Category.PLAYER)
 public class AutoLog extends Module {
-    public AutoLog() {
-        super("AutoLog", "Logs you out at a certain health", Category.PLAYER);
-    }
+
+    /**
+     * TODO: Packet kick mode!
+     */
 
     Setting logmode;
     Setting health;

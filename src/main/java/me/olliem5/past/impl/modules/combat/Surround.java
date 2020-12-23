@@ -4,6 +4,7 @@ import com.mojang.realmsclient.gui.ChatFormatting;
 import me.olliem5.past.Past;
 import me.olliem5.past.api.module.Category;
 import me.olliem5.past.api.module.Module;
+import me.olliem5.past.api.module.ModuleInfo;
 import me.olliem5.past.api.setting.Setting;
 import me.olliem5.past.api.util.client.MessageUtil;
 import me.olliem5.past.api.util.player.PlayerUtil;
@@ -16,10 +17,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+@ModuleInfo(name = "Surround", description = "Automatically surrounds you", category = Category.COMBAT)
 public class Surround extends Module {
-    public Surround() {
-        super("Surround", "Automatically surrounds you with obsidian", Category.COMBAT);
-    }
 
     Setting placemode;
     Setting disablemode;

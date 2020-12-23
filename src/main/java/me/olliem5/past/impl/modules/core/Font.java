@@ -3,14 +3,13 @@ package me.olliem5.past.impl.modules.core;
 import me.olliem5.past.Past;
 import me.olliem5.past.api.module.Category;
 import me.olliem5.past.api.module.Module;
+import me.olliem5.past.api.module.ModuleInfo;
 import me.olliem5.past.api.setting.Setting;
 
 import java.util.ArrayList;
 
+@ModuleInfo(name = "Font", description = "Changes the font that Past uses", category = Category.CORE)
 public class Font extends Module {
-    public Font() {
-        super("Font", "Changes the font that Past uses", Category.CORE);
-    }
 
     Setting font;
     Setting shadow;

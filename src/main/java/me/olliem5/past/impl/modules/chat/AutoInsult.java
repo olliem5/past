@@ -4,6 +4,7 @@ import com.mojang.realmsclient.gui.ChatFormatting;
 import me.olliem5.past.Past;
 import me.olliem5.past.api.module.Category;
 import me.olliem5.past.api.module.Module;
+import me.olliem5.past.api.module.ModuleInfo;
 import me.olliem5.past.api.setting.Setting;
 import me.olliem5.past.api.util.client.MessageUtil;
 import me.olliem5.past.api.util.client.CooldownUtil;
@@ -16,10 +17,8 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
+@ModuleInfo(name = "AutoInsult", description = "Automatically insults players", category = Category.CHAT)
 public class AutoInsult extends Module {
-    public AutoInsult() {
-        super("AutoInsult", "Automatically insults players", Category.CHAT);
-    }
 
     Setting sendmode;
     Setting range;

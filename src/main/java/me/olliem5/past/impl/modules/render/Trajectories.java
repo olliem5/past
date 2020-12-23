@@ -2,6 +2,7 @@ package me.olliem5.past.impl.modules.render;
 
 import me.olliem5.past.api.module.Category;
 import me.olliem5.past.api.module.Module;
+import me.olliem5.past.api.module.ModuleInfo;
 import me.zero.alpine.listener.EventHandler;
 import me.zero.alpine.listener.Listener;
 import net.minecraft.client.renderer.GlStateManager;
@@ -20,13 +21,13 @@ import org.lwjgl.util.glu.Cylinder;
 import java.util.ArrayList;
 import java.util.List;
 
+@ModuleInfo(name = "Trajectories", description = "Allows you to see where certain items will go/land, from IngrosWare", category = Category.RENDER)
 public class Trajectories extends Module {
-    public Trajectories() {
-        super("Trajectories", "Allows you to see where items are going, from IngrosWare", Category.RENDER);
-    }
 
     /**
      * From IngrosWare
+     *
+     * TODO: Settings!
      */
 
     @EventHandler

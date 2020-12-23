@@ -4,14 +4,13 @@ import com.mojang.realmsclient.gui.ChatFormatting;
 import me.olliem5.past.Past;
 import me.olliem5.past.api.module.Category;
 import me.olliem5.past.api.module.Module;
+import me.olliem5.past.api.module.ModuleInfo;
 import me.olliem5.past.api.setting.Setting;
 
 import java.util.ArrayList;
 
+@ModuleInfo(name = "Sprint", description = "Automatically makes you sprint", category = Category.MOVEMENT)
 public class Sprint extends Module {
-    public Sprint() {
-        super("Sprint", "Automatically makes you sprint", Category.MOVEMENT);
-    }
 
     Setting sprintmode;
 

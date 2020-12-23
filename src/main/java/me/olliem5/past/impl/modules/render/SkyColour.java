@@ -3,6 +3,7 @@ package me.olliem5.past.impl.modules.render;
 import me.olliem5.past.Past;
 import me.olliem5.past.api.module.Category;
 import me.olliem5.past.api.module.Module;
+import me.olliem5.past.api.module.ModuleInfo;
 import me.olliem5.past.api.setting.Setting;
 import me.zero.alpine.listener.EventHandler;
 import me.zero.alpine.listener.Listener;
@@ -10,10 +11,12 @@ import net.minecraftforge.client.event.EntityViewRenderEvent;
 
 import java.awt.*;
 
+@ModuleInfo(name = "SkyColour", description = "Changes the colours of fog, best in nether & low render distance", category = Category.RENDER)
 public class SkyColour extends Module {
-    public SkyColour() {
-        super("SkyColour", "Changes the colours of the sky, best in nether & low render distance", Category.RENDER);
-    }
+
+    /**
+     * TODO: Make this work on the whole sky!
+     */
 
     Setting red;
     Setting green;

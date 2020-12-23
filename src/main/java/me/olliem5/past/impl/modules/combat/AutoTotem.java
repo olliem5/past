@@ -3,16 +3,19 @@ package me.olliem5.past.impl.modules.combat;
 import com.mojang.realmsclient.gui.ChatFormatting;
 import me.olliem5.past.api.module.Category;
 import me.olliem5.past.api.module.Module;
+import me.olliem5.past.api.module.ModuleInfo;
 import net.minecraft.init.Items;
 import net.minecraft.inventory.ClickType;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
+@ModuleInfo(name = "AutoTotem", description = "Automatically puts a totem in your offhand", category = Category.COMBAT)
 public class AutoTotem extends Module {
-    public AutoTotem() {
-        super("AutoTotem", "Automatically puts a totem in your offhand", Category.COMBAT);
-    }
+
+    /**
+     * TODO: Offhand module!
+     */
 
     public int totems;
 

@@ -4,6 +4,7 @@ import com.mojang.realmsclient.gui.ChatFormatting;
 import me.olliem5.past.Past;
 import me.olliem5.past.api.module.Category;
 import me.olliem5.past.api.module.Module;
+import me.olliem5.past.api.module.ModuleInfo;
 import me.olliem5.past.api.setting.Setting;
 import me.olliem5.past.api.util.client.MessageUtil;
 import me.olliem5.past.api.util.client.CooldownUtil;
@@ -14,10 +15,8 @@ import net.minecraft.entity.passive.EntityLlama;
 import net.minecraft.entity.passive.EntityMule;
 import net.minecraft.init.SoundEvents;
 
+@ModuleInfo(name = "EntityAlert", description = "Alerts you when selected entities enter render distance", category = Category.MISC)
 public class EntityAlert extends Module {
-    public EntityAlert() {
-        super("EntityAlert", "Alerts you when selected entities enter render distance", Category.MISC);
-    }
 
     Setting donkey;
     Setting llama;

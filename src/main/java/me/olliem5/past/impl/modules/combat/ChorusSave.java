@@ -1,6 +1,7 @@
 package me.olliem5.past.impl.modules.combat;
 
 import me.olliem5.past.Past;
+import me.olliem5.past.api.module.ModuleInfo;
 import me.olliem5.past.impl.events.PacketEvent;
 import me.olliem5.past.api.module.Category;
 import me.olliem5.past.api.module.Module;
@@ -10,10 +11,8 @@ import me.zero.alpine.listener.Listener;
 import net.minecraft.item.ItemChorusFruit;
 import net.minecraft.network.play.client.CPacketPlayerTryUseItem;
 
+@ModuleInfo(name = "ChorusSave", description = "Surrounds you while eating chorus fruit", category = Category.COMBAT)
 public class ChorusSave extends Module {
-    public ChorusSave() {
-        super("ChorusSave", "Surrounds you while eating chorus fruit", Category.COMBAT);
-    }
 
     /**
      * TODO: ChorusTeleportEvent, on teleport, delay, surround

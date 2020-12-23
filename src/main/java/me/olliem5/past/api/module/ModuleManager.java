@@ -35,7 +35,7 @@ public class ModuleManager {
         /* Core */
         modules.add(new OldClickGUI());
         modules.add(new HUD());
-        modules.add(new HudEditor());
+        modules.add(new HUDEditor());
         modules.add(new Render());
         modules.add(new Capes());
         modules.add(new ClickGUI());
@@ -46,7 +46,7 @@ public class ModuleManager {
         modules.add(new PortalGodMode());
         modules.add(new Timer());
         modules.add(new XCarry());
-        modules.add(new BowExploit());
+        modules.add(new BowBoost());
         modules.add(new PacketMine());
 
         /* Misc */
@@ -71,8 +71,7 @@ public class ModuleManager {
         modules.add(new Burrow());
 
         /* Render */
-        modules.add(new NoWeather());
-        modules.add(new EntityESP());
+        modules.add(new ESP());
         modules.add(new ViewModel());
         modules.add(new SkyColour());
         modules.add(new Fullbright());

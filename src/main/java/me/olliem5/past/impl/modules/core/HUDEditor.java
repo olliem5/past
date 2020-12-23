@@ -3,12 +3,11 @@ package me.olliem5.past.impl.modules.core;
 import me.olliem5.past.Past;
 import me.olliem5.past.api.module.Category;
 import me.olliem5.past.api.module.Module;
+import me.olliem5.past.api.module.ModuleInfo;
 import me.olliem5.past.api.setting.Setting;
 
-public class HudEditor extends Module {
-    public HudEditor() {
-        super("HudEditor", "Edit the HUD", Category.CORE);
-    }
+@ModuleInfo(name = "HUDEditor", description = "Edit Past's HUD", category = Category.CORE)
+public class HUDEditor extends Module {
 
     Setting rgb;
     Setting background;

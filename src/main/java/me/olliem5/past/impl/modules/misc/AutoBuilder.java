@@ -4,6 +4,7 @@ import com.mojang.realmsclient.gui.ChatFormatting;
 import me.olliem5.past.Past;
 import me.olliem5.past.api.module.Category;
 import me.olliem5.past.api.module.Module;
+import me.olliem5.past.api.module.ModuleInfo;
 import me.olliem5.past.api.setting.Setting;
 import me.olliem5.past.api.util.client.MessageUtil;
 import me.olliem5.past.api.util.player.PlayerUtil;
@@ -15,10 +16,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+@ModuleInfo(name = "AutoBuilder", description = "Automatically builds set structures", category = Category.MISC)
 public class AutoBuilder extends Module {
-    public AutoBuilder() {
-        super("AutoBuilder", "Automatically builds you stuff", Category.MISC);
-    }
 
     Setting buildmode;
     Setting blockspertick;

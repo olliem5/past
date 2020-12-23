@@ -3,15 +3,18 @@ package me.olliem5.past.impl.modules.render;
 import me.olliem5.past.Past;
 import me.olliem5.past.api.module.Category;
 import me.olliem5.past.api.module.Module;
+import me.olliem5.past.api.module.ModuleInfo;
 import me.olliem5.past.api.setting.Setting;
 import me.zero.alpine.listener.EventHandler;
 import me.zero.alpine.listener.Listener;
 import net.minecraftforge.client.event.EntityViewRenderEvent;
 
+@ModuleInfo(name = "ViewModel", description = "Changes the way your player looks in first person", category = Category.RENDER)
 public class ViewModel extends Module {
-    public ViewModel() {
-        super("ViewModel", "Changes the way your player looks in first person", Category.RENDER);
-    }
+
+    /**
+     * TODO: Settings for item positioning
+     */
 
     Setting itemfov;
     Setting armpitch;

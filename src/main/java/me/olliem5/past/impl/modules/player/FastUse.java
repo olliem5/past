@@ -3,6 +3,7 @@ package me.olliem5.past.impl.modules.player;
 import me.olliem5.past.Past;
 import me.olliem5.past.api.module.Category;
 import me.olliem5.past.api.module.Module;
+import me.olliem5.past.api.module.ModuleInfo;
 import me.olliem5.past.api.setting.Setting;
 import net.minecraft.block.Block;
 import net.minecraft.item.ItemBlock;
@@ -13,10 +14,8 @@ import net.minecraft.network.play.client.CPacketPlayerDigging;
 import net.minecraft.network.play.client.CPacketPlayerTryUseItem;
 import net.minecraft.util.math.BlockPos;
 
+@ModuleInfo(name = "FastUse", description = "Allows you to use items faster", category = Category.PLAYER)
 public class FastUse extends Module {
-    public FastUse() {
-        super("FastUse", "Allows you to use items faster", Category.PLAYER);
-    }
 
     Setting bow;
     Setting exp;

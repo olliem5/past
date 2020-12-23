@@ -4,6 +4,7 @@ import com.mojang.realmsclient.gui.ChatFormatting;
 import me.olliem5.past.Past;
 import me.olliem5.past.api.module.Category;
 import me.olliem5.past.api.module.Module;
+import me.olliem5.past.api.module.ModuleInfo;
 import me.olliem5.past.api.setting.Setting;
 import me.olliem5.past.api.util.player.PlayerUtil;
 import net.minecraft.entity.player.EntityPlayer;
@@ -15,10 +16,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+@ModuleInfo(name = "AutoTrap", description = "Automatically traps players in range", category = Category.COMBAT)
 public class AutoTrap extends Module {
-    public AutoTrap() {
-        super("AutoTrap", "Automatically traps players in range", Category.COMBAT);
-    }
 
     Setting disable;
     Setting playerrange;

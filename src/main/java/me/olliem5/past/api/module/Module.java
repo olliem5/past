@@ -7,19 +7,23 @@ import org.lwjgl.input.Keyboard;
 public class Module {
     protected Minecraft mc = Minecraft.getMinecraft();
 
-    private String name;
-    private String description;
-    private Category category;
-    private boolean toggled;
-    private Integer key;
+    private String name = getAnnotation().name();
+    private String description = getAnnotation().description();
+    private Category category = getAnnotation().category();
+    private Integer key = getAnnotation().key();
 
-    public Module(String name, String description, Category category) {
-        this.name = name;
-        this.description = description;
-        this.category = category;
+    private boolean toggled;
+
+    public Module() {
         toggled = false;
-        key = Keyboard.KEY_NONE;
         setup();
+    }
+
+    private ModuleInfo getAnnotation() {
+        if (getClass().isAnnotationPresent(ModuleInfo.class)) {
+            return getClass().getAnnotation(ModuleInfo.class);
+        }
+        throw new IllegalStateException("No annotation present!");
     }
 
     public void toggle() {

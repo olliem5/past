@@ -1,6 +1,7 @@
 package me.olliem5.past.impl.modules.render;
 
 import me.olliem5.past.Past;
+import me.olliem5.past.api.module.ModuleInfo;
 import me.olliem5.past.impl.events.PacketEvent;
 import me.olliem5.past.api.module.Category;
 import me.olliem5.past.api.module.Module;
@@ -12,10 +13,8 @@ import net.minecraft.network.play.server.SPacketSpawnExperienceOrb;
 import net.minecraft.network.play.server.SPacketSpawnPainting;
 import net.minecraftforge.client.event.RenderBlockOverlayEvent;
 
+@ModuleInfo(name = "NoRender", description = "Disables the rendering of certain things", category = Category.RENDER)
 public class NoRender extends Module {
-    public NoRender() {
-        super("NoRender", "Disables the rendering of certain things", Category.RENDER);
-    }
 
     Setting fire;
     Setting armour;
@@ -23,6 +22,7 @@ public class NoRender extends Module {
     Setting hurtcam;
     Setting xp;
     Setting paintings;
+    Setting weather;
 
     @Override
     public void setup() {
@@ -32,6 +32,17 @@ public class NoRender extends Module {
         Past.settingsManager.registerSetting(hurtcam = new Setting("Hurt Cam", "NoRenderHurtCam", true, this));
         Past.settingsManager.registerSetting(xp = new Setting("XP", "NoRenderXP", false, this));
         Past.settingsManager.registerSetting(paintings = new Setting("Paintings", "NoRenderPaintings", false, this));
+        Past.settingsManager.registerSetting(weather = new Setting("Weather", "NoRenderWeather", true, this));
+    }
+
+    public void onUpdate() {
+        if (nullCheck()) return;
+
+        if (weather.getValBoolean()) {
+            if (mc.world.isRaining()) {
+                mc.world.setRainStrength(0);
+            }
+        }
     }
 
     @EventHandler

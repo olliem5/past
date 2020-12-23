@@ -4,6 +4,7 @@ import com.mojang.realmsclient.gui.ChatFormatting;
 import me.olliem5.past.Past;
 import me.olliem5.past.api.module.Category;
 import me.olliem5.past.api.module.Module;
+import me.olliem5.past.api.module.ModuleInfo;
 import me.olliem5.past.api.setting.Setting;
 import me.olliem5.past.api.util.client.MessageUtil;
 import net.minecraft.client.gui.inventory.GuiContainer;
@@ -29,10 +30,8 @@ import net.minecraftforge.common.MinecraftForge;
 import java.util.Comparator;
 import java.util.List;
 
+@ModuleInfo(name = "BonBedAura", description = "Places and destroys beds, for 1.13+, by bon55", category = Category.COMBAT)
 public class BonBedAura extends Module {
-    public BonBedAura() {
-        super("BonBedAura", "Places and destroys beds, for 1.13+. Made by bon55.", Category.COMBAT);
-    }
 
     //TODO: Mode for 1.12.2. (Probably just AutoBreak).
 

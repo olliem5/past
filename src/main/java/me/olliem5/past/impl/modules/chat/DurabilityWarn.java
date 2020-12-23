@@ -4,6 +4,7 @@ import com.mojang.realmsclient.gui.ChatFormatting;
 import me.olliem5.past.Past;
 import me.olliem5.past.api.module.Category;
 import me.olliem5.past.api.module.Module;
+import me.olliem5.past.api.module.ModuleInfo;
 import me.olliem5.past.api.setting.Setting;
 import me.olliem5.past.api.util.client.MessageUtil;
 import me.olliem5.past.api.util.client.CooldownUtil;
@@ -18,10 +19,8 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
+@ModuleInfo(name = "DurabilityWarn", description = "Warns others when their armour durability is getting low", category = Category.CHAT)
 public class DurabilityWarn extends Module {
-    public DurabilityWarn() {
-        super("DurabilityWarn", "Warns others when their armour durability is getting low", Category.CHAT);
-    }
 
     Setting sendmode;
     Setting durability;

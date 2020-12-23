@@ -3,12 +3,11 @@ package me.olliem5.past.impl.modules.render;
 import me.olliem5.past.Past;
 import me.olliem5.past.api.module.Category;
 import me.olliem5.past.api.module.Module;
+import me.olliem5.past.api.module.ModuleInfo;
 import me.olliem5.past.api.setting.Setting;
 
+@ModuleInfo(name = "HandProgress", description = "Changes your hand progress", category = Category.RENDER)
 public class HandProgress extends Module {
-    public HandProgress() {
-        super("HandProgress", "Changes your hand progress", Category.RENDER);
-    }
 
     Setting mainhand;
     Setting offhand;

@@ -3,12 +3,11 @@ package me.olliem5.past.impl.modules.core;
 import me.olliem5.past.Past;
 import me.olliem5.past.api.module.Category;
 import me.olliem5.past.api.module.Module;
+import me.olliem5.past.api.module.ModuleInfo;
 import me.olliem5.past.api.setting.Setting;
 
+@ModuleInfo(name = "OldClickGUI", description = "Opens Past's old ClickGUI", category = Category.CORE)
 public class OldClickGUI extends Module {
-    public OldClickGUI() {
-        super("OldClickGUI", "Opens the old ClickGUI", Category.CORE);
-    }
 
     Setting rgb;
     Setting background;

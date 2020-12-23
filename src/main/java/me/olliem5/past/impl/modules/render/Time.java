@@ -4,14 +4,13 @@ import com.mojang.realmsclient.gui.ChatFormatting;
 import me.olliem5.past.Past;
 import me.olliem5.past.api.module.Category;
 import me.olliem5.past.api.module.Module;
+import me.olliem5.past.api.module.ModuleInfo;
 import me.olliem5.past.api.setting.Setting;
 
 import java.util.ArrayList;
 
+@ModuleInfo(name = "Time", description = "Changes the world time, client side", category = Category.RENDER)
 public class Time extends Module {
-    public Time() {
-        super("Time", "Changes the time in your world", Category.RENDER);
-    }
 
     Setting timemode;
     Setting customtimemode;

@@ -2,12 +2,15 @@ package me.olliem5.past.impl.modules.misc;
 
 import me.olliem5.past.api.module.Category;
 import me.olliem5.past.api.module.Module;
+import me.olliem5.past.api.module.ModuleInfo;
 import me.olliem5.past.api.util.client.DiscordUtil;
 
+@ModuleInfo(name = "DiscordRPC", description = "Shows off Past on discord", category = Category.MISC)
 public class DiscordRPC extends Module {
-    public DiscordRPC() {
-        super("DiscordRPC", "Shows the client on discord", Category.MISC);
-    }
+
+    /**
+     * TODO: Customisation
+     */
 
     @Override
     public void onEnable() {
