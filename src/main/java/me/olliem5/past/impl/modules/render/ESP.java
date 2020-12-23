@@ -57,15 +57,7 @@ public class ESP extends Module {
     public void onDisable() {
         for (Entity entity : mc.world.getLoadedEntityList()) {
             if (entity != mc.player) {
-                if (entity instanceof EntityPlayer && players.getValBoolean()) {
-                    entity.setGlowing(false);
-                } else if (entity instanceof EntityAnimal && animals.getValBoolean()) {
-                    entity.setGlowing(false);
-                } else if (entity instanceof EntityMob && mobs.getValBoolean()) {
-                    entity.setGlowing(false);
-                } else if (entity instanceof EntityEnderCrystal && crystals.getValBoolean()) {
-                    entity.setGlowing(false);
-                }
+                entity.setGlowing(false);
             }
         }
     }
