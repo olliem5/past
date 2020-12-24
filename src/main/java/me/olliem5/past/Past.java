@@ -27,7 +27,7 @@ import java.awt.*;
 public class Past {
     public static final String NAME = "Past Utility Mod";
     public static final String MOD_ID = "past";
-    public static final String VERSION = "1.5";
+    public static final String VERSION = "1.6";
     public static final String APP_ID = "754509326902886411";
     public static String NAME_VERSION = NAME + " " + VERSION;
 
