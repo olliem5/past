@@ -13,11 +13,11 @@ import java.util.Map;
 public class MixinLoader implements IFMLLoadingPlugin {
 
     public MixinLoader() {
-        System.out.println("[" + Past.nameversion + "]" + " " + "Injecting Mixins!");
+        Past.log("Injecting Mixins!");
         MixinBootstrap.init();
         Mixins.addConfiguration("mixins.past.json");
         MixinEnvironment.getDefaultEnvironment().setSide(MixinEnvironment.Side.CLIENT);
-        System.out.println("[" + Past.nameversion + "]" + " " + "Mixins Injected!");
+        Past.log("Mixins Injected!");
     }
 
     @Override

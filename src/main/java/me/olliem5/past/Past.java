@@ -17,17 +17,21 @@ import me.zero.alpine.EventManager;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.lwjgl.opengl.Display;
 
 import java.awt.*;
 
-@Mod(name = Past.name, modid = Past.modid, version = Past.version)
+@Mod(name = Past.NAME, modid = Past.MOD_ID, version = Past.VERSION)
 public class Past {
-    public static final String name = "Past Utility Mod";
-    public static final String modid = "past";
-    public static final String version = "1.5";
-    public static final String appid = "754509326902886411";
-    public static String nameversion = name + " " + version;
+    public static final String NAME = "Past Utility Mod";
+    public static final String MOD_ID = "past";
+    public static final String VERSION = "1.5";
+    public static final String APP_ID = "754509326902886411";
+    public static String NAME_VERSION = NAME + " " + VERSION;
+
+    public static final Logger LOGGER = LogManager.getLogger(NAME_VERSION);
 
     public static CustomFontRenderer latoFont;
     public static CustomFontRenderer verdanaFont;
@@ -48,54 +52,58 @@ public class Past {
 
     @Mod.EventHandler
     public void pastPreInitialize(FMLPreInitializationEvent event) {
-        Display.setTitle(nameversion);
+        Display.setTitle(NAME_VERSION);
     }
 
     @Mod.EventHandler
     public void pastInitialize(FMLInitializationEvent event) {
-        System.out.println("[" + nameversion + "]" + " " + "Starting client initialization!");
+        log("Starting Client Initialization!");
 
         EVENT_BUS = new EventManager();
-        System.out.println("[" + nameversion + "]" + " " + "Alpine Events Initialized!");
+        log("Event System Initialized!");
 
         forgeEvents = new ForgeEvents();
-        System.out.println("[" + nameversion + "]" + " " + "Forge Events Initialized!");
+        log("Forge Events Initialized!");
 
         settingsManager = new SettingsManager();
-        System.out.println("[" + nameversion + "]" + " " + "Settings Initialized!");
+        log("Settings initialized!");
 
         moduleManager = new ModuleManager();
-        System.out.println("[" + nameversion + "]" + " " + "Modules Initialized!");
+        log("Modules Initialized!");
 
         commandManager = new CommandManager();
-        System.out.println("[" + nameversion + "]" + " " + "Commands Initialized!");
+        log("Commands Initialized!");
 
         friendsManager = new FriendsManager();
-        System.out.println("[" + nameversion + "]" + " " + "Friends Initialized!");
+        log("Friends Initialized!");
 
         latoFont = new CustomFontRenderer(new Font("Lato", 0, 18), true, false);
         verdanaFont = new CustomFontRenderer(new Font("Verdana", 0, 18), true, false);
         arialFont = new CustomFontRenderer(new Font("Arial", 0, 18), true, false);
-        System.out.println("[" + nameversion + "]" + " " + "Custom Fonts Initialized! (Author 086)!");
+        log("Custom Fonts Initialized! (Author 086)!");
 
         capesManager = new CapesManager();
-        System.out.println("[" + nameversion + "]" + " " + "Capes Initialized!");
+        log("Capes Initialized!");
 
         hudComponentManager = new HudComponentManager();
-        System.out.println("[" + nameversion + "]" + " " + "HUD Components Initialized!");
+        log("HUD Components Initialized!");
 
         clickGUIOne = new ClickGUIOne();
-        System.out.println("[" + nameversion + "]" + " " + "ClickGUI One Initialized!");
+        log("ClickGUI One Initialized!");
 
         clickGUITwo = new ClickGUITwo();
-        System.out.println("[" + nameversion + "]" + " " + "ClickGUI Two Initialized!");
+        log("ClickGUI Two Initialized!");
 
         hudEditor = new HudEditor();
-        System.out.println("[" + nameversion + "]" + " " + "HUDEditor Initialized!");
+        log("HUD Editor Initialized!");
 
         configUtil = new ConfigUtil();
-        System.out.println("[" + nameversion + "]" + " " + "Config Initialized!");
+        log("Config Initialized!");
 
-        System.out.println("[" + nameversion + "]" + " " + "Client has finished initializing!");
+        log("Client has finished initializing!");
+    }
+
+    public static void log(String message) {
+        LOGGER.info(message);
     }
 }

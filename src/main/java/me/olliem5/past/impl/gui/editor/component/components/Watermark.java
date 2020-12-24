@@ -7,11 +7,11 @@ public class Watermark extends HudComponent {
     public Watermark() {
         super("Watermark");
 
-        setWidth(mc.fontRenderer.getStringWidth(Past.nameversion));
+        setWidth(mc.fontRenderer.getStringWidth(Past.NAME_VERSION));
         setHeight(mc.fontRenderer.FONT_HEIGHT);
     }
 
     public void render(float ticks) {
-        mc.fontRenderer.drawStringWithShadow(Past.nameversion, getX(), getY(), -1);
+        mc.fontRenderer.drawStringWithShadow(Past.NAME_VERSION, getX(), getY(), -1);
     }
 }

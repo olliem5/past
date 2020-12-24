@@ -21,7 +21,7 @@ public class CapesManager {
                 uuidList.add(UUID.fromString(line));
             }
         } catch (Exception e) {
-            System.out.println("[" + Past.nameversion + "]" + " " + "Cape reading from URL failed! Do you an internet connection?");
+            Past.log("Cape reading from URL failed! Do you an internet connection?");
         }
     }
 

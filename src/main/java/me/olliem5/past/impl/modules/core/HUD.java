@@ -76,7 +76,7 @@ public class HUD extends Module {
     @EventHandler
     public Listener<RenderGameOverlayEvent.Text> listener = new Listener<>(event -> {
         if (watermark.getValBoolean()) {
-            FontUtil.drawText(Past.nameversion, watermarkx.getValueInt(), watermarky.getValueInt(), getColour());
+            FontUtil.drawText(Past.NAME_VERSION, watermarkx.getValueInt(), watermarky.getValueInt(), getColour());
         }
 
         if (welcomer.getValBoolean()) {

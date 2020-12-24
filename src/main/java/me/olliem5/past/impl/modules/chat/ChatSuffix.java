@@ -32,7 +32,7 @@ public class ChatSuffix extends Module {
     }
 
     private String classicsuffix = " \uff30\uff41\uff53\uff54";
-    private String versionsuffix = " \uff30\uff41\uff53\uff54" + " " + Past.version;
+    private String versionsuffix = " \uff30\uff41\uff53\uff54" + " " + Past.VERSION;
 
     @EventHandler
     public Listener<PacketEvent.Send> listener = new Listener<>(event -> {

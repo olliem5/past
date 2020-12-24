@@ -16,12 +16,12 @@ public class DiscordUtil {
     private static String state;
 
     public static void startup() {
-        System.out.println("[" + Past.nameversion + "]" + " " + "Discord RPC starting up!");
+        Past.log("Discord RPC is starting up!");
         final DiscordEventHandlers handlers = new DiscordEventHandlers();
-        rpc.Discord_Initialize(Past.appid, handlers, true, "");
+        rpc.Discord_Initialize(Past.APP_ID, handlers, true, "");
         rp.startTimestamp = System.currentTimeMillis() / 1000L;
         rp.largeImageKey = "pastclient";
-        rp.largeImageText = Past.nameversion;
+        rp.largeImageText = Past.NAME_VERSION;
         rpc.Discord_UpdatePresence(rp);
 
         new Thread(() -> {
@@ -56,7 +56,7 @@ public class DiscordUtil {
     }
 
     public static void shutdown() {
-        System.out.println("[" + Past.nameversion + "]" + " " + "Discord RPC shutting down!");
+        Past.log("Discord RPC is shutting down!");
         rpc.Discord_Shutdown();
     }
 }

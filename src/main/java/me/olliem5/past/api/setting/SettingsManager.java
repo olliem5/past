@@ -27,7 +27,7 @@ public class SettingsManager {
                 return setting;
             }
         }
-        System.out.println("[" + Past.nameversion + "]" + " " + "Error - Setting" + " " + "'" + name + "'" + "NOT Found!");
+        Past.log("Setting error, setting `" + name + "` NOT found!");
         return null;
     }
 
@@ -37,7 +37,7 @@ public class SettingsManager {
                 return setting;
             }
         }
-        System.out.println("[" + Past.nameversion + "]" + " " + "Error - Setting" + " " + "'" + id + "'" + "NOT Found!");
+        Past.log("Setting error, setting id `" + id + "` NOT found!");
         return null;
     }
 
