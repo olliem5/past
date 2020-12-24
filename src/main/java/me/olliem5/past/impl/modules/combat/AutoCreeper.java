@@ -43,6 +43,11 @@ public class AutoCreeper extends Module {
         creepermodes.add("Hole");
         creepermodes.add("Always");
 
+        rendermodes = new ArrayList<>();
+        rendermodes.add("Full");
+        rendermodes.add("FullFrame");
+        rendermodes.add("Frame");
+
         Past.settingsManager.registerSetting(mode = new Setting("Mode", "AutoCreeperMode", this, creepermodes, "Hole"));
         Past.settingsManager.registerSetting(playerrange = new Setting("Player Range", "AutoCreeperPlayerRange", 1.0, 25.0, 50.0, this));
         Past.settingsManager.registerSetting(renderplace = new Setting("Render Place", "AutoCrystalRenderPlace", true, this));
