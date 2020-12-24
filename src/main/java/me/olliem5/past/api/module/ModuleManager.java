@@ -81,6 +81,7 @@ public class ModuleManager {
         modules.add(new NoRender());
         modules.add(new Trajectories());
         modules.add(new HandProgress());
+        modules.add(new CrystalCustomize());
     }
 
     public ArrayList<Module> getModules() {

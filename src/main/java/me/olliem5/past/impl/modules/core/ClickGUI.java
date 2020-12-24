@@ -5,8 +5,9 @@ import me.olliem5.past.api.module.Category;
 import me.olliem5.past.api.module.Module;
 import me.olliem5.past.api.module.ModuleInfo;
 import me.olliem5.past.api.setting.Setting;
+import org.lwjgl.input.Keyboard;
 
-@ModuleInfo(name = "ClickGUI", description = "Opens Past's ClickGUI", category = Category.CORE)
+@ModuleInfo(name = "ClickGUI", description = "Opens Past's ClickGUI", category = Category.CORE, key = Keyboard.KEY_P)
 public class ClickGUI extends Module {
 
     Setting scrollspeed;
