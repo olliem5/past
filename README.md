@@ -5,7 +5,7 @@
 * I don't recommend using this client as reference code for your own client, or to use it as a base for a client, due to most of the code being bad and outdated (as of 22/12/20).
 
 #### Going Forward
-* This client will not be updated very frequently, but I do plan to slowly rewrite most of the old & bad code (most of it), and add new features once that is done.
+* This client will not be updated very frequently, but I do plan to slowly rewrite most of the old & bad code, and add new features once that is done.
 
 #### Planned Features that might get done
 * Rewrite setting system w/ colour support & sub setting support
