@@ -14,8 +14,8 @@ public class CapesManager {
 
     public CapesManager() {
         try {
-            URL pastCapesGitHub = new URL("https://raw.githubusercontent.com/olliem5/past-resources/main/past-capes.json");
-            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(pastCapesGitHub.openStream()));
+            URL capesPaste = new URL("https://pastebin.com/raw/RJb3cDEr");
+            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(capesPaste.openStream()));
             String line;
             while ((line = bufferedReader.readLine()) != null) {
                 uuidList.add(UUID.fromString(line));
