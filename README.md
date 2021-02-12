@@ -13,7 +13,6 @@
 * [Kami](https://github.com/zeroeightysix/KAMI)
 * [Wurst+2](https://github.com/TrvsF/wurstplus-two)
 * [SalHack](https://github.com/ionar2/spidermod)
-* Dream (Repository Removed as of 4/02/21)
 * [GameSense](https://github.com/IUDevman/gamesense-client)
 
 * If you feel that I have not credited you properly, please, let me know on Discord (ollie#0057), and I'll add it in a comment, as well as here.
