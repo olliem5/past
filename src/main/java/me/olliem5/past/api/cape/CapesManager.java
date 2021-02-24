@@ -9,6 +9,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
+/**
+ * @author Hoosiers
+ */
+
 public class CapesManager {
     public List<UUID> uuidList = new ArrayList<>();
 
